@@ -5,7 +5,6 @@ object 救急隊
 object ロストトラッカー
 object 位置情報
 object 管理者
-object 提案先
 object 利用者
 object マップ
 object スキー
@@ -20,7 +19,6 @@ object グループ
 
 管理者 -- 救急隊 : 通報
 管理者 o-- ロストトラッカー
-提案先 o-- ロストトラッカー
 ロストトラッカー o-- 利用者
 
 ロストトラッカー o-- 機能
