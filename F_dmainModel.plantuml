@@ -1,3 +1,45 @@
-@startuml
+@startuml ドメインモデル
+
+
+object 救急隊
+object ロストトラッカー
+object 位置情報
+object 管理者
+object 利用者
+object マップ
+object スキー
+object 旅行
+object ツアー旅行
+object メモ
+object ツアー情報
+object 連絡
+object 機能
+object グループ
+object チャット
+object 通知
+
+
+管理者 -- 救急隊 : 通報
+管理者 o-- ロストトラッカー
+ロストトラッカー o-- 利用者
+
+ロストトラッカー o-- 機能
+機能 <|-- 連絡
+連絡 o-- チャット
+連絡 o-- 通知
+
+機能 <|-- マップ
+マップ o-- 位置情報
+
+機能 <|-- グループ
+機能 <|-- ツアー情報
+
+ツアー情報 o-- スキー
+ツアー情報 o-- 旅行
+ツアー情報 o-- ツアー旅行
+ツアー情報 o-- メモ
+
+
+
 
 @enduml
