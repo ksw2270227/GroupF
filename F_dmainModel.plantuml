@@ -57,7 +57,7 @@ object ツアー情報
 object 連絡
 object グループ
 object チャット
-object 通知
+object 緊急通知
 
 object 新規登録
 object ログイン
@@ -72,7 +72,7 @@ object ログアウト
 
 ユーザー o-- 連絡
 連絡 o-- チャット
-連絡 o-- 通知
+連絡 o-- 緊急通知
 
 ユーザー o-- 新規登録
 ユーザー o-- ログイン
