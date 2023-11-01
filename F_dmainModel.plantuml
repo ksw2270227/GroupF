@@ -45,9 +45,11 @@ object 通知
 
 object 救急隊
 object ロストトラッカー
-object 位置情報
 object 管理者
 object ユーザー
+object 提案先
+
+object 位置情報
 object マップ
 object スキー
 object 旅行
@@ -62,11 +64,13 @@ object 緊急通知
 object 新規登録
 object ログイン
 object ログアウト
+object 集合ルート
 
 
 
 
 管理者 -- 救急隊 : 通報
+提案先 o-- ロストトラッカー
 管理者 o-- ロストトラッカー
 ロストトラッカー o-- ユーザー
 
@@ -81,6 +85,7 @@ object ログアウト
 ユーザー o-- グループ
 
 ロストトラッカー o-- マップ
+マップ o-- 集合ルート
 マップ o-- 位置情報
 ロストトラッカー o-- ツアー情報
 
