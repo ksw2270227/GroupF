@@ -54,7 +54,7 @@ object マップ
 object スキー
 object 旅行
 object ツアー旅行
-object メモ
+
 object ツアー情報
 object 連絡
 object グループ
@@ -92,7 +92,7 @@ object 集合ルート
 ツアー情報 o-- スキー
 ツアー情報 o-- 旅行
 ツアー情報 o-- ツアー旅行
-ツアー情報 o-- メモ
+
 
 
 @enduml
