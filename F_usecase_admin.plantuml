@@ -1,6 +1,6 @@
-@startuml システムシステム管理者
+@startuml システム管理者
 left to right direction
-actor システムシステム管理者
+actor システム管理者
 
 システム管理者 -- (システム管理者がログインする)
 システム管理者 -- (システム管理者がログアウトする)
