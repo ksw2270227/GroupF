@@ -1,4 +1,4 @@
-@startuml パートナー企業
+@startuml パートナー企業_usecase
 left to right direction
 actor パートナー企業
 

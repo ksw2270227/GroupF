@@ -1,4 +1,4 @@
-@startuml ユースケース
+@startuml user_usecase
 
 left to right direction
 actor ユーザー

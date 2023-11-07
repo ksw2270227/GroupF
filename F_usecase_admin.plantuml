@@ -1,4 +1,4 @@
-@startuml システム管理者
+@startuml システム管理者_usecase
 left to right direction
 actor システム管理者
 
