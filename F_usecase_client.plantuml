@@ -1,4 +1,4 @@
-@startuml パートナー企業_usecase
+@startuml パートナー企業_usecase(1)
 left to right direction
 actor パートナー企業
 
@@ -7,6 +7,13 @@ actor パートナー企業
 パートナー企業 -- (パートナー企業がログインする)
 パートナー企業 -- (パートナー企業がログアウトする)
 パートナー企業 -- (ツアー情報を登録する)
+
+
+@enduml
+@startuml パートナー企業_usecase(2)
+left to right direction
+actor パートナー企業
+
 パートナー企業 -- (ツアー情報の変更をする)
 パートナー企業 -- (ツアー情報を削除する)
 パートナー企業 -- (イベントの作成をする)
