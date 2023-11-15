@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="uTmK-iBE3lU_nenHrpvM" name="新規登録">
-        <mxGraphModel dx="1020" dy="530" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="720" dy="530" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -10,7 +10,7 @@
                 <mxCell id="vmnZQYMHZ2b320NhvsvD-4" value="表示" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="380" y="290" width="80" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="vmnZQYMHZ2b320NhvsvD-5" value="Entity Object" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
+                <mxCell id="vmnZQYMHZ2b320NhvsvD-5" value="ユーザー" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="640" y="200" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="vmnZQYMHZ2b320NhvsvD-6" value="新規登録画面" style="shape=umlBoundary;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -104,7 +104,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="dzQNooMkyhAn1drmeg_7" name="ログイン">
-        <mxGraphModel dx="816" dy="424" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="640" dy="471" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -114,7 +114,7 @@
                 <mxCell id="m8YDXRKANyJtlhf9_SZa-2" value="表示" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="380" y="290" width="80" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="m8YDXRKANyJtlhf9_SZa-3" value="Entity Object" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
+                <mxCell id="m8YDXRKANyJtlhf9_SZa-3" value="ユーザー" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="640" y="200" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="m8YDXRKANyJtlhf9_SZa-4" value="ログイン画面" style="shape=umlBoundary;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -198,8 +198,8 @@
                 <mxCell id="m8YDXRKANyJtlhf9_SZa-21" value="無効情報&lt;br&gt;入力時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="485" y="350" width="70" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="m8YDXRKANyJtlhf9_SZa-22" value="システム不良時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="525" y="475" width="120" height="30" as="geometry"/>
+                <mxCell id="m8YDXRKANyJtlhf9_SZa-22" value="エラー発生時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="530" y="475" width="110" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="m8YDXRKANyJtlhf9_SZa-23" value="正常完了時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="440" y="280" width="100" height="30" as="geometry"/>
@@ -208,7 +208,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="ipTaChnev_TjJ8NiurGC" name="ログアウト">
-        <mxGraphModel dx="816" dy="424" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="768" dy="565" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -218,7 +218,7 @@
                 <mxCell id="PhhA4MEKjiTkgzpBqW-F-2" value="表示" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="390" y="250" width="80" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="PhhA4MEKjiTkgzpBqW-F-3" value="Entity Object" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
+                <mxCell id="PhhA4MEKjiTkgzpBqW-F-3" value="ユーザー" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="710" y="355" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="PhhA4MEKjiTkgzpBqW-F-4" value="マイページ" style="shape=umlBoundary;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -296,8 +296,8 @@
                         <mxPoint x="450" y="450" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="PhhA4MEKjiTkgzpBqW-F-21" value="システム&lt;br&gt;不良時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="570" y="520" width="70" height="40" as="geometry"/>
+                <mxCell id="PhhA4MEKjiTkgzpBqW-F-21" value="エラー発生時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="550" y="525" width="110" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="PhhA4MEKjiTkgzpBqW-F-22" value="正常完了時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="440" y="420" width="100" height="30" as="geometry"/>
@@ -324,7 +324,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="OVSRA5t2KKanojTYky73" name="登録情報変更">
-        <mxGraphModel dx="816" dy="424" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="576" dy="424" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -334,7 +334,7 @@
                 <mxCell id="6MrO-Xhiv8SNUKrjHHb--2" value="表示" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="380" y="290" width="80" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="6MrO-Xhiv8SNUKrjHHb--3" value="Entity Object" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
+                <mxCell id="6MrO-Xhiv8SNUKrjHHb--3" value="ユーザー" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="640" y="200" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="6MrO-Xhiv8SNUKrjHHb--4" value="会員情報&lt;br&gt;変更画面" style="shape=umlBoundary;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -394,7 +394,7 @@
                         <mxPoint x="450" y="340" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="6MrO-Xhiv8SNUKrjHHb--16" value="会員情報変更を&lt;br&gt;クリック▶" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                <mxCell id="6MrO-Xhiv8SNUKrjHHb--16" value="変更項目を入力し変更をクリック▶" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
                     <mxGeometry x="120" y="250" width="100" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="6MrO-Xhiv8SNUKrjHHb--17" value="表示" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -442,14 +442,14 @@
                         <mxPoint x="600" y="590" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="YHgp0F3MNIoienxQIIId-1" value="システム&lt;br&gt;不良時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="520" y="585" width="70" height="40" as="geometry"/>
+                <mxCell id="YHgp0F3MNIoienxQIIId-1" value="エラー発生時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="500" y="590" width="110" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
     </diagram>
     <diagram id="ECR1yzQu7yo3wDZo88gZ" name="システム退会">
-        <mxGraphModel dx="1255" dy="652" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="886" dy="652" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -459,7 +459,7 @@
                 <mxCell id="T41Wbb58Z8REeeMgM_rK-2" value="表示" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="390" y="250" width="80" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="T41Wbb58Z8REeeMgM_rK-3" value="Entity Object" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
+                <mxCell id="T41Wbb58Z8REeeMgM_rK-3" value="ユーザー" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="710" y="355" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="T41Wbb58Z8REeeMgM_rK-4" value="マイページ" style="shape=umlBoundary;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -537,8 +537,8 @@
                         <mxPoint x="450" y="450" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="T41Wbb58Z8REeeMgM_rK-21" value="システム&lt;br&gt;不良時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="570" y="520" width="70" height="40" as="geometry"/>
+                <mxCell id="T41Wbb58Z8REeeMgM_rK-21" value="エラー発生時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="550" y="525" width="110" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="T41Wbb58Z8REeeMgM_rK-22" value="正常完了時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="440" y="420" width="100" height="30" as="geometry"/>
@@ -565,17 +565,17 @@
         </mxGraphModel>
     </diagram>
     <diagram id="TEolQ7Deh9BqxUiyOhQK" name="イベント参加">
-        <mxGraphModel dx="816" dy="424" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="768" dy="565" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <mxCell id="msihx0L4T4g1ToQwv0Rq-1" value="ユーザー" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
-                    <mxGeometry x="80" y="200" width="40" height="80" as="geometry"/>
+                    <mxGeometry x="80" y="280" width="40" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="msihx0L4T4g1ToQwv0Rq-2" value="表示" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="380" y="290" width="80" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="msihx0L4T4g1ToQwv0Rq-3" value="Entity Object" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
+                <mxCell id="msihx0L4T4g1ToQwv0Rq-3" value="イベント" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="640" y="200" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="msihx0L4T4g1ToQwv0Rq-4" value="イベント&lt;br&gt;参加画面" style="shape=umlBoundary;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -590,7 +590,7 @@
                 <mxCell id="msihx0L4T4g1ToQwv0Rq-7" value="表示" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="440" y="390" width="80" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="msihx0L4T4g1ToQwv0Rq-8" value="イベント情報" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="msihx0L4T4g1ToQwv0Rq-8" value="イベント情報を取得" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="520" y="190" width="80" height="90" as="geometry"/>
                 </mxCell>
                 <mxCell id="msihx0L4T4g1ToQwv0Rq-9" value="" style="endArrow=classic;html=1;" parent="1" source="msihx0L4T4g1ToQwv0Rq-1" edge="1">
@@ -635,7 +635,7 @@
                         <mxPoint x="450" y="340" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="msihx0L4T4g1ToQwv0Rq-16" value="イベント参加を&lt;br&gt;クリック▶" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                <mxCell id="msihx0L4T4g1ToQwv0Rq-16" value="イベントIDとパスワードを入力▶" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
                     <mxGeometry x="120" y="250" width="100" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="msihx0L4T4g1ToQwv0Rq-17" value="表示" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -659,8 +659,8 @@
                 <mxCell id="msihx0L4T4g1ToQwv0Rq-21" value="無効なID&lt;br&gt;パスワード&lt;br&gt;入力時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="480" y="340" width="80" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="msihx0L4T4g1ToQwv0Rq-22" value="システム&lt;br&gt;不良時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="550" y="470" width="70" height="40" as="geometry"/>
+                <mxCell id="msihx0L4T4g1ToQwv0Rq-22" value="エラー発生時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="530" y="475" width="110" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="msihx0L4T4g1ToQwv0Rq-23" value="正常完了時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="510" y="400" width="100" height="30" as="geometry"/>
@@ -669,7 +669,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="2z-BgR28wJ5oNUA0R-ZV" name="イベント退出">
-        <mxGraphModel dx="816" dy="424" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="768" dy="565" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -679,7 +679,7 @@
                 <mxCell id="nUdygU3lFm32uS2ciTzF-2" value="表示" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="390" y="250" width="80" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="nUdygU3lFm32uS2ciTzF-3" value="Entity Object" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
+                <mxCell id="nUdygU3lFm32uS2ciTzF-3" value="イベント" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="710" y="355" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="nUdygU3lFm32uS2ciTzF-4" value="イベント画面" style="shape=umlBoundary;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -697,7 +697,7 @@
                 <mxCell id="nUdygU3lFm32uS2ciTzF-7" value="表示" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="440" y="445" width="80" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="nUdygU3lFm32uS2ciTzF-8" value="イベント情報" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="nUdygU3lFm32uS2ciTzF-8" value="イベント情報を取得" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="550" y="350" width="80" height="90" as="geometry"/>
                 </mxCell>
                 <mxCell id="nUdygU3lFm32uS2ciTzF-9" value="" style="endArrow=classic;html=1;" parent="1" source="nUdygU3lFm32uS2ciTzF-1" edge="1">
@@ -757,8 +757,8 @@
                         <mxPoint x="450" y="450" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="nUdygU3lFm32uS2ciTzF-22" value="システム&lt;br&gt;不良時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="570" y="520" width="70" height="40" as="geometry"/>
+                <mxCell id="nUdygU3lFm32uS2ciTzF-22" value="エラー発生時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="550" y="525" width="110" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="nUdygU3lFm32uS2ciTzF-23" value="正常完了時▼" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="440" y="420" width="100" height="30" as="geometry"/>
