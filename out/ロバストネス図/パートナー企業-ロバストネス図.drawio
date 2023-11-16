@@ -190,7 +190,7 @@
         </mxGraphModel>
     </diagram>
     <diagram name="チャット" id="fk32bxfwfrK4_u9ZWWz-">
-        <mxGraphModel dx="964" dy="729" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="760" dy="729" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="GyUptNhimLM9t0ycx9Vx-0"/>
                 <mxCell id="GyUptNhimLM9t0ycx9Vx-1" parent="GyUptNhimLM9t0ycx9Vx-0"/>
@@ -224,7 +224,7 @@
                 <mxCell id="o6jr7fadlZw3JiLEumzY-4" style="edgeStyle=none;html=1;startArrow=classic;startFill=1;" parent="GyUptNhimLM9t0ycx9Vx-1" source="o6jr7fadlZw3JiLEumzY-1" target="o6jr7fadlZw3JiLEumzY-2" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="o6jr7fadlZw3JiLEumzY-1" value="チャット&lt;br&gt;セッション" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;" parent="GyUptNhimLM9t0ycx9Vx-1" vertex="1">
+                <mxCell id="o6jr7fadlZw3JiLEumzY-1" value="メッセージ" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;" parent="GyUptNhimLM9t0ycx9Vx-1" vertex="1">
                     <mxGeometry x="730" y="240" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="o6jr7fadlZw3JiLEumzY-3" style="edgeStyle=none;html=1;" parent="GyUptNhimLM9t0ycx9Vx-1" source="o6jr7fadlZw3JiLEumzY-2" target="GyUptNhimLM9t0ycx9Vx-6" edge="1">
@@ -275,7 +275,7 @@
                 <mxCell id="LMnsVSbqZkQQ12WnB9Kf-12" value="ユーザー" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" parent="GyUptNhimLM9t0ycx9Vx-1" vertex="1">
                     <mxGeometry x="230" y="590" width="30" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="LMnsVSbqZkQQ12WnB9Kf-14" value="チャット&lt;br&gt;セッション" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;" parent="GyUptNhimLM9t0ycx9Vx-1" vertex="1">
+                <mxCell id="LMnsVSbqZkQQ12WnB9Kf-14" value="メッセージ" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;" parent="GyUptNhimLM9t0ycx9Vx-1" vertex="1">
                     <mxGeometry x="710" y="485" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="LMnsVSbqZkQQ12WnB9Kf-19" style="edgeStyle=none;html=1;startArrow=none;startFill=0;" parent="GyUptNhimLM9t0ycx9Vx-1" source="LMnsVSbqZkQQ12WnB9Kf-16" target="LMnsVSbqZkQQ12WnB9Kf-17" edge="1">
@@ -1089,7 +1089,7 @@
         </mxGraphModel>
     </diagram>
     <diagram name="ログイン" id="5VITNHc6s9nJNYutQEoY">
-        <mxGraphModel dx="1791" dy="729" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1587" dy="729" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="z_uIZLmKid0DoB7CPF7r-0"/>
                 <mxCell id="z_uIZLmKid0DoB7CPF7r-1" parent="z_uIZLmKid0DoB7CPF7r-0"/>
@@ -1229,7 +1229,7 @@
         </mxGraphModel>
     </diagram>
     <diagram name="新規登録" id="HsREoUSOnRzb0FD5-Vjx">
-        <mxGraphModel dx="803" dy="608" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="814" dy="781" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="DX7NVdZm8c1ugF_eBVML-0"/>
                 <mxCell id="DX7NVdZm8c1ugF_eBVML-1" parent="DX7NVdZm8c1ugF_eBVML-0"/>
@@ -1344,7 +1344,7 @@
                 <mxCell id="cEo9cgd_s9pU2i5K1-Qa-4" style="edgeStyle=none;html=1;fontSize=12;startArrow=none;startFill=0;" edge="1" parent="DX7NVdZm8c1ugF_eBVML-1" source="cEo9cgd_s9pU2i5K1-Qa-1" target="uauXfQR7GUxvZV9IvnAs-7">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="cEo9cgd_s9pU2i5K1-Qa-1" value="内容確認&lt;br&gt;ポップアップ" style="shape=umlBoundary;whiteSpace=wrap;html=1;" vertex="1" parent="DX7NVdZm8c1ugF_eBVML-1">
+                <mxCell id="cEo9cgd_s9pU2i5K1-Qa-1" value="内容確認&lt;br&gt;ダイアログ" style="shape=umlBoundary;whiteSpace=wrap;html=1;" vertex="1" parent="DX7NVdZm8c1ugF_eBVML-1">
                     <mxGeometry x="246" y="390" width="100" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="SxCtIaD7q51Y6JD3bYy0-0" value="" style="endArrow=classic;html=1;" edge="1" parent="DX7NVdZm8c1ugF_eBVML-1" target="SxCtIaD7q51Y6JD3bYy0-3" source="cEo9cgd_s9pU2i5K1-Qa-1">
@@ -1366,6 +1366,18 @@
                 </mxCell>
                 <mxCell id="gDezXU_p95iLIwg22kf4-0" value="はい選択時▶" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="DX7NVdZm8c1ugF_eBVML-1">
                     <mxGeometry x="367" y="400" width="100" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="sSf6YoUdMafXw_V6lr4z-0" value="企業" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;" vertex="1" parent="DX7NVdZm8c1ugF_eBVML-1">
+                    <mxGeometry x="700" y="385" width="90" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="sSf6YoUdMafXw_V6lr4z-1" value="" style="endArrow=classic;startArrow=classic;html=1;" edge="1" parent="DX7NVdZm8c1ugF_eBVML-1" target="sSf6YoUdMafXw_V6lr4z-0" source="uauXfQR7GUxvZV9IvnAs-7">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="610" y="435" as="sourcePoint"/>
+                        <mxPoint x="535" y="405" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="sSf6YoUdMafXw_V6lr4z-2" value="情報を登録▶" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="DX7NVdZm8c1ugF_eBVML-1">
+                    <mxGeometry x="600" y="400" width="100" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
