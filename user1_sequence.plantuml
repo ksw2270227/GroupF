@@ -91,7 +91,7 @@ activate a
     a -> b :1.1: 起動()
 deactivate a
 activate b
-    b -> c :1.1.1: ユーザー認証()
+    b -> c :1.1.1: ログアウト要求()
 activate c
     b <-- c
 deactivate c
@@ -113,7 +113,7 @@ end
 
 actor ユーザー as 0
 Boundary ":会員情報変更画面" as a
-Control ":会員情報を取得" as b
+Control ":入力情報を更新" as b
 Entity ":ユーザー" as c
 Boundary ":マイページ" as d
 Boundary ":メールアドレス重複エラー" as e
@@ -121,13 +121,13 @@ Boundary ":電話番号重複エラー" as f
 Boundary ":情報更新エラー" as g
 
 activate 0
-    0 -> a :1: ログアウトをクリック()
+    0 -> a :1: 変更項目を入力し\n  　  変更をクリック()
 deactivate 0
 activate a
     a -> b :1.1: 起動()
 deactivate a
 activate b
-    b -> c :1.1.1: ユーザー認証()
+    b -> c :1.1.1: 更新()
 activate c
     b <-- c
 deactivate c
