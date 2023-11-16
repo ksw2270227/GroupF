@@ -152,3 +152,110 @@ deactivate g
 end
 
 @enduml
+
+@startuml システム退会シーケンス図
+
+actor ユーザー as 0
+Boundary ":マイページ" as a
+Control ":情報を削除" as b
+Entity ":ユーザー" as c
+Boundary ":トップページ" as d
+Boundary ":退会処理エラー" as e
+
+activate 0
+    0 -> a :1: 退会をクリック()
+deactivate 0
+activate a
+    a -> b :1.1: 起動()
+deactivate a
+activate b
+    b -> c :1.1.1: 登録情報を削除()
+activate c
+    b <-- c
+deactivate c
+alt [正常]
+    b -> d :1.1.2: 表示()
+activate d
+deactivate d
+else [退会処理失敗時]
+    b -> e :1.1.3: エラー発生時:表示()
+deactivate b
+activate e
+e -[hidden]-> e
+deactivate e
+end
+
+@enduml
+
+@startuml イベント参加シーケンス図
+
+actor ユーザー as 0
+Boundary ":イベント参加画面" as a
+Control ":イベント情報を取得" as b
+Entity ":イベント" as c
+Boundary ":イベント画面" as d
+Boundary ":無効な情報エラー" as e
+Boundary ":イベント参加エラー" as f
+
+activate 0
+    0 -> a :1: ログイン情報を入力()
+deactivate 0
+activate a
+    a -> b :1.1: 起動()
+deactivate a
+activate b
+    b -> c :1.1.1: イベント情報を取得()
+activate c
+    b <-- c
+deactivate c
+alt [正常]
+    b -> d :1.1.2: 表示()
+activate d
+deactivate d
+else [無効な情報入力時]
+    b -> e :1.1.3: エラー発生時:表示()
+activate e
+deactivate e
+else [イベント参加失敗時]
+    b -> f :1.1.4: エラー発生時:表示()
+deactivate b
+activate f
+f -[hidden]-> f
+deactivate f
+end
+
+@enduml
+
+@startuml イベント退出シーケンス図
+
+actor ユーザー as 0
+Boundary ":イベント画面" as a
+Control ":ユーザー状態の更新" as b
+Entity ":ユーザー" as c
+Boundary ":マイページ" as d
+Boundary ":退出処理エラー" as e
+
+activate 0
+    0 -> a :1: 退出をクリック()
+deactivate 0
+activate a
+    a -> b :1.1: 起動()
+deactivate a
+activate b
+    b -> c :1.1.1: ユーザーのイベント参加情報を更新()
+activate c
+    b <-- c
+deactivate c
+alt [正常]
+    b -> d :1.1.2: 表示()
+activate d
+deactivate d
+else [退出処理失敗時]
+    b -> e :1.1.3: エラー発生時:表示()
+deactivate b
+activate e
+e -[hidden]-> e
+deactivate e
+end
+
+@enduml
