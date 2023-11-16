@@ -70,7 +70,7 @@
                         <mxPoint x="450" y="340" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="vmnZQYMHZ2b320NhvsvD-25" value="会員情報を入力▶" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                <mxCell id="vmnZQYMHZ2b320NhvsvD-25" value="登録情報を入力▶" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
                     <mxGeometry x="120" y="250" width="100" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="vmnZQYMHZ2b320NhvsvD-29" value="表示" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -104,7 +104,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="dzQNooMkyhAn1drmeg_7" name="ログイン">
-        <mxGraphModel dx="907" dy="471" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1088" dy="565" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -208,7 +208,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="ipTaChnev_TjJ8NiurGC" name="ログアウト">
-        <mxGraphModel dx="1088" dy="565" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1166" dy="606" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -324,7 +324,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="OVSRA5t2KKanojTYky73" name="登録情報変更">
-        <mxGraphModel dx="816" dy="424" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1360" dy="707" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -449,7 +449,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="ECR1yzQu7yo3wDZo88gZ" name="システム退会">
-        <mxGraphModel dx="1255" dy="652" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1020" dy="530" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -561,11 +561,14 @@
                 <mxCell id="T41Wbb58Z8REeeMgM_rK-26" value="いいえ&lt;br&gt;選択時▲" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="280" y="290" width="70" height="40" as="geometry"/>
                 </mxCell>
+                <mxCell id="hV1wHei3YdD9gMG41qcL-1" value="&lt;span style=&quot;color: rgb(240, 240, 240); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(42, 37, 47); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;はい選択時▶&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="360" y="370" width="110" height="40" as="geometry"/>
+                </mxCell>
             </root>
         </mxGraphModel>
     </diagram>
     <diagram id="TEolQ7Deh9BqxUiyOhQK" name="イベント参加">
-        <mxGraphModel dx="1088" dy="565" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1166" dy="606" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -581,7 +584,7 @@
                 <mxCell id="msihx0L4T4g1ToQwv0Rq-4" value="イベント&lt;br&gt;参加画面" style="shape=umlBoundary;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="220" y="200" width="100" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="msihx0L4T4g1ToQwv0Rq-5" value="無効な情報&lt;br&gt;エラー画面" style="shape=umlBoundary;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="msihx0L4T4g1ToQwv0Rq-5" value="無効な情報&lt;br&gt;エラー" style="shape=umlBoundary;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="220" y="440" width="100" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="msihx0L4T4g1ToQwv0Rq-6" value="イベント画面" style="shape=umlBoundary;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -641,7 +644,7 @@
                 <mxCell id="msihx0L4T4g1ToQwv0Rq-17" value="表示" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="480" y="510" width="80" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="msihx0L4T4g1ToQwv0Rq-18" value="イベント参加&lt;br&gt;エラー画面" style="shape=umlBoundary;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="msihx0L4T4g1ToQwv0Rq-18" value="イベント参加&lt;br&gt;エラー" style="shape=umlBoundary;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="220" y="560" width="100" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="msihx0L4T4g1ToQwv0Rq-19" value="" style="endArrow=classic;html=1;entryX=1.027;entryY=0.458;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.017;exitY=0.504;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="msihx0L4T4g1ToQwv0Rq-17" target="msihx0L4T4g1ToQwv0Rq-18" edge="1">
@@ -669,7 +672,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="2z-BgR28wJ5oNUA0R-ZV" name="イベント退出">
-        <mxGraphModel dx="768" dy="565" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1255" dy="652" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -688,7 +691,7 @@
                 <mxCell id="nUdygU3lFm32uS2ciTzF-5" value="マイページ" style="shape=umlBoundary;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="220" y="520" width="100" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="XRThJl2XNFo5mvbpaokM-9" style="edgeStyle=none;html=1;" parent="1" source="nUdygU3lFm32uS2ciTzF-6" target="nUdygU3lFm32uS2ciTzF-8" edge="1">
+                <mxCell id="XRThJl2XNFo5mvbpaokM-9" style="edgeStyle=none;html=1;startArrow=none;" parent="1" source="1nz1r_XTmpyUqj8MDxlB-2" target="nUdygU3lFm32uS2ciTzF-8" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="nUdygU3lFm32uS2ciTzF-6" value="退出&lt;br&gt;ダイアログ" style="shape=umlBoundary;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -781,8 +784,14 @@
                 <mxCell id="XRThJl2XNFo5mvbpaokM-8" value="いいえ&lt;br&gt;選択時▲" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="280" y="290" width="70" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="1nz1r_XTmpyUqj8MDxlB-2" value="&lt;span style=&quot;color: rgb(240, 240, 240); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(42, 37, 47); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;はい選択時▶&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="350" y="370" width="130" height="40" as="geometry"/>
+                <mxCell id="kf4udzupnGDTHoSuGCpW-1" value="" style="edgeStyle=none;html=1;endArrow=none;" edge="1" parent="1" source="nUdygU3lFm32uS2ciTzF-6" target="1nz1r_XTmpyUqj8MDxlB-2">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="320" y="395" as="sourcePoint"/>
+                        <mxPoint x="550" y="395" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="1nz1r_XTmpyUqj8MDxlB-2" value="&lt;span style=&quot;color: rgb(240, 240, 240); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(42, 37, 47); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;はい選択時▶&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="360" y="370" width="130" height="40" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
