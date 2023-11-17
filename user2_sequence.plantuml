@@ -65,9 +65,45 @@ activate 0
 @enduml
 
 @startuml グループ退出シーケンス図
+actor ユーザー as 0
+boundary ":グループ確認画面" as a
+control ":表示" as b
+boundary ":退出ダイアログ" as c
+control ":更新" as d
+entity ":グループ" as e
+control ":表示" as f
+boundary ":トップページ" as g
+control ":表示" as h
+boundary ":退出処理エラー" as i
 
-
-
+activate 0
+    0 -> a:1:退出をクリック()
+    activate a
+    a -> b
+    deactivate a
+    activate b
+    b -> c
+    deactivate b
+    activate c
+    0 -> c:1.1:はい/いいえを選択()
+    c -> a:1.1.1:いいえ選択時()
+    activate a
+    c -> d
+    activate d
+    d -> f:1.2:正常終了時()
+    activate f
+    f -> g
+    activate g
+    deactivate f
+    deactivate g
+    d -> h:1.3:システム不良時()
+    activate h
+    h -> i
+    activate i
+    d -> e
+    activate e
+    e --> d
+    deactivate d
 @enduml
 
 @startuml 状況変更シーケンス図
@@ -172,7 +208,6 @@ activate 0
     activate h
     h -> i
     activate i
-    
     b -> c
     activate c
     c --> b
