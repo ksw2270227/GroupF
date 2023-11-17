@@ -9,24 +9,24 @@ control ":エラー画面表示" as f
 boundary ":エラー画面" as g
 
 activate 0
-    0 --> a:1:グループ情報入力()
+    0 -> a:1:グループ情報入力()
     deactivate 0
     activate a
-    a --> b
+    a -> b
     deactivate a
     activate b
-    b --> d:1.1:正常終了時()
+    b -> d:1.1:正常終了時()
     activate d
-    d --> e
+    d -> e
     activate e
     deactivate e
     deactivate d
-    b --> f:1.2:型式間違い入力()
+    b -> f:1.2:型式間違い入力()
     activate f
-    f --> g
+    f -> g
     activate g
+    b -> c
     activate c
-    b --> c
     c --> b
     deactivate c
 @enduml
@@ -42,24 +42,24 @@ control ":エラー画面表示" as f
 boundary ":エラー画面" as g
 
 activate 0
-    0 --> a:1:グループID、パスワード入力()
+    0 -> a:1:グループID、パスワード入力()
     deactivate 0
     activate a
-    a --> b
+    a -> b
     deactivate a
     activate b
-    b --> d:1.1:正常終了時()
+    b -> d:1.1:正常終了時()
     activate d
-    d --> e
+    d -> e
     activate e
     deactivate e
     deactivate d
-    b --> f:1.2:入力間違い()
+    b -> f:1.2:入力間違い()
     activate f
-    f --> g
+    f -> g
     activate g
+    b -> c
     activate c
-    b --> c
     c --> b
     deactivate c 
 @enduml
@@ -81,24 +81,24 @@ control ":表示" as f
 boundary ":情報更新エラー画面" as g
 
 activate 0
-    0 --> a:1:自分の状況をクリック()
+    0 -> a:1:自分の状況をクリック()
     deactivate 0
     activate a
-    a --> b
+    a -> b
     deactivate a
     activate b
-    b --> d:1.1:正常終了時()
+    b -> d:1.1:正常終了時()
     activate d
-    d --> e
+    d -> e
     activate e
     deactivate e
     deactivate d
-    b --> f:1.2:システム不良時()
+    b -> f:1.2:システム不良時()
     activate f
-    f --> g
+    f -> g
     activate g
+    b -> c
     activate c
-    b --> c
     c --> b
     deactivate c 
 @enduml
@@ -114,24 +114,67 @@ control ":表示" as f
 boundary ":ルート更新エラー画面" as g
 
 activate 0
-    0 --> a
+    0 -> a
     deactivate 0
     activate a
-    a --> b
+    a -> b
     deactivate a
     activate b
-    b --> d:1.1:正常終了時()
+    b -> d:1.1:正常終了時()
     activate d
-    d --> e
+    d -> e
     activate e
     deactivate e
     deactivate d
-    b --> f:1.2:システム不良時()
+    b -> f:1.2:システム不良時()
     activate f
-    f --> g
+    f -> g
     activate g
+    b -> c
     activate c
-    b --> c
+    c --> b
+    deactivate c 
+@enduml
+
+@startuml 位置情報表示シーケンス図
+actor ユーザー as 0
+boundary ":マップ画面" as a
+control ":データ取得" as b
+entity ":位置情報" as c
+control ":表示" as d
+boundary ":マップ画面" as e
+control ":表示" as f
+boundary ":エラー内容ポップアップ" as g
+control ":表示" as h
+boundary ":マップ画面" as i
+
+activate 0
+    0 -> a
+    deactivate 0
+    activate a
+    a -> b
+    deactivate a
+    activate b
+    b -> d:1.1:正常終了時()
+    activate d
+    d -> e
+    activate e
+    deactivate e
+    deactivate d
+    b -> f:1.2:自身の位置情報が取得できない場合()
+    activate f
+    f -> g:1.2.1:マップ上表示()
+    activate g
+    deactivate f
+    deactivate g
+    deactivate d
+    b -> h:1.3:グループメンバーの位置情報が取得ができない場合()
+    activate h
+    h -> i
+    activate i
+    
+    b -> c
+    activate c
     c --> b
     deactivate c 
 @enduml
