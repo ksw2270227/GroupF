@@ -2,11 +2,11 @@
 
 actor パートナー企業 as 0
 Boundary ":新規登録画面" as a
-Control ":会員登録" as b
+Control ":新規登録" as b
 Entity ":企業" as c
 Boundary ":ログイン画面" as d
 Boundary ":登録失敗エラー" as e
-Boundary ":情報入力不備エラー" as f
+Boundary ":無効情報エラー" as f
 
 
 activate 0
@@ -31,7 +31,7 @@ else [登録処理失敗時]
     b -> e :1.1.3: エラー発生時:表示()
 activate e
 deactivate e
-else [入力不備発見時]
+else [無効情報入力時]
     b -> f :1.1.4: エラー発生時:表示()
 deactivate b
 activate f
@@ -52,8 +52,8 @@ Control ":ユーザー認証" as b
 Entity ":企業" as c
 Boundary ":トップページ" as d
 Boundary ":ログインエラー" as e
-Boundary ":無効なログインエラー" as g
-Boundary ":情報入力不備エラー" as f
+Boundary ":無効情報エラー" as g
+Boundary ":未入力エラー" as f
 
 activate 0
     0 -> a :1: ログイン情報を入力()
@@ -77,12 +77,12 @@ else [ログイン処理失敗時]
     b -> e :1.1.3: エラー発生時:表示()
 activate e
 deactivate e
-else [無効な情報入力時]
-    b -> g :1.1.3: エラー発生時:表示()
+else [無効情報入力時]
+    b -> g :1.1.4: エラー発生時:表示()
 activate g
 deactivate g
-else [入力不備発見時]
-    b -> f :1.1.4: エラー発生時:表示()
+else [情報未入力時]
+    b -> f :1.1.5: エラー発生時:表示()
 deactivate b
 activate f
 f -[hidden]-> f
@@ -149,12 +149,9 @@ activate a
 a -> b : 1.1: 表示()
 deactivate a
 activate b
-b -[hidden]-> b
-deactivate b
 
 
 0 -> b : 2: メールアドレスを入力()
-activate b
 
 b -> c : 2.1: 起動()
 deactivate b
@@ -165,11 +162,16 @@ activate en
 en --> c
 deactivate en
 
+alt [正常時]
+h -[hidden]-> h
+
+else [無効なメールアドレス入力時]
 c -> h : 2.1.2: エラー発生時:表示()
 deactivate c
 activate h
 h -[hidden]-> h
 deactivate h
+end
 
 
 0 -> d  : 3: 新規パスワードを入力()
@@ -182,6 +184,7 @@ activate e
 
 e -> en : 3.1.1: パスワード更新()
 activate en
+en --> e
 deactivate en
 
 alt [正常]
@@ -271,14 +274,12 @@ a -> c :1.1: 表示()
 deactivate a
 
 activate c
-c -[hidden]-> c
-deactivate c
 
 
     0 -> c :2: 変更情報を入力()
 deactivate 0
 
-activate c
+
 c -> d :2.1: 起動()
 deactivate c
 activate d
@@ -429,7 +430,6 @@ deactivate en
 
 b -> a : 0.2: 表示()
 deactivate b
-
 '/
 
 activate 0
@@ -449,14 +449,12 @@ deactivate en
 d -> c :1.1.2: 表示()
 deactivate d
 activate c
-c -[hidden]-> c
-deactivate c
 
 
     0 -> c :2: チャット内容を入力し送信()
 deactivate 0
 
-activate c
+
 c -> g :2.1: 起動()
 deactivate c
 activate g
@@ -488,38 +486,48 @@ end
 @startuml 異常確認
 
 actor パートナー企業 as 0
+boundary "トップページ" as a
 control "ユーザー情報取得" as c
 entity ユーザー
 control "位置情報取得" as b
 entity 位置情報
-boundary "異常確認画面" as a
+boundary "異常確認画面" as d
 
 
-activate b
-b -> 位置情報 : 位置情報を取得する()
-activate 位置情報
-位置情報 --> b
-deactivate 位置情報
 
-activate c
-c -> ユーザー : ユーザー情報を取得する()
-activate ユーザー
-ユーザー --> c
-deactivate ユーザー
-
-a <- b : 表示()
-deactivate b
-activate a
-
-a <- c : 表示()
-deactivate c
 
 
 activate 0
 0 -> a : 1:異常確認をクリック()
 deactivate 0
-a -[hidden]-> a
+
+activate a
+a -> c : 1.1: 起動()
 deactivate a
+
+
+
+activate c
+c -> ユーザー :1.1.1: ユーザー情報を取得する()
+activate ユーザー
+ユーザー --> c
+deactivate ユーザー
+
+c -> b : 1.1.2: 起動()
+deactivate c
+
+
+activate b
+b -> 位置情報 :1.1.2.1: 位置情報を取得する()
+activate 位置情報
+位置情報 --> b
+deactivate 位置情報
+
+d <- b : 1.1.2.1:表示()
+deactivate b
+activate d
+d -[hidden]-> d
+deactivate d
 
 @enduml
 
