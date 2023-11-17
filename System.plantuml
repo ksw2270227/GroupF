@@ -109,9 +109,37 @@ activate paschange
 paschange -> display2:画面の変更()
 deactivate paschange
 activate display2
-display2 -> mein:
 activate mein
+display2 -> mein:表示()
 deactivate display2
 deactivate mein
-
 @enduml
+@startuml ログアウトシーケンス図
+actor システム管理者
+boundary "ログアウト画面" as out
+control "ログアウト処理" as process
+boundary "ログイン画面" as in
+control "エラー表示" as error
+boundary "エラー表示画面" as errorscreen
+
+activate システム管理者
+システム管理者 -> out:ポップアップの表示()
+deactivate システム管理者
+activate out
+out -> process:起動()
+deactivate out
+activate process
+activate in
+process -> in:表示()
+deactivate process
+deactivate in
+process -> error:エラー発生()
+activate process
+deactivate process
+activate error
+error -> errorscreen:エラー表示()
+deactivate error
+activate errorscreen
+deactivate errorscreen
+@enduml
+

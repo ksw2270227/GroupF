@@ -29,9 +29,10 @@ activate e
 deactivate e
 else [電話番号重複時]
     b -> f :1.1.4: エラー発生時:表示()
+deactivate b
 activate f
+f -[hidden]-> f
 deactivate f
-deactivate c
 end
 
 @enduml
@@ -91,7 +92,7 @@ activate a
     a -> b :1.1: 起動()
 deactivate a
 activate b
-    b -> c :1.1.1: ユーザー認証()
+    b -> c :1.1.1: ログアウト要求()
 activate c
     b <-- c
 deactivate c
@@ -106,5 +107,223 @@ activate e
 e -[hidden]-> e
 deactivate e
 end
+
+@enduml
+
+@startuml 登録情報変更シーケンス図
+
+actor ユーザー as 0
+Boundary ":会員情報変更画面" as a
+Control ":入力情報を更新" as b
+Entity ":ユーザー" as c
+Boundary ":マイページ" as d
+Boundary ":メールアドレス重複エラー" as e
+Boundary ":電話番号重複エラー" as f
+Boundary ":情報更新エラー" as g
+
+activate 0
+    0 -> a :1: 変更項目を入力し\n  　  変更をクリック()
+deactivate 0
+activate a
+    a -> b :1.1: 起動()
+deactivate a
+activate b
+    b -> c :1.1.1: 更新()
+activate c
+    b <-- c
+deactivate c
+alt [正常]
+    b -> d :1.1.2: 表示()
+activate d
+deactivate d
+else [メールアドレス重複時]
+    b -> e :1.1.3: エラー発生時:表示()
+activate e
+deactivate e
+else [電話番号重複時]
+    b -> f :1.1.4: エラー発生時:表示()
+activate f
+deactivate f
+else [情報更新失敗時]
+    b -> g :1.1.5: エラー発生時:表示()
+deactivate b
+activate g
+g -[hidden]-> g
+deactivate g
+end
+
+@enduml
+
+@startuml システム退会シーケンス図
+
+actor ユーザー as 0
+Boundary ":マイページ" as a
+Control ":情報を削除" as b
+Entity ":ユーザー" as c
+Boundary ":トップページ" as d
+Boundary ":退会処理エラー" as e
+
+activate 0
+    0 -> a :1: 退会をクリック()
+deactivate 0
+activate a
+    a -> b :1.1: 起動()
+deactivate a
+activate b
+    b -> c :1.1.1: 登録情報を削除()
+activate c
+    b <-- c
+deactivate c
+alt [正常]
+    b -> d :1.1.2: 表示()
+activate d
+deactivate d
+else [退会処理失敗時]
+    b -> e :1.1.3: エラー発生時:表示()
+deactivate b
+activate e
+e -[hidden]-> e
+deactivate e
+end
+
+@enduml
+
+@startuml イベント参加シーケンス図
+
+actor ユーザー as 0
+Boundary ":イベント参加画面" as a
+Control ":イベント情報を取得" as b
+Entity ":イベント" as c
+Boundary ":イベント画面" as d
+Boundary ":無効な情報エラー" as e
+Boundary ":イベント参加エラー" as f
+
+activate 0
+    0 -> a :1: イベント参加をクリック()
+deactivate 0
+activate a
+    a -> b :1.1: 起動()
+deactivate a
+activate b
+    b -> c :1.1.1: イベント情報を取得()
+activate c
+    b <-- c
+deactivate c
+alt [正常]
+    b -> d :1.1.2: 表示()
+activate d
+deactivate d
+else [無効な情報入力時]
+    b -> e :1.1.3: エラー発生時:表示()
+activate e
+deactivate e
+else [イベント参加失敗時]
+    b -> f :1.1.4: エラー発生時:表示()
+deactivate b
+activate f
+f -[hidden]-> f
+deactivate f
+end
+
+@enduml
+
+@startuml イベント退出シーケンス図
+
+actor ユーザー as 0
+Boundary ":イベント画面" as a
+Control ":ユーザー状態の更新" as b
+Entity ":ユーザー" as c
+Boundary ":マイページ" as d
+Boundary ":退出処理エラー" as e
+
+activate 0
+    0 -> a :1: 退出をクリック()
+deactivate 0
+activate a
+    a -> b :1.1: 起動()
+deactivate a
+activate b
+    b -> c :1.1.1: ユーザーのイベント参加情報を更新()
+activate c
+    b <-- c
+deactivate c
+alt [正常]
+    b -> d :1.1.2: 表示()
+activate d
+deactivate d
+else [退出処理失敗時]
+    b -> e :1.1.3: エラー発生時:表示()
+deactivate b
+activate e
+e -[hidden]-> e
+deactivate e
+end
+
+@enduml
+
+@startuml パスワード変更シーケンス図
+
+actor ユーザー as 0
+Boundary ":ログイン画面" as a
+Boundary ":パスワード忘れ画面" as b
+Control ":メールアドレス認証" as c
+Entity ":ユーザー" as d
+Boundary ":メール送信" as e
+Boundary ":メールアドレスエラー" as f
+Boundary ":パスワード変更画面" as g
+Control ":パスワード更新" as h
+Entity ":ユーザー" as i
+Boundary ":ログイン画面" as j
+Boundary ":パスワードエラー" as k
+
+activate 0
+    0 -> a :1: パスワード忘れた場合をクリック()
+activate a
+    a -> b :1.1: 表示()
+deactivate a
+activate b
+
+    0 -> b :2: メールアドレスを入力する()
+    b -> c :2.1: 起動()
+deactivate b
+activate c
+    c -> d :2.2.1: メールアドレス認証()
+activate d
+    c <-- d
+deactivate d
+alt [正常]
+    c -> e :2.2.2: 送信()
+activate e
+deactivate e
+else [メールアドレス無効時]
+    c -> f :2.2.3: エラー発生時:表示()
+deactivate c
+activate f
+f -[hidden]-> f
+deactivate f
+end
+
+activate 0
+    0 -> g :3: 新規パスワードを入力()
+activate g
+    g -> h :3.1: 起動()
+deactivate g
+activate h
+    h -> i :3.1.1: パスワード更新()
+activate i
+    h <-- i
+deactivate i
+alt [正常]
+    h -> j :3.1.2: 送信()
+activate j
+deactivate j
+else [パスワードエラー時]
+    h -> k :3.1.3: エラー発生時:表示()
+deactivate h
+activate k
+k -[hidden]-> k
+deactivate k
+end
+deactivate 0
 
 @enduml
