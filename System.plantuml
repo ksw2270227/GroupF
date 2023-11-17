@@ -142,4 +142,78 @@ deactivate error
 activate errorscreen
 deactivate errorscreen
 @enduml
+@startuml シーケンス図登録情報確認
+actor システム管理者
+boundary "ユーザー情報確認画面" as screenuser
+control "情報の取得" as information
+entity "ユーザー" as user
+control "情報詳細表示" as detail
+boundary "ユーザー情報詳細確認画面" as detailuser
+control "エラー表示" as error
+boundary "ユーザー一覧失敗画面" as erroruser
+control "詳細取得失敗表示" as errordetail
+boundary "詳細表示失敗画面" as errorscreen
+control "ユーザー詳細失敗表示" as userdetail
+boundary "ユーザー選択表示失敗画面" as userdisplay
 
+activate システム管理者
+システム管理者 -> screenuser:アクセス()
+deactivate システム管理者
+activate screenuser
+screenuser -> information:起動()
+deactivate screenuser
+activate information
+information -> user:情報の取得()
+activate user
+user --> information
+deactivate user
+information -> screenuser:表示()
+activate screenuser
+deactivate screenuser
+information -> detail:取得()
+activate detail
+activate detailuser
+detail -> detailuser:表示()
+deactivate detail
+deactivate detailuser
+information -> error:エラー発生()
+deactivate information
+activate error
+activate erroruser
+error -> erroruser:エラー発生表示()
+deactivate error
+deactivate erroruser
+activate detail
+detail -> errordetail:エラー取得()
+deactivate detail
+activate errordetail
+activate errorscreen
+errordetail -> errorscreen:エラー取得表示()
+deactivate errordetail
+deactivate errorscreen
+errordetail -> userdetail:エラー詳細()
+activate errordetail
+deactivate errordetail
+activate userdetail
+userdetail -> userdisplay:エラー詳細表示()
+deactivate userdetail
+activate userdisplay
+deactivate userdisplay
+@enduml
+@startuml シーケンス図登録情報削除
+actor システム管理者
+boundary "ユーザー情報確認詳細画面" as userdetail
+control "情報の取得" as detail
+entity "ユーザー" as user
+control "ポップアップの表示" as display1
+control "エラー表示" as errordisplay
+boundary "ポップアップの表示に失敗画面" as display1error
+control "情報の取得" as detail1
+control "エラー表示" as errordisplay1
+boundary "削除失敗画面" as errordelete
+
+activate システム管理者
+システム管理者 -> userdetail
+deactivate システム管理者
+activate userdetail
+@enduml
