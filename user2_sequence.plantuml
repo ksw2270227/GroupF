@@ -1,26 +1,137 @@
 @startuml グループ作成シーケンス図
-actor ユーザー
-boundary "グループ作成画面"
-control "グループ情報登録"
-entity "グループ"
-control "表示"
-boundary "グループ画面"
-control "エラー画面表示"
-boundary "エラー画面"
+actor ユーザー as 0
+boundary ":グループ作成画面" as a
+control ":グループ情報登録" as b
+entity ":グループ" as c
+control ":表示" as d
+boundary ":グループ画面" as e
+control ":エラー画面表示" as f
+boundary ":エラー画面" as g
 
-activate ユーザー
-    ユーザー --> グループ作成画面
-    activate グループ作成画面
-    グループ作成画面 --> グループ情報登録
-    activate グループ情報登録
-    グループ情報登録 --> 表示
-    activate グループ情報登録
-    グループ情報登録 --> グループ
-    グループ <-- グループ情報登録
-    activate グループ
-    activate 表示
-    表示 --> グループ画面
-    activate グループ画面
-    エラー画面表示 --> エラー画面
-    activate 表示
+activate 0
+    0 --> a:1:グループ情報入力()
+    deactivate 0
+    activate a
+    a --> b
+    deactivate a
+    activate b
+    b --> d:1.1:正常終了時()
+    activate d
+    d --> e
+    activate e
+    deactivate e
+    deactivate d
+    b --> f:1.2:型式間違い入力()
+    activate f
+    f --> g
+    activate g
+    activate c
+    b --> c
+    c --> b
+    deactivate c
+@enduml
+
+@startuml グループ参加シーケンス図
+actor ユーザー as 0
+boundary ":グループ参加画面" as a
+control ":入力内容照合" as b
+entity ":グループ" as c
+control ":表示" as d
+boundary ":グループ画面" as e
+control ":エラー画面表示" as f
+boundary ":エラー画面" as g
+
+activate 0
+    0 --> a:1:グループID、パスワード入力()
+    deactivate 0
+    activate a
+    a --> b
+    deactivate a
+    activate b
+    b --> d:1.1:正常終了時()
+    activate d
+    d --> e
+    activate e
+    deactivate e
+    deactivate d
+    b --> f:1.2:入力間違い()
+    activate f
+    f --> g
+    activate g
+    activate c
+    b --> c
+    c --> b
+    deactivate c 
+@enduml
+
+@startuml グループ退出シーケンス図
+
+
+
+@enduml
+
+@startuml 状況変更シーケンス図
+actor ユーザー as 0
+boundary ":マップ画面" as a
+control ":ユーザー状況変更" as b
+entity ":ユーザー" as c
+control ":表示" as d
+boundary ":マップ画面" as e
+control ":表示" as f
+boundary ":情報更新エラー画面" as g
+
+activate 0
+    0 --> a:1:自分の状況をクリック()
+    deactivate 0
+    activate a
+    a --> b
+    deactivate a
+    activate b
+    b --> d:1.1:正常終了時()
+    activate d
+    d --> e
+    activate e
+    deactivate e
+    deactivate d
+    b --> f:1.2:システム不良時()
+    activate f
+    f --> g
+    activate g
+    activate c
+    b --> c
+    c --> b
+    deactivate c 
+@enduml
+
+@startuml ルート表示シーケンス図
+actor ユーザー as 0
+boundary ":マップ画面" as a
+control ":位置情報取得" as b
+entity ":位置情報" as c
+control ":ルート作成" as d
+boundary ":マップ画面" as e
+control ":表示" as f
+boundary ":ルート更新エラー画面" as g
+
+activate 0
+    0 --> a
+    deactivate 0
+    activate a
+    a --> b
+    deactivate a
+    activate b
+    b --> d:1.1:正常終了時()
+    activate d
+    d --> e
+    activate e
+    deactivate e
+    deactivate d
+    b --> f:1.2:システム不良時()
+    activate f
+    f --> g
+    activate g
+    activate c
+    b --> c
+    c --> b
+    deactivate c 
 @enduml
