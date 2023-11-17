@@ -29,9 +29,10 @@ activate e
 deactivate e
 else [電話番号重複時]
     b -> f :1.1.4: エラー発生時:表示()
+deactivate b
 activate f
+f -[hidden]-> f
 deactivate f
-deactivate c
 end
 
 @enduml
