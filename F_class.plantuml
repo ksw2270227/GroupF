@@ -1,4 +1,12 @@
-@startuml
+@startuml クラス図
 
-class something{}
+class users{}
+class admins{}
+class companies{}
+class companies_empyloee{}
+class groups{}
+class events{}
+class messages{}
+class location_data{}
+class location_history{}
 @enduml
