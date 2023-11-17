@@ -1,0 +1,219 @@
+@startuml シーケンス図 ログイン
+actor システム管理者
+boundary "ログイン画面" as mein
+control "表示一" as display1
+control "本人認証表示" as certification
+entity "システム管理者" as system
+boundary "ログイン完了" as completion
+control "エラー表示" as error
+boundary "エラー画面1" as error1
+boundary "エラー画面2" as error2
+boundary "エラー画面3" as error3
+
+activate システム管理者
+システム管理者 -> mein :ログイン画面をクリック()
+deactivate システム管理者
+activate mein
+mein -> display1 :起動()
+deactivate mein
+activate display1
+display1 -> certification:値の入力()
+deactivate display1
+activate certification
+certification -> system:情報の参照()
+activate system
+system --> certification
+deactivate certification
+deactivate system
+certification -> completion:認証完了ログインをする()
+activate certification
+activate completion
+deactivate certification
+deactivate completion
+certification -> error:エラー発生()
+activate certification
+deactivate certification
+activate error
+activate error1
+error -> error1:無効なパスワードまたは名前エラー()
+deactivate error
+deactivate error1
+error -> error2:未入力エラー()
+activate error
+activate error2
+deactivate error
+deactivate error2
+error -> error3:ログイン失敗エラー()
+activate error
+activate error3
+deactivate error
+deactivate error3
+@enduml
+@startuml ログインシーケンス図
+actor システム管理者
+boundary "ログイン画面" as mein
+control "表示" as display1
+boundary "パス忘れ画面" as pasforget
+control "認証表示" as certification
+entity "システム管理者" as system
+control "エラー表示" as error
+boundary "エラー画面1" as error1
+control "リンク先送信" as url
+boundary "パスワード変更画面" as paschange
+control "パスワード変更" as paschangeing
+control "表示" as display2
+
+activate システム管理者
+システム管理者 -> mein:ログイン画面のクリック()
+deactivate システム管理者
+activate mein
+mein -> display1:起動()
+deactivate mein
+activate display1
+display1 -> pasforget:パスワード変更をクリック()
+deactivate display1
+activate pasforget
+pasforget -> certification:メアドの入力()
+deactivate pasforget
+activate certification
+certification -> system:メアドの比較()
+activate system
+system --> certification
+deactivate certification
+deactivate system
+certification -> error:エラー発生()
+activate certification
+activate error
+activate error1
+error -> error1:エラーの表示()
+deactivate error
+deactivate certification
+deactivate error1
+certification -> url:リンクページ()
+activate certification
+deactivate certification
+activate url
+url -> paschange:起動()
+deactivate url
+activate paschange
+deactivate paschange
+paschange -> paschangeing:変更()
+deactivate paschange
+activate paschangeing
+deactivate paschangeing
+activate system
+paschangeing -> system:保存()
+deactivate system
+deactivate paschangeing
+activate paschange
+paschange -> display2:画面の変更()
+deactivate paschange
+activate display2
+activate mein
+display2 -> mein:表示()
+deactivate display2
+deactivate mein
+@enduml
+@startuml ログアウトシーケンス図
+actor システム管理者
+boundary "ログアウト画面" as out
+control "ログアウト処理" as process
+boundary "ログイン画面" as in
+control "エラー表示" as error
+boundary "エラー表示画面" as errorscreen
+
+activate システム管理者
+システム管理者 -> out:ポップアップの表示()
+deactivate システム管理者
+activate out
+out -> process:起動()
+deactivate out
+activate process
+activate in
+process -> in:表示()
+deactivate process
+deactivate in
+process -> error:エラー発生()
+activate process
+deactivate process
+activate error
+error -> errorscreen:エラー表示()
+deactivate error
+activate errorscreen
+deactivate errorscreen
+@enduml
+@startuml シーケンス図登録情報確認
+actor システム管理者
+boundary "ユーザー情報確認画面" as screenuser
+control "情報の取得" as information
+entity "ユーザー" as user
+control "情報詳細表示" as detail
+boundary "ユーザー情報詳細確認画面" as detailuser
+control "エラー表示" as error
+boundary "ユーザー一覧失敗画面" as erroruser
+control "詳細取得失敗表示" as errordetail
+boundary "詳細表示失敗画面" as errorscreen
+control "ユーザー詳細失敗表示" as userdetail
+boundary "ユーザー選択表示失敗画面" as userdisplay
+
+activate システム管理者
+システム管理者 -> screenuser:アクセス()
+deactivate システム管理者
+activate screenuser
+screenuser -> information:起動()
+deactivate screenuser
+activate information
+information -> user:情報の取得()
+activate user
+user --> information
+deactivate user
+information -> screenuser:表示()
+activate screenuser
+deactivate screenuser
+information -> detail:取得()
+activate detail
+activate detailuser
+detail -> detailuser:表示()
+deactivate detail
+deactivate detailuser
+information -> error:エラー発生()
+deactivate information
+activate error
+activate erroruser
+error -> erroruser:エラー発生表示()
+deactivate error
+deactivate erroruser
+activate detail
+detail -> errordetail:エラー取得()
+deactivate detail
+activate errordetail
+activate errorscreen
+errordetail -> errorscreen:エラー取得表示()
+deactivate errordetail
+deactivate errorscreen
+errordetail -> userdetail:エラー詳細()
+activate errordetail
+deactivate errordetail
+activate userdetail
+userdetail -> userdisplay:エラー詳細表示()
+deactivate userdetail
+activate userdisplay
+deactivate userdisplay
+@enduml
+@startuml シーケンス図登録情報削除
+actor システム管理者
+boundary "ユーザー情報確認詳細画面" as userdetail
+control "情報の取得" as detail
+entity "ユーザー" as user
+control "ポップアップの表示" as display1
+control "エラー表示" as errordisplay
+boundary "ポップアップの表示に失敗画面" as display1error
+control "情報の取得" as detail1
+control "エラー表示" as errordisplay1
+boundary "削除失敗画面" as errordelete
+
+activate システム管理者
+システム管理者 -> userdetail
+deactivate システム管理者
+activate userdetail
+@enduml
