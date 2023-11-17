@@ -199,7 +199,7 @@ Boundary ":無効な情報エラー" as e
 Boundary ":イベント参加エラー" as f
 
 activate 0
-    0 -> a :1: ログイン情報を入力()
+    0 -> a :1: イベント参加をクリック()
 deactivate 0
 activate a
     a -> b :1.1: 起動()
