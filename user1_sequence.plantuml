@@ -29,9 +29,10 @@ activate e
 deactivate e
 else [電話番号重複時]
     b -> f :1.1.4: エラー発生時:表示()
+deactivate b
 activate f
+f -[hidden]-> f
 deactivate f
-deactivate c
 end
 
 @enduml
@@ -198,7 +199,7 @@ Boundary ":無効な情報エラー" as e
 Boundary ":イベント参加エラー" as f
 
 activate 0
-    0 -> a :1: ログイン情報を入力()
+    0 -> a :1: イベント参加をクリック()
 deactivate 0
 activate a
     a -> b :1.1: 起動()
