@@ -1,0 +1,117 @@
+@startuml シーケンス図 ログイン
+actor システム管理者
+boundary "ログイン画面" as mein
+control "表示一" as display1
+control "本人認証表示" as certification
+entity "システム管理者" as system
+boundary "ログイン完了" as completion
+control "エラー表示" as error
+boundary "エラー画面1" as error1
+boundary "エラー画面2" as error2
+boundary "エラー画面3" as error3
+
+activate システム管理者
+システム管理者 -> mein :ログイン画面をクリック()
+deactivate システム管理者
+activate mein
+mein -> display1 :起動()
+deactivate mein
+activate display1
+display1 -> certification:値の入力()
+deactivate display1
+activate certification
+certification -> system:情報の参照()
+activate system
+system --> certification
+deactivate certification
+deactivate system
+certification -> completion:認証完了ログインをする()
+activate certification
+activate completion
+deactivate certification
+deactivate completion
+certification -> error:エラー発生()
+activate certification
+deactivate certification
+activate error
+activate error1
+error -> error1:無効なパスワードまたは名前エラー()
+deactivate error
+deactivate error1
+error -> error2:未入力エラー()
+activate error
+activate error2
+deactivate error
+deactivate error2
+error -> error3:ログイン失敗エラー()
+activate error
+activate error3
+deactivate error
+deactivate error3
+@enduml
+@startuml ログインシーケンス図
+actor システム管理者
+boundary "ログイン画面" as mein
+control "表示" as display1
+boundary "パス忘れ画面" as pasforget
+control "認証表示" as certification
+entity "システム管理者" as system
+control "エラー表示" as error
+boundary "エラー画面1" as error1
+control "リンク先送信" as url
+boundary "パスワード変更画面" as paschange
+control "パスワード変更" as paschangeing
+control "表示" as display2
+
+activate システム管理者
+システム管理者 -> mein:ログイン画面のクリック()
+deactivate システム管理者
+activate mein
+mein -> display1:起動()
+deactivate mein
+activate display1
+display1 -> pasforget:パスワード変更をクリック()
+deactivate display1
+activate pasforget
+pasforget -> certification:メアドの入力()
+deactivate pasforget
+activate certification
+certification -> system:メアドの比較()
+activate system
+system --> certification
+deactivate certification
+deactivate system
+certification -> error:エラー発生()
+activate certification
+activate error
+activate error1
+error -> error1:エラーの表示()
+deactivate error
+deactivate certification
+deactivate error1
+certification -> url:リンクページ()
+activate certification
+deactivate certification
+activate url
+url -> paschange:起動()
+deactivate url
+activate paschange
+deactivate paschange
+paschange -> paschangeing:変更()
+deactivate paschange
+activate paschangeing
+deactivate paschangeing
+activate system
+paschangeing -> system:保存()
+deactivate system
+deactivate paschangeing
+activate paschange
+paschange -> display2:画面の変更()
+deactivate paschange
+activate display2
+display2 -> mein:
+activate mein
+deactivate display2
+deactivate mein
+
+@enduml
