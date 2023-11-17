@@ -12,20 +12,20 @@ activate 0
     0 -> a:1:グループ情報入力()
     deactivate 0
     activate a
-    a -> b
+    a -> b:1.1:入力情報確認()
     deactivate a
     activate b
-    b -> d:1.1:正常終了時()
+    b -> d:1.2:正常終了時()
     activate d
-    d -> e
+    d -> e:1.2.1表示()
     activate e
     deactivate e
     deactivate d
-    b -> f:1.2:型式間違い入力()
+    b -> f:1.3:型式間違い入力()
     activate f
-    f -> g
+    f -> g:1.4:表示()
     activate g
-    b -> c
+    b -> c:1.5:登録
     activate c
     c --> b
     deactivate c
@@ -45,20 +45,20 @@ activate 0
     0 -> a:1:グループID、パスワード入力()
     deactivate 0
     activate a
-    a -> b
+    a -> b:1.2:入力内容確認()
     deactivate a
     activate b
-    b -> d:1.1:正常終了時()
+    b -> d:1.3:正常終了時()
     activate d
-    d -> e
+    d -> e:1.3.1:表示()
     activate e
     deactivate e
     deactivate d
-    b -> f:1.2:入力間違い()
+    b -> f:1.4:入力間違い()
     activate f
-    f -> g
+    f -> g:1.4.1:表示()
     activate g
-    b -> c
+    b -> c:1.5:照合()
     activate c
     c --> b
     deactivate c 
@@ -79,28 +79,29 @@ boundary ":退出処理エラー" as i
 activate 0
     0 -> a:1:退出をクリック()
     activate a
-    a -> b
+    a -> b::入力内容確認()
     deactivate a
     activate b
-    b -> c
+    b -> c:表示()
     deactivate b
     activate c
     0 -> c:1.1:はい/いいえを選択()
+    deactivate 0
     c -> a:1.1.1:いいえ選択時()
     activate a
     c -> d
     activate d
     d -> f:1.2:正常終了時()
     activate f
-    f -> g
+    f -> g:表示()
     activate g
     deactivate f
     deactivate g
     d -> h:1.3:システム不良時()
     activate h
-    h -> i
+    h -> i:表示()
     activate i
-    d -> e
+    d -> e:更新()
     activate e
     e --> d
     deactivate d
@@ -120,20 +121,20 @@ activate 0
     0 -> a:1:自分の状況をクリック()
     deactivate 0
     activate a
-    a -> b
+    a -> b:変更確認()
     deactivate a
     activate b
     b -> d:1.1:正常終了時()
     activate d
-    d -> e
+    d -> e:表示()
     activate e
     deactivate e
     deactivate d
     b -> f:1.2:システム不良時()
     activate f
-    f -> g
+    f -> g:表示()
     activate g
-    b -> c
+    b -> c:変更()
     activate c
     c --> b
     deactivate c 
@@ -150,26 +151,86 @@ control ":表示" as f
 boundary ":ルート更新エラー画面" as g
 
 activate 0
-    0 -> a
+    0 -> a:ルート作成()
     deactivate 0
     activate a
-    a -> b
+    a -> b:起動()
     deactivate a
     activate b
     b -> d:1.1:正常終了時()
     activate d
-    d -> e
+    d -> e:表示()
     activate e
     deactivate e
     deactivate d
     b -> f:1.2:システム不良時()
     activate f
-    f -> g
+    f -> g:表示()
     activate g
-    b -> c
+    b -> c:位置情報()
     activate c
     c --> b
     deactivate c 
+@enduml
+
+@startuml システム管理者チャットシーケンス図
+actor ユーザー as 0
+boundary ":トップページ" as a
+control ":取得" as b
+entity ":メッセージ" as c
+control ":表示" as d
+boundary ":チャット更新エラー画面" as e
+boundary ":チャット画面" as f
+control ":追加" as g
+entity ":メッセージ" as h
+
+activate 0
+    0 -> a:1:チャットをクリック()
+    deactivate 0
+    activate a
+    a -> b:1.1:取得()
+    deactivate a
+    activate b
+    b -> c:1.2:表示()
+    activate c
+    c --> b
+    deactivate c
+    alt [異常時]
+    b -> d:1.3:システム不良時()
+    activate d
+    d --> b
+    d -> e:1.3.1:表示()
+    deactivate d
+    activate e
+    e -[hidden]-> e
+    deactivate e
+    else [正常時]
+    b -> d:1.4:正常終了時()
+    
+    activate d
+    d --> b
+    d -> f:1.4.1:表示()
+    deactivate b
+    activate f
+    
+    f --> d
+    deactivate d
+    0 -> f:1.3:メッセージを送信()
+    activate 0
+    f --> 0
+    deactivate 0
+    f -> g:1.5:追加()
+    activate g
+    g --> f
+    deactivate f
+    g -> h:1.6:追加()
+    activate h
+    h --> g
+    deactivate h
+    deactivate g
+    end
+    
+
 @enduml
 
 @startuml 位置情報表示シーケンス図
