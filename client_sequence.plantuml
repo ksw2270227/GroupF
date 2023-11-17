@@ -1,42 +1,24 @@
 @startuml 新規登録
 
-
 actor パートナー企業 as 0
 Boundary ":新規登録画面" as a
-Boundary ":内容確認ダイアログ" as a1
 Control ":会員登録" as b
-Entity ":ユーザー" as c
+Entity ":企業" as c
 Boundary ":ログイン画面" as d
-Boundary ":メールアドレス重複エラー" as e
-Boundary ":電話番号重複エラー" as f
+Boundary ":登録失敗エラー" as e
+Boundary ":情報入力不備エラー" as f
+
 
 activate 0
     0 -> a :1: 登録情報を入力()
 deactivate 0
 
 activate a
-    a -> a1 :1.1: 起動()
+    a -> b :1.1: 起動()
 deactivate a
-activate a1
 
-
-alt [いいえを選択]
-
-    a1 --> a :1.1: 表示()
-activate a
-deactivate a
-else [はいを選択]
-
-    a1 -> b :1.2: 表示()
-
-deactivate a1
 activate b
-
-end
-
-
     b -> c :1.1.1: 新規登録()
-
 activate c
     b <-- c
 deactivate c
@@ -45,17 +27,16 @@ alt [正常]
     b -> d :1.1.2: 表示()
 activate d
 deactivate d
-else [メールアドレス重複時]
+else [登録失敗時]
     b -> e :1.1.3: エラー発生時:表示()
 activate e
 deactivate e
-else [電話番号重複時]
+else [入力不備発見時]
     b -> f :1.1.4: エラー発生時:表示()
 deactivate b
 activate f
 f -[hidden]-> f
 deactivate f
-
 end
 
 
@@ -68,10 +49,12 @@ end
 actor パートナー企業 as 0
 Boundary ":ログイン画面" as a
 Control ":ユーザー認証" as b
-Entity ":ユーザー" as c
-Boundary ":マイページ" as d
-Boundary ":無効なログインエラー" as e
-Boundary ":ログインエラー" as f
+Entity ":企業" as c
+Boundary ":トップページ" as d
+Boundary ":ログインエラー" as e
+Boundary ":無効なログインエラー" as g
+Boundary ":情報入力不備エラー" as f
+
 
 activate 0
     0 -> a :1: ログイン情報を入力()
@@ -91,11 +74,15 @@ alt [正常]
     b -> d :1.1.2: 表示()
 activate d
 deactivate d
-else [無効な情報入力時]
+else [ログイン失敗時]
     b -> e :1.1.3: エラー発生時:表示()
 activate e
 deactivate e
-else [ログイン失敗時]
+else [無効な情報入力時]
+    b -> g :1.1.3: エラー発生時:表示()
+activate g
+deactivate g
+else [入力不備発見時]
     b -> f :1.1.4: エラー発生時:表示()
 deactivate b
 activate f
@@ -110,9 +97,9 @@ end
 
 
 actor パートナー企業 as 0
-Boundary ":マイページ" as a
+Boundary ":トップページ" as a
 Control ":ログアウト処理" as b
-Entity ":ユーザー" as c
+Entity ":企業" as c
 Boundary ":トップページ" as d
 Boundary ":ログアウトエラー" as e
 
@@ -143,9 +130,118 @@ end
 
 @enduml
 
+@startuml パスワード変更
+
+actor パートナー企業 as 0
+Boundary ":ログイン画面" as a
+Boundary ":パスワード忘れ画面" as b
+Control ":メールアドレス認証" as c
+Boundary ":パスワード変更画面" as d
+Control ":パスワード更新" as e
+Entity ":企業" as en
+Boundary ":ログイン画面" as f
+Boundary ":無効パスワードエラー" as g
+
+
+activate 0
+0 -> a : 1: パスワードを忘れた場合をクリック()
+
+
+activate a
+a -> b : 1.1: 起動()
+deactivate a
+activate b
+b -[hidden]-> b
+deactivate b
+
+
+
+
+0 -> b : 2: メールアドレスを入力()
+
+activate b
+b -> c : 2.1: 起動()
+deactivate b
+
+activate c
+c -> en : 2.1.1: メールアドレス認証()
+activate en
+en --> c
+deactivate en
+
+c -> g : 2.1.2: エラー発生時:表示()
+deactivate c
+activate g
+g -[hidden]-> g
+deactivate g
+
+
+
+
+0 -> d  : 3: 新規パスワードを入力()
+deactivate 0
+
+activate d
+d -> e : 3.1: 起動()
+deactivate d
+activate e
+
+e -> en : 3.1.1: パスワード更新()
+activate en
+deactivate en
+
+alt [正常]
+e -> f : 3.1.3: 表示()
+activate f
+deactivate f
+deactivate g
+
+else [無効なパスワード入力時時]
+e -> g : 3.1.2: エラー発生時:表示()
+deactivate e
+activate g
+g -[hidden]-> g
+deactivate g
+
+end
+
+@enduml
+
 
 @startuml イベント作成
 
+actor パートナー企業 as 0
+Boundary ":イベント作成画面" as a
+Control ":イベント情報登録" as b
+Entity ":イベント" as c
+Boundary ":トップページ" as d
+Boundary ":登録失敗エラー" as e
+
+activate 0
+    0 -> a :1: イベント情報を入力()
+deactivate 0
+
+activate a
+    a -> b :1.1: 起動()
+deactivate a
+
+activate b
+    b -> c :1.1.1: イベント情報を登録()
+activate c
+    b <-- c
+deactivate c
+
+alt [正常]
+    b -> d :1.1.2: 表示()
+activate d
+deactivate d
+else [登録処理失敗時]
+    b -> e :1.1.3: エラー発生時:表示()
+deactivate b
+activate e
+e -[hidden]-> e
+deactivate e
+end
 
 
 @enduml
@@ -153,14 +249,162 @@ end
 
 @startuml イベント変更
 
+actor パートナー企業 as 0
+Control ":イベント情報取得" as b
+Boundary ":イベント情報画面" as a
+Boundary ":イベント変更画面" as c
+Control ":イベント変更登録" as d
+Entity ":イベント" as en
+Boundary ":イベント情報画面" as e
+Boundary ":登録失敗エラー" as f
+
+activate b
+b -> en : 0.1: イベント情報取得()
+activate en
+en --> b
+deactivate en
+
+b -> a
+deactivate b
+activate a
+
+activate 0
+    0 -> a :1: 変更ボタンをクリック()
+deactivate 0
+
+a -> c :1.1: 表示()
+deactivate a
+
+activate c
+c -[hidden]-> c
+deactivate c
+
+
+
+activate 0
+    0 -> c :2: 変更情報を入力()
+deactivate 0
+
+activate c
+c -> d :2.1: 起動()
+deactivate c
+activate d
+
+    d -> en :2.1.1: 変更を登録()
+activate en
+    d <-- en
+deactivate en
+
+alt [正常]
+d -> e :2.1.2: 表示()
+activate e
+deactivate e
+
+else [登録処理失敗時]
+d -> f :2.1.3: エラー発生時:表示()
+deactivate d
+activate f
+f -[hidden]-> f
+deactivate f
+
+end
+
+@enduml
+
+
+
+
+@startuml イベント削除
+
+actor パートナー企業 as 0
+Control ":イベント情報取得" as b
+Boundary ":イベント情報画面" as a
+Control ":イベント削除" as d
+Entity ":イベント" as en
+Boundary ":トップページ" as e
+Boundary ":削除失敗エラー" as f
+
+activate b
+b -> en : 0.1: イベント情報取得()
+activate en
+en --> b
+deactivate en
+
+b -> a
+deactivate b
+activate a
+
+activate 0
+    0 -> a :1: 削除ボタンをクリック()
+deactivate 0
+
+a -> d :1.1: 起動()
+deactivate a
+
+activate d
+    d -> en :1.1.1: 変更を登録()
+activate en
+    d <-- en
+deactivate en
+
+alt [正常]
+d -> e :1.1.2: 表示()
+activate e
+deactivate e
+
+else [削除処理失敗時]
+d -> f :1.1.3: エラー発生時:表示()
+deactivate d
+activate f
+f -[hidden]-> f
+deactivate f
+
+end
 
 
 @enduml
 
 
-@startuml イベント削除
+@startuml 参加ユーザー確認
 
 
+actor パートナー企業 as 0
+Control ":イベント情報取得" as b
+Entity ":イベント" as en
+Boundary ":イベント情報画面" as a
+Control ":参加ユーザー取得" as c
+Entity ":ユーザー" as enn
+Boundary ":ユーザー一覧画面" as d
+
+activate b
+b -> en : 0.1: イベント情報取得()
+activate en
+en --> b
+deactivate en
+
+b -> a
+deactivate b
+activate a
+
+activate 0
+    0 -> a :1: ユーザーボタンをクリック()
+deactivate 0
+
+
+a -> c :1.1: 起動()
+deactivate a
+
+activate c
+    c -> enn :1.1.1: ユーザー情報取得()
+activate enn
+    c <-- enn
+deactivate enn
+
+c -> d :1.1.2: 表示()
+deactivate c
+activate d
+d -[hidden]-> d
+deactivate d
 
 @enduml
 
@@ -173,6 +417,43 @@ end
 
 
 @startuml 異常確認
+
+actor パートナー企業 as 0
+
+control "ユーザー情報取得" as c
+entity ユーザー
+control "位置情報取得" as b
+entity 位置情報
+boundary "異常確認画面" as a
+
+
+activate b
+b -> 位置情報 : 位置情報を取得する()
+activate 位置情報
+位置情報 --> b
+deactivate 位置情報
+
+
+activate c
+c -> ユーザー : ユーザー情報を取得する()
+activate ユーザー
+ユーザー --> c
+deactivate ユーザー
+
+
+a <- b : 表示()
+deactivate b
+activate a
+
+
+a <- c : 表示()
+deactivate c
+
+activate 0
+0 -> a : 異常確認をクリック()
+deactivate 0
+a -[hidden]-> a
+deactivate a
 
 
 
