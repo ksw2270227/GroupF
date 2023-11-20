@@ -17,18 +17,25 @@ activate 0
     activate b
     b -> d:1.2:正常終了時()
     activate d
-    d -> e:1.2.1表示()
+    d -> e:1.2.1:表示()
     activate e
     deactivate e
     deactivate d
+    alt [型式間違いの場合]
     b -> f:1.3:型式間違い入力()
     activate f
-    f -> g:1.4:表示()
+    f -> g:1.3.1:表示()
+    deactivate f
     activate g
-    b -> c:1.5:登録
+    g -[hidden]> g
+    deactivate g
+    else [正常の場合]
+    b -> c:1.4:登録
     activate c
     c --> b
     deactivate c
+    deactivate b
+    end
 @enduml
 
 @startuml グループ参加シーケンス図
@@ -48,20 +55,27 @@ activate 0
     a -> b:1.2:入力内容確認()
     deactivate a
     activate b
-    b -> d:1.3:正常終了時()
+    b -> c:1.3:照合()
+    activate c
+    c --> b
+    deactivate c
+    alt [正常な場合]
+    b -> d:1.4:正常終了時()
     activate d
-    d -> e:1.3.1:表示()
+    d -> e:1.4.1:表示()
     activate e
     deactivate e
     deactivate d
-    b -> f:1.4:入力間違い()
+    else [入力間違いの場合]
+    b -> f:1.5:入力間違い()
     activate f
-    f -> g:1.4.1:表示()
+    deactivate b
+    f -> g:1.5.1:表示()
+    deactivate f
     activate g
-    b -> c:1.5:照合()
-    activate c
-    c --> b
-    deactivate c 
+    g -[hidden]> g
+    deactivate g
+    end
 @enduml
 
 @startuml グループ退出シーケンス図
@@ -79,32 +93,42 @@ boundary ":退出処理エラー" as i
 activate 0
     0 -> a:1:退出をクリック()
     activate a
-    a -> b::入力内容確認()
+    a -> b:1.1:入力内容確認()
     deactivate a
     activate b
-    b -> c:表示()
+    b -> c:1.1.1:表示()
     deactivate b
     activate c
-    0 -> c:1.1:はい/いいえを選択()
+    0 -> c:1.2:はい/いいえを選択()
     deactivate 0
-    c -> a:1.1.1:いいえ選択時()
+    alt [「いいえ」を選択した場合]
+    c -> a:2.1:いいえ選択時()
     activate a
-    c -> d
+    a -[hidden]> a
+    deactivate a
+    else [「はい」を選択した場合]
+    c -> d:2.2:起動()
     activate d
-    d -> f:1.2:正常終了時()
+    d -> f:3.1:正常終了時()
     activate f
-    f -> g:表示()
+    f -> g:3.1.1表示()
     activate g
     deactivate f
     deactivate g
-    d -> h:1.3:システム不良時()
+    d -> h:3.2:システム不良時()
     activate h
-    h -> i:表示()
+    h -> i:3.2.1:表示()
+    deactivate h
     activate i
-    d -> e:更新()
+    d -> e:3.3:更新()
     activate e
     e --> d
+    deactivate c
     deactivate d
+    deactivate e
+    deactivate i
+    
+    end
 @enduml
 
 @startuml 状況変更シーケンス図
@@ -121,23 +145,29 @@ activate 0
     0 -> a:1:自分の状況をクリック()
     deactivate 0
     activate a
-    a -> b:変更確認()
+    a -> b:1.1:変更確認()
     deactivate a
+    alt [正常な場合]
     activate b
-    b -> d:1.1:正常終了時()
+    b -> d:1.2:正常終了時()
     activate d
-    d -> e:表示()
+    d -> e:1.2.1:表示()
     activate e
     deactivate e
     deactivate d
-    b -> f:1.2:システム不良時()
-    activate f
-    f -> g:表示()
-    activate g
-    b -> c:変更()
+    b -> c:1.3:変更()
     activate c
     c --> b
     deactivate c 
+    else [不良な場合]
+    b -> f:1.4:システム不良時()
+    activate f
+    f -> g:1.4.1表示()
+    activate g
+    deactivate b
+    deactivate f
+    deactivate g
+    end
 @enduml
 
 @startuml ルート表示シーケンス図
@@ -151,26 +181,32 @@ control ":表示" as f
 boundary ":ルート更新エラー画面" as g
 
 activate 0
-    0 -> a:ルート作成()
+    0 -> a:1:ルート作成()
     deactivate 0
     activate a
-    a -> b:起動()
+    a -> b:1.1:起動()
     deactivate a
+    alt [正常な場合]
     activate b
-    b -> d:1.1:正常終了時()
+    b -> d:1.2:正常終了時()
     activate d
-    d -> e:表示()
+    d -> e:1.2.1:表示()
     activate e
     deactivate e
     deactivate d
-    b -> f:1.2:システム不良時()
-    activate f
-    f -> g:表示()
-    activate g
-    b -> c:位置情報()
+    b -> c:1.3:位置情報()
     activate c
     c --> b
-    deactivate c 
+    deactivate c
+    else [不良な場合]
+    b -> f:1.4:システム不良時()
+    activate f
+    f -> g:1.4.1:表示()
+    activate g
+    deactivate b
+    deactivate f
+    deactivate g
+    end
 @enduml
 
 @startuml システム管理者チャットシーケンス図
@@ -195,7 +231,7 @@ activate 0
     activate c
     c --> b
     deactivate c
-    alt [異常時]
+    alt [異常な場合]
     b -> d:1.3:システム不良時()
     activate d
     d --> b
@@ -204,7 +240,7 @@ activate 0
     activate e
     e -[hidden]-> e
     deactivate e
-    else [正常時]
+    else [正常な場合]
     b -> d:1.4:正常終了時()
     
     activate d
@@ -215,15 +251,15 @@ activate 0
     
     f --> d
     deactivate d
-    0 -> f:1.3:メッセージを送信()
+    0 -> f:1.5:メッセージを送信()
     activate 0
     f --> 0
     deactivate 0
-    f -> g:1.5:追加()
+    f -> g:2.1:追加()
     activate g
     g --> f
     deactivate f
-    g -> h:1.6:追加()
+    g -> h:2.2:追加()
     activate h
     h --> g
     deactivate h
@@ -246,31 +282,104 @@ control ":表示" as h
 boundary ":マップ画面" as i
 
 activate 0
-    0 -> a
+    0 -> a:1:マップ選択()
     deactivate 0
     activate a
-    a -> b
+    a -> b:1.1:取得()
     deactivate a
+    alt [正常な場合]
     activate b
-    b -> d:1.1:正常終了時()
+    b -> d:1.1.1正常終了時()
     activate d
-    d -> e
+    d -> e:1.1.2:表示()
     activate e
-    deactivate e
     deactivate d
-    b -> f:1.2:自身の位置情報が取得できない場合()
+    deactivate e
+    b -> c:1.2:位置情報表示()
+    activate c
+    c --> b
+    deactivate c 
+    else [取得できない場合]
+    b -> f:1.3:自身の位置情報が取得できない場合()
     activate f
-    f -> g:1.2.1:マップ上表示()
+    f -> g:1.3.1:マップ上表示()
     activate g
     deactivate f
     deactivate g
     deactivate d
-    b -> h:1.3:グループメンバーの位置情報が取得ができない場合()
+    b -> h:1.4:グループメンバーの位置情報が取得ができない場合()
     activate h
-    h -> i
+    h -> i:1.4.1:表示()
     activate i
-    b -> c
-    activate c
-    c --> b
-    deactivate c 
+    deactivate b
+    deactivate h
+    deactivate i
+    end
+@enduml
+
+@startuml パスワード変更シーケンス図
+
+actor ユーザー as 0
+Boundary ":ログイン画面" as a
+Boundary ":パスワード忘れ画面" as b
+Control ":メールアドレス認証" as c
+Entity ":ユーザー" as d
+Boundary ":メール送信" as e
+Boundary ":メールアドレスエラー" as f
+Boundary ":パスワード変更画面" as g
+Control ":パスワード更新" as h
+Entity ":ユーザー" as i
+Boundary ":ログイン画面" as j
+Boundary ":パスワードエラー" as k
+
+activate 0
+    0 -> a :1: パスワード忘れた場合をクリック()
+activate a
+    a -> b :1.1: 表示()
+deactivate a
+activate b
+
+    0 -> b :2: メールアドレスを入力する()
+    b -> c :2.1: 起動()
+deactivate b
+activate c
+    c -> d :2.2.1: メールアドレス認証()
+activate d
+    c <-- d
+deactivate d
+alt [正常]
+    c -> e :2.2.2: 送信()
+activate e
+deactivate e
+else [メールアドレス無効時]
+    c -> f :2.2.3: エラー発生時:表示()
+deactivate c
+activate f
+f -[hidden]-> f
+deactivate f
+end
+
+activate 0
+    0 -> g :3: 新規パスワードを入力()
+activate g
+    g -> h :3.1: 起動()
+deactivate g
+activate h
+    h -> i :3.1.1: パスワード更新()
+activate i
+    h <-- i
+deactivate i
+alt [正常]
+    h -> j :3.1.2: 送信()
+activate j
+deactivate j
+else [パスワードエラー時]
+    h -> k :3.1.3: エラー発生時:表示()
+deactivate h
+activate k
+k -[hidden]-> k
+deactivate k
+end
+deactivate 0
+
 @enduml
