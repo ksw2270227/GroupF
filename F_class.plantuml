@@ -1,4 +1,4 @@
-@startuml クラス図
+@startuml
 
 class Users {
     - user_id: String
@@ -9,8 +9,8 @@ class Users {
     - password: String
     - age: Integer
     - gender: String
-    - current_event_id: String
-    - current_group_id: String
+    - current_event_id: Integer
+    - current_group_id: Integer
     - user_status: String
 }
 
@@ -44,7 +44,7 @@ class Groups {
     - group_id: String
     - password: String
     - user_id: String
-    - creation_date: DateTime
+    - creation_date: String
     - max_members: Integer
     - current_members: Integer
     - event_id: String
@@ -52,48 +52,53 @@ class Groups {
 
 class Events {
     - company_id: String
-    - event_name: String
     - event_id: String
+    - event_name: String
     - password: String
-    - start_time: DateTime
-    - end_time: DateTime
+    - start_time: String
+    - end_time: String
     - location: String
-    - event_content: Text
+    - event_content: String
 }
 
 class Messages {
     - message_id: String
     - sender_user_id: String
     - reciver_user_id: String
-    - message_content: Text
-    - sent_time: DateTime
+    - message_content: String
+    - sent_time: String
 }
 
 class LocationData {
     - user_id: String
+    - latitude: Float
+    - longitude: Float
+    - current_altitude: Float
+    - acquisition_time: String
     - user_stats: String
-    - current_latitude: Float
-    - current_longitude: Float
-    - acquisition_time: DateTime
 }
 
 class LocationHistory {
     - user_id: String
     - latitude: Float
     - longitude: Float
-    - acquisition_time: DateTime
+    - altitude: Float
+    - acquisition_time: String
     - user_status: String
 }
 
+' 関連（has-a 関係）
+Users "1" -- "0..*" Groups
+Users "1" -- "0..*" Events
+Users "1" -- "0..*" Messages
+Users "1" -- "0..1" LocationData
+Users "1" -- "0..*" LocationHistory
 
-Users "1" -- "0..*" Events : current_event_id
-Users "1" -- "0..*" Groups : current_group_id
-Users "1" -- "0..*" Messages : sender_user_id
-Users "1" -- "0..*" Messages : reciver_user_id
-Users "1" -- "0..*" LocationData : user_id
-Users "1" -- "0..*" LocationHistory : user_id
-Companies "1" -- "0..*" Events : company_id
-Companies "1" -- "0..*" CompaniesEmployee : company_id
-Groups "1" -- "0..*" Users : user_id
-Events "1" -- "0..*" Groups : event_id
+Groups "0..*" -- "0..*" Users
+Groups "1" -- "0..*" Events
+
+Companies "1" -- "0..*" Events
+Companies "1" -- "0..*" CompaniesEmployee
+
+Events "1" -- "0..*" Messages
 @enduml

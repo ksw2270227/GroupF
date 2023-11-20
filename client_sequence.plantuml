@@ -100,7 +100,7 @@ Boundary ":トップページ" as a
 Control ":ログアウト処理" as b
 Entity ":企業従業員" as c
 Boundary ":トップページ" as d
-Boundary ":ログアウトエラー" as e
+Boundary ":ログアウト失敗エラー" as e
 
 activate 0
     0 -> a :1: ログアウトをクリック()
@@ -136,7 +136,7 @@ Boundary ":パスワード忘れ画面" as b
 Control ":メールアドレス認証" as c
 Boundary ":無効メールアドレスエラー" as h
 Boundary ":パスワード変更画面" as d
-Control ":パスワード更新" as e
+Control ":パスワード変更" as e
 Entity ":企業従業員" as en
 Boundary ":ログイン画面" as f
 Boundary ":無効パスワードエラー" as g
@@ -182,7 +182,7 @@ d -> e : 3.1: 起動()
 deactivate d
 activate e
 
-e -> en : 3.1.1: パスワード更新()
+e -> en : 3.1.1: パスワードを変更()
 activate en
 en --> e
 deactivate en
@@ -212,7 +212,9 @@ Boundary ":イベント作成画面" as a
 Control ":イベント情報登録" as b
 Entity ":イベント" as c
 Boundary ":トップページ" as d
+Boundary ":無効情報エラー" as f
 Boundary ":登録失敗エラー" as e
+
 
 activate 0
     0 -> a :1: イベント情報を入力()
@@ -223,7 +225,7 @@ activate a
 deactivate a
 
 activate b
-    b -> c :1.1.1: イベント情報を登録()
+    b -> c :1.1.1: イベントを登録()
 activate c
     b <-- c
 deactivate c
@@ -232,8 +234,12 @@ alt [正常]
     b -> d :1.1.2: 表示()
 activate d
 deactivate d
+else [無効情報入力時]
+    b -> f :1.1.3: エラー発生時:表示()
+activate f
+deactivate f
 else [登録処理失敗時]
-    b -> e :1.1.3: エラー発生時:表示()
+    b -> e :1.1.4: エラー発生時:表示()
 deactivate b
 activate e
 e -[hidden]-> e
@@ -370,6 +376,7 @@ Boundary ":イベント情報画面" as a
 Control ":参加ユーザー取得" as c
 Entity ":ユーザー" as enn
 Boundary ":ユーザー一覧画面" as d
+Boundary ":参加者不在エラー" as e
 
 /'
 activate b
@@ -398,11 +405,19 @@ activate enn
     c <-- enn
 deactivate enn
 
+alt [正常]
 c -> d :1.1.2: 表示()
-deactivate c
+
 activate d
-d -[hidden]-> d
 deactivate d
+
+else [参加者0人]
+c -> e :1.1.3: エラー発生時:表示()
+deactivate c
+activate e
+e -[hidden]-> e
+deactivate e
+end
 
 @enduml
 
@@ -414,6 +429,7 @@ actor パートナー企業 as 0
 'Control ":最新チャット取得" as b
 Boundary ":チャット相手指定画面" as a
 Control ":チャット履歴取得" as d
+Boundary ":選択失敗エラー" as h
 Boundary ":チャット画面" as c
 Control ":チャット履歴保存" as g
 Entity ":メッセージ" as en
@@ -446,12 +462,20 @@ activate en
     d <-- en
 deactivate en
 
+alt [正常]
 d -> c :1.1.2: 表示()
-deactivate d
 activate c
 
+else [ユーザー選択失敗時]
+d -> h :1.1.3: エラー発生時:表示()
+deactivate d
+activate h
+h -[hidden]-> h
+deactivate h
+end
 
-    0 -> c :2: チャット内容を入力し送信()
+
+0 -> c :2: チャットを入力し送信()
 deactivate 0
 
 
@@ -459,7 +483,7 @@ c -> g :2.1: 起動()
 deactivate c
 activate g
 
-g -> en :2.1.1: チャット内容を保存()
+g -> en :2.1.1: チャットを保存()
 activate en
     g <-- en
 deactivate en
@@ -506,7 +530,7 @@ deactivate a
 
 
 activate c
-c -> e :1.1.1: ユーザー情報を取得()
+c -> e :1.1.1: 異常状態のユーザーを取得()
 activate e
 e --> c
 deactivate e
