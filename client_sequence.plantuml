@@ -3,7 +3,7 @@
 actor パートナー企業 as 0
 Boundary ":新規登録画面" as a
 Control ":新規登録" as b
-Entity ":企業" as c
+Entity ":企業従業員" as c
 Boundary ":ログイン画面" as d
 Boundary ":登録失敗エラー" as e
 Boundary ":無効情報エラー" as f
@@ -49,7 +49,7 @@ end
 actor パートナー企業 as 0
 Boundary ":ログイン画面" as a
 Control ":ユーザー認証" as b
-Entity ":企業" as c
+Entity ":企業従業員" as c
 Boundary ":トップページ" as d
 Boundary ":ログインエラー" as e
 Boundary ":無効情報エラー" as g
@@ -98,7 +98,7 @@ end
 actor パートナー企業 as 0
 Boundary ":トップページ" as a
 Control ":ログアウト処理" as b
-Entity ":企業" as c
+Entity ":企業従業員" as c
 Boundary ":トップページ" as d
 Boundary ":ログアウトエラー" as e
 
@@ -137,7 +137,7 @@ Control ":メールアドレス認証" as c
 Boundary ":無効メールアドレスエラー" as h
 Boundary ":パスワード変更画面" as d
 Control ":パスワード更新" as e
-Entity ":企業" as en
+Entity ":企業従業員" as en
 Boundary ":ログイン画面" as f
 Boundary ":無効パスワードエラー" as g
 
@@ -485,15 +485,13 @@ end
 
 @startuml 異常確認
 
-actor パートナー企業 as 0
-boundary "トップページ" as a
-control "ユーザー情報取得" as c
-entity ユーザー
-control "位置情報取得" as b
-entity 位置情報
-boundary "異常確認画面" as d
-
-
+actor ":パートナー企業" as 0
+boundary ":トップページ" as a
+control ":ユーザー情報取得" as c
+entity ":ユーザー" as e
+control ":位置情報取得" as b
+entity ":位置情報" as en
+boundary ":異常確認画面" as d
 
 
 
@@ -508,20 +506,20 @@ deactivate a
 
 
 activate c
-c -> ユーザー :1.1.1: ユーザー情報を取得する()
-activate ユーザー
-ユーザー --> c
-deactivate ユーザー
+c -> e :1.1.1: ユーザー情報を取得する()
+activate e
+e --> c
+deactivate e
 
 c -> b : 1.1.2: 起動()
 deactivate c
 
 
 activate b
-b -> 位置情報 :1.1.2.1: 位置情報を取得する()
-activate 位置情報
-位置情報 --> b
-deactivate 位置情報
+b -> en :1.1.2.1: 位置情報を取得する()
+activate en
+en --> b
+deactivate en
 
 d <- b : 1.1.2.1:表示()
 deactivate b
