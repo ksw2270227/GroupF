@@ -87,9 +87,17 @@ activate 0
     activate c
     0 -> c:1:2:はい/いいえを選択()
     deactivate 0
+
+    alt [「いいえ」を選択した時]
+
     c -> a:2:1:いいえ選択時()
     activate a
-    c -> d:2:2:()
+    a -[hidden]> a
+    deactivate a
+
+    else [「はい」を選択した時]
+    
+    c -> d:2:2:起動()
     activate d
     d -> f:3:1:正常終了時()
     activate f
@@ -105,6 +113,8 @@ activate 0
     activate e
     e --> d
     deactivate d
+
+    end
 @enduml
 
 @startuml 状況変更シーケンス図
