@@ -305,6 +305,7 @@ end
 
 activate 0
     0 -> g :3: 新規パスワードを入力()
+deactivate 0
 activate g
     g -> h :3.1: 起動()
 deactivate g
@@ -324,7 +325,6 @@ activate k
 k -[hidden]-> k
 deactivate k
 end
-deactivate 0
 
 @enduml
 
@@ -379,6 +379,7 @@ end
 
 activate 0
     0 -> g :3: 新規パスワードを入力()
+deactivate 0
 activate g
     g -> h :3.1: 起動()
 deactivate g
@@ -398,7 +399,6 @@ activate k
 k -[hidden]-> k
 deactivate k
 end
-deactivate 0
 
 @enduml
 
