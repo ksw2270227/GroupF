@@ -1,4 +1,4 @@
-@startuml 新規登録シーケンス図
+@startuml 新規登録
 
 actor ユーザー as 0
 Boundary ":新規登録画面" as a
@@ -37,7 +37,7 @@ end
 
 @enduml
 
-@startuml ログインシーケンス図
+@startuml ログイン
 
 actor ユーザー as 0
 Boundary ":ログイン画面" as a
@@ -76,7 +76,7 @@ end
 
 @enduml
 
-@startuml ログアウトシーケンス図
+@startuml ログアウト
 
 actor ユーザー as 0
 Boundary ":マイページ" as a
@@ -110,7 +110,7 @@ end
 
 @enduml
 
-@startuml 登録情報変更シーケンス図
+@startuml 登録情報変更
 
 actor ユーザー as 0
 Boundary ":会員情報変更画面" as a
@@ -154,7 +154,7 @@ end
 
 @enduml
 
-@startuml システム退会シーケンス図
+@startuml システム退会
 
 actor ユーザー as 0
 Boundary ":マイページ" as a
@@ -188,7 +188,7 @@ end
 
 @enduml
 
-@startuml イベント参加シーケンス図
+@startuml イベント参加
 
 actor ユーザー as 0
 Boundary ":イベント参加画面" as a
@@ -227,7 +227,7 @@ end
 
 @enduml
 
-@startuml イベント退出シーケンス図
+@startuml イベント退出
 
 actor ユーザー as 0
 Boundary ":イベント画面" as a
@@ -261,7 +261,7 @@ end
 
 @enduml
 
-@startuml パスワード変更シーケンス図
+@startuml パスワード変更
 
 actor ユーザー as 0
 Boundary ":ログイン画面" as a
@@ -328,7 +328,7 @@ end
 
 @enduml
 
-@startuml チャットシーケンス図
+@startuml チャット
 
 actor システム管理者 as 0
 Boundary ":チャット画面" as a
@@ -402,7 +402,7 @@ end
 
 @enduml
 
-@startuml チャット
+@startuml システム管理者チャット
 
 
 actor システム管理者 as 0
@@ -493,3 +493,35 @@ deactivate j
 end
 
 @enduml 
+
+@startuml ユーザー異常確認
+
+actor システム管理者 as 0
+Boundary ":異常確認画面" as a
+Control ":ユーザー取得" as b
+Entity ":ユーザー" as c
+Control ":位置情報取得" as d
+Entity ":位置情報履歴" as e
+
+activate 0
+    0 -> a :1: 異常確認をクリック()
+deactivate 0
+activate a
+    a -> b :1.1: 起動()
+activate b
+    b -> c :1.1.1: 異常状態のユーザーを取得()
+activate c
+    b <-- c
+deactivate c
+deactivate b
+
+    a -> d :1.2: 起動()
+deactivate a
+activate d 
+    d -> e :1.2.1: 位置情報を取得()
+activate e
+    d <-- e
+deactivate d
+deactivate e
+
+@enduml
