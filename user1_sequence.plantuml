@@ -391,7 +391,7 @@ alt [正常]
     h -> j :3.1.2: 送信()
 activate j
 deactivate j
-else [パスワードエラー時]
+else [送信エラー時]
     h -> k :3.1.3: エラー発生時:表示()
 deactivate h
 activate k
@@ -399,5 +399,82 @@ k -[hidden]-> k
 deactivate k
 end
 deactivate 0
+
+@enduml
+
+@startuml チャット
+
+
+actor システム管理者 as 0
+'Control ":最新チャット取得" as b
+Boundary ":チャット相手指定画面" as a
+Control ":チャット履歴取得" as d
+Boundary ":チャット画面" as c
+Control ":チャット履歴保存" as g
+Entity ":メッセージ" as en
+Boundary ":チャット画面" as e
+Boundary ":送信失敗エラー" as f
+
+
+/'
+activate b
+b -> en : 0.1: 最新チャット取得()
+activate en
+en --> b
+deactivate en
+
+b -> a : 0.2: 表示()
+deactivate b
+
+'/
+
+activate 0
+    0 -> a :1: チャットするユーザーを選択()
+activate a
+
+
+a -> d :1.1: 起動()
+deactivate a
+activate d
+
+d -> en :1.1.1: チャット履歴を取得()
+activate en
+    d <-- en
+deactivate en
+
+d -> c :1.1.2: 表示()
+deactivate d
+activate c
+c -[hidden]-> c
+deactivate c
+
+
+    0 -> c :2: チャット内容を入力し送信()
+deactivate 0
+
+activate c
+c -> g :2.1: 起動()
+deactivate c
+activate g
+
+g -> en :2.1.1: チャット内容を保存()
+activate en
+    g <-- en
+deactivate en
+
+
+alt [正常]
+g -> e :2.1.2: 表示()
+activate e
+deactivate e
+
+else [送信処理失敗時]
+g -> f :2.1.3: エラー発生時:表示()
+deactivate g
+activate f
+f -[hidden]-> f
+deactivate f
+
+end
 
 @enduml
