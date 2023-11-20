@@ -188,13 +188,13 @@ en --> e
 deactivate en
 
 alt [正常]
-e -> f : 3.1.3: 表示()
+e -> f : 3.1.2: 表示()
 activate f
 deactivate f
 deactivate g
 
 else [無効なパスワード入力時]
-e -> g : 3.1.2: エラー発生時:表示()
+e -> g : 3.1.3: エラー発生時:表示()
 deactivate e
 activate g
 g -[hidden]-> g
@@ -521,7 +521,7 @@ activate en
 en --> b
 deactivate en
 
-d <- b : 1.1.2.1:表示()
+d <- b : 1.1.2.2:表示()
 deactivate b
 activate d
 d -[hidden]-> d
