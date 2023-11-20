@@ -182,7 +182,7 @@ d -> e : 3.1: 起動()
 deactivate d
 activate e
 
-e -> en : 3.1.1: パスワード変更()
+e -> en : 3.1.1: パスワードを変更()
 activate en
 en --> e
 deactivate en
@@ -530,7 +530,7 @@ deactivate a
 
 
 activate c
-c -> e :1.1.1: ユーザー情報を取得()
+c -> e :1.1.1: 異常状態のユーザーを取得()
 activate e
 e --> c
 deactivate e
