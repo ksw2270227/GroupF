@@ -182,7 +182,7 @@ d -> e : 3.1: 起動()
 deactivate d
 activate e
 
-e -> en : 3.1.1: パスワード更新()
+e -> en : 3.1.1: パスワード変更()
 activate en
 en --> e
 deactivate en
@@ -225,7 +225,7 @@ activate a
 deactivate a
 
 activate b
-    b -> c :1.1.1: イベント情報を登録()
+    b -> c :1.1.1: イベントを登録()
 activate c
     b <-- c
 deactivate c
