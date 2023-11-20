@@ -1,90 +1,125 @@
 @startuml
 
 class Users {
-    - user_id: String
-    - user_name: String
-    - full_name: String
-    - phone_number: String
-    - email_address: String
-    - password: String
-    - age: Integer
-    - gender: String
-    - current_event_id: Integer
-    - current_group_id: Integer
-    - user_status: String
+    - String user_id
+    - String user_name
+    - String full_name
+    - String phone_number
+    - String email_address
+    - String password
+    - Integer age
+    - String gender
+    - Integer current_event_id
+    - Integer current_group_id
+    - String user_status
+
+    + registerUser(): String
+    + loginUser(): Boolean
+    + logoutUser(): Void
+    + updateUserProfile(): Boolean
+    + getUserProfile(): Users
+    + deleteUserAccount(): Boolean
+    + joinEvent(): Boolean
+    + leaveEvent(): Boolean
+    + createGroup() : Boolean
+    + joinGroup(): Boolean
+    + leaveGroup(): Boolean
+    + updateUserStatus(): Boolean
+    + displayLocationInfo(): LocationData
+    + changePassword(): Boolean
 }
 
 class Admins {
-    - user_id: String
-    - user_name: String
-    - password: String
-    - full_name: String
-    - email_address: String
+    - String user_id
+    - String user_name
+    - String password
+    - String full_name
+    - String email_address
+
+    + loginUser(): Boolean
+    + logoutUser(): Void
+    + changePassword(): Boolean
+    + viewUserDetails(): Users
+    + deleteUserDetails(): Boolean
 }
 
 class Companies {
-    - company_id: String
-    - company_name: String
-    - company_password: String
-    - address: String
-    - phone_number: String
-    - email_address: String
-}
+    - String company_id
+    - String company_name
+    - String company_password
+    - String address
+    - String phone_number
+    - String email_address
 
-class CompaniesEmployee {
-    - company_id: String
-    - user_id: String
-    - user_name: String
-    - full_name: String
-    - password: String
-    - email_address: String
-}
-
-class Groups {
-    - group_id: String
-    - password: String
-    - user_id: String
-    - creation_date: String
-    - max_members: Integer
-    - current_members: Integer
-    - event_id: String
+    + registerCompany() : String
+    + createEvent(): Boolean
 }
 
 class Events {
-    - company_id: String
-    - event_id: String
-    - event_name: String
-    - password: String
-    - start_time: String
-    - end_time: String
-    - location: String
-    - event_content: String
-}
+    - String company_id
+    - String event_id
+    - String event_name
+    - String password
+    - String start_time
+    - String end_time
+    - String location
+    - String event_content
 
-class Messages {
-    - message_id: String
-    - sender_user_id: String
-    - reciver_user_id: String
-    - message_content: String
-    - sent_time: String
+    + createEvent(): String
+    + updateEvent(): Boolean
+    + deleteEvent(): Boolean
+    + getEventDetails(): Events
+    + listAllEvents(): List<Events>
 }
 
 class LocationData {
-    - user_id: String
-    - latitude: Float
-    - longitude: Float
-    - current_altitude: Float
-    - acquisition_time: String
-    - user_stats: String
+    - String user_id
+    - Float latitude
+    - Float longitude
+    - Float current_altitude
+    - String acquisition_time
+    - String user_stats
+
+    + createLocationData(): String
+    + updateLocationData(): Boolean
+    + getLocationData(): LocationData
 }
 
 class LocationHistory {
-    - user_id: String
-    - latitude: Float
-    - longitude: Float
-    - altitude: Float
-    - acquisition_time: String
-    - user_status: String
+    - String user_id
+    - Float latitude
+    - Float longitude
+    - Float altitude
+    - String acquisition_time
+    - String user_status
+
+    + saveLocationHistory(): Boolean
+    + getLocationHistory(): List<LocationHistory>
+}
+
+class Messages {
+    - String message_id
+    - String sender_user_id
+    - String reciver_user_id
+    - String message_content
+    - String sent_time
+
+    + sendMessage(): Boolean
+    + getMessageHistory(): List<Messages>
+}
+
+class Groups {
+    - String group_id
+    - String password
+    - String user_id
+    - String creation_date
+    - Integer max_members
+    - Integer current_members
+    - String event_id
+
+    + createGroup(): String
+    + addMember(): Boolean
+    + updateGroupInfo(): Boolean
 }
 
 ' 関連（has-a 関係）
