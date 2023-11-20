@@ -506,7 +506,7 @@ deactivate a
 
 
 activate c
-c -> e :1.1.1: ユーザー情報を取得する()
+c -> e :1.1.1: ユーザー情報を取得()
 activate e
 e --> c
 deactivate e
@@ -516,7 +516,7 @@ deactivate c
 
 
 activate b
-b -> en :1.1.2.1: 位置情報を取得する()
+b -> en :1.1.2.1: 位置情報を取得()
 activate en
 en --> b
 deactivate en
