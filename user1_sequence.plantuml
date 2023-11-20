@@ -410,10 +410,14 @@ actor システム管理者 as 0
 Boundary ":チャット相手指定画面" as a
 Control ":チャット履歴取得" as d
 Boundary ":チャット画面" as c
-Control ":チャット履歴保存" as g
+Control ":メッセージ送信" as j
 Entity ":メッセージ" as en
+Control ":ユーザー選択失敗画面" as h
+Control ":チャット画面表示失敗画面" as i
 Boundary ":チャット画面" as e
+Boundary ":送信完了" as k
 Boundary ":送信失敗エラー" as f
+
 
 
 /'
@@ -442,39 +446,50 @@ activate en
     d <-- en
 deactivate en
 
-d -> c :1.1.2: 表示()
-deactivate d
+
+alt [正常]
+    d -> c :1.1.2: 表示()
 activate c
-c -[hidden]-> c
 deactivate c
+else [ユーザー選択エラー時]
+    d -> h :1.1.3: エラー発生時:表示()
+activate h
+deactivate h
+else [画面表示エラー時]
+    d -> i :1.1.4: エラー発生時:表示()
+activate i
+i -[hidden]-> i
+deactivate i
+deactivate d
+end
 
 
     0 -> c :2: チャット内容を入力し送信()
 deactivate 0
 
 activate c
-c -> g :2.1: 起動()
+c -> j :2.1: 起動()
 deactivate c
-activate g
+activate j
 
-g -> en :2.1.1: チャット内容を保存()
+j -> en :2.1.1: チャット内容を保存()
 activate en
-    g <-- en
+    j <-- en
 deactivate en
 
 
 alt [正常]
-g -> e :2.1.2: 表示()
-activate e
-deactivate e
+j -> k :2.1.2: 表示()
+activate k
+deactivate k
 
 else [送信処理失敗時]
-g -> f :2.1.3: エラー発生時:表示()
-deactivate g
+j -> f :2.1.3: エラー発生時:表示()
 activate f
 f -[hidden]-> f
 deactivate f
+deactivate j
 
 end
 
-@enduml
+@enduml 
