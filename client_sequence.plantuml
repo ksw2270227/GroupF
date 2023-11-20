@@ -530,7 +530,7 @@ deactivate a
 
 
 activate c
-c -> e :1.1.1: ユーザー情報を取得()
+c -> e :1.1.1: 異常状態のユーザーを取得()
 activate e
 e --> c
 deactivate e

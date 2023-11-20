@@ -128,7 +128,7 @@ activate a
     a -> b :1.1: 起動()
 deactivate a
 activate b
-    b -> c :1.1.1: 更新()
+    b -> c :1.1.1: 登録情報を更新()
 activate c
     b <-- c
 deactivate c
