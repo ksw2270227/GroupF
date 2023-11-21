@@ -68,7 +68,7 @@ activate 0
 actor ユーザー as 0
 boundary ":グループ確認画面" as a
 control ":更新" as b
-entity ":グループ" as c
+entity ":ユーザー" as c
 boundary ":トップページ" as d
 boundary ":退出処理エラー" as e
 
@@ -198,9 +198,11 @@ activate 0
     deactivate 0
     e -> f:2.1:起動()
     activate f
+    f --> e
     deactivate e
     f -> g:2.1.1:追加()
     activate g
+    g --> f
     deactivate f
     deactivate g
     
@@ -213,7 +215,6 @@ control ":データ取得" as b
 entity ":位置情報" as c
 boundary ":マップ画面" as d
 boundary ":エラー内容ポップアップ" as e
-boundary ":マップ画面" as f
 
 activate 0
     0 -> a:1:マップ選択()
@@ -234,10 +235,6 @@ activate 0
     b -> e:1.1.3:自身の位置情報が取得できない場合()
     activate e
     deactivate e
-    else [メンバーの位置情報が取得できない場合]
-    b -> f:1.1.4:グループメンバーの位置情報が取得ができない場合()
-    activate f
-    deactivate f
     deactivate b
     end
 @enduml
