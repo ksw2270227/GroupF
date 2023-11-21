@@ -368,13 +368,13 @@ activate c
 deactivate c
 deactivate b
 
-    a -> d :1.2: 起動()
+    a -> d :1.2: 位置状態更新()
 activate d 
     d -> e :1.2.1: 位置情報を取得()
 activate e
     d <-- e
 deactivate e
-    d -> a :表示()
+    d --> a 
 deactivate d
 deactivate a
 
