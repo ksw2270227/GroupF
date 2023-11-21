@@ -35,6 +35,7 @@ activate error2
 deactivate error2
 else [ログイン失敗エラー]
     certification -> error3:1.1.5:ログイン失敗エラー:表示()
+deactivate certification
 activate error3
 error3 -[hidden]-> error3
 deactivate error3
