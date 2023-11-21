@@ -197,13 +197,16 @@ activate 0
     activate 0
     deactivate 0
     e -> f:2.1:起動()
-    activate f
-    f --> e
     deactivate e
+    activate f
     f -> g:2.1.1:追加()
+    deactivate f
     activate g
     g --> f
+    activate f
+    f --> e
     deactivate f
+    activate e
     deactivate g
     
 @enduml
