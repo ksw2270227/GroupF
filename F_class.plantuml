@@ -49,7 +49,6 @@ class Companies {
     - String company_password
     - String address
     - String phone_number
-    - String email_address
 
     + registerCompany() : String
 }
@@ -59,8 +58,8 @@ class Events {
     - String event_id
     - String event_name
     - String password
-    - String start_time
-    - String end_time
+    - datetime start_time
+    - datetime end_time
     - String location
     - String event_content
 
@@ -91,7 +90,7 @@ class LocationHistory {
     - String user_status
 
     + saveLocationHistory(): Boolean
-    + getLocationHistory(): List<LocationHistory>
+    + getLocationHistory() : List[LocationHistory]
 }
 
 class Messages {
@@ -102,7 +101,7 @@ class Messages {
     - String sent_time
 
     + sendMessage(): Boolean
-    + getMessageHistory(): List<Messages>
+    + getMessageHistory(): List[Messages]
 }
 
 class Groups {
@@ -119,7 +118,21 @@ class Groups {
     + updateGroupInfo(): Boolean
 }
 
-' 関連（has-a 関係）
+class CompaniesEmployee{
+    - String company_id
+    - String user_id
+    - String user_name
+    - String full_name
+    - String password
+    - String email_address
+
+    + registerUser(): String
+    + loginUser(): Boolean
+    + logoutUser(): Void
+    + changePassword(): Boolean
+}
+
+' 関連
 Users "1" -- "0..*" Groups
 Users "1" -- "0..*" Events
 Users "1" -- "0..*" Messages
