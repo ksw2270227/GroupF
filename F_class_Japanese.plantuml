@@ -11,7 +11,7 @@ class ユーザー {
     - String 性別
     - Integer 現在のイベントID
     - Integer 現在のグループID
-    - String ユーザー状態
+    - String ユーザー状況
 
     + ユーザー登録(): String
     + ログイン(): Boolean
@@ -23,7 +23,7 @@ class ユーザー {
     + イベント退会(): Boolean
     + グループ参加(): Boolean
     + グループ退会(): Boolean
-    + ユーザー状態更新(): Boolean
+    + ユーザー状況更新(): Boolean
     + パスワード変更(): Boolean
 }
 
@@ -73,11 +73,11 @@ class 位置データ {
     - Float 経度
     - Float 現在の高度
     - datetime 取得時刻
-    - String ユーザー状態
+    - String ユーザー状況
 
     + 位置データ更新(): Boolean
     + 位置データ取得(): 位置データ
-    + ユーザー状態取得() : String
+    + ユーザー状況取得() : String
 }
 
 class 位置履歴 {
@@ -86,7 +86,7 @@ class 位置履歴 {
     - Float 経度
     - Float 高度
     - datetime 取得時刻
-    - String ユーザー状態
+    - String ユーザー状況
 
     + 位置履歴保存(): Boolean
     + 位置履歴取得(): List[位置履歴]
