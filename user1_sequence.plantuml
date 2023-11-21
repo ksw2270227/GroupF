@@ -1,4 +1,4 @@
-@startuml 新規登録シーケンス図
+@startuml 新規登録
 
 actor ユーザー as 0
 Boundary ":新規登録画面" as a
@@ -37,7 +37,7 @@ end
 
 @enduml
 
-@startuml ログインシーケンス図
+@startuml ログイン
 
 actor ユーザー as 0
 Boundary ":ログイン画面" as a
@@ -76,7 +76,7 @@ end
 
 @enduml
 
-@startuml ログアウトシーケンス図
+@startuml ログアウト
 
 actor ユーザー as 0
 Boundary ":マイページ" as a
@@ -110,7 +110,7 @@ end
 
 @enduml
 
-@startuml 登録情報変更シーケンス図
+@startuml 登録情報変更
 
 actor ユーザー as 0
 Boundary ":会員情報変更画面" as a
@@ -128,7 +128,7 @@ activate a
     a -> b :1.1: 起動()
 deactivate a
 activate b
-    b -> c :1.1.1: 更新()
+    b -> c :1.1.1: 登録情報を更新()
 activate c
     b <-- c
 deactivate c
@@ -154,7 +154,7 @@ end
 
 @enduml
 
-@startuml システム退会シーケンス図
+@startuml システム退会
 
 actor ユーザー as 0
 Boundary ":マイページ" as a
@@ -188,7 +188,7 @@ end
 
 @enduml
 
-@startuml イベント参加シーケンス図
+@startuml イベント参加
 
 actor ユーザー as 0
 Boundary ":イベント参加画面" as a
@@ -227,7 +227,7 @@ end
 
 @enduml
 
-@startuml イベント退出シーケンス図
+@startuml イベント退出
 
 actor ユーザー as 0
 Boundary ":イベント画面" as a
@@ -261,7 +261,7 @@ end
 
 @enduml
 
-@startuml パスワード変更シーケンス図
+@startuml パスワード変更
 
 actor ユーザー as 0
 Boundary ":ログイン画面" as a
@@ -305,6 +305,7 @@ end
 
 activate 0
     0 -> g :3: 新規パスワードを入力()
+deactivate 0
 activate g
     g -> h :3.1: 起動()
 deactivate g
@@ -324,6 +325,129 @@ activate k
 k -[hidden]-> k
 deactivate k
 end
+
+@enduml
+
+@startuml システム管理者チャット
+
+
+actor システム管理者 as 0
+'Control ":最新チャット取得" as b
+Boundary ":チャット相手指定画面" as a
+Control ":チャット履歴取得" as d
+Boundary ":チャット画面" as c
+Control ":メッセージ送信" as j
+Entity ":メッセージ" as en
+Control ":ユーザー選択失敗画面" as h
+Control ":チャット画面表示失敗画面" as i
+Boundary ":チャット画面" as e
+Boundary ":送信完了" as k
+Boundary ":送信失敗エラー" as f
+
+
+
+/'
+activate b
+b -> en : 0.1: 最新チャット取得()
+activate en
+en --> b
+deactivate en
+
+b -> a : 0.2: 表示()
+deactivate b
+
+'/
+
+activate 0
+    0 -> a :1: チャットするユーザーを選択()
+activate a
+
+
+a -> d :1.1: 起動()
+deactivate a
+activate d
+
+d -> en :1.1.1: チャット履歴を取得()
+activate en
+    d <-- en
+deactivate en
+
+
+alt [正常]
+    d -> c :1.1.2: 表示()
+activate c
+deactivate c
+else [ユーザー選択エラー時]
+    d -> h :1.1.3: エラー発生時:表示()
+activate h
+deactivate h
+else [画面表示エラー時]
+    d -> i :1.1.4: エラー発生時:表示()
+activate i
+i -[hidden]-> i
+deactivate i
+deactivate d
+end
+
+
+    0 -> c :2: チャット内容を入力し送信()
 deactivate 0
+
+activate c
+c -> j :2.1: 起動()
+deactivate c
+activate j
+
+j -> en :2.1.1: チャット内容を保存()
+activate en
+    j <-- en
+deactivate en
+
+
+alt [正常]
+j -> k :2.1.2: 表示()
+activate k
+deactivate k
+
+else [送信処理失敗時]
+j -> f :2.1.3: エラー発生時:表示()
+activate f
+f -[hidden]-> f
+deactivate f
+deactivate j
+
+end
+
+@enduml 
+
+@startuml ユーザー異常確認
+
+actor システム管理者 as 0
+Boundary ":異常確認画面" as a
+Control ":ユーザー取得" as b
+Entity ":ユーザー" as c
+Control ":位置情報取得" as d
+Entity ":位置情報履歴" as e
+
+activate 0
+    0 -> a :1: 異常確認をクリック()
+deactivate 0
+activate a
+    a -> b :1.1: 起動()
+activate b
+    b -> c :1.1.1: 異常状態のユーザーを取得()
+activate c
+    b <-- c
+deactivate c
+deactivate b
+
+    a -> d :1.2: 起動()
+deactivate a
+activate d 
+    d -> e :1.2.1: 位置情報を取得()
+activate e
+    d <-- e
+deactivate d
+deactivate e
 
 @enduml

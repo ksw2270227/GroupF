@@ -124,20 +124,20 @@ boundary "ログイン画面" as in
 boundary "エラー表示画面" as errorscreen
 
 activate システム管理者
-システム管理者 -> out:ポップアップの表示()
+システム管理者 -> out:1:ポップアップの表示()
 deactivate システム管理者
 activate out
-out -> process:起動()
+out -> process:1.1起動()
 deactivate out
 activate process
 
 
 alt [正常]
-    process -> in :3.1.2: 表示()
+    process -> in :1.1.1: 表示()
 activate in
 deactivate in
 else [ログアウトエラー時]
-    process -> errorscreen :3.1.3: エラー発生時:表示()
+    process -> errorscreen :1.1.2: エラー発生時:表示()
 deactivate process
 activate errorscreen
 errorscreen -[hidden]-> errorscreen
@@ -161,27 +161,27 @@ boundary "詳細表示失敗画面" as errorscreen
 boundary "ユーザー選択表示失敗画面" as userdisplay
 
 activate システム管理者
-システム管理者 -> screenuser:アクセス()
+システム管理者 -> screenuser:1:アクセス()
 deactivate システム管理者
 activate screenuser
-screenuser -> information:起動()
+screenuser -> information:1.1起動()
 deactivate screenuser
 activate information
-information -> user:情報の取得()
+information -> user:1.1.1情報の取得()
 activate user
 user --> information
 deactivate user
 
 alt [正常]
-    information -> detailuser :3.1.2: 表示()
+    information -> detailuser :1.1.2: 表示()
 activate detailuser
 deactivate detailuser
 else [詳細表示エラー時]
-    information -> errorscreen :3.1.3: エラー発生時:表示()
+    information -> errorscreen :1.1.3: エラー発生時:表示()
 activate errorscreen
 deactivate errorscreen
 else [ユーザー表示エラー時]
-    information -> userdisplay :エラー発生時:表示()
+    information -> userdisplay :1.1.4:エラー発生時:表示()
 deactivate information
 activate userdisplay
 userdisplay -[hidden]-> userdisplay
@@ -206,29 +206,29 @@ boundary "ユーザー一覧画面" as user3
 boundary "削除失敗画面" as errordelete
 
 activate システム管理者
-システム管理者 -> userdetail:画面のクリック()
+システム管理者 -> userdetail:1:画面のクリック()
 
 activate userdetail
-userdetail -> detail:起動()
+userdetail -> detail:1.1:起動()
 deactivate userdetail
 activate detail
-detail -> user:取得()
+detail -> user:1.1.1:取得()
 activate user
 user --> detail
 deactivate detail
 deactivate user
 
-システム管理者 -> userdetail2:画面のクリック()
+システム管理者 -> userdetail2:2:画面のクリック()
 deactivate システム管理者
 
 activate userdetail2
-userdetail2 -> detail1:起動()
+userdetail2 -> detail1:2.1:起動()
 deactivate userdetail2
 
 
 
 activate detail1
-detail1 -> user2:取得()
+detail1 -> user2:2.1.1:取得()
 activate user2
 user2 --> detail1
 deactivate user2
@@ -236,11 +236,11 @@ deactivate user2
 
 
 alt [正常]
-    detail1 -> user3 :3.1.2: 表示()
+    detail1 -> user3 :2.1.2: 表示()
 activate user3
 deactivate user3
 else [削除エラー時]
-    detail1 -> errordelete :3.1.3: エラー発生時:表示()
+    detail1 -> errordelete :2.1.3: エラー発生時:表示()
 deactivate detail1
 activate errordelete
 errordelete -[hidden]-> errordelete
@@ -249,67 +249,126 @@ end
 
 @enduml
 
-@startuml
-actor システム管理者
-boundary "ログイン画面" as mein
-control "表示" as display1
-boundary "パス忘れ画面" as pasforget
-control "認証表示" as certification
-boundary "エラー画面1" as error1
-entity "システム管理者" as system
-boundary "パスワード変更画面" as paschange
-control "パスワード変更" as pas
-
-entity "システム管理者" as system2
-boundary "ログイン画面" as mein1
+@startuml システム管理者チャット
 
 
-activate システム管理者
-システム管理者 -> mein:パス忘れクリック()
-activate mein
-mein -> display1:表示()
-deactivate mein
-activate display1
-display1 -> pasforget:起動()
-deactivate display1
-activate pasforget
-システム管理者 -> pasforget :メアドの入力()
-pasforget -> certification :認証()
-deactivate pasforget
-activate certification
-certification -> system:メアドの比較()
-activate system
-system --> certification
-deactivate system
+actor システム管理者 as 0
+'Control ":最新チャット取得" as b
+Boundary ":チャット相手指定画面" as a
+Control ":チャット履歴取得" as d
+Boundary ":チャット画面" as c
+Control ":メッセージ送信" as j
+Entity ":メッセージ" as en
+Control ":ユーザー選択失敗画面" as h
+Control ":チャット画面表示失敗画面" as i
+Boundary ":チャット画面" as e
+Boundary ":送信完了" as k
+Boundary ":送信失敗エラー" as f
+
+
+
+/'
+activate b
+b -> en : 0.1: 最新チャット取得()
+activate en
+en --> b
+deactivate en
+
+b -> a : 0.2: 表示()
+deactivate b
+
+'/
+
+activate 0
+    0 -> a :1: チャットするユーザーを選択()
+activate a
+
+
+a -> d :1.1: 起動()
+deactivate a
+activate d
+
+d -> en :1.1.1: チャット履歴を取得()
+activate en
+    d <-- en
+deactivate en
 
 
 alt [正常]
-    certification -> paschange :3.1.2: リンク送信()
-activate paschange
-deactivate paschange
-
-
-else [エラー時]
-    certification -> error1 :3.1.3: エラー発生時:表示()
-deactivate certification
-activate error1
-error1 -[hidden]-> error1
-deactivate error1
+    d -> c :1.1.2: 表示()
+activate c
+deactivate c
+else [ユーザー選択エラー時]
+    d -> h :1.1.3: エラー発生時:表示()
+activate h
+deactivate h
+else [画面表示エラー時]
+    d -> i :1.1.4: エラー発生時:表示()
+activate i
+i -[hidden]-> i
+deactivate i
+deactivate d
 end
 
 
-システム管理者 -> paschange:各自の情報を入力して、登録を押す()
-activate paschange
-paschange -> pas:起動()
-deactivate paschange
-activate pas
-pas -> system2:保存()
-activate system2
-system2 --> pas
-deactivate system2
-pas -> mein1:送信()
-deactivate pas
-activate mein1
-deactivate mein1
+    0 -> c :2: チャット内容を入力し送信()
+deactivate 0
+
+activate c
+c -> j :2.1: 起動()
+deactivate c
+activate j
+
+j -> en :2.1.1: チャット内容を保存()
+activate en
+    j <-- en
+deactivate en
+
+
+alt [正常]
+j -> k :2.1.2: 表示()
+activate k
+deactivate k
+
+else [送信処理失敗時]
+j -> f :2.1.3: エラー発生時:表示()
+activate f
+f -[hidden]-> f
+deactivate f
+deactivate j
+
+end
+
+@enduml 
+
+@startuml ユーザー異常確認
+
+actor システム管理者 as 0
+Boundary ":異常確認画面" as a
+Control ":ユーザー取得" as b
+Entity ":ユーザー" as c
+Control ":位置情報取得" as d
+Entity ":位置情報履歴" as e
+
+activate 0
+    0 -> a :1: 異常確認をクリック()
+deactivate 0
+activate a
+    a -> b :1.1: 起動()
+activate b
+    b -> c :1.1.1: 異常状態のユーザーを取得()
+activate c
+    b <-- c
+deactivate c
+deactivate b
+
+    a -> d :1.2: 起動()
+deactivate a
+activate d 
+    d -> e :1.2.1: 位置情報を取得()
+activate e
+    d <-- e
+deactivate d
+deactivate e
 
 @enduml

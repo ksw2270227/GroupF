@@ -1,12 +1,104 @@
-@startuml クラス図
+@startuml
 
-class users{}
-class admins{}
-class companies{}
-class companies_empyloee{}
-class groups{}
-class events{}
-class messages{}
-class location_data{}
-class location_history{}
+class Users {
+    - user_id: String
+    - user_name: String
+    - full_name: String
+    - phone_number: String
+    - email_address: String
+    - password: String
+    - age: Integer
+    - gender: String
+    - current_event_id: Integer
+    - current_group_id: Integer
+    - user_status: String
+}
+
+class Admins {
+    - user_id: String
+    - user_name: String
+    - password: String
+    - full_name: String
+    - email_address: String
+}
+
+class Companies {
+    - company_id: String
+    - company_name: String
+    - company_password: String
+    - address: String
+    - phone_number: String
+    - email_address: String
+}
+
+class CompaniesEmployee {
+    - company_id: String
+    - user_id: String
+    - user_name: String
+    - full_name: String
+    - password: String
+    - email_address: String
+}
+
+class Groups {
+    - group_id: String
+    - password: String
+    - user_id: String
+    - creation_date: String
+    - max_members: Integer
+    - current_members: Integer
+    - event_id: String
+}
+
+class Events {
+    - company_id: String
+    - event_id: String
+    - event_name: String
+    - password: String
+    - start_time: String
+    - end_time: String
+    - location: String
+    - event_content: String
+}
+
+class Messages {
+    - message_id: String
+    - sender_user_id: String
+    - reciver_user_id: String
+    - message_content: String
+    - sent_time: String
+}
+
+class LocationData {
+    - user_id: String
+    - latitude: Float
+    - longitude: Float
+    - current_altitude: Float
+    - acquisition_time: String
+    - user_stats: String
+}
+
+class LocationHistory {
+    - user_id: String
+    - latitude: Float
+    - longitude: Float
+    - altitude: Float
+    - acquisition_time: String
+    - user_status: String
+}
+
+' 関連（has-a 関係）
+Users "1" -- "0..*" Groups
+Users "1" -- "0..*" Events
+Users "1" -- "0..*" Messages
+Users "1" -- "0..1" LocationData
+Users "1" -- "0..*" LocationHistory
+
+Groups "0..*" -- "0..*" Users
+Groups "1" -- "0..*" Events
+
+Companies "1" -- "0..*" Events
+Companies "1" -- "0..*" CompaniesEmployee
+
+Events "1" -- "0..*" Messages
 @enduml
