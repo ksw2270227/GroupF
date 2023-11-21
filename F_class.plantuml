@@ -52,7 +52,6 @@ class Companies {
     - String email_address
 
     + registerCompany() : String
-    + createEvent(): Boolean
 }
 
 class Events {
@@ -69,7 +68,6 @@ class Events {
     + updateEvent(): Boolean
     + deleteEvent(): Boolean
     + getEventDetails(): Events
-    + listAllEvents(): List<Events>
 }
 
 class LocationData {
@@ -80,7 +78,6 @@ class LocationData {
     - String acquisition_time
     - String user_stats
 
-    + createLocationData(): String
     + updateLocationData(): Boolean
     + getLocationData(): LocationData
 }
