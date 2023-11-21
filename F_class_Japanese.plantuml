@@ -21,11 +21,9 @@ class ユーザー {
     + アカウント削除(): Boolean
     + イベント参加(): Boolean
     + イベント退会(): Boolean
-    + グループ作成(): Boolean
     + グループ参加(): Boolean
     + グループ退会(): Boolean
     + ユーザー状態更新(): Boolean
-    + 位置情報表示(): 位置データ
     + パスワード変更(): Boolean
 }
 
@@ -74,11 +72,12 @@ class 位置データ {
     - Float 緯度
     - Float 経度
     - Float 現在の高度
-    - String 取得時刻
+    - datetime 取得時刻
     - String ユーザー状態
 
     + 位置データ更新(): Boolean
     + 位置データ取得(): 位置データ
+    + ユーザー状態取得() : String
 }
 
 class 位置履歴 {
@@ -86,7 +85,7 @@ class 位置履歴 {
     - Float 緯度
     - Float 経度
     - Float 高度
-    - String 取得時刻
+    - datetime 取得時刻
     - String ユーザー状態
 
     + 位置履歴保存(): Boolean
@@ -98,7 +97,7 @@ class メッセージ {
     - String 送信者ユーザーID
     - String 受信者ユーザーID
     - String メッセージ内容
-    - String 送信時刻
+    - datetime 送信時刻
 
     + メッセージ送信(): Boolean
     + メッセージ履歴取得(): List[メッセージ]
@@ -108,13 +107,12 @@ class グループ {
     - String グループID
     - String パスワード
     - String ユーザーID
-    - String 作成日
+    - datetime 作成日
     - Integer 最大メンバー数
     - Integer 現在のメンバー数
     - String イベントID
 
     + グループ作成(): String
-    + メンバー追加(): Boolean
     + グループ情報更新(): Boolean
 }
 
