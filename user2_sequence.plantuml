@@ -93,7 +93,7 @@ activate 0
     activate e
     deactivate e   
     
-    deactivate e
+    deactivate b
     end
 @enduml
 
