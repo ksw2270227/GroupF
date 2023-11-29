@@ -1,1 +1,154 @@
 <!-- イベント情報 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イベント表示画面</title>
+</head>
+<style>
+body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    form {
+      width: 500px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+
+    /* イベント内容のスタイル */
+    p {
+        font-size: 16px;
+        line-height: 1.6;
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    /* label {
+      
+    } */
+
+    div.back{
+      width: 500px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="text"],
+    input[type="password"]{
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    /* イベント退出ボタン */
+    input[type="submit"] {
+      background-color: #3498db;
+      color: #fff;
+      /* 
+      cursor: pointer;
+      box-sizing: border-box;
+       */
+
+      border: none;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+
+      margin-left: auto;
+      
+    }
+
+
+    input[type="submit"]:hover {
+      background-color: #2980b9;
+    }
+
+</style>
+<body>
+    <div id="header"></div>
+
+
+    <div class="back">
+            <!-- イベント名を表示する要素 -->
+            <p>イベント名:</p>
+            <p id="eventName">スキー・スノーボードツアー</p>
+    </div>
+    <div class="back">
+            <!-- イベント内容を表示する要素 -->
+            <p>イベント内容:</p>
+            <p id="eventContent">
+                ____________________________________________<br>
+                ____________________________________________<br>
+                ____________________________________________<br>
+                ____________________________________________<br>
+                ____________________________________________<br>
+            </p>
+
+
+            <input type="submit" value="イベント退出" class="exit">
+    </div>
+    
+
+    <div id="footer"></div>
+
+<!-- <script>
+    // ページが読み込まれたときにデータを取得して表示
+    document.addEventListener('DOMContentLoaded', function () {
+        fetchData();
+    });
+
+    // データを取得して表示する関数
+    function fetchData() {
+        // ここでサーバーサイドのエンドポイントを呼び出してデータを取得
+        // 以下はサンプルデータの代わりに非同期でデータを取得する例（フェッチ APIを使用）
+        fetch('/api/getEventData')
+            .then(response => response.json())
+            .then(data => {
+                // 取得したデータを画面に表示
+                document.getElementById('eventName').innerText = data.eventName;
+                document.getElementById('eventContent').innerText = data.eventContent;
+            })
+            .catch(error => console.error('データの取得に失敗しました', error));
+    }
+</script> -->
+
+  <!-- JavaScriptを追加 -->
+  <script>
+    fetch("header.html")
+      .then((response) => response.text())
+      .then((data) => {
+        document.querySelector("#header").innerHTML = data;
+
+        // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
+        document.querySelector('.hamburger-menu').addEventListener('click', function () {
+          document.querySelector('.menu').classList.toggle('active');
+        });
+      });
+
+    fetch("footer.html")
+      .then((response) => response.text())
+      .then((data) => document.querySelector("#footer").innerHTML = data);
+  </script>
+
+</body>
+</html>
