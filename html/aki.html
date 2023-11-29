@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ログインフォーム</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .login-container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      display: block;
+      margin: 0 auto;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .back-button {
+      float: left;
+      /* 左に寄せる */
+      margin-top: 20px;
+    }
+
+
+    #header,
+    #footer {
+      width: 100%;
+    }
+
+    /* ハンバーガーメニューのスタイルを追加 */
+    .menu {
+      display: none;
+      padding: 10px;
+    }
+
+    .menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .menu ul li {
+      margin-bottom: 10px;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #333;
+      font-size: 18px;
+    }
+
+    .hamburger-menu {
+      display: none;
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger-menu {
+        display: block;
+      }
+
+      .menu.active {
+        display: block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="header"></div>
+
+  <!-- ハンバーガーボタン内容 -->
+  <!-- <nav class="menu">
+  <ul>
+    <li><a href="signup.html">新規登録</a></li>
+    <li><a href="login.html">ログイン</a></li>
+  </ul>
+</nav> -->
+
+  <div class="back-button">
+    <a href="javascript:history.back()">戻る</a>
+  </div>
+
+  <div class="login-container">
+    <h2>ログイン</h2>
+    <form>
+      <div class="form-group">
+        <label for="email">メールアドレス:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">パスワード:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+
+      <button type="button" onclick="login()">ログイン</button>
+    </form>
+  </div>
+
+  <script>
+    function login() {
+      // ここにログインの処理を追加
+      alert("ログインボタンがクリックされました。実際のログイン処理はここに追加してください。");
+    }
+  </script>
+
+  <div id="footer"></div>
+
+  <!-- JavaScriptを追加 -->
+  <script>
+    fetch("header.html")
+      .then((response) => response.text())
+      .then((data) => {
+        document.querySelector("#header").innerHTML = data;
+
+        // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
+        document.querySelector('.hamburger-menu').addEventListener('click', function () {
+          document.querySelector('.menu').classList.toggle('active');
+        });
+      });
+
+    fetch("footer.html")
+      .then((response) => response.text())
+      .then((data) => document.querySelector("#footer").innerHTML = data);
+  </script>
+</body>
+
+</html>

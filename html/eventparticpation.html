@@ -1,0 +1,103 @@
+<!-- イベント参加 -->
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>イベント参加</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    form {
+      width: 300px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="submit"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <!-- ハンバーガーボタン内容 
+  <nav class="menu">
+    <ul>
+      <li><a href="signup.html">新規登録</a></li>
+      <li><a href="login.html">ログイン</a></li>
+    </ul>
+  </nav>
+  -->
+
+  <form action="/index.html" method="post">
+    <h2>イベント参加</h2>
+    <label for="eventid">イベントID:</label>
+    <input type="text" id="eventid" name="eventid" maxlength="20" pattern="^[a-zA-Z0-9]+$" required>
+
+    <label for="password">パスワード:</label>
+    <input type="password" id="password" name="password" required>
+
+    <input type="submit" value="参加">
+  </form>
+
+  <div id="footer"></div>
+
+  <!-- JavaScriptを追加 -->
+  <script>
+    fetch("header.html")
+      .then((response) => response.text())
+      .then((data) => {
+        document.querySelector("#header").innerHTML = data;
+
+        // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
+        document.querySelector('.hamburger-menu').addEventListener('click', function () {
+          document.querySelector('.menu').classList.toggle('active');
+        });
+      });
+
+    fetch("footer.html")
+      .then((response) => response.text())
+      .then((data) => document.querySelector("#footer").innerHTML = data);
+  </script>
+</body>
+
+</html>
