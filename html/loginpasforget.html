@@ -1,1 +1,86 @@
 <!-- ログインパスワード忘れ画面 -->
+<!-- 新規登録 -->
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>title here</title>
+
+    <style>
+        /* CSSスタイル */
+        /* フォーム全体のスタイル */
+        form {
+            width: 300px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        /* ラベルのスタイル */
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+    
+        /* 入力フィールドのスタイル */
+        input[type="email"] {
+          width: calc(100% - 75px); /* 送信ボタンの幅を考慮して調整 */
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+    
+        /* 送信ボタンのスタイル */
+        button[type="submit"] {
+            width: 70px;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+        }
+    
+        button[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <a href="top.html" class="cta-button">戻る</a>
+
+    <form id="emailForm" action="/send_email" method="post">
+        <label for="email">メールアドレス</label>
+        <input type="email" id="email" name="email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
+        <button type="submit">送信</button>
+    </form>
+
+    <div id="footer"></div>
+    <script>
+    fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+        document.querySelector("#header").innerHTML = data;
+
+        // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
+        document.querySelector('.hamburger-menu').addEventListener('click', function() {
+        document.querySelector('.menu').classList.toggle('active');
+        });
+    });
+
+    fetch("footer.html")
+        .then((response) => response.text())
+        .then((data) => document.querySelector("#footer").innerHTML = data);
+    </script>
+</body>
+
+</html>
