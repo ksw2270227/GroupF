@@ -14,9 +14,9 @@
         }
 
         .event-container {
-            width: 640px;
-            margin: 20px auto;
-            padding: 70px;
+            width: 580px;
+            margin: 0px auto;
+            padding: 40px;
         }
 
         .event-title {
@@ -44,7 +44,7 @@
             
         }
 
-        .exit-button {
+        .exitEventButton {
             float: right;
             display: block;
             
@@ -56,11 +56,9 @@
             cursor: pointer;
         }
 
-        .exit-button:hover {
+        .exitEventButton:hover {
       background-color: #2980b9;
     }
-
-
 
         .footer{
           margin-top: 20px;
@@ -72,31 +70,40 @@
   <div id="header"></div>
 
   <div class="event-container">
-    <div class="event-title">実際のイベント名</div>
-    <div class="event-description">
-        実際のイベント内容がここに入ります。<br>
-        詳細な情報や説明などが含まれます。
+    <div class="event-title">
+      <p name="eventText">
+        実際のイベント名
+      </p>
     </div>
-    <button class="exit-button" onclick="confirmExit()">イベント退出</button>
-</div>
+    <div class="event-description">
+        <p name="scheduleText">
+          実際のイベント内容がここに入ります。<br>詳細な情報や説明などが含まれます。<br><br><br><br><br><br>
+        </p>
+    </div>
+    <button class="exitEventButton" onclick="confirmExit()">
+      イベント退出
+    </button>
+  </div>
     
 
-    <div id="footer" class="footer"></div>
+  <div id="footer" class="footer"></div>
 
-    <script>
-      // イベント退出の確認ダイアログを表示する関数
-      function confirmExit() {
-          var result = confirm("イベントを退出しますか？");
+  <script>
+    // イベント退出の確認ダイアログを表示する関数
+    function confirmExit() {
+        var result = confirm("イベントを退出しますか？");
   
-          if (result) {
-              // はいを選択した場合の処理
-              window.location.href = 'top.html';
-          } else {
-              // いいえを選択した場合の処理
-              // 何もしない
-          }
+        if (result) {
+            // はいを選択した場合の処理
+            window.location.href = 'top.html';
+        } else {
+            // いいえを選択した場合の処理
+            // 何もしない
+        }
       }
   </script>
+
+  
 
   <!-- JavaScriptを追加 -->
   <script>
