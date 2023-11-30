@@ -5,12 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>イベントページ</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
+        }
+
+        button{
+          border: none;
         }
 
         .event-container {
@@ -69,6 +74,8 @@
 <body>
   <div id="header"></div>
 
+  <button onclick="goBack()" class="cta-button">戻る</button>
+
   <div class="event-container">
     <div class="event-title">
       <p name="eventText">
@@ -87,6 +94,13 @@
     
 
   <div id="footer" class="footer"></div>
+
+  <script>
+    // 前の画面に戻る関数 ブラウザでやると戻れる
+    function goBack() {
+        window.history.back();
+    }
+  </script>
 
   <script>
     // イベント退出の確認ダイアログを表示する関数
