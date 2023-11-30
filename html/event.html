@@ -62,11 +62,27 @@
         }
 
         .exitEventButton:hover {
-      background-color: #2980b9;
-    }
+        background-color: #2980b9;
+        }
 
         .footer{
           margin-top: 20px;
+        }
+
+        /* 戻るボタンのスタイル */
+        .backButton {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: #ffffff;
+          color: #3498db;
+          text-decoration: none;
+          border-radius: 5px;
+          transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .backButton:hover {
+          background-color: #a5a3a3;
+          color: #ffffff;
         }
 
     </style>
@@ -74,7 +90,9 @@
 <body>
   <div id="header"></div>
 
-  <button onclick="goBack()" class="cta-button">戻る</button>
+  <a href="index.html" class="backButton">戻る</a>
+
+  <!-- <button onclick="goBack()" class="cta-button">戻る</button> -->
 
   <div class="event-container">
     <div class="event-title">
@@ -87,35 +105,37 @@
           実際のイベント内容がここに入ります。<br>詳細な情報や説明などが含まれます。<br><br><br><br><br><br>
         </p>
     </div>
-    <button class="exitEventButton" onclick="confirmExit()">
+    <a href="index.html" class="exitEventButton">イベント退出</a>
+    <!-- <input type="submit" value="イベント退出" class="exitEventButton"> -->
+    <!--  ダイアログ出てくる　<button class="exitEventButton" onclick="confirmExit()">
       イベント退出
-    </button>
+    </button> -->
   </div>
     
 
   <div id="footer" class="footer"></div>
 
-  <script>
-    // 前の画面に戻る関数 ブラウザでやると戻れる
+  <!-- <script>
+    // 前の画面に戻る関数
     function goBack() {
         window.history.back();
     }
-  </script>
+  </script> -->
 
-  <script>
+  <!-- <script>
     // イベント退出の確認ダイアログを表示する関数
     function confirmExit() {
         var result = confirm("イベントを退出しますか？");
   
         if (result) {
             // はいを選択した場合の処理
-            window.location.href = 'top.html';
+            window.location.href = 'index.html';
         } else {
             // いいえを選択した場合の処理
             // 何もしない
         }
       }
-  </script>
+  </script> -->
 
   
 

@@ -1,5 +1,4 @@
-
-
+<!-- ログインパス忘れ変更画面 -->
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -18,7 +17,6 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center; /* コンテンツを中央揃えに */
         }
     
         /* ラベルのスタイル */
@@ -29,7 +27,7 @@
         }
     
         /* 入力フィールドとボタンのスタイル */
-        input[type="email"],
+        input[type="password"],
         button[type="submit"] {
             width: calc(100% - 40px); /* 必要に応じて幅を調整 */
             padding: 8px;
@@ -39,22 +37,6 @@
             box-sizing: border-box;
             display: block; /* 要素を縦に積み重ねるためにブロック要素に */
             margin: 10px auto; /* 水平方向に中央揃え */
-        }
-
-        /* 戻るボタンのスタイル */
-        .backButton {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #ffffff;
-            color: #3498db;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-        }
-
-        .backButton:hover {
-            background-color: #a5a3a3;
-            color: #ffffff;
         }
     
         /* 送信ボタンのスタイル */
@@ -78,7 +60,21 @@
         .sendButton:hover {
             background-color: #2980b9;
         }
-        
+
+        .backButton {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            color: #3498db;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .backButton:hover {
+            background-color: #a5a3a3;
+            color: #ffffff;
+        }
 
     </style>
 </head>
@@ -86,12 +82,15 @@
 <body>
     <div id="header"></div>
 
-    <a href="top.html" class="backButton">戻る</a>
+    <a href="index.html" class="backButton">戻る</a>
 
-    <form id="emailForm" action="#" method="post">
-        <label for="email">メールアドレス</label>
-        <input type="email" id="email" name="email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
-        <input type="submit" value="送信" class="sendButton">
+    <form id="passchange" action="#" method="post">
+    <label for="password">新規パスワード</label>
+    <input type="password" id="password" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
+    <label for="confirmPassword">確認</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
+    <input type="submit" value="登録" class="sendButton">
+    <p id="error-message"></p>
     </form>
 
     <div id="footer"></div>
@@ -106,6 +105,27 @@
                     document.querySelector('.menu').classList.toggle('active');
                 });
             });
+
+            document.getElementById('passchange').addEventListener('submit', function(event) {
+    event.preventDefault(); // フォームのデフォルトの送信を防止
+
+    // 入力されたパスワードとパスワード再確認の値を取得
+    var password = document.getElementById('password').value;
+    var confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (password !== confirmPassword) {
+            // パスワードが一致しない場合にエラーメッセージを表示
+            var errorElement = document.getElementById('error-message');
+            errorElement.innerText = 'パスワードが一致しません';
+            errorElement.style.color = 'red';
+            return false; // フォーム送信をキャンセル
+        }
+
+    // 送信先のURLにリダイレクトする
+    window.location.href = 'index.html'; // ここに遷移先のURLを指定
+});
+
+
 
         fetch("footer.html")
             .then((response) => response.text())
