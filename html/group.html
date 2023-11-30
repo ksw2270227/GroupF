@@ -1,1 +1,84 @@
 <!-- グループ画面 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 戻るリンクのスタイル */
+        .custom-link {
+            display: block;
+            margin-top: 2px;
+            /* text-align: center; */
+            text-decoration: none;
+            color: #3498db;
+            transition: color 0.3s;
+        }
+
+
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }
+
+        .backButton {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            color: #3498db;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .backButton:hover {
+            background-color: #a5a3a3;
+            color: #ffffff;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="header"></div>
+    <a href="top.html" class="backButton">戻る</a>
+    <form class="login-container" action="group.html">
+        <form class="line" action="group.html">
+
+            <script>
+                fetch("header.html")
+                    .then((response) => response.text())
+                    .then((data) => {
+                        document.querySelector("#header").innerHTML = data;
+
+                        // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
+                        document.querySelector('.hamburger-menu').addEventListener('click', function () {
+                            document.querySelector('.menu').classList.toggle('active');
+                        });
+                    });
+
+                fetch("footer.html")
+                    .then((response) => response.text())
+                    .then((data) => document.querySelector("#footer").innerHTML = data);
+            </script>
+
+
+            
+
+        </form>
+
+
+
+
+
+        <div id="footer"></div>
+</body>
+
+</html>
