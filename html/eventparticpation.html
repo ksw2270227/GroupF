@@ -70,11 +70,13 @@
 
   <form action="eventinformation.html" method="post">
     <h2>イベント参加</h2>
-    <label for="eventid">イベントID:</label>
-    <input type="text" id="eventid" name="eventid" maxlength="20" pattern="^[a-zA-Z0-9]+$" required>
+    <label for="eventidLabel">イベントID:
+      <input type="text" id="eventid" name="eventid" maxlength="20" required pattern="^[a-zA-Z0-9]+$">
+    </label>
 
-    <label for="password">パスワード:</label>
-    <input type="password" id="password" name="password" required>
+    <label for="passLabel">パスワード:
+      <input type="password" id="password" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
+    </label>
 
     <input type="submit" value="参加">
   </form>
