@@ -28,6 +28,16 @@
       font-size: 16px;
     }
 
+    .login-container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      
+    }
+
     /* 作成ボタンのスタイル */
     .custom-button {
       display: block;
@@ -64,6 +74,21 @@
     .custom-link:hover {
       color: #2980b9;
     }
+
+    .backButton {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  color: #3498db;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.backButton:hover {
+  background-color: #a5a3a3;
+  color: #ffffff;
+}
   </style>
 </head>
 <body>
@@ -91,8 +116,8 @@
 
   <!-- コンテンツ -->
   <div id="header"></div>
-  <a href="top.html" class="custom-link">戻る</a>
-  <form class="line" action="group.html">
+  <a href="top.html" class="backButton">戻る</a>
+  <form class="login-container" action="group.html">
     <div class="group_nam">
       <label for="group_name">グループ名:</label>
       <input type="text" id="group_name" name="group_name">
