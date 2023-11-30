@@ -49,8 +49,8 @@
 <body>
     <div id="header"></div>
     <a href="index.html" class="backButton">戻る</a>
-    <form class="login-container" action="group.html">
-        <form class="line" action="group.html">
+    <form class="login-container">
+        <form class="line">
 
             <script>
                 fetch("header.html")
@@ -67,8 +67,17 @@
                 fetch("footer.html")
                     .then((response) => response.text())
                     .then((data) => document.querySelector("#footer").innerHTML = data);
-            </script>
 
+                function submitForm() {
+            var username = document.getElementById('group_name').value;
+            var password = document.getElementById('man').value;
+
+
+            console.log("ユーザー名: " + group_name);
+            console.log("パスワード: " + man);
+
+            }
+            </script>
 
             
 
