@@ -1,5 +1,5 @@
 <!-- ログインパスワード忘れ画面 -->
-<!-- 新規登録 -->
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -17,6 +17,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center; /* コンテンツを中央揃えに */
         }
     
         /* ラベルのスタイル */
@@ -26,53 +27,39 @@
             font-weight: bold;
         }
     
-        /* 入力フィールドのスタイル */
-        input[type="email"] {
-          width: calc(100% - 75px); /* 送信ボタンの幅を考慮して調整 */
+        /* 入力フィールドとボタンのスタイル */
+        input[type="email"],
+        button[type="submit"] {
+            width: calc(100% - 40px); /* 必要に応じて幅を調整 */
             padding: 8px;
             margin-bottom: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
             box-sizing: border-box;
+            display: block; /* 要素を縦に積み重ねるためにブロック要素に */
+            margin: 10px auto; /* 水平方向に中央揃え */
         }
     
         /* 送信ボタンのスタイル */
-        button[type="submit"] {
-            width: 70px;
-            padding: 8px;
-            border-radius: 5px;
+
+        .sendButton {
+            display: block;
+            width: 30%;
+            padding: 8px 0;
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            text-decoration: none;
             border: none;
+            border-radius: 5px;
             background-color: #3498db;
             color: #fff;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
-    
-        button[type="submit"]:hover {
+
+        .sendButton:hover {
             background-color: #2980b9;
-        }
-
-        button[type="cta-button"] {
-            width: 70px;
-            padding: 8px;
-            border-radius: 5px;
-            border: none;
-            background-color: #3498db;
-            color: #000;
-            cursor: pointer;
-        }
-        .cta-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #ffffff;
-            color: #3498db;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-        }
-
-        .cta-button:hover {
-            background-color: rgb(237, 11, 177);
-            color: #ffffff;
         }
 
     </style>
@@ -83,28 +70,28 @@
 
     <a href="top.html" class="cta-button">戻る</a>
 
-    <form id="emailForm" action="/send_email" method="post">
+    <form id="emailForm" action="#" method="post">
         <label for="email">メールアドレス</label>
         <input type="email" id="email" name="email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
-        <button type="submit">送信</button>
+        <input type="submit" value="送信" class="sendButton">
     </form>
 
     <div id="footer"></div>
     <script>
-    fetch("header.html")
-        .then((response) => response.text())
-        .then((data) => {
-        document.querySelector("#header").innerHTML = data;
+        fetch("header.html")
+            .then((response) => response.text())
+            .then((data) => {
+                document.querySelector("#header").innerHTML = data;
 
-        // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
-        document.querySelector('.hamburger-menu').addEventListener('click', function() {
-        document.querySelector('.menu').classList.toggle('active');
-        });
-    });
+                // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
+                document.querySelector('.hamburger-menu').addEventListener('click', function() {
+                    document.querySelector('.menu').classList.toggle('active');
+                });
+            });
 
-    fetch("footer.html")
-        .then((response) => response.text())
-        .then((data) => document.querySelector("#footer").innerHTML = data);
+        fetch("footer.html")
+            .then((response) => response.text())
+            .then((data) => document.querySelector("#footer").innerHTML = data);
     </script>
 </body>
 
