@@ -3,13 +3,14 @@
 <head>
   <style>
     /* 外枠のスタイル */
-    .sen {
+    .line {
       border: 2px solid #3498db;
       border-radius: 10px;
       padding: 30px;
       max-width: 400px;
       margin: 0 auto;
       background-color: #f9f9f9;
+      text-align: center;      
     }
 
     /* 各フォーム要素のスタイル */
@@ -30,7 +31,7 @@
     /* 作成ボタンのスタイル */
     .custom-button {
       display: block;
-      width: 100%;
+      width: 20%;
       padding: 10px 0;
       font-size: 18px;
       text-align: center;
@@ -41,6 +42,9 @@
       color: #fff;
       cursor: pointer;
       transition: background-color 0.3s;
+      position:relative;
+			/* top: 50px; */
+			left:131px;
     }
 
     .custom-button:hover {
@@ -50,8 +54,8 @@
     /* 戻るリンクのスタイル */
     .custom-link {
       display: block;
-      margin-top: 20px;
-      text-align: center;
+      margin-top: 2px;
+      /* text-align: center; */
       text-decoration: none;
       color: #3498db;
       transition: color 0.3s;
@@ -88,21 +92,22 @@
   <!-- コンテンツ -->
   <div id="header"></div>
   <a href="top.html" class="custom-link">戻る</a>
-  <form class="sen">
+  <form class="line" action="group.html">
     <div class="group_nam">
       <label for="group_name">グループ名:</label>
       <input type="text" id="group_name" name="group_name">
     </div>
     <div class="password">
       <label for="password">パスワード:</label>
-      <input type="password" id="password" name="password">
+      <input type="password" id="password" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
     </div>
     <div class="man">
       <label for="man">参加人数:</label>
       <input type="number" id="man" name="man">
     </div>
     <div class="button-container">
-      <a href="group.html" class="custom-button">作成</a>
+      <input type="submit" value="作成" class="custom-button">
+      </form>
     </div>
   </form>
   <div id="footer"></div>
