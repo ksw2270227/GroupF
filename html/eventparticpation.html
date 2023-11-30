@@ -5,12 +5,17 @@
 <head>
   <meta charset="UTF-8">
   <title>イベント参加</title>
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #f5f5f5;
       margin: 0;
       padding: 0;
+    }
+
+    button{
+      border: none;
     }
 
     form {
@@ -59,6 +64,8 @@
 <body>
   <div id="header"></div>
 
+  <button onclick="goBack()" class="cta-button">戻る</button>
+
   <!-- ハンバーガーボタン内容 
   <nav class="menu">
     <ul>
@@ -70,11 +77,13 @@
 
   <form action="eventinformation.html" method="post">
     <h2>イベント参加</h2>
-    <label for="eventid">イベントID:</label>
-    <input type="text" id="eventid" name="eventid" maxlength="20" pattern="^[a-zA-Z0-9]+$" required>
+    <label for="eventidLabel">イベントID:
+      <input type="text" id="eventid" name="eventid" maxlength="20" required pattern="^[a-zA-Z0-9]+$">
+    </label>
 
-    <label for="password">パスワード:</label>
-    <input type="password" id="password" name="password" required>
+    <label for="passLabel">パスワード:
+      <input type="password" id="password" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
+    </label>
 
     <input type="submit" value="参加">
   </form>
@@ -82,6 +91,14 @@
   <div id="footer"></div>
 
   <!-- JavaScriptを追加 -->
+  <script>
+    // 前の画面に戻る関数
+    function goBack() {
+        window.history.back();
+    }
+  </script>
+
+
   <script>
     fetch("header.html")
       .then((response) => response.text())

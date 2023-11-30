@@ -13,7 +13,7 @@
 
     .login-container {
       max-width: 400px;
-      margin: 50px auto;
+      margin: 20px 50px 10px 50px ;
       padding: 20px;
       border: 1px solid #ccc;
       border-radius: 8px;
@@ -37,7 +37,7 @@
     }
 
     button {
-      background-color: #4caf50;
+      background-color: #3498db;
       color: white;
       padding: 10px 15px;
       border: none;
@@ -49,8 +49,33 @@
     }
 
     button:hover {
-      background-color: #45a049;
+      background-color: #2980b9;
     }
+
+    .sighup-button {
+      margin-left: 50px ;
+      padding-bottom: 30px;
+    }
+
+    .paschange-button {
+      margin: 0px 50px ;
+      padding-bottom: 30px;
+    } 
+
+    .backButton {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  color: #3498db;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.backButton:hover {
+  background-color: #a5a3a3;
+  color: #ffffff;
+}
   </style>
 </head>
 <body>
@@ -64,7 +89,7 @@
     </ul>
   </nav> -->
 
-<a href="top.html" class="cta-button">戻る</a>
+<a href="top.html" class="backButton">戻る</a>
 <div class="login-container">
   <h2>ログイン</h2>
   <form>
@@ -80,7 +105,15 @@
 
     <button type="button" onclick="login()">ログイン</button>
   </form>
+  
 </div>
+  <div class="sighup-button">
+    <a href="signup.html">新規登録はこちら</a>
+  </div>
+
+  <div class="paschange-button">
+    <a href="loginpasforgetchange.html">パスワードを忘れた場合</a>
+  </div>
 
 
 <script>
