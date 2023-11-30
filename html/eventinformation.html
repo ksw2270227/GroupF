@@ -4,133 +4,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>イベント表示画面</title>
-</head>
-<style>
-body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 0;
-    }
+    <title>イベントページ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
 
-    form {
-      width: 500px;
-      margin: 20px auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+        .event-container {
+            width: 640px;
+            margin: 20px auto;
+            padding: 70px;
+        }
 
-    h2 {
-      text-align: center;
-    }
+        .event-title {
+            width: 500px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
+            font-size: 24px;
+            font-weight: bold;
+            
+        }
 
-    /* イベント内容のスタイル */
-    p {
-        font-size: 16px;
-        line-height: 1.6;
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
+        .event-description {
+            width: 500px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
-    /* label {
-      
-    } */
+            font-size: 16px;
+            
+        }
 
-    div.back{
-      width: 500px;
-      margin: 20px auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+        .exit-button {
+            float: right;
+            display: block;
+            
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    input[type="text"],
-    input[type="password"]{
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-    }
-
-    /* イベント退出ボタン */
-    input[type="submit"] {
-      background-color: #3498db;
-      color: #fff;
-      /* 
-      cursor: pointer;
-      box-sizing: border-box;
-       */
-
-      border: none;
-      padding: 8px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-
-      margin-left: auto;
-      
-    }
-
-
-    input[type="submit"]:hover {
+        .exit-button:hover {
       background-color: #2980b9;
     }
 
-</style>
+
+
+        .footer{
+          margin-top: 20px;
+        }
+
+    </style>
+</head>
 <body>
-    <div id="header"></div>
+  <div id="header"></div>
 
-
-    <div class="back">
-            <!-- イベント名を表示する要素 -->
-            <p>イベント名:</p>
-            <p id="eventName">スキー・スノーボードツアー</p>
+  <div class="event-container">
+    <div class="event-title">実際のイベント名</div>
+    <div class="event-description">
+        実際のイベント内容がここに入ります。<br>
+        詳細な情報や説明などが含まれます。
     </div>
-    <div class="back">
-            <!-- イベント内容を表示する要素 -->
-            <p>イベント内容:</p>
-            <p id="eventContent">
-                ____________________________________________<br>
-                ____________________________________________<br>
-                ____________________________________________<br>
-                ____________________________________________<br>
-                ____________________________________________<br>
-            </p>
-
-
-            <input type="submit" value="イベント退出" class="exit">
-    </div>
+    <button class="exit-button" onclick="confirmExit()">イベント退出</button>
+</div>
     
 
-    <div id="footer"></div>
+    <div id="footer" class="footer"></div>
 
-<!-- <script>
-    // ページが読み込まれたときにデータを取得して表示
-    document.addEventListener('DOMContentLoaded', function () {
-        fetchData();
-    });
-
-    // データを取得して表示する関数
-    function fetchData() {
-        // ここでサーバーサイドのエンドポイントを呼び出してデータを取得
-        // 以下はサンプルデータの代わりに非同期でデータを取得する例（フェッチ APIを使用）
-        fetch('/api/getEventData')
-            .then(response => response.json())
-            .then(data => {
-                // 取得したデータを画面に表示
-                document.getElementById('eventName').innerText = data.eventName;
-                document.getElementById('eventContent').innerText = data.eventContent;
-            })
-            .catch(error => console.error('データの取得に失敗しました', error));
-    }
-</script> -->
+    <script>
+      // イベント退出の確認ダイアログを表示する関数
+      function confirmExit() {
+          var result = confirm("イベントを退出しますか？");
+  
+          if (result) {
+              // はいを選択した場合の処理
+              window.location.href = 'top.html';
+          } else {
+              // いいえを選択した場合の処理
+              // 何もしない
+          }
+      }
+  </script>
 
   <!-- JavaScriptを追加 -->
   <script>
