@@ -14,110 +14,158 @@
             background-color: #f4f4f4;
         }
 
-        button{
+        /* button{
           border: none;
+        } */
+
+        /* 戻るボタンのスタイル */
+        .backButton {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: #ffffff;
+          color: #3498db;
+          text-decoration: none;
+          border-radius: 5px;
+          transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
         }
 
+        .backButton:hover {
+          background-color: #a5a3a3;
+          color: #ffffff;
+        }
+
+        /* 全体 */
         .event-container {
-            width: 580px;
-            margin: 0px auto;
-            padding: 40px;
+          display: flex; /* Flexコンテナを作成 */
         }
 
-        .event-title {
-            width: 500px;
-            margin: 20px auto;
-            background-color: #fff;
+        /* 左のボタン */
+        .buttons{
+            /* background-color: #e0e0e0; */
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-            font-size: 24px;
-            font-weight: bold;
-            
         }
 
-        .event-description {
-            width: 500px;
-            margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-            font-size: 16px;
-            
-        }
-
-        .exitEventButton {
-            float: right;
+        button {
+            min-width: 120px;
+            margin: 10px;
             display: block;
-            
             padding: 10px 20px;
             background-color: #3498db;
             color: #fff;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
+
+            font-size: 20px;
+            font-weight: bold;
+
         }
 
-        .exitEventButton:hover {
-      background-color: #2980b9;
-    }
+        button:hover {
+          background-color: #2980b9;
+        }
+
+
+        /* 右のイベントの内容 */
+        .contents{
+            flex: 8; /* 画面の80% */
+            /* background-color: #f0f0f0; */
+        }
+
+        .event-contents {
+            max-width: 80%;
+            min-width: 250px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
 
         .footer{
           margin-top: 20px;
         }
+
+        
 
     </style>
 </head>
 <body>
   <div id="header"></div>
 
-  <button onclick="goBack()" class="cta-button">戻る</button>
+  <a href="index.html" class="backButton">戻る</a>
+
+  <!-- <button onclick="goBack()" class="cta-button">戻る</button> -->
 
   <div class="event-container">
-    <div class="event-title">
-      <p name="eventText">
-        実際のイベント名
-      </p>
+
+    <div class="buttons">
+      <a href="#">
+        <button class="userButton">
+          ユーザー
+        </button>
+      </a>
+      <a href="eventchange.html">
+        <button class="changeButton">
+          変更
+        </button>
+      </a>
+      <a href="#">
+        <button class="deleteButton">
+          削除
+        </button>
+      </a>
     </div>
-    <div class="event-description">
-        <p name="scheduleText">
-          実際のイベント内容がここに入ります。<br>詳細な情報や説明などが含まれます。<br><br><br><br><br><br>
+
+    <div class="contents">
+      <div class="event-contents">
+        イベント名：
+        <p name="eventName">
+          実際のイベントの名前
         </p>
+      </div>
+      <div class="event-contents">
+        期間：
+          <p name="eventDuration">
+            実際のイベントの期間
+          </p>
+      </div>
+      <div class="event-contents">
+        場所：
+          <p name="eventLocation">
+            実際のイベントの場所
+          </p>
+      </div>
+      <div class="event-contents">
+        内容：
+          <p name="eventDescription">
+            実際のイベントの内容<br>
+            １日目<br>
+            --:00 OOOOOOOO<br>
+            --:00 OOOOOOOO<br>
+            --:00 OOOOOOOO<br>
+            --:00 OOOOOOOO<br>
+            <br>
+            ２日目<br>
+            --:00 OOOOOOOO<br>
+            --:00 OOOOOOOO<br>
+            --:00 OOOOOOOO<br>
+            --:00 OOOOOOOO<br>
+            ........................
+            
+          </p>
+      </div>
     </div>
-    <button class="exitEventButton" onclick="confirmExit()">
-      イベント退出
-    </button>
   </div>
-    
 
   <div id="footer" class="footer"></div>
 
-  <script>
+  <!-- <script>
     // 前の画面に戻る関数 ブラウザでやると戻れる
     function goBack() {
         window.history.back();
     }
-  </script>
-
-  <script>
-    // イベント退出の確認ダイアログを表示する関数
-    function confirmExit() {
-        var result = confirm("イベントを退出しますか？");
-  
-        if (result) {
-            // はいを選択した場合の処理
-            window.location.href = 'top.html';
-        } else {
-            // いいえを選択した場合の処理
-            // 何もしない
-        }
-      }
-  </script>
-
-  
+  </script> -->
 
   <!-- JavaScriptを追加 -->
   <script>

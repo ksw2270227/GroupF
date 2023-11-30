@@ -14,9 +14,9 @@
       padding: 0;
     }
 
-    button{
+    /* button{
       border: none;
-    }
+    } */
 
     form {
       width: 300px;
@@ -58,13 +58,33 @@
     input[type="submit"]:hover {
       background-color: #2980b9;
     }
+
+    /* 戻るボタンのスタイル */
+    .backButton {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: #ffffff;
+          color: #3498db;
+          text-decoration: none;
+          border-radius: 5px;
+          transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .backButton:hover {
+          background-color: #a5a3a3;
+          color: #ffffff;
+        }
+
   </style>
 </head>
 
 <body>
   <div id="header"></div>
 
-  <button onclick="goBack()" class="cta-button">戻る</button>
+
+  <a href="index.html" class="backButton">戻る</a>
+
+  <!-- <button onclick="goBack()" class="cta-button">戻る</button> -->
 
   <!-- ハンバーガーボタン内容 
   <nav class="menu">
@@ -75,7 +95,7 @@
   </nav>
   -->
 
-  <form action="eventinformation.html" method="post">
+  <form action="eventinformation.html" method="get">
     <h2>イベント参加</h2>
     <label for="eventidLabel">イベントID:
       <input type="text" id="eventid" name="eventid" maxlength="20" required pattern="^[a-zA-Z0-9]+$">
@@ -91,12 +111,12 @@
   <div id="footer"></div>
 
   <!-- JavaScriptを追加 -->
-  <script>
+  <!-- <script>
     // 前の画面に戻る関数
     function goBack() {
         window.history.back();
     }
-  </script>
+  </script> -->
 
 
   <script>
