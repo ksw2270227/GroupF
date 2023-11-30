@@ -156,3 +156,16 @@ footer {
   bottom: 0;
   width: 100%;
 }
+.backButton {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  color: #3498db;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+.backButton:hover {
+  background-color: #a5a3a3;
+  color: #ffffff;
+}
