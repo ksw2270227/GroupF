@@ -25,7 +25,17 @@
             border: 1px solid #ccc;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 0;
+            margin-bottom: 0;
+        }
 
+        .login-container2 {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            margin-top: 0;
+            margin-bottom: 0;
+            /* display: none; */
         }
 
         .backButton {
@@ -39,6 +49,23 @@
         }
 
         .backButton:hover {
+            background-color: #a5a3a3;
+            color: #ffffff;
+        }
+
+        .backButton1 {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #000000;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            float: right;
+            size: auto;
+        }
+
+        .backButton1:hover {
             background-color: #a5a3a3;
             color: #ffffff;
         }
@@ -68,26 +95,38 @@
                     .then((response) => response.text())
                     .then((data) => document.querySelector("#footer").innerHTML = data);
 
-                function submitForm() {
-            var username = document.getElementById('group_name').value;
-            var password = document.getElementById('man').value;
-
-
-            console.log("ユーザー名: " + group_name);
-            console.log("パスワード: " + man);
-
-            }
             </script>
+            <h2>グループ名が入る：</h2>
 
-            
-
+            <h1></h1>
+        </form>
+        <form class="login-container">
+            <h2>グループIDが入る:</h2>
         </form>
 
-
-
-
-
-        <div id="footer"></div>
+        <form class="login-container">
+            <h3>参加人数 ?/10 が入る</h3>
+            <div style="border: 1px solid black;">
+                参加者氏名:○○○○
+            </div>
+            <div style="border: 1px solid black;">
+                参加者氏名:○○○○
+            </div>
+            <div style="border: 1px solid black;">
+                参加者氏名:○○○○
+            </div>
+            <div style="border: 1px solid black;">
+                参加者氏名:○○○○
+            </div>
+            <div style="border: 1px solid black;">
+                参加者氏名:○○○○
+            </div>
+        </form>
+        <div class="login-container2">
+        <a href="index.html" class="backButton1">グループ退会</a>
+        </div>
+    </form>
+        
 </body>
 
 </html>
