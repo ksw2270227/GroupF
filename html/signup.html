@@ -50,9 +50,9 @@
       display: none;
     }
 
-    label[for="male"],
-    label[for="female"],
-    label[for="other"] {
+    label[for="maleRadio"],
+    label[for="femaleRadio"],
+    label[for="otherRadio"] {
       display: inline-block;
       cursor: pointer;
       padding: 5px 10px;
@@ -123,13 +123,8 @@
     <label for="nameInput">名前</label>
     <input type="text" id="nameInput" name="name" required>
 
-<<<<<<< HEAD
     <label for="phoneInput">電話番号</label>
     <input type="tel" id="phoneInput" name="phone" required>
-=======
-    <label for="email">メールアドレス</label>
-    <input type="email" id="email" name="email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
->>>>>>> ca9f8761aa863c197a3568a1f534fe0ec3547045
 
     <label for="emailInput">メールアドレス</label>
     <input type="email" id="emailInput" name="email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
@@ -149,11 +144,6 @@
 
     <input type="radio" id="otherRadio" name="gender" value="other">
     <label for="otherRadio">未回答</label>
-
-
-
-    <input type="submit" value="登録" class="sendButton">
-
 
     <input type="submit" value="登録" class="sendButton">
   </form>
