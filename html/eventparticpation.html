@@ -48,16 +48,26 @@
       box-sizing: border-box;
     }
 
-    input[type="submit"] {
+    input[type=submit] {
+      display: block;
+      width: 30%;
+      padding: 8px 0;
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
       background-color: #3498db;
       color: #fff;
-      border: none;
       cursor: pointer;
+      transition: background-color 0.3s;
     }
 
-    input[type="submit"]:hover {
+    input[type=submit]:hover {
       background-color: #2980b9;
     }
+    
 
     /* 戻るボタンのスタイル */
     .backButton {
