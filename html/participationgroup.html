@@ -85,10 +85,13 @@
     <a href="index.html" class="backButton">戻る</a>
 
     <form id="passchange" action="#" method="post">
-        <label for="groupID">グループID</label>
-        <input type="text" id="groupID" name="groupID" required>
-        <label for="password">新規パスワード</label>
-        <input type="password" id="password" name="password" required>
+
+        <label for="groupidInput">グループID</label>
+        <input type="text" id="groupidInput" name="groupidInput" required>
+
+        <label for="passwordInput">新規パスワード</label>
+        <input type="password" id="passwordInput" name="passwordInput" required>
+
         <input type="submit" value="参加" class="sendButton">
         <p id="error-message"></p>
     </form>
@@ -109,8 +112,8 @@
         document.getElementById('passchange').addEventListener('submit', function(event) {
             event.preventDefault(); // フォームのデフォルトの送信を防止
 
-            var groupID = document.getElementById('groupID').value;
-            var password = document.getElementById('password').value;
+            var groupID = document.getElementById('groupidInput').value;
+            var password = document.getElementById('passwordInput').value;
 
             // ここでグループIDとパスワードのチェックを行う
             // (仮)IDが"exampleID" パスワードが"examplePass"
