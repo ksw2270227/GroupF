@@ -7,7 +7,7 @@
     <title>title here</title>
 
     <style>
-        .aaa {
+        .table {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -40,10 +40,7 @@
             text-overflow: ellipsis;
         }
 
-        
-
     </style>
-
 </head>
 
 <body>
@@ -51,11 +48,12 @@
     <a href="abnormalityconfirmation.html" class="backButton">戻る</a>
 
     <!-- 最新チャットの履歴は20文字以上になったら....で表示される -->
-    <div class="aaa">
+    <div class="table">
         <table>
             <thead>
                 <tr>
                     <th>名前</th>
+                    <th>時間</th>
                     <th>最新チャット</th>
                 </tr>
             </thead>
@@ -63,22 +61,27 @@
                 <tr>
                     <!-- 履歴を取得し、遷移先の内容はユーザーごとに違うものになる -->
                     <td><a href="chat.html">ユーザー1</a></td>
+                    <td>--:--</td>
                     <td class="ellipsis">123456789012345678901</td>
                 </tr>
                 <tr>
                     <td><a href="chat.html">ユーザー2</a></td>
+                    <td>--:--</td>
                     <td class="ellipsis">~~~~~~~~~~~~~</td>
                 </tr>
                 <tr>
                     <td><a href="chat.html">ユーザー3</a></td>
+                    <td>--:--</td>
                     <td class="ellipsis">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</td>
                 </tr>
                 <tr>
                     <td><a href="chat.html">ユーザー4</a></td>
+                    <td>--:--</td>
                     <td class="ellipsis">~~~~~~~~~~~~~~~~~~~......</td>
                 </tr>
                 <tr>
                     <td><a href="chat.html">ユーザー5</a></td>
+                    <td>--:--</td>
                     <td class="ellipsis">最新チャット5</td>
                 </tr>
             </tbody>
