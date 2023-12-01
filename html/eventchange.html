@@ -34,12 +34,6 @@
           color: #ffffff;
         }
 
-        /* 全体 */
-        .event-container {
-          
-        }
-
-        
 
         button {
             min-width: 120px;
@@ -53,7 +47,6 @@
 
             font-size: 20px;
             font-weight: bold;
-
         }
 
         button:hover {
@@ -83,7 +76,6 @@
         }
 
         input[type="text"],
-        input[type="submit"],
         textarea{
             width: 100%;
             padding: 8px;
@@ -92,6 +84,40 @@
             border: 1px solid #ccc;
             box-sizing: border-box;
         }
+
+        input[type="date"]{
+            float: inline-;
+            min-width: 110px;
+            width: 48.1%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+          display: block;
+          width: 80px;
+          padding: 8px 0;
+          display: block;
+          margin: 0 auto;
+          text-align: center;
+          text-decoration: none;
+          border: none;
+          border-radius: 5px;
+          background-color: #3498db;
+          color: #fff;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+
+        input[type=submit]:hover {
+          background-color: #2980b9;
+        }
+    
+
+
 
     </style>
 </head>
@@ -102,28 +128,30 @@
 
   <!-- <button onclick="goBack()" class="cta-button">戻る</button> -->
 
-  <form action="eventinformation.html" method="get">
-    <div class=".event-container">
+  <form action="eventinformation.html" method="post">
+    
         <div class="contents">
-        <div class="event-contents">
-            <p>イベント名：</p>
-            <input type="text" name="eventName" value="実際のイベントの名前">
+          <div class="event-contents">
+              <p>イベント名：</p>
+              <input type="text" name="eventName" value="実際のイベントの名前">
+          </div>
+          <div class="event-contents">
+              <p>期間：</p>
+              <input type="date" name="startEventDuration" value="実際のイベントの開始年月日"> ～
+              <input type="date" name="endEventDuration" value="実際のイベントの終了年月日">
+          </div>
+          
+          <div class="event-contents">
+              <p>場所：</p>
+              <input type="text" name="eventLocation" value="実際のイベントの場所">
+          </div>
+          <div class="event-contents">
+              <p>内容：</p>
+              <textarea name="eventDescription" cols="65%" rows="20%">実際のイベントの内容</textarea>
+          </div>
+          <input type="submit" value="変更" class="changeButton">
         </div>
-        <div class="event-contents">
-            <p>期間：</p>
-            <input type="text" name="eventDuration" value="実際のイベントの期間">
-        </div>
-        <div class="event-contents">
-            <p>場所：</p>
-            <input type="text" name="eventLocation" value="実際のイベントの場所">
-        </div>
-        <div class="event-contents">
-            <p>内容：</p>
-            <textarea name="eventDescription" cols="65%" rows="20%">実際のイベントの内容</textarea>
-        </div>
-        <input type="submit" value="参加">
-        </div>
-    </div>
+    
   </form>
 
 
