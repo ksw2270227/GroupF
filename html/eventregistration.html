@@ -36,7 +36,8 @@
 
         /* 全体 */
         .event-container {
-          
+            flex: 8; /* 画面の80% */
+            /* background-color: #f0f0f0; */
         }
 
         
@@ -61,11 +62,6 @@
         }
 
 
-        /* イベントの内容 */
-        .contents{
-            flex: 8; /* 画面の80% */
-            /* background-color: #f0f0f0; */
-        }
 
         .event-contents {
             max-width: 80%;
@@ -139,7 +135,6 @@
 
   <form action="eventinformation.html" method="get">
     <div class="event-container">
-        <div class="contents">
           <div class="event-contents">
               <p>イベント名：</p>
               <input type="text" name="eventName" value="">
@@ -159,7 +154,6 @@
               <textarea name="eventDescription" cols="65%" rows="20%"></textarea>
           </div>
           <input type="submit" value="登録" class="registrationButton">
-        </div>
     </div>
   </form>
 
