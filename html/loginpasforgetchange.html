@@ -85,12 +85,16 @@
     <a href="index.html" class="backButton">戻る</a>
 
     <form id="passchange" action="#" method="post">
-    <label for="password">新規パスワード</label>
-    <input type="password" id="password" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
-    <label for="confirmPassword">確認</label>
-    <input type="password" id="confirmPassword" name="confirmPassword" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
+        
+    <label for="nawPasswordInput">新規パスワード</label>
+    <input type="password" id="nawPasswordInput" name="nawPasswordInput" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
+
+    <label for="confirmationInput">確認</label>
+    <input type="password" id="confirmationInput" name="confirmationInput" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
+
     <input type="submit" value="登録" class="sendButton">
     <p id="error-message"></p>
+
     </form>
 
     <div id="footer"></div>
@@ -110,8 +114,8 @@
     event.preventDefault(); // フォームのデフォルトの送信を防止
 
     // 入力されたパスワードとパスワード再確認の値を取得
-    var password = document.getElementById('password').value;
-    var confirmPassword = document.getElementById('confirmPassword').value;
+    var password = document.getElementById('nawPasswordInput').value;
+    var confirmPassword = document.getElementById('confirmationInput').value;
 
     if (password !== confirmPassword) {
             // パスワードが一致しない場合にエラーメッセージを表示
@@ -122,7 +126,7 @@
         }
 
     // 送信先のURLにリダイレクトする
-    window.location.href = 'index.html'; // ここに遷移先のURLを指定
+    window.location.href = 'login.html'; // ここに遷移先のURLを指定
 });
 
 
