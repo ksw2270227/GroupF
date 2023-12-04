@@ -1,5 +1,4 @@
-<!-- ログインパスワード忘れ画面 -->
-
+<!-- グループ参加 -->
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -17,7 +16,6 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center; /* コンテンツを中央揃えに */
         }
     
         /* ラベルのスタイル */
@@ -28,7 +26,8 @@
         }
     
         /* 入力フィールドとボタンのスタイル */
-        input[type="email"],
+        input[type="text"],
+        input[type="password"],
         button[type="submit"] {
             width: calc(100% - 40px); /* 必要に応じて幅を調整 */
             padding: 8px;
@@ -62,7 +61,6 @@
             background-color: #2980b9;
         }
 
-        /* 戻るボタンのスタイル */
         .backButton {
             display: inline-block;
             padding: 10px 20px;
@@ -86,12 +84,16 @@
 
     <a href="index.html" class="backButton">戻る</a>
 
-    <form id="emailForm" action="#" method="post">
+    <form id="passchange" action="#" method="post">
 
-        <label for="emailAddressInput">メールアドレス</label>
-        <input type="email" id="emailAddressInput" name="emailAddressInput" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
+        <label for="groupidInput">グループID</label>
+        <input type="text" id="groupidInput" name="groupidInput" required>
 
-        <input type="submit" value="送信" class="sendButton">
+        <label for="passwordInput">新規パスワード</label>
+        <input type="password" id="passwordInput" name="passwordInput" required>
+
+        <input type="submit" value="参加" class="sendButton">
+        <p id="error-message"></p>
     </form>
 
     <div id="footer"></div>
@@ -106,6 +108,27 @@
                     document.querySelector('.menu').classList.toggle('active');
                 });
             });
+
+        document.getElementById('passchange').addEventListener('submit', function(event) {
+            event.preventDefault(); // フォームのデフォルトの送信を防止
+
+            var groupID = document.getElementById('groupidInput').value;
+            var password = document.getElementById('passwordInput').value;
+
+            // ここでグループIDとパスワードのチェックを行う
+            // (仮)IDが"exampleID" パスワードが"examplePass"
+
+            if (groupID !== "exampleID" || password !== "examplePass") {
+                var errorElement = document.getElementById('error-message');
+                errorElement.innerText = 'グループIDまたはパスワードが間違っています';
+                errorElement.style.color = 'red';
+                return false; // フォーム送信をキャンセル
+            }
+
+            // ここで何かしらの処理を行うか、遷移先にデータを送信する処理を記述
+
+            window.location.href = 'group.html'; // ここに遷移先のURLを指定
+        });
 
         fetch("footer.html")
             .then((response) => response.text())

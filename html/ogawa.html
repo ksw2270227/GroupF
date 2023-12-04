@@ -1,147 +1,104 @@
-<!-- 新規登録 -->
+<!-- ヘッダー -->
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
   <meta charset="UTF-8">
-  <title>新規登録</title>
+  <title>サイトのタイトル</title>
+  <meta name="description" content="サイトの説明文">
+  <link rel="stylesheet" href="style.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 0;
+    .radio-buttons {
+      border-top: 3px solid #ccc;
+      padding-top: 15px;
+      display: flex;
+      flex-direction: row;
     }
 
-    form {
-      width: 300px;
-      margin: 20px auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-      text-align: center;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-
-    input[type="text"],
-    input[type="tel"],
-    input[type="email"],
-    input[type="password"],
-    input[type="number"],
-    input[type="submit"] {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-    }
-
-    input[type="submit"] {
-      background-color: #3498db;
-      color: #fff;
-      border: none;
+    .radio-buttons label {
+      margin-right: 20px;
+      position: relative;
       cursor: pointer;
     }
 
-    input[type="submit"]:hover {
-      background-color: #2980b9;
-    }
-
-    /* ラジオボタンのスタイル */
-    input[type="radio"] {
-      display: none;
-    }
-
-    label[for="male"],
-    label[for="female"],
-    label[for="other"] {
-      display: inline-block;
+    .radio-buttons input[type="radio"] {
+      position: absolute;
+      opacity: 0;
       cursor: pointer;
-      padding: 5px 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      margin-right: 10px;
     }
 
-    input[type="radio"]:checked+label {
-      background-color: #3498db;
-      color: #fff;
-      border-color: #3498db;
+    .radio-buttons img {
+      width: 80px; /* 画像の幅を調整 */
+      height: 80px; /* 画像の高さを調整 */
+      object-fit: contain; /* 画像を潰れずに収める */
+    }
+
+    .radio-buttons label::before {
+      content: "";
+      position: absolute;
+      top: 35%; /* 画像の上端からの位置 */
+      left: 50%; /* 画像の左端からの位置 */
+      transform: translate(-50%, -50%); /* 中央揃え */
+      width: 90px; /* 丸の横幅 */
+      height: 90px; /* 丸の高さ */
+      border-radius: 50%;
+      /* border: 2px solid rgba(170, 170, 170, 0.233); 丸の枠線 */
+      background-color: transparent;
+    }
+
+    .radio-buttons input[type="radio"]:checked + label::before {
+      background-color: rgba(170, 170, 170, 0.233); /* チェックされた時の背景色 */
     }
   </style>
 </head>
-
-<body>
-  <div id="header"></div>
-
-  <!-- ハンバーガーボタン内容 -->
-  <nav class="menu">
-    <ul>
-      <li><a href="signup.html">新規登録</a></li>
-      <li><a href="login.html">ログイン</a></li>
-    </ul>
-  </nav>
   
-  <a href="top.html" class="cta-button">戻る</a>
+<body>
+  <header>
+    <div class="logo">
+      <img src="1logo.png" alt="ロストトラッカー">
+    </div>
+    <div class="hamburger-menu">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <nav class="menu">
+      <ul>
+        <li><a href="signup.html">新規登録</a></li>
+        <li><a href="login.html">ログイン</a></li>
+        <li><a href="#">aaa</a></li>
+      </ul>
 
-  <form action="/register" method="post">
-    <h2>新規登録</h2>
-    <label for="name">名前:</label>
-    <input type="text" id="name" name="name" required>
-
-    <label for="phone">電話番号:</label>
-    <input type="tel" id="phone" name="phone" required>
-
-    <label for="email">Eメール:</label>
-    <input type="email" id="email" name="email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
-
-    <label for="password">パスワード:</label>
-    <input type="password" id="password" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
-
-    <label>性別:</label>
-    <input type="radio" id="male" name="gender" value="male">
-    <label for="male">男性</label>
-
-    <input type="radio" id="female" name="gender" value="female">
-    <label for="female">女性</label>
-
-    <input type="radio" id="other" name="gender" value="other">
-    <label for="other">未回答</label>
-
-    <label for="age">年齢:</label>
-    <input type="number" id="age" name="age" pattern="[0-9]*">
-
-    <input type="submit" value="登録">
-  </form>
-
-  <div id="footer"></div>
-  <!-- JavaScriptを追加 -->
-  <script>
-    fetch("header.html")
-      .then((response) => response.text())
-      .then((data) => {
-        document.querySelector("#header").innerHTML = data;
-
-        // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
-        document.querySelector('.hamburger-menu').addEventListener('click', function() {
-          document.querySelector('.menu').classList.toggle('active');
-        });
+      <div class="radio-buttons">
+        <input type="radio" name="option" value="usually" id="usually" checked>
+        <label for="usually">
+          <img src="usually.png" alt="Usually">
+        </label>
+        
+        <input type="radio" name="option" value="stand" id="stand">
+        <label for="stand">
+          <img src="stand.png" alt="Stand">
+        </label>
+        
+        <input type="radio" name="option" value="lost" id="lost">
+        <label for="lost">
+          <img src="lost.png" alt="Lost">
+        </label>
+        
+        <input type="radio" name="option" value="eme" id="eme">
+        <label for="eme">
+          <img src="eme.png" alt="Eme">
+        </label>
+      </div>
+    </nav>
+    
+    <!-- 以下、ラジオボタンの部分 -->
+    
+    
+    <script>
+      document.querySelector('.hamburger-menu').addEventListener('click', function() {
+        document.querySelector('.menu').classList.toggle('active');
       });
-
-    fetch("footer.html")
-      .then((response) => response.text())
-      .then((data) => document.querySelector("#footer").innerHTML = data);
-  </script>
+    </script>
+  </header>
 </body>
-
 </html>

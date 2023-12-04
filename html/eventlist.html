@@ -1,17 +1,93 @@
-<!-- 新規登録 -->
+<!-- イベント一覧 -->
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
   <meta charset="UTF-8">
-  <title>title here</title>
+  <style>
+  table {
+    margin: 20px auto;
+    padding: 2px auto;
+    border-collapse: collapse;
+    border: px solid red;
+    /* border-left: 2px solid #ccc;
+    border-right: 2px solid #ccc;  */
+    width: 60%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+
+  td, th {
+    text-align: center;
+    /* border: none; */
+    /* border: 3px solid black; */
+    /* margin: px; */
+    padding: 10px;
+    font-weight: normal;
+  }
+
+  tr {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+  }
+
+  tr:first-child td:first-child {
+    border-top-left-radius: 15px; 
+  }
+  
+  table tr:first-child td:last-child {
+    border-top-right-radius: 15px; 
+  }
+  
+  table tr:last-child td:first-child {
+     border-bottom-left-radius: 15px; 
+  }
+  
+  table tr:last-child td:last-child { 
+  border-bottom-right-radius: 15px; 
+  }
+  /* tr:first-child {
+    border-top: 2px solid #ccc; 
+  }
+
+  tr:last-child {
+    border-bottom: 2px solid #ccc; 
+  } */
+
+/* 
+    th{
+      width: 90px;
+      font-weight: normal;
+    } */
+
+  </style>
 </head>
 
 <body>
   <div id="header"></div>
+
   <a href="index.html" class="backButton">戻る</a>
 
+  <!-- <table class ="kkkkkk"> -->
+  <table>
+    <tr>
+      <th>イベント名</th>
+      <th>開催日</th>
+      </tr>
+      <tr>
+        <td>うぃー</td>
+        <td>2222/888/888
+        </td>
+      </tr>
+      <tr>
+        <td>うぇー</td>
+        <td>3333/09/31</td>
+      </tr>
+    </table>
+  <!-- </table> -->
+
   <div id="footer"></div>
+  <!-- JavaScriptを追加 -->
   <script>
     fetch("header.html")
       .then((response) => response.text())
