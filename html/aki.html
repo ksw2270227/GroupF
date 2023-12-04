@@ -7,22 +7,21 @@
     <title>マイページ</title>
     <style>
         table {
-            border-collapse: collapse;
-            width: 50%;
-            margin: 20px auto;
+        border-collapse: collapse;
+        width: 50%;
+        margin-top: 20px;
+        margin-left: auto; /* 左側の余白をautoに設定 */
+        margin-right: 0;   /* 右側の余白を0に設定 */
+        margin-bottom: 0;  /* 下の余白を0に設定 */
         }
 
-        table, th, td {
+        table, td {
             border: 1px solid #3d3a3a;
         }
 
-        th, td {
+        td {
             padding: 10px;
             text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
         }
 
         .buttons{
@@ -39,14 +38,12 @@
             color: #fff;
             border: none;
             border-radius: 5px;
-
             font-size: 20px;
             font-weight: bold;
-
         }
-
     </style>
 </head>
+
 <body>
     <div id="header"></div>
     <a href="index.html" class="backButton">戻る</a>
@@ -56,7 +53,7 @@
     <table>
         <tr>
             <td>名前</td>
-            <td>〇〇</td>
+            <td>〇〇 〇〇</td>
         </tr>
         <tr>
             <td>電話番号</td>
