@@ -1,4 +1,4 @@
-<!-- チャット画面 -->
+<!-- チャット画面 形はできてるやつ -->
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -6,12 +6,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>チャット画面</title>
+    
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
             overflow-x: hidden; /* 横スクロールを無効に */
+
+            word-wrap: break-word; /* 半角・全角の区別なく、単語の途中で改行する */
+            overflow-wrap: break-word; /* word-wrapの標準互換プロパティ */
         }
 
 
@@ -23,17 +27,10 @@
             flex-direction: column; /* チャット履歴を下から上に表示 */
         }
 
-
         .user1-message {
-            align-self: flex-start; /* 左寄りに表示 */
-            background-color: #efffe0; /* 背景色を設定 */
-            margin-bottom: 5px;
-            padding: 10px;
-            border-radius: 10px;
-            white-space: pre-line; /* 改行を有効にする */
-        }
+            max-width: 50%;
 
-        .user2-message {
+            text-align: right;
             align-self: flex-end; /* 右寄りに表示 */
             background-color: #e0f7ff;
             margin-bottom: 5px;
@@ -42,7 +39,19 @@
             white-space: pre-line; /* 改行を有効にする */
         }
 
-        
+        .user2-message {
+            max-width: 50%;
+
+            text-align: left;
+            align-self: flex-start; /* 左寄りに表示 */
+            background-color: #efffe0; /* 背景色を設定 */
+            margin-bottom: 5px;
+            padding: 10px;
+            border-radius: 10px;
+            white-space: pre-line; /* 改行を有効にする */
+        }
+
+
 
         #messageInputContainer {
             display: flex;
@@ -56,7 +65,7 @@
         }
 
         #messageInput {
-            width: 70%;
+            width: 90%;
             padding: 8px;
             margin-right: 10px;
             overflow: hidden;
@@ -64,9 +73,18 @@
         }
 
         #sendMessageBtn {
+            min-width: 80px;
             padding: 8px;
             cursor: pointer;
+
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
+
     </style>
 </head>
 <body>
@@ -122,11 +140,11 @@
             { user: 'ユーザー1', message: 'こんにちは！' },
             { user: 'ユーザー2', message: 'こんにちは！お元気ですか？' },
             { user: 'ユーザー1', message: '元気です！' },
-            { user: 'ユーザー2', message: 'それは良かったですね！' },
+            { user: 'ユーザー2', message: '111111111111111111111111111111111111111111111111111111111111111111' },
             { user: 'ユーザー1', message: 'こんにちは！' },
-            { user: 'ユーザー2', message: 'こんにちは！お元気ですか？' },
+            { user: 'ユーザー2', message: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' },
             { user: 'ユーザー1', message: '元気です！' },
-            { user: 'ユーザー2', message: 'それは良かったですね！' },
+            { user: 'ユーザー2', message: 'あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ' },
             // 他のチャットデータも同様に追加
         ];
 
@@ -138,10 +156,10 @@
             
             
             if (chat.user === 'ユーザー1') {
-                chatMessage.textContent = chat.user + ': ' + chat.message;
+                chatMessage.textContent = chat.message;
                 chatMessage.className = 'user1-message';
             } else {
-                chatMessage.textContent = chat.message + ': ' + chat.user;
+                chatMessage.textContent = chat.user + ': ' +'\n'+ chat.message;
                 chatMessage.className = 'user2-message';
             }
 
@@ -156,28 +174,28 @@
         var messageInput = document.getElementById('messageInput');
         var message = messageInput.value.trim();
 
+        // 送ったチャット
         if (message !== '') {
-            var chatDiv = document.getElementById('chat');
-            var chatMessage = document.createElement('div');
-            chatMessage.textContent = 'ユーザー1: ' + message;
+                var chatDiv = document.getElementById('chat');
+                var chatMessage = document.createElement('div');
 
-            // ユーザーごとにクラスを設定
-            chatMessage.className = 'user1-message';
+                chatMessage.textContent = message;
+                chatMessage.className = 'user1-message';// ユーザーごとにクラスを設定
+                
+                chatDiv.appendChild(chatMessage);
+                messageInput.value = '';
 
-            chatDiv.appendChild(chatMessage);
-            messageInput.value = '';
-
-            // 送信後、入力欄をクリアし、一番下にスクロール
-            messageInput.value = '';
-            chatDiv.scrollTop = chatDiv.scrollHeight;
+                messageInput.value = '';// 送信後、入力欄をクリアし、一番下にスクロール
+                chatDiv.scrollTop = chatDiv.scrollHeight;
+            }
         }
-    }
 
     document.addEventListener('DOMContentLoaded', function () {
         loadChatHistory();
     });
 
 
+    
         // Enterキーで改行する設定
         document.getElementById('messageInput').addEventListener('input', function () {
             this.style.height = 'auto';
@@ -191,8 +209,42 @@
             }
         });
 
+
         
+
 </script>
+
+<!-- <script>
+    function displayInfo() {
+        var infoInput = document.getElementById('messageInput').value;
+        var displayInfoDiv = document.getElementById('chat');
+
+        if (infoInput.length > 0) {
+            var formattedInfo = formatInfo(infoInput);
+            var chatMessage = document.createElement('div');
+            chatMessage.textContent = 'ユーザー: ' + formattedInfo;
+            chatMessage.className = 'user1-message'; // ユーザー1のメッセージとして表示
+            displayInfoDiv.appendChild(chatMessage);
+        } else {
+            var chatMessage = document.createElement('div');
+            chatMessage.textContent = 'ユーザー: ' + '入力された情報はありません。';
+            chatMessage.className = 'user1-message'; // ユーザー1のメッセージとして表示
+            displayInfoDiv.appendChild(chatMessage);
+        }
+    }
+
+    function formatInfo(messageInput) {
+        // 一行が10文字以上の場合、11文字目から新たな行に開業
+        var formattedText = '';
+        for (var i = 0; i < messageInput.length; i++) {
+            formattedText += messageInput[i];
+            if ((i + 1) % 10 === 0) {
+                formattedText += '\n';
+            }
+        }
+        return formattedText;
+    }
+</script> -->
 
 </body>
 </html>
