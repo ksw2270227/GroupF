@@ -1,1 +1,127 @@
 <!-- ユーザー情報詳細画面 -->
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ユーザー情報詳細画面</title>
+
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .name {
+            border: 1px solid black;
+            padding: 5px;
+            margin-right: 100px;
+            margin-bottom: 10px;
+
+        }
+
+        .situation {
+            border: 1px solid black;
+            max-width: 150px;
+            padding: 5px;
+            margin-right: 10px;
+            flex-grow: 1;
+            margin-bottom: 10px;
+
+        }
+
+        .container {
+            display: flex;
+            /* Flexboxを使って横並びに配置 */
+        }
+
+        .participating_group {
+            border: 2px solid black;
+            margin-bottom: 10px;
+        }
+
+        /* 作成ボタンのスタイル */
+        .custom-button {
+            width: 20%;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: #fff;
+            
+            transition: background-color 0.3s;
+            /* position: relative;
+            /* top: 50px; */
+            /* left: 131px; */
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header"></div>
+    <a href="index.html" class="backButton">戻る</a>
+
+
+    <div class="login-container">
+        <div class="container">
+            <div class="name">
+                名前　:○○○○
+            </div>
+            <div class="situation">
+                状況アイコン
+                通常
+            </div>
+        </div>
+        <div class="participating_group">
+            参加グループ名
+        </div>
+        <div class="participating_group">
+            電話番号
+        </div>
+        <div class="participating_group">
+            メールアドレス
+        </div>
+        <div class="participating_group">
+            パスワード
+        </div>
+        <div class="participating_group">
+            年齢
+        </div>
+        <div class="participating_group">
+            性別
+        </div>
+    </div>
+    <input type="submit" value="作成" class="custom-button" onclick="submitForm()">
+
+
+    <div id="footer"></div>
+    <script>
+        fetch("header.html")
+            .then((response) => response.text())
+            .then((data) => {
+                document.querySelector("#header").innerHTML = data;
+
+                // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
+                document.querySelector('.hamburger-menu').addEventListener('click', function () {
+                    document.querySelector('.menu').classList.toggle('active');
+                });
+            });
+
+        fetch("footer.html")
+            .then((response) => response.text())
+            .then((data) => document.querySelector("#footer").innerHTML = data);
+    </script>
+</body>
+
+</html>
