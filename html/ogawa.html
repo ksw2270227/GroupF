@@ -8,9 +8,10 @@
   <link rel="stylesheet" href="style.css">
   <style>
     .radio-buttons {
-      display: none; /* 最初は非表示にする */
-      /* display: flex; */
-      /* flex-direction: row; */
+      border-top: 3px solid #ccc;
+      padding-top: 15px;
+      display: flex;
+      flex-direction: row;
     }
 
     .radio-buttons label {
@@ -66,30 +67,32 @@
         <li><a href="login.html">ログイン</a></li>
         <li><a href="#">aaa</a></li>
       </ul>
+
+      <div class="radio-buttons">
+        <input type="radio" name="option" value="usually" id="usually" checked>
+        <label for="usually">
+          <img src="usually.png" alt="Usually">
+        </label>
+        
+        <input type="radio" name="option" value="stand" id="stand">
+        <label for="stand">
+          <img src="stand.png" alt="Stand">
+        </label>
+        
+        <input type="radio" name="option" value="lost" id="lost">
+        <label for="lost">
+          <img src="lost.png" alt="Lost">
+        </label>
+        
+        <input type="radio" name="option" value="eme" id="eme">
+        <label for="eme">
+          <img src="eme.png" alt="Eme">
+        </label>
+      </div>
     </nav>
     
     <!-- 以下、ラジオボタンの部分 -->
-    <div class="radio-buttons">
-      <input type="radio" name="option" value="usually" id="usually" checked>
-      <label for="usually">
-        <img src="usually.png" alt="Usually">
-      </label>
-      
-      <input type="radio" name="option" value="stand" id="stand">
-      <label for="stand">
-        <img src="stand.png" alt="Stand">
-      </label>
-      
-      <input type="radio" name="option" value="lost" id="lost">
-      <label for="lost">
-        <img src="lost.png" alt="Lost">
-      </label>
-      
-      <input type="radio" name="option" value="eme" id="eme">
-      <label for="eme">
-        <img src="eme.png" alt="Eme">
-      </label>
-    </div>
+    
     
     <script>
       document.querySelector('.hamburger-menu').addEventListener('click', function() {
