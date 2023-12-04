@@ -1,139 +1,74 @@
-<!-- グループ参加 -->
+<!-- メニュー下状況変更 -->
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-    <meta charset="UTF-8">
-    <title>title here</title>
+  <meta charset="UTF-8">
+  <title>Image Radio Buttons</title>
+  <style>
+    .radio-buttons {
+      display: flex;
+      flex-direction: row;
+    }
 
-    <style>
-        /* CSSスタイル */
-        /* フォーム全体のスタイル */
-        form {
-            width: 300px;
-            margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-    
-        /* ラベルのスタイル */
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-    
-        /* 入力フィールドとボタンのスタイル */
-        input[type="text"],
-        input[type="password"],
-        button[type="submit"] {
-            width: calc(100% - 40px); /* 必要に応じて幅を調整 */
-            padding: 8px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-            display: block; /* 要素を縦に積み重ねるためにブロック要素に */
-            margin: 10px auto; /* 水平方向に中央揃え */
-        }
-    
-        /* 送信ボタンのスタイル */
+    .radio-buttons label {
+      margin-right: 20px;
+      position: relative;
+      cursor: pointer;
+    }
 
-        .sendButton {
-            display: block;
-            width: 30%;
-            padding: 8px 0;
-            display: block;
-            margin: 0 auto;
-            text-align: center;
-            text-decoration: none;
-            border: none;
-            border-radius: 5px;
-            background-color: #3498db;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+    .radio-buttons input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
 
-        .sendButton:hover {
-            background-color: #2980b9;
-        }
+    .radio-buttons img {
+      width: 80px; /* 画像の幅を調整 */
+      height: 80px; /* 画像の高さを調整 */
+      object-fit: contain; /* 画像を潰れずに収める */
+    }
 
-        .backButton {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #ffffff;
-            color: #3498db;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-        }
+    .radio-buttons label::before {
+      content: "";
+      position: absolute;
+      top: 35%; /* 画像の上端からの位置 */
+      left: 50%; /* 画像の左端からの位置 */
+      transform: translate(-50%, -50%); /* 中央揃え */
+      width: 90px; /* 丸の横幅 */
+      height: 90px; /* 丸の高さ */
+      border-radius: 50%;
+      /* border: 2px solid rgba(170, 170, 170, 0.233); 丸の枠線 */
+      background-color: transparent;
+    }
 
-        .backButton:hover {
-            background-color: #a5a3a3;
-            color: #ffffff;
-        }
-
-    </style>
+    .radio-buttons input[type="radio"]:checked + label::before {
+      background-color: rgba(170, 170, 170, 0.233); /* チェックされた時の背景色 */
+    }
+  </style>
 </head>
-
 <body>
-    <div id="header"></div>
 
-    <a href="index.html" class="backButton">戻る</a>
+<div class="radio-buttons">
+  <input type="radio" name="option" value="usually" id="usually" checked>
+  <label for="usually">
+    <img src="usually.png" alt="Usually">
+  </label>
+  
+  <input type="radio" name="option" value="stand" id="stand">
+  <label for="stand">
+    <img src="stand.png" alt="Stand">
+  </label>
+  
+  <input type="radio" name="option" value="lost" id="lost">
+  <label for="lost">
+    <img src="lost.png" alt="Lost">
+  </label>
+  
+  <input type="radio" name="option" value="eme" id="eme">
+  <label for="eme">
+    <img src="eme.png" alt="Eme">
+  </label>
+</div>
 
-    <form id="passchange" action="#" method="post">
-
-        <label for="groupidInput">グループID</label>
-        <input type="text" id="groupidInput" name="groupidInput" required>
-
-        <label for="passwordInput">新規パスワード</label>
-        <input type="password" id="passwordInput" name="passwordInput" required>
-
-        <input type="submit" value="参加" class="sendButton">
-        <p id="error-message"></p>
-    </form>
-
-    <div id="footer"></div>
-    <script>
-        fetch("header.html")
-            .then((response) => response.text())
-            .then((data) => {
-                document.querySelector("#header").innerHTML = data;
-
-                // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
-                document.querySelector('.hamburger-menu').addEventListener('click', function() {
-                    document.querySelector('.menu').classList.toggle('active');
-                });
-            });
-
-        document.getElementById('passchange').addEventListener('submit', function(event) {
-            event.preventDefault(); // フォームのデフォルトの送信を防止
-
-            var groupID = document.getElementById('groupidInput').value;
-            var password = document.getElementById('passwordInput').value;
-
-            // ここでグループIDとパスワードのチェックを行う
-            // (仮)IDが"exampleID" パスワードが"examplePass"
-
-            if (groupID !== "exampleID" || password !== "examplePass") {
-                var errorElement = document.getElementById('error-message');
-                errorElement.innerText = 'グループIDまたはパスワードが間違っています';
-                errorElement.style.color = 'red';
-                return false; // フォーム送信をキャンセル
-            }
-
-            // ここで何かしらの処理を行うか、遷移先にデータを送信する処理を記述
-
-            window.location.href = 'group.html'; // ここに遷移先のURLを指定
-        });
-
-        fetch("footer.html")
-            .then((response) => response.text())
-            .then((data) => document.querySelector("#footer").innerHTML = data);
-    </script>
 </body>
-
 </html>
