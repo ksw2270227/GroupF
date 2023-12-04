@@ -213,38 +213,5 @@
         
 
 </script>
-
-<!-- <script>
-    function displayInfo() {
-        var infoInput = document.getElementById('messageInput').value;
-        var displayInfoDiv = document.getElementById('chat');
-
-        if (infoInput.length > 0) {
-            var formattedInfo = formatInfo(infoInput);
-            var chatMessage = document.createElement('div');
-            chatMessage.textContent = 'ユーザー: ' + formattedInfo;
-            chatMessage.className = 'user1-message'; // ユーザー1のメッセージとして表示
-            displayInfoDiv.appendChild(chatMessage);
-        } else {
-            var chatMessage = document.createElement('div');
-            chatMessage.textContent = 'ユーザー: ' + '入力された情報はありません。';
-            chatMessage.className = 'user1-message'; // ユーザー1のメッセージとして表示
-            displayInfoDiv.appendChild(chatMessage);
-        }
-    }
-
-    function formatInfo(messageInput) {
-        // 一行が10文字以上の場合、11文字目から新たな行に開業
-        var formattedText = '';
-        for (var i = 0; i < messageInput.length; i++) {
-            formattedText += messageInput[i];
-            if ((i + 1) % 10 === 0) {
-                formattedText += '\n';
-            }
-        }
-        return formattedText;
-    }
-</script> -->
-
 </body>
 </html>
