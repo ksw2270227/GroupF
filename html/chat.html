@@ -1,1 +1,113 @@
-<!-- チャット画面 -->
+<!-- chat.php -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チャット画面</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header, footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+        }
+
+        main {
+            margin-top: 60px;
+            padding: 20px;
+        }
+
+        #chat {
+            margin: 50px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        #messageInput {
+            width: 70%;
+            padding: 8px;
+        }
+
+        #sendMessageBtn {
+            padding: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        チャットアプリ
+    </header>
+
+    <main>
+        <div id="chat"></div>
+        <div>
+            <input type="text" id="messageInput" placeholder="メッセージを入力">
+            <button id="sendMessageBtn" onclick="sendMessage()">送信</button>
+        </div>
+    </main>
+
+    <footer>
+        © 2023 チャットアプリ
+    </footer>
+
+    <script>
+        // チャット履歴を取得して表示する関数
+        function loadChatHistory() {
+            // ここでサーバーサイドからデータベースからチャット履歴を取得する処理が必要
+            // 以下はサンプルデータの代わりに表示する例
+            var chatHistory = [
+                { user: 'ユーザー1', message: 'こんにちは！' },
+                { user: 'ユーザー2', message: 'こんにちは！お元気ですか？' },
+                // 他のチャットデータも同様に追加
+            ];
+
+            var chatDiv = document.getElementById('chat');
+
+            // 取得したチャット履歴を表示
+            chatHistory.forEach(function (chat) {
+                var chatMessage = document.createElement('div');
+                chatMessage.textContent = chat.user + ': ' + chat.message;
+                chatDiv.appendChild(chatMessage);
+            });
+        }
+
+        // ユーザーがメッセージを送信する関数
+        function sendMessage() {
+            var messageInput = document.getElementById('messageInput');
+            var message = messageInput.value.trim();
+
+            if (message !== '') {
+                // ここでサーバーサイドにメッセージを送信する処理が必要
+                // サンプルデータを表示する例
+                var chatDiv = document.getElementById('chat');
+                var chatMessage = document.createElement('div');
+                chatMessage.textContent = 'ユーザー: ' + message;
+                chatDiv.appendChild(chatMessage);
+
+                // 送信後、入力欄をクリア
+                messageInput.value = '';
+            }
+        }
+
+        // ページが読み込まれたらチャット履歴を読み込む
+        document.addEventListener('DOMContentLoaded', function () {
+            loadChatHistory();
+        });
+    </script>
+
+</body>
+</html>
