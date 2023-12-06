@@ -1,1 +1,52 @@
-<!-- 異常ユーザー詳細画面 -->
+<!-- 新規登録 -->
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>title here</title>
+</head>
+
+<body>
+    <div id="header"></div>
+    <div class="divbackButton">
+        <a href="index.html" class="backButton">戻る</a>
+        <a class="userstats">30分不動</a>
+        <a class="userstats">緊急</a>
+        
+    </div>
+    
+    <style>
+        .divbackButton{
+            margin: 10px;
+            border: 2px solid red;
+        }
+
+        .userstats{
+            border: 2px solid orange;
+            float: right;
+            margin: 8px;
+            padding: 3px;
+        }
+    </style>
+
+    <div id="footer"></div>
+<script>
+    fetch("header.html")
+    .then((response) => response.text())
+    .then((data) => {
+        document.querySelector("#header").innerHTML = data;
+
+        // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
+        document.querySelector('.hamburger-menu').addEventListener('click', function() {
+        document.querySelector('.menu').classList.toggle('active');
+        });
+    });
+
+    fetch("footer.html")
+    .then((response) => response.text())
+    .then((data) => document.querySelector("#footer").innerHTML = data);
+</script>
+</body>
+
+</html>
