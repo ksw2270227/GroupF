@@ -7,26 +7,52 @@
   <meta name="description" content="サイトの説明文">
   <link rel="stylesheet" href="style.css">
   <style>
-    td1 {
-      text-align: center;
+    footer {
+      display: flex;
+      justify-content: center;
     }
 
-    td2 {
-      color: aqua;
-      border: 2px solid coral;
+    .main-container {
+      text-align: center;
       padding: 15px;
       margin-left: 20px;
       border-radius: 10px;
-      }
+      display: flex;
+      align-items: center; 
+    }
+
+    .main {
+      display: block;
+      margin-right: 10px;
+    }
+
+    .sub {
+      padding: 10px;
+      border: 2px solid white;
+      border-radius: 5px;
+      margin-left: 10px;
+    }
+
+    .create-button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: auto;
+    }
   </style>
 </head>
   
+<body>
   <footer>
-  <!-- <table border="2"> -->
-  <td1>&copy; 2023 groupF</td1>
-    <td2>
-     集合ルート
-    </td2>
-  </table>
+    <div class="main-container">
+      <span class="main">&copy; 2023 groupF</span>
+      <span class="sub">集合ルート</span>
+      <button class="create-button">作成</button>
+    </div>
   </footer>
+</body>
+
 </html>
