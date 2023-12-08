@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
   <meta charset="UTF-8">
   <title>サイトのタイトル</title>
@@ -8,40 +7,49 @@
   <link rel="stylesheet" href="style.css">
   <style>
     footer {
-      display: flex;
-      justify-content: center;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* フッターを画面幅全体に拡張 */
+}
 
-    .main-container {
-      text-align: center;
-      padding: 15px;
-      margin-left: 20px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center; 
-    }
+.main-container {
+  display: flex;
+  justify-content: center; /* 子要素を中央に揃えます */
+  align-items: center;
+  width: 100%; /* コンテナを画面幅全体に拡張 */
+  /* padding: 15px; */
+  border-radius: 10px;
+  position: relative; /* 相対位置を設定 */
+}
 
-    .main {
-      display: block;
-      margin-right: 10px;
-    }
+.main {
+  position: absolute; /* 絶対位置を設定 */
+  left: 50%; /* 要素の左端をコンテナの中央に配置 */
+  transform: translateX(-50%); /* 要素を左に半分移動して中央揃えに */
+}
 
-    .sub {
-      padding: 10px;
-      border: 2px solid white;
-      border-radius: 5px;
-      margin-left: 10px;
-    }
+.sub {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  /* margin: 3px; */
+  border: 2px solid white;
+  border-radius: 5px;
+  margin-left: auto; /* 自動的に左側の余白を最大化 */
+  margin-right: 20px; /* 右側の余白を設定 */
+}
 
-    .create-button {
-      padding: 8px 16px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-left: auto;
-    }
+.create-button {
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
   </style>
 </head>
   
@@ -49,10 +57,11 @@
   <footer>
     <div class="main-container">
       <span class="main">&copy; 2023 groupF</span>
-      <span class="sub">集合ルート</span>
-      <button class="create-button">作成</button>
+      <div class="sub">
+        <span>集合ルート</span>
+        <button class="create-button">作成</button>
+      </div>
     </div>
   </footer>
 </body>
-
 </html>
