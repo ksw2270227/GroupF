@@ -14,10 +14,6 @@
       padding: 0;
     }
 
-    /* button{
-      border: none;
-    } */
-
     form {
       width: 300px;
       margin: 20px auto;
@@ -108,14 +104,14 @@
   <form action="eventinformation.html" method="get">
     <h2>イベント参加</h2>
     <label for="eventidLabel">イベントID:
-      <input type="text" id="eventid" name="eventid" maxlength="20" required pattern="^[a-zA-Z0-9]+$">
+      <input type="text" id="eventid" name="eventidInput" maxlength="20" required pattern="^[a-zA-Z0-9]+$">
     </label>
 
-    <label for="passLabel">パスワード:
-      <input type="password" id="password" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
+    <label for="passwordLabel">パスワード:
+      <input type="password" id="password" name="passwordInput" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
     </label>
 
-    <input type="submit" value="参加">
+    <input type="submit" name="joinButton" value="参加">
   </form>
 
   <div id="footer"></div>

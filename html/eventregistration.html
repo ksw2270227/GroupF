@@ -89,16 +89,34 @@
             box-sizing: border-box;
         }
 
-        input[type="date"]{
+        /* input[type="date"]{
             float: inline-;
-            min-width: 110px;
-            width: 48.1%;
+            text-align: center;
+            width: 46%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        } */
+        
+        input[type="date"] {
+            display: inline-block; /* インラインブロック要素として表示 */
+            text-align: center;
+            width: 46%;
             padding: 8px;
             margin-bottom: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
             box-sizing: border-box;
         }
+
+
+        /* 横並びにするためのスタイル */
+        label[name="durationLabel"] input[type="date"] {
+            display: inline-block;
+            vertical-align: top; /* 垂直方向の配置をトップにする */
+        } 
 
 
         input[type=submit] {
@@ -136,22 +154,30 @@
   <form action="eventinformation.html" method="get">
     <div class="event-container">
           <div class="event-contents">
+            <label name="eventNameLabel">
               <p>イベント名：</p>
-              <input type="text" name="eventName" value="">
+              <input type="text" name="eventName">
+            </label>
           </div>
           <div class="event-contents">
+            <label name="durationLabel">
               <p>期間：</p>
-              <input type="date" name="startEventDuration" value=""> ～
-              <input type="date" name="endEventDuration" value="">
+              <input type="date" name="startEventDuration"> -
+              <input type="date" name="endEventDuration">
+            </label>
           </div>
           
           <div class="event-contents">
+            <label name="durationLabel"></label>
               <p>場所：</p>
-              <input type="text" name="eventLocation" value="">
+              <input type="text" name="eventLocation">
+            </label>
           </div>
           <div class="event-contents">
+            <label name="durationLabel">
               <p>内容：</p>
               <textarea name="eventDescription" cols="65%" rows="20%"></textarea>
+            </label>
           </div>
           <input type="submit" value="登録" class="registrationButton">
     </div>
