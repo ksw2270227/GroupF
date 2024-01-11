@@ -46,7 +46,7 @@
     }
 
     /* ラジオボタンのスタイル */
-    input[type="radio"] {
+    /* input[type="radio"] {
       display: none;
     }
 
@@ -59,13 +59,30 @@
       border: 1px solid #ccc;
       border-radius: 5px;
       margin-right: 10px;
-      text-align: center; /* テキストを中央寄せにする */
-    }
+      text-align: center; テキストを中央寄せにする */
+    /* }
 
     input[type="radio"]:checked+label {
       background-color: #3498db;
       color: #fff;
       border-color: #3498db;
+    } */
+
+    /* ラジオボタンのラベルスタイル */
+    label[for="maleRadio"],
+    label[for="femaleRadio"],
+    label[for="otherRadio"]{
+      display: inline-block;
+      width: auto; /* ラベルの幅を自動に設定 */
+      text-align: left; /* ラベルを左寄せ */
+      margin-right: 10px; /* ラベルと次のラジオボタンの間のスペース */
+      box-sizing: border-box; /* paddingを含めた全体の幅にする */
+    }
+
+/* ラジオボタンのスタイル */
+    input[type="radio"] {
+      display: inline-block;
+      margin-right: 5px; /* ラジオボタン同士の間隔を調整 */
     }
 
     /* 戻るボタンのスタイル */
@@ -117,10 +134,23 @@
   input[type="tel"],
   input[type="email"],
   input[type="password"],
-  input[type="number"],
-  input[type="radio"] {
+  input[type="number"] {
     width: 60%; /* 入力フィールドの幅を調整 */
   }
+  /* 名前のラベルのスタイル */
+.labelContainer {
+  margin-bottom: 20px; /* ラベルと入力フィールドの間に余白を追加 */
+  border: 1px solid #ccc; /* ラベルを囲むボーダー */
+  border-radius: 5px; /* 角を丸める */
+  padding: 10px; /* 内側の余白を追加 */
+}
+
+.labelContainer label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
   </style>
 </head>
 
@@ -155,7 +185,7 @@
     <input type="number" id="ageInput" name="age" pattern="[0-9]*">
 
     <label>性別</label>
-    <input type="radio" id="maleRadio" name="gender" value="male">
+    <input type="radio" id="maleRadio" name="gender" value="male"checked>
     <label for="maleRadio">男性</label>
 
     <input type="radio" id="femaleRadio" name="gender" value="female">
