@@ -9,9 +9,9 @@
 
     <style>
         .login-container {
-            max-width: 400px;
+            max-width: 460px;
             margin: 50px auto;
-            padding: 20px;
+            padding: 50px;
             border: 1px solid #ccc;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -25,6 +25,8 @@
             padding: 5px;
             margin-right: 100px;
             margin-bottom: 10px;
+            margin-bottom: 5px;
+            border-radius: 10px;
 
         }
 
@@ -35,6 +37,8 @@
             margin-right: 10px;
             flex-grow: 1;
             margin-bottom: 10px;
+            margin-bottom: 5px;
+            border-radius: 10px;
 
         }
 
@@ -44,23 +48,14 @@
         }
 
         .participating_group {
-            border: 2px solid black;
-            margin-bottom: 10px;
-        }
-
-        /* 作成ボタンのスタイル */
-        /* .deleto {
-            width: 20%;
+            border: 1px solid black;
+            margin-bottom: 5px;
+            border-radius: 10px; /* 丸角の半径を指定 */
+            /* 以下はオプションで、背景色や影などのスタイルを追加できます */
             padding: 10px;
-            font-size: 18px;
-            text-align: center;
-            text-decoration: none;
-            border: none;
-            border-radius: 5px;
-            background-color: #3498db;
-            color: #fff;
-            
-        } */
+            box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.2);
+
+        }
 
         button {
             background-color: #3498db;
@@ -71,7 +66,8 @@
             cursor: pointer;
             text-align: center;
             display: block;
-            margin: 0 auto;
+            margin: 0;
+            float: right;
         }
     </style>
 </head>
@@ -109,10 +105,10 @@
         <div class="participating_group">
             性別
         </div>
-    </div>
 
-    <div class="deleto">
-        <button type="button" onclick="login()">削除</button>
+        <div class="deleto">
+            <button type="button" onclick="delet()">削除</button>
+        </div>
     </div>
 
     <div id="footer"></div>
