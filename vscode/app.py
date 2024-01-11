@@ -8,5 +8,7 @@ app.register_blueprint(testIndex_bp)
 def inedx():
     return "index is here"
 
-if __name__ =="__main__":
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run()  # あるいは任意のポート
+
+print("ok")
