@@ -7,62 +7,6 @@
     <title>イベントページ</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        /* button{
-          border: none;
-        } */
-
-        /* 戻るボタンのスタイル */
-        .backButton {
-          display: inline-block;
-          padding: 10px 20px;
-          background-color: #ffffff;
-          color: #3498db;
-          text-decoration: none;
-          border-radius: 5px;
-          transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-        }
-
-        .backButton:hover {
-          background-color: #a5a3a3;
-          color: #ffffff;
-        }
-
-        /* 全体 */
-        .event-container {
-            flex: 8; /* 画面の80% */
-            /* background-color: #f0f0f0; */
-        }
-
-        
-
-        button {
-            min-width: 120px;
-            margin: 10px;
-            display: block;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-
-            font-size: 20px;
-            font-weight: bold;
-
-        }
-
-        button:hover {
-          background-color: #2980b9;
-        }
-
-
-
         .event-contents {
             max-width: 80%;
             min-width: 250px;
@@ -71,11 +15,6 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-
-        .footer{
-          margin-top: 20px;
         }
 
         input[type="text"],
@@ -89,21 +28,9 @@
             box-sizing: border-box;
         }
 
-        /* input[type="date"]{
-            float: inline-;
-            text-align: center;
-            width: 46%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        } */
-        
-        input[type="date"] {
-            display: inline-block; /* インラインブロック要素として表示 */
-            text-align: center;
-            width: 46%;
+        input[type="datetime-local"]{
+            min-width: 110px;
+            width: 100%;
             padding: 8px;
             margin-bottom: 10px;
             border-radius: 5px;
@@ -112,11 +39,8 @@
         }
 
 
-        /* 横並びにするためのスタイル */
-        label[name="durationLabel"] input[type="date"] {
-            display: inline-block;
-            vertical-align: top; /* 垂直方向の配置をトップにする */
-        } 
+
+/*display: inline-block;  インラインブロック要素として表示 */
 
 
         input[type=submit] {
@@ -133,15 +57,13 @@
           color: #fff;
           cursor: pointer;
           transition: background-color 0.3s;
+
+          margin-bottom: 20px;
         }
 
         input[type=submit]:hover {
           background-color: #2980b9;
         }
-        
-
-
-
     </style>
 </head>
 <body>
@@ -152,35 +74,36 @@
   <!-- <button onclick="goBack()" class="cta-button">戻る</button> -->
 
   <form action="eventinformation.html" method="get">
-    <div class="event-container">
-          <div class="event-contents">
-            <label name="eventNameLabel">
-              <p>イベント名：</p>
-              <input type="text" name="eventName">
-            </label>
-          </div>
-          <div class="event-contents">
-            <label name="durationLabel">
-              <p>期間：</p>
-              <input type="date" name="startEventDuration"> -
-              <input type="date" name="endEventDuration">
-            </label>
-          </div>
-          
-          <div class="event-contents">
-            <label name="durationLabel"></label>
-              <p>場所：</p>
-              <input type="text" name="eventLocation">
-            </label>
-          </div>
-          <div class="event-contents">
-            <label name="durationLabel">
-              <p>内容：</p>
-              <textarea name="eventDescription" cols="65%" rows="20%"></textarea>
-            </label>
-          </div>
-          <input type="submit" value="登録" class="registrationButton">
-    </div>
+      <div class="event-contents">
+        <label name="eventNameLabel">
+          <p>イベント名：</p>
+          <input type="text" name="eventName" required>
+        </label>
+      </div>
+      <div class="event-contents">
+        <p>期間：</p>
+        <label name="durationLabel">
+          <p>開始日時：</p>
+          <input type="datetime-local" name="startEventDuration" required>
+        </label>
+        <label name="durationLabel">
+          <p>終了日時：</p>
+          <input type="datetime-local" name="endEventDuration" required>
+        </label>
+      </div>
+      <div class="event-contents">
+        <label name="locationLabel">
+          <p>場所：</p>
+          <input type="text" name="eventLocation" required>
+        </label>
+      </div>
+      <div class="event-contents">
+        <label name="contentLabel">
+          <p>内容：</p>
+          <textarea name="eventDescription" cols="65%" rows="20%" required></textarea>
+        </label>
+      </div>
+      <input type="submit" value="登録" class="RegistrationButton">
   </form>
 
 
