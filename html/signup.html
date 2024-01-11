@@ -14,7 +14,7 @@
     }
 
     form {
-      width: 300px;
+      width: 450px;
       margin: 20px auto;
       background-color: #fff;
       padding: 20px;
@@ -59,6 +59,7 @@
       border: 1px solid #ccc;
       border-radius: 5px;
       margin-right: 10px;
+      text-align: center; /* テキストを中央寄せにする */
     }
 
     input[type="radio"]:checked+label {
@@ -102,6 +103,24 @@
     .sendButton:hover {
       background-color: #2980b9;
     }
+
+    
+  label {
+    display: inline-block;
+    width: 30%; /* ラベルの幅を調整 */
+    text-align: right; /* ラベルを右寄せ */
+    margin-right: 10px; /* ラベルと入力フィールドの間隔 */
+    box-sizing: border-box; /* paddingを含めた全体の幅にする */
+  }
+
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="radio"] {
+    width: 60%; /* 入力フィールドの幅を調整 */
+  }
   </style>
 </head>
 
