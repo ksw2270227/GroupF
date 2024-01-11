@@ -1,150 +1,109 @@
+<!--マイページ-->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>マイページ</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マイページ</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
         table {
-        width: 80%;
-        max-width: 400px;
-        border-collapse: separate;
-        border-spacing: 10px;
-        background-color: #fff;
-        /* margin: 0 auto; テーブルを中央寄せにし、右寄せにするために左右の margin を auto に設定 */
-        float: right;
+            border-collapse: collapse;
+            border-spacing: 0 10px;
+            width: 50%;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        tr {
+            border: 1px solid #3d3a3a;
         }
 
-        th, td {
-            padding: 15px;
+        td {
+            padding: 10px;
             text-align: left;
         }
 
-        tr{
-            margin-bottom: 59px;
-            border:1px solid;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        h2 {
-            color: #333;
-            text-align: center;
+        .buttons{
+            /* background-color: #e0e0e0; */
             padding: 20px;
-        }
-
-        .buttons {
-            padding: 20px;
-            text-align: left; /* 左寄せにする */
-            bottom: 0; /* 画面下部に配置 */
-            left: 0; /* 画面左端に配置 */
+            position: relative;
+            bottom: 100px;
         }
 
         button {
             min-width: 120px;
-            font-size: 20px;
-            font-weight: bold;
+            margin: 10px;
+            display: block;
             padding: 10px 20px;
             background-color: #3498db;
             color: #fff;
             border: none;
             border-radius: 5px;
-            display: block; /* ボタンを縦方向横並びにする */
-            margin: 10px;
-            
-        }
-
-        .footer{
-        margin-top: 20px;
-        }
-        profile-form{
-            margin-right: auto;
+            font-size: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
     <div id="header"></div>
-
     <a href="index.html" class="backButton">戻る</a>
+    <div class="login-container">
+        <h2>マイページ</h2>
 
-    <form action="#" method="post">
+    <table>
+        <tr>
+            <td>名前</td>
+            <td>〇〇 〇〇</td>
+        </tr>
+        <tr>
+            <td>電話番号</td>
+            <td>***-****-****</td>
+        </tr>
+        <tr>
+            <td>メールアドレス</td>
+            <td>******@****.***</td>
+        </tr>
+        <tr>
+            <td>パスワード</td>
+            <td>********</td>
+        </tr>
+        <tr>
+            <td>年齢</td>
+            <td>**歳</td>
+        </tr>
+        <tr>
+            <td>性別</td>
+            <td>**</td>
+        </tr>
+    </table>
 
-    <div id="main-content">
-        <div id="profile-form">
-            <h2>マイページ</h2>
-            <table>
-                <tr>
-                <td>名前</td>
-                <td>****</td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                <td>電話番号</td>
-                <td>***-****-****</td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                <td>メールアドレス</td>
-                <td>****@****.***</td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                <td>パスワード</td>
-                <td>********</td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                <td>年齢</td>
-                <td>〇〇歳</td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                <td>性別</td>
-                <td>〇〇歳</td>
-                </tr>
-            </table>
-        </div>
-        <div class="buttons">
-            <a href="mypagechangescreen.html">
-                <button class="changeButton">
-                    変更
-                </button>
-            </a>
-            <a href="mypagewithdrawal.html">
-                <button class="withdrawalButton">
-                    退会
-                </button>
-            </a>
-        </div>
+    <div class="buttons">
+        <a href="mypagechangescreen.html">
+        <button class="changeButton">
+            変更
+        </button>
+        </a>
+        <a href="mypagewithdrawal.html">
+        <button class="withdrawalButton">
+            退会
+        </button>
+        </a>
     </div>
 
     <div id="footer"></div>
 
-        <script>
-            fetch("header.html")
-                .then((response) => response.text())
-                .then((data) => {
-                    document.querySelector("#header").innerHTML = data;
-                });
-
-            fetch("footer.html")
-                .then((response) => response.text())
-                .then((data) => document.querySelector("#footer").innerHTML = data);
-        </script>
-    </body>
+    <script>
+        fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+            document.querySelector("#header").innerHTML = data;
+        });
+    
+        fetch("footer.html")
+        .then((response) => response.text())
+        .then((data) => document.querySelector("#footer").innerHTML = data);
+    </script>
+</body>
 </html>
