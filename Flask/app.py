@@ -1,8 +1,10 @@
 from flask import Flask
 from testIndex import testIndex_bp
+from index import index_bp
 
 app = Flask(__name__)
 app.register_blueprint(testIndex_bp)
+app.register_blueprint(index_bp)
 
 @app.route("/")
 def show_urls():
