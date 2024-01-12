@@ -54,11 +54,12 @@
         }
 
         .exitEventButton:hover {
-        background-color: #2980b9;
+            background-color: #2980b9;
         }
 
         /* footerを下に配置 */
         main {
+            text-align: left;
             display: flex;
             flex-direction: column;
             min-height: calc(100vh - 169px);
@@ -77,7 +78,7 @@
 
   <!-- <button onclick="goBack()" class="cta-button">戻る</button> -->
 
-  <main>
+  <main class="frame">
   <div class="event-container">
     <div class="event-title">
       <p name="eventText">
@@ -95,7 +96,7 @@
       イベント退出
     </button> -->
   </div>
-</main>
+  </main>
     
 
   <div id="footer" class="footer"></div>
