@@ -55,6 +55,18 @@
     input[type=submit]:hover {
       background-color: #2980b9;
     }
+
+    /* footerを下に配置 */
+    main {
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 169px);
+            margin: 0;
+        }
+
+        footer {
+            margin-top: auto;
+        }
   </style>
 </head>
 
@@ -74,10 +86,11 @@
     </ul>
   </nav>
   -->
-
-  <form action="eventinformation.html" method="get">
+  <main>
+  <form action="eventinformation.html" method="post">
     <h2>イベント参加</h2>
-    <label for="eventidLabel">イベントID:
+    <label for="eventidLabel">
+      イベントID:
       <input type="text" id="eventid" name="eventidinput" maxlength="20" required pattern="^[a-zA-Z0-9]+$">
     </label>
 
@@ -87,7 +100,7 @@
 
     <input type="submit" name="joinButton" value="参加">
   </form>
-
+  </main>
   <div id="footer"></div>
 
   <!-- JavaScriptを追加 -->

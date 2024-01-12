@@ -20,7 +20,7 @@
 
         button {
             min-width: 120px;
-            margin: 0 0 15px 20px;
+            margin: 0 0 15px 10px;
             display: block;
             padding: 10px 20px;
             background-color: #3498db;
@@ -138,6 +138,20 @@
         window.history.back();
     }
   </script> -->
+  <script>
+    // イベント退出の確認ダイアログを表示する関数
+    function goDel() {
+        var result = confirm("イベントを削除しますか？");
+  
+        if (result) {
+            // はいを選択した場合の処理
+            window.location.href = 'index.html';
+        } else {
+            // いいえを選択した場合の処理
+            // 何もしない
+        }
+      }
+  </script>
 
   <!-- JavaScriptを追加 -->
   <script>
