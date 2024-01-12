@@ -27,9 +27,13 @@
     }
 
     label {
-      display: block;
       margin-bottom: 5px;
       font-weight: bold;
+      display: inline-block;
+      width: 30%; /* ラベルの幅を調整 */
+      text-align: right; /* ラベルを右寄せ */
+      margin-right: 10px; /* ラベルと入力フィールドの間隔 */
+      box-sizing: border-box; /* paddingを含めた全体の幅にする */
     }
 
     input[type="text"],
@@ -121,15 +125,6 @@
       background-color: #2980b9;
     }
 
-    
-  label {
-    display: inline-block;
-    width: 30%; /* ラベルの幅を調整 */
-    text-align: right; /* ラベルを右寄せ */
-    margin-right: 10px; /* ラベルと入力フィールドの間隔 */
-    box-sizing: border-box; /* paddingを含めた全体の幅にする */
-  }
-
   input[type="text"],
   input[type="tel"],
   input[type="email"],
@@ -137,19 +132,6 @@
   input[type="number"] {
     width: 60%; /* 入力フィールドの幅を調整 */
   }
-  /* 名前のラベルのスタイル */
-.labelContainer {
-  margin-bottom: 20px; /* ラベルと入力フィールドの間に余白を追加 */
-  border: 1px solid #ccc; /* ラベルを囲むボーダー */
-  border-radius: 5px; /* 角を丸める */
-  padding: 10px; /* 内側の余白を追加 */
-}
-
-.labelContainer label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
 
   </style>
 </head>
