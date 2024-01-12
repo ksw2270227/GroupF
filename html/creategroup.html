@@ -11,6 +11,7 @@
       border-radius: 8px;
       box-shadow: 0 0 10px rgb(0, 0, 0,0.1);
       background-color: #ffffff;
+      width: 430px;
     }
     
     /* 外枠のスタイル */
@@ -30,11 +31,13 @@
       margin-bottom: 20px;
       display: flex;
       font-weight: bold; /*文字の濃さを変えるCSS*/
+      width: 400px;
     }
 
     .group_nam input,
     .password input,
     .man input {
+
       float: right;
       margin-left: 10px;
       width: 75%;
@@ -42,7 +45,7 @@
       border: 1px solid #ccc;
       border-radius: 5px;
       font-size: 15px;
-      
+      text-align: left;
     }
 
 
@@ -135,7 +138,7 @@
       <input type="password" id="password" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
     </div>
     <div class="man">
-      <label for="man">参加人数:　</label>
+      <label for="man">参加人数　:</label>
       <input type="number" id="man" name="man">
     </div>
     <div class="button-container">
