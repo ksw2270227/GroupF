@@ -9,14 +9,15 @@
     <style>
         /* 全体 */
         .event-container {
-            width: 580px;
+            width: 80%;
+            min-width: 500px;
             margin: 0px auto;
             padding: 40px;
         }
 
         /* タイトル */
         .event-title {
-            width: 500px;
+            width: 100%;
             margin: 20px auto;
             background-color: #fff;
             padding: 20px;
@@ -30,15 +31,12 @@
 
         /* 内容 */
         .event-description {
-            width: 500px;
+            width: 100%;
             margin: 20px auto;
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-            font-size: 16px;
-            
         }
 
         /* 退出ボタン */
@@ -56,7 +54,20 @@
         }
 
         .exitEventButton:hover {
-        background-color: #2980b9;
+            background-color: #2980b9;
+        }
+
+        /* footerを下に配置 */
+        main {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 169px);
+            margin: 0;
+        }
+
+        footer {
+            margin-top: auto;
         }
     </style>
 </head>
@@ -67,6 +78,7 @@
 
   <!-- <button onclick="goBack()" class="cta-button">戻る</button> -->
 
+  <main class="frame">
   <div class="event-container">
     <div class="event-title">
       <p name="eventText">
@@ -84,6 +96,7 @@
       イベント退出
     </button> -->
   </div>
+  </main>
     
 
   <div id="footer" class="footer"></div>
@@ -95,7 +108,7 @@
     }
   </script> -->
 
-  <!-- <script>
+  <script>
     // イベント退出の確認ダイアログを表示する関数
     function confirmExit() {
         var result = confirm("イベントを退出しますか？");
@@ -108,7 +121,7 @@
             // 何もしない
         }
       }
-  </script> -->
+  </script>
 
   
 

@@ -20,7 +20,7 @@
 
         button {
             min-width: 120px;
-            margin: 0 0 15px 20px;
+            margin: 0 0 15px 10px;
             display: block;
             padding: 10px 20px;
             background-color: #3498db;
@@ -81,25 +81,35 @@
     
     <div class="contents">
       <div class="event-contents">
-        イベント名：
-        <p name="eventName">
-          実際のイベントの名前
-        </p>
+        <label name="eventNameLabel">
+          イベント名：
+          <p name="eventName">
+            実際のイベントの名前
+          </p>
+        </label>
       </div>
+      
       <div class="event-contents">
-        期間：
+        <label name="durationLabel">
+          期間：
           <p name="eventDuration">
             実際のイベントの期間
           </p>
+        </label>
       </div>
+      
       <div class="event-contents">
-        場所：
+        <label name="locationLabel">
+          場所：
           <p name="eventLocation">
             実際のイベントの場所
           </p>
+        </label>
       </div>
+      
       <div class="event-contents">
-        内容：
+        <label name="contentLabel">
+          内容：
           <p name="eventDescription">
             実際のイベントの内容<br>
             １日目<br>
@@ -114,8 +124,8 @@
             --:00 OOOOOOOO<br>
             --:00 OOOOOOOO<br>
             ........................
-            
           </p>
+        </label>
       </div>
     </div>
   </div>
@@ -128,6 +138,20 @@
         window.history.back();
     }
   </script> -->
+  <script>
+    // イベント退出の確認ダイアログを表示する関数
+    function goDel() {
+        var result = confirm("イベントを削除しますか？");
+  
+        if (result) {
+            // はいを選択した場合の処理
+            window.location.href = 'index.html';
+        } else {
+            // いいえを選択した場合の処理
+            // 何もしない
+        }
+      }
+  </script>
 
   <!-- JavaScriptを追加 -->
   <script>

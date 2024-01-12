@@ -21,6 +21,7 @@
     }
 
     label {
+      text-align: left;
       display: block;
       margin-bottom: 5px;
       font-weight: bold;
@@ -55,6 +56,18 @@
     input[type=submit]:hover {
       background-color: #2980b9;
     }
+
+    /* footerを下に配置 */
+    main {
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 169px);
+            margin: 0;
+        }
+
+        footer {
+            margin-top: auto;
+        }
   </style>
 </head>
 
@@ -74,20 +87,21 @@
     </ul>
   </nav>
   -->
-
-  <form action="eventinformation.html" method="get">
+  <main>
+  <form action="eventinformation.html" method="post">
     <h2>イベント参加</h2>
-    <label for="eventidLabel">イベントID:
-      <input type="text" id="eventid" name="eventidInput" maxlength="20" required pattern="^[a-zA-Z0-9]+$">
+    <label for="eventidLabel">
+      イベントID:
+      <input type="text" id="eventid" name="eventidinput" maxlength="20" required pattern="^[a-zA-Z0-9]+$">
     </label>
 
     <label for="passwordLabel">パスワード:
-      <input type="password" id="password" name="passwordInput" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
+      <input type="password" id="password" name="passwordinput" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
     </label>
 
     <input type="submit" name="joinButton" value="参加">
   </form>
-
+  </main>
   <div id="footer"></div>
 
   <!-- JavaScriptを追加 -->

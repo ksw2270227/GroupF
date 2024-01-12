@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>title here</title>
+    <link rel="stylesheet" href="style.css">
 
     <style>
         .table {
@@ -18,10 +19,10 @@
             background-color: #ffffff;
             width: 70%;
             border-collapse: collapse;
-            margin: 20px;
+            /* margin: 20px; */
             border: 1px solid #dddddd; /* 追加：外側のボーダーを設定 */
 
-            margin-bottom: 50px;
+            /* margin-bottom: 50px; */
         }
 
         th, td {
@@ -40,6 +41,18 @@
             text-overflow: ellipsis;
         }
 
+        /* footerを下に配置 */
+        main {
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 169px);
+            margin: 0;
+        }
+
+        footer {
+            margin-top: auto;
+        }
+
     </style>
 </head>
 
@@ -47,6 +60,7 @@
     <div id="header"></div>
     <a href="abnormalityconfirmation.html" class="backButton">戻る</a>
 
+    <main>
     <!-- 最新チャットの履歴は20文字以上になったら....で表示される -->
     <div class="table">
         <table>
@@ -87,6 +101,7 @@
             </tbody>
         </table>
     </div>
+    </main>
 
     <div id="footer"></div>
 
