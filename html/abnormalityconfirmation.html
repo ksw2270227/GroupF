@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>title here</title>
+    <title>異常確認画面</title>
 
     <style>
         .login-container {
@@ -17,10 +17,36 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-top: 0;
             margin-bottom: 0;
+            background-color: #ffff;
         }
 
         .user{
             text-align: center;
+            border: 1px solid black;
+
+        }
+
+        .haiti{
+            display: flex;
+        }
+
+        .em{
+            border: 1px solid black;
+            padding: 5px;
+            margin-right: 10px;
+            margin-bottom: 5px;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+
+        .immovable{
+            border: 1px solid black;
+            max-width: 120px;
+            padding: 5px;
+            margin-right: 10px;
+            flex-grow: 1;
+            margin-bottom: 5px;
+            border-radius: 10px;
         }
 
         .listLabel {
@@ -57,16 +83,22 @@
     <div id="header"></div>
 
     <div class="login-container">
-
-        <div class="">
-
-        </div>
+        <div class="haiti">
+            <div class="em">
+                🔴　緊急
+            </div>
+            <div class="immovable">            
+                🟣　30分不動
+            </div>
+        </div>    
 
         <div class="user">
             異常確認したユーザーの現在地
         </div>
         <div class="map">
+
             ここに異常検知をした人にマップを表示する画面
+
         </div>
     </div>
 

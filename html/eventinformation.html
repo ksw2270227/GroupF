@@ -7,33 +7,6 @@
     <title>イベントページ</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        /* button{
-          border: none;
-        } */
-
-        /* 戻るボタンのスタイル */
-        .backButton {
-          display: inline-block;
-          padding: 10px 20px;
-          background-color: #ffffff;
-          color: #3498db;
-          text-decoration: none;
-          border-radius: 5px;
-          transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-        }
-
-        .backButton:hover {
-          background-color: #a5a3a3;
-          color: #ffffff;
-        }
-
         /* 全体 */
         .event-container {
           display: flex; /* Flexコンテナを作成 */
@@ -47,7 +20,7 @@
 
         button {
             min-width: 120px;
-            margin: 10px;
+            margin: 0 0 15px 10px;
             display: block;
             padding: 10px 20px;
             background-color: #3498db;
@@ -57,7 +30,6 @@
 
             font-size: 20px;
             font-weight: bold;
-
         }
 
         button:hover {
@@ -80,14 +52,6 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
-
-        .footer{
-          margin-top: 20px;
-        }
-
-        
-
     </style>
 </head>
 <body>
@@ -98,7 +62,6 @@
   <!-- <button onclick="goBack()" class="cta-button">戻る</button> -->
 
   <div class="event-container">
-
     <div class="buttons">
       <a href="userlist.html">
         <button class="userButton">
@@ -114,30 +77,39 @@
       <button class="deleteButton"  onclick="goDel()">
         削除
       </button>
-      
     </div>
-
+    
     <div class="contents">
       <div class="event-contents">
-        イベント名：
-        <p name="eventName">
-          実際のイベントの名前
-        </p>
+        <label name="eventNameLabel">
+          イベント名：
+          <p name="eventName">
+            実際のイベントの名前
+          </p>
+        </label>
       </div>
+      
       <div class="event-contents">
-        期間：
+        <label name="durationLabel">
+          期間：
           <p name="eventDuration">
             実際のイベントの期間
           </p>
+        </label>
       </div>
+      
       <div class="event-contents">
-        場所：
+        <label name="locationLabel">
+          場所：
           <p name="eventLocation">
             実際のイベントの場所
           </p>
+        </label>
       </div>
+      
       <div class="event-contents">
-        内容：
+        <label name="contentLabel">
+          内容：
           <p name="eventDescription">
             実際のイベントの内容<br>
             １日目<br>
@@ -152,8 +124,8 @@
             --:00 OOOOOOOO<br>
             --:00 OOOOOOOO<br>
             ........................
-            
           </p>
+        </label>
       </div>
     </div>
   </div>
@@ -166,6 +138,20 @@
         window.history.back();
     }
   </script> -->
+  <script>
+    // イベント退出の確認ダイアログを表示する関数
+    function goDel() {
+        var result = confirm("イベントを削除しますか？");
+  
+        if (result) {
+            // はいを選択した場合の処理
+            window.location.href = 'index.html';
+        } else {
+            // いいえを選択した場合の処理
+            // 何もしない
+        }
+      }
+  </script>
 
   <!-- JavaScriptを追加 -->
   <script>

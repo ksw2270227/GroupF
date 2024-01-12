@@ -7,13 +7,6 @@
   <title>イベント参加</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 0;
-    }
-
     form {
       width: 300px;
       margin: 20px auto;
@@ -28,14 +21,14 @@
     }
 
     label {
+      text-align: left;
       display: block;
       margin-bottom: 5px;
       font-weight: bold;
     }
 
     input[type="text"],
-    input[type="password"],
-    input[type="submit"] {
+    input[type="password"]{
       width: 100%;
       padding: 8px;
       margin-bottom: 10px;
@@ -63,24 +56,18 @@
     input[type=submit]:hover {
       background-color: #2980b9;
     }
-    
 
-    /* 戻るボタンのスタイル */
-    .backButton {
-          display: inline-block;
-          padding: 10px 20px;
-          background-color: #ffffff;
-          color: #3498db;
-          text-decoration: none;
-          border-radius: 5px;
-          transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    /* footerを下に配置 */
+    main {
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 169px);
+            margin: 0;
         }
 
-        .backButton:hover {
-          background-color: #a5a3a3;
-          color: #ffffff;
+        footer {
+            margin-top: auto;
         }
-
   </style>
 </head>
 
@@ -100,20 +87,21 @@
     </ul>
   </nav>
   -->
-
-  <form action="eventinformation.html" method="get">
+  <main>
+  <form action="eventinformation.html" method="post">
     <h2>イベント参加</h2>
-    <label for="eventidLabel">イベントID:
-      <input type="text" id="eventid" name="eventidInput" maxlength="20" required pattern="^[a-zA-Z0-9]+$">
+    <label for="eventidLabel">
+      イベントID:
+      <input type="text" id="eventid" name="eventidinput" maxlength="20" required pattern="^[a-zA-Z0-9]+$">
     </label>
 
     <label for="passwordLabel">パスワード:
-      <input type="password" id="password" name="passwordInput" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
+      <input type="password" id="password" name="passwordinput" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
     </label>
 
     <input type="submit" name="joinButton" value="参加">
   </form>
-
+  </main>
   <div id="footer"></div>
 
   <!-- JavaScriptを追加 -->
