@@ -11,32 +11,36 @@
         /* CSSスタイル */
         /* フォーム全体のスタイル */
         form {
-            width: 300px;
+            width: 450px;
             margin: 20px auto;
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center; /* コンテンツを中央揃えに */
         }
     
         /* ラベルのスタイル */
         label {
-            display: block;
             margin-bottom: 5px;
             font-weight: bold;
+            display: inline-block;
+            width: 30%; /* ラベルの幅を調整 */
+            text-align: right; /* ラベルを右寄せ */
+            margin-right: 10px; /* ラベルと入力フィールドの間隔 */
+            box-sizing: border-box; /* paddingを含めた全体の幅にする */
+        
         }
+
     
         /* 入力フィールドとボタンのスタイル */
-        input[type="email"],
-        button[type="submit"] {
-            width: calc(100% - 40px); /* 必要に応じて幅を調整 */
+        input[type="email"] {
+            width: 60%; /* 入力フィールドの幅を調整 */
             padding: 8px;
             margin-bottom: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
             box-sizing: border-box;
-            display: block; /* 要素を縦に積み重ねるためにブロック要素に */
+            /* display: block; 要素を縦に積み重ねるためにブロック要素に */
             margin: 10px auto; /* 水平方向に中央揃え */
         }
     
