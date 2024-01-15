@@ -13,12 +13,12 @@
         }
 
         form {
+            width: 470px;
             margin: 20px auto;
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 450px;
         }
 
         h2 {
@@ -35,7 +35,11 @@
             box-sizing: border-box; /* paddingを含めた全体の幅にする */
         }
 
-        input {
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"] {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
@@ -103,6 +107,13 @@
 <body>
     <div id="header"></div>
 
+    <nav class="menu">
+        <ul>
+            <li><a href="signup.html">新規登録</a></li>
+            <li><a href="login.html">ログイン</a></li>
+        </ul>
+    </nav>
+
     <a href="index.html" class="backButton">戻る</a>
 
     <form action="#" method="post">
@@ -118,30 +129,31 @@
     <input type="tel" id="phone" name="phone" pattern="[0-9]{10,11}" required>
 
     <label for="email">メールアドレス</label>
-    <input type="email" id="email" name="email" required>
+    <input type="email" id="email" name="email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
 
     <label for="currentPassword">現在のパスワード</label>
-    <input type="password" id="currentPassword" name="currentPassword" required>
+    <input type="password" id="currentPassword" name="currentPassword" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
 
     <label for="newPassword">新しいパスワード</label>      
-    <input type="password" id="newPassword" name="newPassword" required>
+    <input type="password" id="newPassword" name="newPassword" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
 
     <label for="age">年齢</label>
     <input type="number" id="age" name="age" pattern="[0-9]*">
 
     <label>性別</label>
-    <input type="radio" id="male" name="gender" value="male">
+    <input type="radio" id="maleRadio" name="gender" value="male">
     <label for="maleRadio">男性</label>
 
-    <input type="radio" id="female" name="gender" value="female">
+    <input type="radio" id="femaleRadio" name="gender" value="female">
     <label for="femaleRadio">女性</label>
 
-    <input type="radio" id="other" name="gender" value="other">
+    <input type="radio" id="otherRadio" name="gender" value="other">
     <label for="otherRadio">未回答</label>
 
     <button type="button" onclick="updateProfile()">変更ボタン</button>
-        </form>
     </div>
+
+    </form>
 
     <div id="footer"></div>
 
