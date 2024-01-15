@@ -47,12 +47,9 @@ a:hover {
   color: #3498db;
 }
 
-main {
-  padding-top: 80px;
-  text-align: center;
-}
-
 .hero {
+  margin-top: 80px;
+  text-align: center;
   padding: 100px 0;
   background-color: #3498db;
   color: #ffffff;

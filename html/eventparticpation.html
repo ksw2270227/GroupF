@@ -7,38 +7,36 @@
   <title>イベント参加</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    form {
+     form {
       width: 50%;
-      min-width: 290px;
+      min-width: 310px;
       margin: 20px auto;
       background-color: #fff;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
     }
 
-    h2 {
-      text-align: center;
+    /* ラベルのスタイル */
+    label {
+        margin-bottom: 5px;
+        font-weight: bold;
+        display: inline-block;
+        text-align: left; /* ラベルを右寄せ */
+        margin-right: 10px; /* ラベルと入力フィールドの間隔 */
+        box-sizing: border-box; /* paddingを含めた全体の幅にする */
     }
 
-
+    /* 入力フィールドとボタンのスタイル */
     input[type="text"],
     input[type="password"]{
-      /* width: 80%;
+      width: 60%; /* 入力フィールドの幅を調整 */
       padding: 8px;
       margin-bottom: 10px;
       border-radius: 5px;
       border: 1px solid #ccc;
       box-sizing: border-box;
-      margin-left: 10px; */
-
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
+      margin: 10px auto; /* 水平方向に中央揃え */
     }
 
     input[type=submit] {
@@ -47,6 +45,7 @@
       padding: 8px 0;
       display: block;
       margin: 0 auto;
+      margin-top: 10px;
       text-align: center;
       text-decoration: none;
       border: none;
@@ -55,29 +54,22 @@
       color: #fff;
       cursor: pointer;
       transition: background-color 0.3s;
-    }
+    } 
 
-    input[type=submit]:hover {
-      background-color: #2980b9;
-    }
 
-    #footer{
+    /* #footer{
       position: fixed;
       bottom: 0;
       width: 100%;
-    }
+    } */
 
     /* footerを下に配置 */
-    /* main {
+    main {
             display: flex;
             flex-direction: column;
             min-height: calc(100vh - 169px);
             margin: 0;
         }
-
-      footer {
-          margin-top: auto;
-      } */
   </style>
 </head>
 
@@ -99,15 +91,18 @@
   -->
   <main>
   <form action="eventinformation.html" method="post">
-    <h2>イベント参加</h2>
+    <!-- <h2>イベント参加</h2> -->
     <label for="eventidLabel">
       イベントID
-      <input type="text" id="eventid" name="eventidinput" maxlength="20" required pattern="^[a-zA-Z0-9]+$">
     </label>
+      <input type="text" id="eventidLabel" name="eventidinput" maxlength="20" required pattern="^[a-zA-Z0-9]+$">
+    
 
-    <label for="passwordLabel">パスワード
-      <input type="password" id="password" name="passwordinput" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
+    <label for="passwordLabel">
+      パスワード
     </label>
+      <input type="password" id="passwordLabel" name="passwordinput" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
+    
 
     <input type="submit" name="joinButton" value="参加">
   </form>
