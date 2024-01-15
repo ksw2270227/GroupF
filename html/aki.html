@@ -12,14 +12,23 @@
             padding: 0;
         }
 
+        .login-container {
+            width: 470px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
         table {
             border-collapse: collapse;
             border-spacing: 0 10px;
-            width: 50%;
-            margin-top: 20px;
+            width: 100%;
+            margin-top: 20px; /* 調整されたトップのマージン */
+            margin-bottom: 30px; /* 追加されたボトムのマージン */
             margin-left: auto;
             margin-right: auto;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         h2 {
@@ -39,14 +48,14 @@
             /* background-color: #e0e0e0; */
             padding: 20px;
             position: relative;
-            bottom: 100px;
+            bottom: 50px;
         }
 
         button {
             background-color: #3498db;
             color: white;
             min-width: 120px;
-            margin: 10px;
+            margin: 20px;
             display: block;
             padding: 10px 20px;
             border: none;
@@ -94,6 +103,7 @@
             <td>**</td>
         </tr>
     </table>
+    </div>
 
     <div class="buttons">
         <a href="mypagechangescreen.html">
@@ -112,14 +122,14 @@
 
     <script>
         fetch("header.html")
-        .then((response) => response.text())
-        .then((data) => {
-            document.querySelector("#header").innerHTML = data;
-        });
-    
+            .then((response) => response.text())
+            .then((data) => {
+                document.querySelector("#header").innerHTML = data;
+            });
+
         fetch("footer.html")
-        .then((response) => response.text())
-        .then((data) => document.querySelector("#footer").innerHTML = data);
+            .then((response) => response.text())
+            .then((data) => document.querySelector("#footer").innerHTML = data);
     </script>
 </body>
 </html>
