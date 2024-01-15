@@ -11,7 +11,7 @@ chat.register_blueprint(docker_mysql_bp)
 @chat.route("/chat")
 def selectchatpartner():
     
-    return render_template('chat.html', urls=urls)
+    return render_template('chat.html')
 
 if __name__ == "__main__":
     chat.run()  # あるいは任意のポート
