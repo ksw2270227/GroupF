@@ -2,11 +2,13 @@ from flask import Flask,render_template
 from testIndex import testIndex_bp
 from index import index_bp
 from docker_mysql import docker_mysql_bp
+from register import register_bp
 
 app = Flask(__name__)
 app.register_blueprint(testIndex_bp)
 app.register_blueprint(index_bp)
 app.register_blueprint(docker_mysql_bp)
+app.register_blueprint(register_bp)
 
 @app.route("/")
 def show_urls():
