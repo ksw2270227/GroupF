@@ -6,12 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ログインフォーム</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
 
     .login-container {
-      max-width: 80%;
+      max-width: 460px;
       margin-left: auto;
       margin-right: auto;
       padding: 20px;
@@ -19,12 +16,35 @@
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       background-color: #ffffff;
-      width: 430px;
+      width: 460px;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h2 {
+      text-align: center;
     }
 
     .form-group {
       margin-bottom: 20px;
       display: flex;
+      text-align: left; /* ラベルのテキストを右寄せ */
+    }
+
+    .form-group label {
+      width: 30%; /* ラベルの幅を調整 */
+      margin-right: 10px; /* ラベルと入力フィールドの間隔を調整 */
+      font-weight: bold;
+    }
+
+    .form-group input {
+      width: 70%; /* 入力フィールドの幅を調整 */
+      padding: 10px; /* 入力フィールドの内側の余白を調整 */
+      border-radius: 10px;
+      font-size: 15px;
+      box-sizing: border-box;
     }
 
     .form-group input{

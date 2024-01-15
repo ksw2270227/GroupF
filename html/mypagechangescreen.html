@@ -13,12 +13,12 @@
         }
 
         form {
-            width: 450px;
             margin: 20px auto;
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 450px;
         }
 
         h2 {
@@ -26,11 +26,11 @@
         }
 
         label {
-            display: inline-block;
             margin-bottom: 5px;
             font-weight: bold;
+            display: inline-block;
             width: 30%; /* ラベルの幅を調整 */
-            text-align: right; /* ラベルを右寄せ */
+            text-align: left; /* ラベルを右寄せ */
             margin-right: 10px; /* ラベルと入力フィールドの間隔 */
             box-sizing: border-box; /* paddingを含めた全体の幅にする */
         }
@@ -38,15 +38,10 @@
         input {
             width: 100%;
             padding: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
             box-sizing: border-box;
             border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        input[type="radio"] {
-            display: inline-block;
-            margin-right: 5px; /* ラジオボタン同士の間隔を調整 */
         }
 
         label[for="maleRadio"],
@@ -93,6 +88,14 @@
 
         button:hover {
             background-color: #2980b9;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"] {
+            width: 60%; /* 入力フィールドの幅を調整 */
         }
     </style>
 </head>
