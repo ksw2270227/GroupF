@@ -8,39 +8,42 @@
   <link rel="stylesheet" href="style.css">
   <style>
     form {
-      width: 400px;
+      width: 50%;
+      min-width: 290px;
       margin: 20px auto;
       background-color: #fff;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
     }
 
     h2 {
       text-align: center;
     }
 
-    label {
-      text-align: left;
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
 
     input[type="text"],
     input[type="password"]{
-      width: 70%;
+      /* width: 80%;
       padding: 8px;
       margin-bottom: 10px;
       border-radius: 5px;
       border: 1px solid #ccc;
       box-sizing: border-box;
-      margin-left: 10px;
+      margin-left: 10px; */
+
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
     }
 
     input[type=submit] {
       display: block;
-      width: 30%;
+      width: 80px;
       padding: 8px 0;
       display: block;
       margin: 0 auto;
@@ -58,8 +61,14 @@
       background-color: #2980b9;
     }
 
+    #footer{
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
     /* footerを下に配置 */
-    main {
+    /* main {
             display: flex;
             flex-direction: column;
             min-height: calc(100vh - 169px);
@@ -68,7 +77,7 @@
 
       footer {
           margin-top: auto;
-      }
+      } */
   </style>
 </head>
 
@@ -92,11 +101,11 @@
   <form action="eventinformation.html" method="post">
     <h2>イベント参加</h2>
     <label for="eventidLabel">
-      イベントID:
+      イベントID
       <input type="text" id="eventid" name="eventidinput" maxlength="20" required pattern="^[a-zA-Z0-9]+$">
     </label>
 
-    <label for="passwordLabel">パスワード:
+    <label for="passwordLabel">パスワード
       <input type="password" id="password" name="passwordinput" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
     </label>
 
