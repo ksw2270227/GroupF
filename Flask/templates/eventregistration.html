@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>イベントページ</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         .event-contents {
             max-width: 80%;
@@ -38,10 +38,9 @@
             box-sizing: border-box;
         }
 
-
-
-/*display: inline-block;  インラインブロック要素として表示 */
-
+        textarea {
+          resize: none; /* ユーザーが手動でリサイズできないようにする */
+        }
 
         input[type=submit] {
           display: block;
@@ -76,12 +75,12 @@
   <form action="eventinformation.html" method="get">
       <div class="event-contents">
         <label name="eventNameLabel">
-          <p>イベント名：</p>
+          <p>イベント名</p>
           <input type="text" name="eventName" required>
         </label>
       </div>
       <div class="event-contents">
-        <p>期間：</p>
+        <p>期間</p>
         <label name="durationLabel">
           <p>開始日時：</p>
           <input type="datetime-local" name="startEventDuration" required>
@@ -93,13 +92,13 @@
       </div>
       <div class="event-contents">
         <label name="locationLabel">
-          <p>場所：</p>
+          <p>場所</p>
           <input type="text" name="eventLocation" required>
         </label>
       </div>
       <div class="event-contents">
         <label name="contentLabel">
-          <p>内容：</p>
+          <p>内容</p>
           <textarea name="eventDescription" cols="65%" rows="20%" required></textarea>
         </label>
       </div>
