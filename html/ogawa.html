@@ -1,104 +1,49 @@
-<!-- ヘッダー -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>サイトのタイトル</title>
-  <meta name="description" content="サイトの説明文">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    .radio-buttons {
-      border-top: 3px solid #ccc;
-      padding-top: 15px;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .radio-container {
       display: flex;
-      flex-direction: row;
+      align-items: center;
     }
 
-    .radio-buttons label {
-      margin-right: 20px;
-      position: relative;
-      cursor: pointer;
+    .radio-group {
+      display: flex;
+      margin-right: 10px;
     }
 
-    .radio-buttons input[type="radio"] {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-    }
-
-    .radio-buttons img {
-      width: 80px; /* 画像の幅を調整 */
-      height: 80px; /* 画像の高さを調整 */
-      object-fit: contain; /* 画像を潰れずに収める */
-    }
-
-    .radio-buttons label::before {
-      content: "";
-      position: absolute;
-      top: 35%; /* 画像の上端からの位置 */
-      left: 50%; /* 画像の左端からの位置 */
-      transform: translate(-50%, -50%); /* 中央揃え */
-      width: 90px; /* 丸の横幅 */
-      height: 90px; /* 丸の高さ */
-      border-radius: 50%;
-      /* border: 2px solid rgba(170, 170, 170, 0.233); 丸の枠線 */
-      background-color: transparent;
-    }
-
-    .radio-buttons input[type="radio"]:checked + label::before {
-      background-color: rgba(170, 170, 170, 0.233); /* チェックされた時の背景色 */
+    .radio-group label {
+      margin-left: 10px; /* ラベルを右に移動 */
     }
   </style>
+  <title>ラジオボタン横並び</title>
 </head>
-  
 <body>
-  <header>
-    <div class="logo">
-      <img src="1logo.png" alt="ロストトラッカー">
-    </div>
-    <div class="hamburger-menu">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
-    <nav class="menu">
-      <ul>
-        <li><a href="signup.html">新規登録</a></li>
-        <li><a href="login.html">ログイン</a></li>
-        <li><a href="#">aaa</a></li>
-      </ul>
 
-      <div class="radio-buttons">
-        <input type="radio" name="option" value="usually" id="usually" checked>
-        <label for="usually">
-          <img src="usually.png" alt="Usually">
-        </label>
-        
-        <input type="radio" name="option" value="stand" id="stand">
-        <label for="stand">
-          <img src="stand.png" alt="Stand">
-        </label>
-        
-        <input type="radio" name="option" value="lost" id="lost">
-        <label for="lost">
-          <img src="lost.png" alt="Lost">
-        </label>
-        
-        <input type="radio" name="option" value="eme" id="eme">
-        <label for="eme">
-          <img src="eme.png" alt="Eme">
-        </label>
-      </div>
-    </nav>
-    
-    <!-- 以下、ラジオボタンの部分 -->
-    
-    
-    <script>
-      document.querySelector('.hamburger-menu').addEventListener('click', function() {
-        document.querySelector('.menu').classList.toggle('active');
-      });
-    </script>
-  </header>
+<div class="radio-container">
+  <div class="radio-group">
+    <input type="radio" id="male" name="gender" value="male">
+    <label for="male">男性</label>
+  </div>
+
+  <div class="radio-group">
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">女性</label>
+  </div>
+
+  <div class="radio-group">
+    <input type="radio" id="not-specified" name="gender" value="not-specified">
+    <label for="not-specified">未回答</label>
+  </div>
+</div>
+
 </body>
 </html>
