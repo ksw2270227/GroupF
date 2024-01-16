@@ -13,7 +13,7 @@ from login import login_bp
 
 from check_data import check_data_bp
 from mypagechangescreen import mypagechangescreen_bp
-
+from loginpasforgetchange import loginpasforgetchange_bp
 
 app = Flask(__name__)
 app.register_blueprint(testIndex_bp)
@@ -30,6 +30,7 @@ app.register_blueprint(userlist_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(check_data_bp)
 app.register_blueprint(mypagechangescreen_bp)
+app.register_blueprint(loginpasforgetchange_bp)
 
 @app.route("/")
 def show_urls():
