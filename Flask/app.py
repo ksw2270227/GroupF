@@ -12,6 +12,8 @@ from login import login_bp
 
 from check_data import check_data_bp
 
+from group import group_bp
+
 app = Flask(__name__)
 app.register_blueprint(testIndex_bp)
 app.register_blueprint(index_bp)
@@ -24,6 +26,7 @@ app.register_blueprint(creategroup_bp)
 app.register_blueprint(userlist_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(check_data_bp)
+app.register_blueprint(group_bp)
 
 @app.route("/")
 def show_urls():
