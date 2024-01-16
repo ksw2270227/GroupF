@@ -1,7 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for,Blueprint
 import mysql.connector
-
-app = Flask(__name__)
+eventlist_bp = Blueprint('eventlist',__name__)
 
 # MySQL接続情報
 db_config = {
@@ -27,10 +26,10 @@ def insert_event(event_name, start_time, end_time, location, event_content):
     cursor.close()
     connection.close()
 
-@app.route('/submit_event', methods=['POST'])
+@eventlist_bp.route('/submit_event', methods=['POST'])
 def submit_event():
     if request.method == 'POST':
-        # フォームからデータを取得
+        # フォームからデータを取得4
         event_name = request.form['event_name']
         start_time = request.form['start_time']
         end_time = request.form['end_time']
@@ -42,7 +41,7 @@ def submit_event():
 
         return redirect(url_for('show_events'))
 
-@app.route('/show_events')
+@eventlist_bp.route('/show_events')
 def show_events():
     # データベースからイベント一覧を取得
     connection = mysql.connector.connect(**db_config)

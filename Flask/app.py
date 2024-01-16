@@ -4,7 +4,7 @@ from index import index_bp
 from docker_mysql import docker_mysql_bp
 from register import register_bp
 from signup import signup_bp
-from signup import eventlist_bp
+from eventlist import eventlist_bp
 
 app = Flask(__name__)
 app.register_blueprint(testIndex_bp)
