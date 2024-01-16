@@ -27,7 +27,7 @@ app.register_blueprint(userlist_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(check_data_bp)
 app.register_blueprint(mypagechangescreen_bp)
-app.register_blueprint(loginpasforgetchange_bp)
+# app.register_blueprint(loginpasforgetchange_bp)
 
 @app.route("/")
 def show_urls():
