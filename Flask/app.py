@@ -7,15 +7,10 @@ from signup import signup_bp
 from eventlist import eventlist_bp
 from chat import chat_bp
 from creategroup import creategroup_bp
-from mypage import mypage_bp
 from userlist import userlist_bp
 from login import login_bp
-from loginpasforget import loginpasforget_bp
 
-# from check_data import check_data_bp
 from check_data import check_data_bp
-from mypagechangescreen import mypagechangescreen_bp
-
 
 app = Flask(__name__)
 app.register_blueprint(testIndex_bp)
@@ -26,14 +21,9 @@ app.register_blueprint(signup_bp)
 app.register_blueprint(eventlist_bp)
 app.register_blueprint(chat_bp)
 app.register_blueprint(creategroup_bp)
-app.register_blueprint(mypage_bp)
-
 app.register_blueprint(userlist_bp)
 app.register_blueprint(login_bp)
-# app.register_blueprint(check_data_bp)
-app.register_blueprint(loginpasforget_bp)
 app.register_blueprint(check_data_bp)
-app.register_blueprint(mypagechangescreen_bp)
 
 @app.route("/")
 def show_urls():
