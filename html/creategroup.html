@@ -27,16 +27,16 @@
     }
 
     /* 各フォーム要素のスタイル */
-    .group_nam, .password, .man {
+    .groupNameText, .passwordText, .participantNumberText {
       margin-bottom: 20px;
       display: flex;
       font-weight: bold; /*文字の濃さを変えるCSS*/
       width: 400px;
     }
 
-    .group_nam input,
-    .password input,
-    .man input {
+    .groupNameText input,
+    .passwordText input,
+    .participantNumberText input {
 
       float: right;
       margin-left: 10px;
@@ -50,7 +50,7 @@
 
 
     /* 作成ボタンのスタイル */
-    .custom-button {
+    .createButton {
       display: block;
       width: 20%;
       padding: 10px 0;
@@ -69,7 +69,7 @@
     }
 
     .custom-button:hover {
-      background-color: #2980b9;
+      background-color: #7fb1d2;
     }
 
     /* 戻るリンクのスタイル */
@@ -126,32 +126,28 @@
 
 
   <!-- コンテンツ -->
-  <div id="header"></div>
   <a href="index.html" class="backButton">戻る</a>
   <form class="login-container" action="group.html">
-    <div class="group_nam">
+
+    <div class="groupNameText">
       <label for="group_name">グループ名:</label>
       <input type="text" id="group_name" name="group_name">
     </div>
-    <div class="password">
+
+    <div class="passwordText">
       <label for="password">パスワード:</label>
       <input type="password" id="password" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
     </div>
-    <div class="man">
+
+    <div class="participantNumberText">
       <label for="man">参加人数　:</label>
       <input type="number" id="man" name="man">
     </div>
-    <div class="button-container">
-      <input type="submit" value="作成" class="custom-button" onclick="submitForm()">
-    </div>
+    
+    <input type="submit" value="作成" class="createButton" onclick="submitForm()">
+    
   </form>
   <div id="footer"></div>
 
-  <!-- JavaScriptの読み込み -->
-  <script>
-    // ヘッダーの読み込みとフッターの読み込みのコード
-  </script>
-
-<div id="footer"></div>
 </body>
 </html>
