@@ -39,7 +39,9 @@ def loginpasforget_change():
         cursor.close()
         conn.close()
 
-        return render_template('loginpasforgetchange.html', message='メールアドレスが見つかりませんでした。')
+        return redirect(url_for('loginpasforgetchange.html'))
+
+    return render_template('loginpasforget.html', message='メールアドレスが見つかりませんでした。')
 
 # この部分でアプリケーションにBlueprintを登録します。
 # app.register_blueprint(loginpasforget_bp)  # app.pyで行うことが一般的

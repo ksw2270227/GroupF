@@ -11,6 +11,8 @@ from userlist import userlist_bp
 from login import login_bp
 
 from check_data import check_data_bp
+from mypagechangescreen import mypagechangescreen_bp
+# from loginpasforgetchange import loginpasforgetchange_bp
 
 from group import group_bp
 
@@ -26,7 +28,12 @@ app.register_blueprint(creategroup_bp)
 app.register_blueprint(userlist_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(check_data_bp)
+<<<<<<< HEAD
 app.register_blueprint(group_bp)
+=======
+app.register_blueprint(mypagechangescreen_bp)
+# app.register_blueprint(loginpasforgetchange_bp)
+>>>>>>> bdd94f2393fac4760e8af3a80909bd217d336778
 
 @app.route("/")
 def show_urls():
