@@ -5,6 +5,7 @@ from docker_mysql import docker_mysql_bp
 from register import register_bp
 from signup import signup_bp
 from chat import chat_bp
+from creategroup import creategroup_bp
 
 app = Flask(__name__)
 app.register_blueprint(testIndex_bp)
@@ -13,6 +14,7 @@ app.register_blueprint(docker_mysql_bp)
 app.register_blueprint(register_bp)
 app.register_blueprint(signup_bp)
 app.register_blueprint(chat_bp)
+app.register_blueprint(creategroup_bp)
 
 @app.route("/")
 def show_urls():
