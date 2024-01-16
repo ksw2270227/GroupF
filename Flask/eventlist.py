@@ -1,22 +1,23 @@
-from flask import Flask, render_template, request, redirect, url_for,Blueprint
+from flask import Flask, render_template, request, redirect, url_for, Blueprint
 import mysql.connector
-eventlist_bp = Blueprint('eventlist',__name__)
 
-# MySQL接続情報
-db_config = {
-    'host': 'localhost',
-    'database': 'your_database_name',
-    'user': 'your_username',
-    'password': 'your_password'
-}
+eventlist_bp = Blueprint('eventlist', __name__)
+
+def get_db_connection():
+    return mysql.connector.connect(
+        host='localhost',
+        database='testDB1',
+        user='root',
+        password='pass'
+    )
 
 def insert_event(event_name, start_time, end_time, location, event_content):
-    connection = mysql.connector.connect(**db_config)
+    connection =  get_db_connection()
     cursor = connection.cursor()
 
     # イベント情報をINSERT
     insert_query = """
-        INSERT INTO event (event_name, start_time, end_time, location, event_content)
+        INSERT INTO events (event_name, start_time, end_time, location, event_content)
         VALUES (%s, %s, %s, %s, %s)
     """
     data = (event_name, start_time, end_time, location, event_content)
@@ -29,7 +30,7 @@ def insert_event(event_name, start_time, end_time, location, event_content):
 @eventlist_bp.route('/submit_event', methods=['POST'])
 def submit_event():
     if request.method == 'POST':
-        # フォームからデータを取得4
+        # フォームからデータを取得
         event_name = request.form['event_name']
         start_time = request.form['start_time']
         end_time = request.form['end_time']
@@ -39,15 +40,15 @@ def submit_event():
         # データベースにイベント情報を挿入
         insert_event(event_name, start_time, end_time, location, event_content)
 
-        return redirect(url_for('show_events'))
+        return redirect(url_for('eventlist.show_events'))
 
 @eventlist_bp.route('/show_events')
 def show_events():
     # データベースからイベント一覧を取得
-    connection = mysql.connector.connect(**db_config)
+    connection =  get_db_connection()
     cursor = connection.cursor()
 
-    select_query = "SELECT * FROM event"
+    select_query = 'SELECT * FROM events'
     cursor.execute(select_query)
     events = cursor.fetchall()
 
@@ -55,4 +56,3 @@ def show_events():
     connection.close()
 
     return render_template('eventlist.html', events=events)
-
