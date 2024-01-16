@@ -12,7 +12,7 @@ from login import login_bp
 
 from check_data import check_data_bp
 from mypagechangescreen import mypagechangescreen_bp
-from loginpasforgetchange import loginpasforgetchange_bp
+# from loginpasforgetchange import loginpasforgetchange_bp
 
 app = Flask(__name__)
 app.register_blueprint(testIndex_bp)
