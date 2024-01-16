@@ -106,7 +106,7 @@
   <div id="header"></div>
 
   <script>
-    fetch("header.html")
+    fetch("./static/header.html")
       .then((response) => response.text())
       .then((data) => {
         document.querySelector("#header").innerHTML = data;
@@ -117,7 +117,7 @@
         });
       });
 
-    fetch("footer.html")
+    fetch("./static/footer.html")
       .then((response) => response.text())
       .then((data) => document.querySelector("#footer").innerHTML = data);
   </script>
@@ -136,7 +136,7 @@
 
     <div class="passwordText">
       <label for="password">パスワード:</label>
-      <input type="password" id="password" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
+      <input type="text" id="password" name="password">
     </div>
 
     <div class="participantNumberText">
