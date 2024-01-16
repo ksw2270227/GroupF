@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, Blueprint
 import mysql.connector
 
-app = Flask(__name__)
+creategroup_bp = Blueprint('creategroup', __name__)
 
 def get_db_connection():
     return mysql.connector.connect(
@@ -11,8 +11,11 @@ def get_db_connection():
         password='pass'
     )
 
-@app.route('/creategroup', methods=['POST'])
+@creategroup_bp.route('/creategroup', methods=['GET', 'POST'])
 def create_group():
+    if request.method == 'GET':
+        return render_template("creategroup.html")
+
     if request.method == 'POST':
         group_name = request.form['group_name']
         password = request.form['password']
@@ -27,7 +30,7 @@ def create_group():
         try:
             # Insert data into the users table
             cursor.execute('INSERT INTO users (group_name, password, user_id, max_members) VALUES (%s, %s, %s, %s)',
-                        (group_name, password, user_id, max_members))
+                           (group_name, password, user_id, max_members))
             conn.commit()
 
             # Optionally, you can do further processing or redirect to another page upon success
@@ -43,6 +46,3 @@ def create_group():
 
     # Handle other HTTP methods or render the creategroup.html template
     return render_template('creategroup.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
