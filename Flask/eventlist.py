@@ -57,4 +57,4 @@ def show_events():
     return render_template('eventlist.html', events=events)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    eventlist_bp.run(debug=True)
