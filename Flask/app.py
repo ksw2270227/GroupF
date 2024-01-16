@@ -12,7 +12,6 @@ from login import login_bp
 
 from check_data import check_data_bp
 from mypagechangescreen import mypagechangescreen_bp
-# from loginpasforgetchange import loginpasforgetchange_bp
 
 from group import group_bp
 
