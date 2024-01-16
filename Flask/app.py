@@ -8,6 +8,8 @@ from eventlist import eventlist_bp
 from chat import chat_bp
 from creategroup import creategroup_bp
 from userlist import userlist_bp
+from login import login_bp
+
 
 app = Flask(__name__)
 app.register_blueprint(testIndex_bp)
@@ -19,6 +21,7 @@ app.register_blueprint(eventlist_bp)
 app.register_blueprint(chat_bp)
 app.register_blueprint(creategroup_bp)
 app.register_blueprint(userlist_bp)
+app.register_blueprint(login_bp)
 
 @app.route("/")
 def show_urls():

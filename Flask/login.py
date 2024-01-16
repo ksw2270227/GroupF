@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
 import mysql.connector
+from flask import Blueprint
 
-app = Flask(__name__)
+login_bp = Blueprint('login', __name__)
 
 def get_db_connection():
     return mysql.connector.connect(
@@ -11,33 +12,39 @@ def get_db_connection():
         password='pass'
     )
 
-@app.route('/login', methods=['GET', 'POST'])
+@login_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form['email']
+        username = request.form['username']
         password = request.form['password']
 
-        # ログイン情報をデータベースに保存する処理
-        save_login_info(email, password)
+        # パスワードのハッシュ化はセキュリティ上の理由で必要ですが、
+        # この例では簡略化のため省略しています。実際には適切なハッシュ関数を使用してください。
 
-        return redirect(url_for('success'))
+        conn = get_db_connection()
+        cursor = conn.cursor()
 
-    return render_template('login.html')
+        # ユーザーが存在するか確認
+        cursor.execute('SELECT * FROM users WHERE user_name = %s', (username,))
+        existing_user = cursor.fetchone()
 
-def save_login_info(email, password):
-    conn = get_db_connection()
-    cursor = conn.cursor()
+        if existing_user:
+            # 既に同じユーザー名が存在する場合の処理をここに追加するか、
+            # ユーザーに通知してください。
 
-    # 注意: 以下は簡易的な例で、実際のアプリケーションではパスワードのハッシュ化などのセキュリティ対策が必要です。
-    cursor.execute('INSERT INTO users (email_address, password) VALUES (%s, %s)', (email, password))
+            return render_template('login.html', message='ユーザー名は既に存在します。')
 
-    conn.commit()
-    cursor.close()
-    conn.close()
+        # ユーザーが存在しない場合は新しいユーザーを挿入
+        cursor.execute('INSERT INTO users (user_name, password) VALUES (%s, %s)', (username, password))
+        conn.commit()
 
-@app.route('/success')
-def success():
-    return 'ログイン情報が正常に保存されました。'
+        cursor.close()
+        conn.close()
 
-if __name__ == '__main__':
-    app.run(debug=True)
+        # 登録が成功した場合、適切なリダイレクト先に変更してください。
+        return redirect(url_for('index.index'))
+
+    return render_template('login.html', message='')
+
+# この部分でアプリケーションにBlueprintを登録します。
+# app.register_blueprint(login_bp)  # app.pyで行うことが一般的
