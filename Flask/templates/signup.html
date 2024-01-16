@@ -149,13 +149,13 @@
     <input type="number" id="ageInput" name="age" pattern="[0-9]*">
 
     <label>性別</label>
-    <input type="radio" id="maleRadio" name="gender" value="male"checked>
+    <input type="radio" id="maleRadio" name="gender" value="男性"checked>
     <label for="maleRadio">男性</label>
 
-    <input type="radio" id="femaleRadio" name="gender" value="female">
+    <input type="radio" id="femaleRadio" name="gender" value="女性">
     <label for="femaleRadio">女性</label>
 
-    <input type="radio" id="otherRadio" name="gender" value="other">
+    <input type="radio" id="otherRadio" name="gender" value="未回答">
     <label for="otherRadio">未回答</label>
 
     <input type="submit" value="登録" class="sendButton">
@@ -164,7 +164,7 @@
   <div id="footer"></div>
   <!-- JavaScriptを追加 -->
   <script>
-    fetch("header.html")
+    fetch("./static/header.html")
       .then((response) => response.text())
       .then((data) => {
         document.querySelector("#header").innerHTML = data;
@@ -175,7 +175,7 @@
         });
       });
 
-    fetch("footer.html")
+    fetch("./static/footer.html")
       .then((response) => response.text())
       .then((data) => document.querySelector("#footer").innerHTML = data);
   </script>
