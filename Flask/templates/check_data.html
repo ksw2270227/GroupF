@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Check Data</title>
+    <script>
+        async function loadTableData(tableName) {
+            try {
+                const response = await fetch(`/data/get_table_data/${tableName}`);
+                const data = await response.json();
+                if (response.ok) {
+                    const tableContainer = document.getElementById(tableName);
+                    if (tableContainer.style.display === 'none' || tableContainer.style.display === '') {
+                        tableContainer.style.display = 'block';
+                        tableContainer.innerHTML = generateTableHTML(data);
+                    } else {
+                        tableContainer.style.display = 'none';
+                    }
+                } else {
+                    console.error('Error fetching data:', data.error);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function generateTableHTML(data) {
+            let html = '<table border="1">';
+            if (data.length > 0) {
+                html += '<tr>';
+                Object.keys(data[0]).forEach(key => {
+                    html += `<th>${key}</th>`;
+                });
+                html += '</tr>';
+                data.forEach(row => {
+                    html += '<tr>';
+                    Object.values(row).forEach(value => {
+                        html += `<td>${value}</td>`;
+                    });
+                    html += '</tr>';
+                });
+            } else {
+                html += '<tr><td>No data available</td></tr>';
+            }
+            html += '</table>';
+            return html;
+        }
+    </script>
+</head>
+<body>
+    <h1>Database Tables Data</h1>
+    <button onclick="loadTableData('users')">Load Users Data</button>
+    <div id="users" style="display:none;"></div>
+    
+    <button onclick="loadTableData('admins')">Load Admins Data</button>
+    <div id="admins" style="display:none;"></div>
+    
+    <button onclick="loadTableData('companies')">Load Companies Data</button>
+    <div id="companies" style="display:none;"></div>
+
+    <!-- 他のテーブルに対しても同様にボタンとdivを追加 -->
+
+</body>
+</html>
