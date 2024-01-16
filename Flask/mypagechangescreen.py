@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, Blueprint
 import mysql.connector
 
-app = Flask(__name__)
+mypagechangescreen_bp = Blueprint('mypagechangescreen', __name__)
 
 def get_db_connection():
     return mysql.connector.connect(
@@ -11,7 +11,7 @@ def get_db_connection():
         password='pass'
     )
 
-@app.route('/mypagechangescreen', methods=['GET', 'POST'])
+@mypagechangescreen_bp.route('/mypagechangescreen', methods=['GET', 'POST'])
 def mypage_changescreen():
     if request.method == 'POST':
         # フォームからのデータを取得
@@ -50,5 +50,3 @@ def mypage_changescreen():
     # GETリクエストの場合はマイページ変更画面を表示
     return render_template('mypagechangescreen.html')
 
-if __name__ == "__main__":
-    app.run(debug=True)
