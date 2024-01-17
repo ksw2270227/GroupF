@@ -5,14 +5,14 @@ import datetime
 chat_bp = Blueprint('chat', __name__)
 
 def get_db_connection():
-    conn = sqlite3.connect('testDB.db')  # データベース名を適切なものに変更
+    conn = sqlite3.connect('testDB.db')
     return conn
 
 @chat_bp.route('/chat', methods=['GET', 'POST'])
 def chat():
     if request.method == 'POST':
         # チャット画面からメッセージを取得
-        message_content = request.form['message']
+        message_content = request.form['message_content']
 
         if message_content.strip() != '':
             # 送信ユーザーIDと受信ユーザーIDは適切な値に設定する必要があります
