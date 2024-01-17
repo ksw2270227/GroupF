@@ -1,39 +1,55 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, Blueprint
 import sqlite3
-from flask import Blueprint
+import datetime
 
 chat_bp = Blueprint('chat', __name__)
 
-# SQLiteデータベースへの接続を取得する関数
 def get_db_connection():
-    conn = sqlite3.connect('your_database.db')  # ここでデータベース名を適切に指定してください
+    conn = sqlite3.connect('testDB.db')  # データベース名を適切なものに変更
     return conn
 
 @chat_bp.route('/chat', methods=['GET', 'POST'])
 def chat():
     if request.method == 'POST':
-        # メッセージの保存処理
-        message_content = request.form['messageInput']
-        sender_user_id = 'ユーザー1'  # ダミーデータとしてユーザー1としていますが、実際にはユーザーIDを取得する必要があります
-        receiver_user_id = 'ユーザー2'  # ダミーデータとしてユーザー2としていますが、実際にはユーザーIDを取得する必要があります
+        # チャット画面からメッセージを取得
+        message_content = request.form['message']
 
-        if message_content:
-            conn = get_db_connection()
-            cursor = conn.cursor()
+        if message_content.strip() != '':
+            # 送信ユーザーIDと受信ユーザーIDは適切な値に設定する必要があります
+            sender_user_id = '1'
+            receiver_user_id = '2'
+            
+            # 現在の日時を取得
+            sent_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-            # messagesテーブルにデータを挿入
-            cursor.execute("INSERT INTO messages (sender_user_id, receiver_user_id, message_content) VALUES (?, ?, ?)",
-                           (sender_user_id, receiver_user_id, message_content))
+            # メッセージをデータベースに保存
+            save_message_to_database(sender_user_id, receiver_user_id, message_content, sent_time)
 
-            conn.commit()
-            conn.close()
+    # チャット履歴を取得して表示
+    chat_history = get_chat_history()
+    return render_template('chat.html', chat_history=chat_history)
 
-    # メッセージの表示処理
+def save_message_to_database(sender_user_id, receiver_user_id, message_content, sent_time):
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM messages')
-    messages = cursor.fetchall()
+
+    # メッセージをmessagesテーブルに挿入
+    cursor.execute('INSERT INTO messages (sender_user_id, receiver_user_id, message_content, sent_time) VALUES (?, ?, ?, ?)',
+                   (sender_user_id, receiver_user_id, message_content, sent_time))
+
+    conn.commit()
     cursor.close()
     conn.close()
 
-    return render_template('chat.html', messages=messages)
+def get_chat_history():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # messagesテーブルからチャット履歴を取得
+    cursor.execute('SELECT * FROM messages')
+    chat_history = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return chat_history
