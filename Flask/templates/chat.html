@@ -95,13 +95,13 @@
             {% if message.user == 'ユーザー1' %}
                 <div class="user1-message">{{ message.message }}</div>
             {% else %}
-                <div class="user2-message">{{ message.user }}: <br> {{ message.message }}</div>
+                <div class="user2-message">{{ message.user }}: <br>{{ message.message }}</div>
             {% endif %}
         {% endfor %}
         </main>
 
 
-        <form action="/chat" method="post" id="messageInputContainer">
+        <form method="POST" action="{{ url_for('chat.chat') }}" id="messageInputContainer">
             <textarea name="chatTextarea" id="messageInput" placeholder="メッセージを入力" rows="1"></textarea>
             <button name="sendButton" id="sendMessageBtn" onclick="sendMessage()">送信</button>
         </form>
