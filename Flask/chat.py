@@ -7,7 +7,7 @@ chat_bp = Blueprint('chat', __name__)
 def get_db_connection():
     return mysql.connector.connect(
         host='localhost',
-        database='testDB',
+        database='testDB1',
         user='root',
         password='pass'
     )
@@ -33,26 +33,32 @@ def create_messages_table():
     cursor.close()
     conn.close()
 
+
 @chat_bp.route('/chat', methods=['GET', 'POST'])
 def chat():
     create_messages_table()  # アプリケーション起動時にテーブルを作成
-
     if request.method == 'POST':
-        message_content = request.form['message_content']
+        message_content = request.form['message']
+        save_message(message_content)
 
-        if message_content:
-            conn = get_db_connection()
-            cursor = conn.cursor()
-            cursor.execute('INSERT INTO messages (message_content) VALUES (%s)', (message_content,))
-            conn.commit()
-            cursor.close()
-            conn.close()
+    messages = get_messages()
 
+    return render_template('chat.html', messages=messages)
+
+def save_message(message_content):
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM messages')
-    messages = cursor.fetchall()
+    cursor.execute('INSERT INTO messages (message_content) VALUES (%s)', (message_content,))
+    conn.commit()
     cursor.close()
     conn.close()
 
-    return render_template('chat.html', messages=messages)
+def get_messages():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute('SELECT * FROM messages ORDER BY sent_time DESC')
+    messages = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return messages
+
