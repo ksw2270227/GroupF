@@ -35,6 +35,6 @@ def register_user():
         cursor.close()
         conn.close()
 
-        return redirect(url_for('index.index')) 
+        return redirect(url_for('index.index'))
     
     return render_template('signup.html')
