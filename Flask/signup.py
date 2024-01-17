@@ -4,17 +4,16 @@ from flask import Blueprint
 
 signup_bp = Blueprint('signup', __name__)
 
+import sqlite3
+
 def get_db_connection():
-    return mysql.connector.connect(
-        host='localhost',
-        database='testDB1',
-        user='root',
-        password='pass'
-    )
+    conn = sqlite3.connect('testDB.db')
+    return conn
 
 @signup_bp.route('/signup', methods=['GET', 'POST'])
 def register_user():
     if request.method == 'POST':
+        # 以下のフォームデータ取得部分は変更不要
         user_name = request.form['user_name']
         full_name = request.form['full_name']
         phone_number = request.form['phone_number']
@@ -26,9 +25,9 @@ def register_user():
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        # ユーザーをINSERT
+        # ユーザーをINSERT（プレースホルダを?に変更）
         cursor.execute(
-            'INSERT INTO users (user_name, full_name, phone_number, email_address, password, age, gender) VALUES (%s, %s, %s, %s, %s, %s, %s)',
+            'INSERT INTO users (user_name, full_name, phone_number, email_address, password, age, gender) VALUES (?, ?, ?, ?, ?, ?, ?)',
             (user_name, full_name, phone_number, email_address, password, age, gender)
         )
 
@@ -36,6 +35,6 @@ def register_user():
         cursor.close()
         conn.close()
 
-        return redirect(url_for('docker_mysql.show_users'))  # 登録後にユーザー一覧ページにリダイレクト
-
+        return redirect(url_for('docker_mysql.show_users')) # 登録後にユーザー一覧ページにリダイレクト
+    
     return render_template('signup.html')

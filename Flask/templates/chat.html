@@ -91,17 +91,17 @@
 
         <main id="chat">
             <!-- チャットメッセージが表示されるエリア -->
-            {% for message in messages %}
-                {% if message.sender_user_id == 'user1' %}
-                    <div class="user1-message">{{ message.message_content }}</div>
-                {% else %}
-                    <div class="user2-message">{{ message.sender_user_id }}: <br>{{ message.message_content }}</div>
-                {% endif %}
+            {% for chat in chat_history %}
+            {% if chat.user == 'ユーザー1' %}
+                <div class="user1-message">{{ chat.message }}</div>
+            {% else %}
+                <div class="user2-message">{{ chat.user }}: <br>{{ chat.message }}</div>
+            {% endif %}
             {% endfor %}
         </main>
 
 
-        <form method="POST" action="{{ url_for('chat.chat') }}" id="messageInputContainer">
+        <form method="post" action="/chat" id="messageInputContainer">
             <textarea name="chatTextarea" id="messageInput" placeholder="メッセージを入力" rows="1"></textarea>
             <button name="sendButton" id="sendMessageBtn" onclick="sendMessage()">送信</button>
         </form>
@@ -124,39 +124,29 @@
             .then((data) => document.querySelector("#footer").innerHTML = data);
             
             // チャット履歴の取得
-            function loadChatHistory() {
-                var chatHistory = [
-                    { user: 'ユーザー1', message: 'こんにちは！' },
-                    { user: 'ユーザー2', message: 'こんにちは！お元気ですか？' },
-                    { user: 'ユーザー1', message: '元気です！' },
-                    { user: 'ユーザー2', message: 'それは良かったですね！' },
-                    { user: 'ユーザー1', message: 'こんにちは！' },
-                    { user: 'ユーザー2', message: 'こんにちは！お元気ですか？' },
-                    { user: 'ユーザー1', message: '元気です！' },
-                    { user: 'ユーザー2', message: 'それは良かったですね！' },
-                    { user: 'ユーザー1', message: 'こんにちは！' },
-                    { user: 'ユーザー2', message: 'こんにちは！お元気ですか？' },
-                    { user: 'ユーザー1', message: '元気です！' },
-                    { user: 'ユーザー2', message: '111111111111111111111111111111111111111111111111111111111111111111' },
-                    { user: 'ユーザー1', message: 'こんにちは！' },
-                    { user: 'ユーザー2', message: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' },
-                    { user: 'ユーザー1', message: '元気です！' },
-                    { user: 'ユーザー2', message: 'あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ' },
-                    // 他のチャットデータも同様に追加
-                ];
+        function loadChatHistory() {
+            // ここでログインしているアカウントのIDを取得する処理を実装する
+            var loggedInUserId = "ユーザー1";  // 仮の値、実際にはログイン情報から取得する
 
+            fetch('/get_chat_history', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user_id: loggedInUserId }),
+            })
+            .then(response => response.json())
+            .then(data => {
                 var chatDiv = document.getElementById('chat');
-
-                // おそらくここで背景色・配置きめてる
-                chatHistory.forEach(function (chat) {
+                
+                data.forEach(function (chat) {
                     var chatMessage = document.createElement('div');
                     
-                    
-                    if (chat.user === 'ユーザー1') {
-                        chatMessage.textContent = chat.message;
+                    if (chat.sender_user_id === loggedInUserId) {
+                        chatMessage.textContent = chat.message_content;
                         chatMessage.className = 'user1-message';
                     } else {
-                        chatMessage.textContent = chat.user + ': ' +'\n'+ chat.message;
+                        chatMessage.textContent = chat.sender_user_id + ': ' + '\n' + chat.message_content;
                         chatMessage.className = 'user2-message';
                     }
 
@@ -165,27 +155,9 @@
 
                 // チャット履歴が追加されたら一番下にスクロール
                 chatDiv.scrollTop = chatDiv.scrollHeight;
-            }
-
-            function sendMessage() {
-                var messageInput = document.getElementById('messageInput');
-                var message = messageInput.value.trim();
-
-                // 送ったチャット
-                if (message !== '') {
-                        var chatDiv = document.getElementById('chat');
-                        var chatMessage = document.createElement('div');
-
-                        chatMessage.textContent = message;
-                        chatMessage.className = 'user1-message';// ユーザーごとにクラスを設定
-                        
-                        chatDiv.appendChild(chatMessage);
-                        messageInput.value = '';
-
-                        messageInput.value = '';// 送信後、入力欄をクリアし、一番下にスクロール
-                        chatDiv.scrollTop = chatDiv.scrollHeight;
-                    }
-                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
 
             document.addEventListener('DOMContentLoaded', function () {
                 loadChatHistory();
