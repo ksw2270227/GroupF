@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, Blueprint
+from flask import Flask, render_template, request, redirect, url_for, Blueprint, session
 import sqlite3
 import datetime
 
@@ -16,7 +16,7 @@ def chat():
 
         if message_content.strip() != '':
             # 送信ユーザーIDと受信ユーザーIDは適切な値に設定する必要があります
-            sender_user_id = '1'
+            sender_user_id =  session.get('user_id')
             receiver_user_id = '2'
 
             # 現在の日時を取得
