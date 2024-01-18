@@ -14,7 +14,7 @@ def mypage():
     user_id = session.get('user_id')
 
     if not user_id:
-        # ユーザーがログインしていない場合はログインページにリダイレクト
+        # ユーザーがログインしていない場合はログインページにリダイレクトkkk
         print("ログインしてない")
         return redirect(url_for('index.index'))
 
