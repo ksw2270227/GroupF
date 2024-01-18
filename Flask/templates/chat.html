@@ -167,20 +167,20 @@
             var message = messageInput.value.trim();
 
             // 送ったチャット
-            if (message !== '') {
-                var chatDiv = document.getElementById('chat');
-                var chatMessage = document.createElement('div');
+            // if (message !== '') {
+            //     var chatDiv = document.getElementById('chat');
+            //     var chatMessage = document.createElement('div');
 
-                chatMessage.textContent = message;
-                chatMessage.className = 'user1-message'; // ユーザーごとにクラスを設定
+            //     chatMessage.textContent = message;
+            //     chatMessage.className = 'user1-message'; // ユーザーごとにクラスを設定
 
-                chatDiv.appendChild(chatMessage);
-                messageInput.value = '';
+            //     chatDiv.appendChild(chatMessage);
+            //     messageInput.value = '';
 
                 // 送信後、入力欄をクリアし、一番下にスクロール
                 chatDiv.scrollTop = chatDiv.scrollHeight;
             }
-        }
+        
         
 
             document.addEventListener('DOMContentLoaded', function () {
