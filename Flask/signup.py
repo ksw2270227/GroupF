@@ -25,7 +25,7 @@ def register_user():
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        # ユーザーをINSERT（プレースホルダを?に変更）
+        # ユーザーをINSERT（プレースホルダを?に変更）.
         cursor.execute(
             'INSERT INTO users (user_name, full_name, phone_number, email_address, password, age, gender) VALUES (?, ?, ?, ?, ?, ?, ?)',
             (user_name, full_name, phone_number, email_address, password, age, gender)
@@ -35,6 +35,6 @@ def register_user():
         cursor.close()
         conn.close()
 
-        return redirect(url_for('docker_mysql.show_users')) # 登録後にユーザー一覧ページにリダイレクト
+        return redirect(url_for('index.index'))
     
     return render_template('signup.html')

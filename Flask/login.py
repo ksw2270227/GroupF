@@ -1,50 +1,38 @@
-from flask import Flask, render_template, request, redirect, url_for
-import mysql.connector
-from flask import Blueprint
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash
+import sqlite3
 
 login_bp = Blueprint('login', __name__)
 
 def get_db_connection():
-    return mysql.connector.connect(
-        host='localhost',
-        database='testDB1',
-        user='root',
-        password='pass'
-    )
+    conn = sqlite3.connect('testDB.db')
+    return conn
 
 @login_bp.route('/login', methods=['GET', 'POST'])
-def login():
+def login_user():
+    error = None
     if request.method == 'POST':
-        username = request.form['username']
+        email_address = request.form['email_address']
         password = request.form['password']
-
-        # パスワードのハッシュ化はセキュリティ上の理由で必要ですが、
-        # この例では簡略化のため省略しています。実際には適切なハッシュ関数を使用してください。
-
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        # ユーザーが存在するか確認
-        cursor.execute('SELECT * FROM users WHERE user_name = %s', (username,))
-        existing_user = cursor.fetchone()
-
-        if existing_user:
-            # 既に同じユーザー名が存在する場合の処理をここに追加するか、
-            # ユーザーに通知してください。
-
-            return render_template('login.html', message='ユーザー名は既に存在します。')
-
-        # ユーザーが存在しない場合は新しいユーザーを挿入
-        cursor.execute('INSERT INTO users (user_name, password) VALUES (%s, %s)', (username, password))
-        conn.commit()
-
+        # ユーザーを検索
+        cursor.execute(
+            'SELECT * FROM users WHERE email_address = ? AND password = ?',(email_address, password)
+        )
+        user = cursor.fetchone()
         cursor.close()
         conn.close()
 
-        # 登録が成功した場合、適切なリダイレクト先に変更してください。
-        return redirect(url_for('index.index'))
+        if user:
+            # ユーザーIDをセッションに格納
+            session['user_id'] = user[0]
+            # ログイン成功時のリダイレクト先（例：indexページ）
+            return redirect(url_for('index.index'))
+        else:
+            # ログイン失敗時のエラーメッセージ
+            error = '無効なメールアドレスまたはパスワードです。'
 
-    return render_template('login.html', message='')
+    # GETリクエストの場合、またはエラーがある場合にログインページを表示.
+    return render_template('login.html', error=error)
 
-# この部分でアプリケーションにBlueprintを登録します。
-# app.register_blueprint(login_bp)  # app.pyで行うことが一般的

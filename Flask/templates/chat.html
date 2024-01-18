@@ -92,7 +92,7 @@
         <main id="chat">
             <!-- チャットメッセージが表示されるエリア -->
             {% for chat in chat_history %}
-            {% if chat.user == 'ユーザー1' %}
+            {% if chat.user == '1' %}
                 <div class="user1-message">{{ chat.message }}</div>
             {% else %}
                 <div class="user2-message">{{ chat.user }}: <br>{{ chat.message }}</div>
@@ -102,7 +102,7 @@
 
 
         <form method="post" action="/chat" id="messageInputContainer">
-            <textarea name="chatTextarea" id="messageInput" placeholder="メッセージを入力" rows="1"></textarea>
+            <textarea name="message_content" id="messageInput" placeholder="メッセージを入力" rows="1"></textarea>
             <button name="sendButton" id="sendMessageBtn" onclick="sendMessage()">送信</button>
         </form>
 
