@@ -28,7 +28,7 @@ def mypage():
     conn.close()
 
     if user_info:
-        # マイページにユーザー情報を渡して表示
+        # マイページにユーザー情報を渡して表示。
         return render_template('mypage.html', user_info=user_info)
     else:
         # ユーザー情報が見つからない場合はエラーを表示
