@@ -70,7 +70,7 @@
                 margin-right: 10px;
                 overflow: hidden;
                 resize: none; /* ユーザーが手動でリサイズできないようにする */
-                max-height: 100px;
+                max-height: 40px;
                 overflow-y: auto; 
                 
             }
@@ -126,50 +126,8 @@
             .then((response) => response.text())
             .then((data) => document.querySelector("#footer").innerHTML = data);
             
-            // チャット履歴の取得
-        function loadChatHistory() {
-            // ここでログインしているアカウントのIDを取得する処理を実装する
-            var loggedInUserId = "1";  // 仮の値、実際にはログイン情報から取得する
-
-            fetch('/get_chat_history', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ user_id: loggedInUserId }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                var chatDiv = document.getElementById('chat');
-                
-                data.forEach(function (chat) {
-                    var chatMessage = document.createElement('div');
-                    
-                    if (chat.sender_user_id === loggedInUserId) {
-                        chatMessage.textContent = chat.message_content;
-                        chatMessage.className = 'user1-message';
-                    } else {
-                        chatMessage.textContent = chat.sender_user_id + ': ' + '\n' + chat.message_content;
-                        chatMessage.className = 'user2-message';
-                    }
-
-                    chatDiv.appendChild(chatMessage);
-                });
-
-                // チャット履歴が追加されたら一番下にスクロール
-                chatDiv.scrollTop = chatDiv.scrollHeight;
-            })
-            .catch(error => console.error('Error:', error));
-        }
-
-        
-        
-
-            document.addEventListener('DOMContentLoaded', function () {
-                loadChatHistory();
-            });
             
-            // Enterキーで改行する設定
+            // 高さの調整
             document.getElementById('messageInput').addEventListener('input', function () {
                 this.style.height = 'auto';
                 this.style.height = (this.scrollHeight) + 'px';
@@ -177,12 +135,12 @@
                 this.scrollTop = this.scrollHeight;
                 });
 
-            document.getElementById('messageInput').addEventListener('keyup', function (e) {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                    sendMessage();
-                }
-            });
+            
+            // チャット履歴が表示された後にスクロールを一番下に移動
+            var mainElement = document.getElementById('chat');
+            mainElement.scrollTop = mainElement.scrollHeight;
+
+            
         </script>
 
 <div id="footer" class="footer"></div>
