@@ -92,10 +92,10 @@
         <main id="chat">
             <!-- チャットメッセージが表示されるエリア -->
             {% for chat in chat_history %}
-            {% if chat.user == '1' %}
-                <div class="user1-message">{{ chat.message }}</div>
-            {% else %}
-                <div class="user2-message">{{ chat.user }}: <br>{{ chat.message }}</div>
+            {% if chat[1] == 1 %}
+                <div class="user1-message">{{ chat[3] }}</div>
+            {% elif chat[2] == 2 %}
+                <div class="user2-message">{{ chat[2] }}: <br>{{ chat[3] }}</div>
             {% endif %}
             {% endfor %}
         </main>
@@ -126,7 +126,7 @@
             // チャット履歴の取得
         function loadChatHistory() {
             // ここでログインしているアカウントのIDを取得する処理を実装する
-            var loggedInUserId = "ユーザー1";  // 仮の値、実際にはログイン情報から取得する
+            var loggedInUserId = "1";  // 仮の値、実際にはログイン情報から取得する
 
             fetch('/get_chat_history', {
                 method: 'POST',
@@ -159,6 +159,26 @@
             .catch(error => console.error('Error:', error));
         }
 
+        function sendMessage() {
+        var messageInput = document.getElementById('messageInput');
+        var message = messageInput.value.trim();
+
+        // 送ったチャット
+        // if (message !== '') {
+        //     var chatDiv = document.getElementById('chat');
+        //     var chatMessage = document.createElement('div');
+
+        //     chatMessage.textContent = message;
+        //     chatMessage.className = 'user1-message'; // ユーザーごとにクラスを設定
+
+        //     chatDiv.appendChild(chatMessage);
+        //     messageInput.value = '';
+
+            // 送信後、入力欄をクリアし、一番下にスクロール
+            chatDiv.scrollTop = chatDiv.scrollHeight;
+            }
+        
+
             document.addEventListener('DOMContentLoaded', function () {
                 loadChatHistory();
             });
@@ -169,12 +189,12 @@
                 this.style.height = (this.scrollHeight) + 'px';
                 });
 
-                document.getElementById('messageInput').addEventListener('keypress', function (e) {
-                    if (e.key === 'Enter' && !e.shiftKey) {
+            document.getElementById('messageInput').addEventListener('keyup', function (e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
                         e.preventDefault();
-                        sendMessage();
-                    }
-                });
+                    sendMessage();
+                }
+            });
         </script>
     </body>
 </html>

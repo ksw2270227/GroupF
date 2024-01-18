@@ -1,48 +1,32 @@
-from flask import Flask, render_template, request, redirect, url_for, Blueprint
-import mysql.connector
+from flask import Flask, render_template, request, redirect, url_for
+import sqlite3
+from flask import Blueprint
 
 creategroup_bp = Blueprint('creategroup', __name__)
 
 def get_db_connection():
-    return mysql.connector.connect(
-        host='localhost',
-        database='testDB1',
-        user='root',
-        password='pass'
-    )
+    conn = sqlite3.connect('testDB.db')
+    return conn
 
 @creategroup_bp.route('/creategroup', methods=['GET', 'POST'])
 def create_group():
-    if request.method == 'GET':
-        return render_template("creategroup.html")
-
     if request.method == 'POST':
+        # フォームからデータを受け取り
         group_name = request.form['group_name']
         password = request.form['password']
-        user_id = request.form['user_id']
-        max_members = request.form['max_members']
-        # Other form fields...
+        max_members = request.form['man']  # フォームの input 要素の名前が 'man' なのでこちらを指定
 
-        # Connect to the database
+        # データベースに挿入する処理
         conn = get_db_connection()
         cursor = conn.cursor()
+        cursor.execute(
+            'INSERT INTO groups (password, user_id, creation_date, max_members, current_members, event_id) VALUES (?, ?, ?, ?, ?, ?)',
+            (password, 1, '2023-01-17 12:00:00', max_members, 0, 0)
+        )
+        conn.commit()
+        cursor.close()
+        conn.close()
 
-        try:
-            # Insert data into the users table
-            cursor.execute('INSERT INTO users (group_name, password, user_id, max_members) VALUES (%s, %s, %s, %s)',
-                           (group_name, password, user_id, max_members))
-            conn.commit()
-
-            # Optionally, you can do further processing or redirect to another page upon success
-            return redirect(url_for('index'))  # Redirect to the index page after successful insertion
-
-        except mysql.connector.Error as err:
-            print(f"Error: {err}")
-            # Handle the error, display a message, or redirect to an error page
-
-        finally:
-            cursor.close()
-            conn.close()
-
-    # Handle other HTTP methods or render the creategroup.html template
-    return render_template('creategroup.html')
+        return redirect(url_for('group.group'))  # グループ作成後に表示するページにリダイレクト
+    
+    return render_template('creategroup.html')  # グループ作成フォームを表示

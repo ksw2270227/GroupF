@@ -25,7 +25,7 @@ def register_user():
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        # ユーザーをINSERT（プレースホルダを?に変更）
+        # ユーザーをINSERT（プレースホルダを?に変更）.
         cursor.execute(
             'INSERT INTO users (user_name, full_name, phone_number, email_address, password, age, gender) VALUES (?, ?, ?, ?, ?, ?, ?)',
             (user_name, full_name, phone_number, email_address, password, age, gender)
