@@ -73,7 +73,7 @@
 <body>
     <div id="header"></div>
 
-    <a href="index.html" class="backButton">戻る</a>
+    <a href="index.index" class="backButton">戻る</a>
     <div class="login-container">
         <h2>マイページ</h2>
 
@@ -122,14 +122,20 @@
 
     <script>
         fetch("header.html")
-            .then((response) => response.text())
-            .then((data) => {
-                document.querySelector("#header").innerHTML = data;
+          .then((response) => response.text())
+          .then((data) => {
+            document.querySelector("#header").innerHTML = data;
+    
+            // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
+            document.querySelector('.hamburger-menu').addEventListener('click', function () {
+              document.querySelector('.menu').classList.toggle('active');
             });
-
+          });
+    
         fetch("footer.html")
-            .then((response) => response.text())
-            .then((data) => document.querySelector("#footer").innerHTML = data);
-    </script>
+          .then((response) => response.text())
+          .then((data) => document.querySelector("#footer").innerHTML = data);
+      </script>            
+    
 </body>
 </html>

@@ -10,6 +10,7 @@ from create_SQLite_DB import create_SQLite_DB_bp
 from login import login_bp
 from mypage import mypage_bp
 from joingroup import joingroup_bp
+from logout import logout_bp
 
 app = Flask(__name__)
 app.register_blueprint(index_bp)
@@ -23,6 +24,7 @@ app.register_blueprint(create_SQLite_DB_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(mypage_bp)
 app.register_blueprint(joingroup_bp)
+app.register_blueprint(logout_bp)
 
 try:
     with open('Flask/secret_key.txt', 'r') as file:

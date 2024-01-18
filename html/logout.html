@@ -1,34 +1,41 @@
-<!-- ログアウト画面 -->
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
-    <title>title here</title>
-</head>
-
-<body>
-    <div id="header"></div>
-
-    <!-- ログアウトのダイアログつける -->
-
-    <div id="footer"></div>
+    <title>ログアウト</title>
     <script>
-        fetch("header.html")
-        .then((response) => response.text())
-        .then((data) => {
-        document.querySelector("#header").innerHTML = data;
+        function confirmLogout() {
+            var confirmLogout = confirm("ログアウトしますか？");
 
-        // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
-        document.querySelector('.hamburger-menu').addEventListener('click', function() {
-        document.querySelector('.menu').classList.toggle('active');
-        });
-    });
-
-    fetch("footer.html")
-        .then((response) => response.text())
-        .then((data) => document.querySelector("#footer").innerHTML = data);
+            if (confirmLogout) {
+                // はいが選択された場合、Flaskの/logoutにPOSTリクエストを送信
+                fetch("/logout", { method: "POST" })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert("ログアウトしました。");
+                            window.location.href = "/";  // index.indexにリダイレクト
+                        } else {
+                            alert("ログアウトに失敗しました。");
+                        }
+                    });
+            } else {
+                // いいえが選択された場合、トップページにリダイレクト
+                alert("ログアウトしませんでした。");
+                window.location.href = "/";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div style="text-align: center; padding: 20px;">
+        <h3>ログアウトしてもよろしいですか？</h3>
+        <button onclick="confirmLogout()">はい</button>
+        <button onclick="window.location.href = '/';">いいえ</button>
+    </div>
+    <script>
+        // ページ読み込み時に自動的にログアウト確認を表示
+        window.onload = confirmLogout;
     </script>
 </body>
-
 </html>
