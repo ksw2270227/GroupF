@@ -20,13 +20,13 @@ def create_group():
         conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute(
-            'INSERT INTO groups (password, user_id, creation_date, max_members, current_members, event_id) VALUES (?, ?, ?, ?, ?, ?)',
-            (password, 1, '2023-01-17 12:00:00', max_members, 0, 0)
+            'INSERT INTO groups (group_name, password, user_id, creation_date, max_members, current_members, event_id) VALUES (?, ?, ?, ?, ?, ?)',
+            (group_name, password, 1, '2023-01-17 12:00:00', max_members, 0, 0)
         )
         conn.commit()
         cursor.close()
         conn.close()
 
-        return redirect(url_for('group.group'))  # グループ作成後に表示するページにリダイレクト
+        return redirect(url_for('creategroup.create_group'))  # グループ作成後に表示するページにリダイレクト
     
     return render_template('creategroup.html')  # グループ作成フォームを表示
