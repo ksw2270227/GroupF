@@ -107,7 +107,7 @@
 
         <form method="post" action="/chat" id="messageInputContainer">
             <textarea name="message_content" id="messageInput" placeholder="メッセージを入力" rows="1"></textarea>
-            <button name="sendButton" id="sendMessageBtn" onclick="sendMessage()">送信</button>
+            <button name="sendButton" id="sendMessageBtn">送信</button>
         </form>
         
         <script>
@@ -162,24 +162,6 @@
             .catch(error => console.error('Error:', error));
         }
 
-        function sendMessage() {
-            var messageInput = document.getElementById('messageInput');
-            var message = messageInput.value.trim();
-
-            // 送ったチャット
-            // if (message !== '') {
-            //     var chatDiv = document.getElementById('chat');
-            //     var chatMessage = document.createElement('div');
-
-            //     chatMessage.textContent = message;
-            //     chatMessage.className = 'user1-message'; // ユーザーごとにクラスを設定
-
-            //     chatDiv.appendChild(chatMessage);
-            //     messageInput.value = '';
-
-                // 送信後、入力欄をクリアし、一番下にスクロール
-                chatDiv.scrollTop = chatDiv.scrollHeight;
-            }
         
         
 

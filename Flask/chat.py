@@ -39,7 +39,7 @@ def save_message_to_database(sender_user_id, receiver_user_id, message_content, 
 
     # メッセージをmessagesテーブルに挿入
     cursor.execute('INSERT INTO messages (sender_user_id, receiver_user_id, message_content, sent_time) VALUES (?, ?, ?, ?)',
-                   (sender_user_id, receiver_user_id, message_content, sent_time))
+                   (sender_user_id, receiver_user_id, message_content.strip(), sent_time))
 
     conn.commit()
     cursor.close()
