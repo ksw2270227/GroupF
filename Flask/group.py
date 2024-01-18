@@ -12,9 +12,7 @@ def get_db_connection():
         password='pass'
     )
 
-# @group_bp.route('/create_group', methods=['GET', 'POST'])
-# def create_group():
-@group_bp.route('/group/create_group', methods=['GET', 'POST'])
+@group_bp.route('/group', methods=['GET', 'POST'])
 def create_group():
     if request.method == 'POST':
         # フォームから送信されたデータを取得
