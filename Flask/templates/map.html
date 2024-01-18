@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ユーザーの位置</title>
+    <style>
+      /* 地図のサイズを設定 */
+      #map {
+        height: 400px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>ユーザーの位置</h3>
+    <!-- 地図を表示するためのコンテナ -->
+    <div id="map"></div>
+
+    <!-- Google Maps JavaScript API の読み込み -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
+    </script>
+  </body>
+</html>
