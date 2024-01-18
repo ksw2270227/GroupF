@@ -132,7 +132,7 @@
 <body>
   <div id="header"></div>
 
-  <a href="index.html" class="backButton">戻る</a>
+  <a href="/index" class="backButton">戻る</a>
   <div class="login-container">
     <h2>ログイン</h2>
     <form action="#" method="post">
@@ -152,7 +152,7 @@
 
   <table class="table-choose">
     <tr>
-      <td class="tabletd1"><a href="signup.html" >新規登録はこちら</a></td>
+      <td class="tabletd1"><a href="/signup" >新規登録はこちら</a></td>
       <td class="tabletd2"><a href="loginpasforget.html">パスワードを忘れた場合</a></td>
     </tr>
   </table>
@@ -161,13 +161,13 @@
   <div id="footer"></div>
 
   <script>
-    fetch("header.html")
+    fetch("./static/header.html")
       .then((response) => response.text())
       .then((data) => {
         document.querySelector("#header").innerHTML = data;
       });
 
-    fetch("footer.html")
+    fetch("./static/footer.html")
       .then((response) => response.text())
       .then((data) => document.querySelector("#footer").innerHTML = data);
   </script>
