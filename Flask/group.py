@@ -1,3 +1,5 @@
+# group.py
+
 from flask import Flask, render_template, request, redirect, url_for
 import mysql.connector
 from flask import Blueprint
@@ -14,37 +16,24 @@ def get_db_connection():
 
 @group_bp.route('/group', methods=['GET', 'POST'])
 def create_group():
-    if request.method == 'POST':
-        # フォームから送信されたデータを取得
-        group_name = request.form['group_name']
-        group_id = request.form['group_id']
-        # 他のフォームフィールドも同様に取得する
+    conn = None
+    cursor = None
 
-        # データベースに接続
-        conn = get_db_connection()
-        cursor = conn.cursor()
+    try:
+        if request.method == 'POST':
+            # フォームの送信を処理するコード
 
-        try:
-            # データベースにデータを挿入
-            cursor.execute('INSERT INTO users (group_name, group_id) VALUES (%s, %s)', (group_name, group_id))
-            # 他のフォームフィールドも適切に挿入する
+        # GETメソッドの場合はデータベースから情報を取得してテンプレートに渡す
+            conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
 
-            # データベースへの変更を確定
-            conn.commit()
-
-            # 成功した場合、リダイレクトなどの適切な処理を行う
-            return redirect(url_for('group.create_group'))
-        except Exception as e:
-            # エラーが発生した場合、ロールバック
-            conn.rollback()
-            print(f"Error: {e}")
-
-        finally:
-            # 接続をクローズ
+        # 以下略...
+    except Exception as e:
+        print(f"エラー: {e}")
+    finally:
+        if cursor:
             cursor.close()
+        if conn:
             conn.close()
 
-    # GETメソッドの場合は単にテンプレートを表示
     return render_template('group.html')
-
-# 他の関連するルートや処理を追加することも可能

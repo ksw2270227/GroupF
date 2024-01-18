@@ -101,11 +101,19 @@
                     .then((data) => document.querySelector("#footer").innerHTML = data);
 
             </script>
-            <h5>グループ名が入る場所</h5>
+        {% if groups %}
+        <form class="login-container">
+            {% for group in groups %}
+                <h5>{{ group['group_name'] }}が入る場所</h5>
         </form>
         <form class="login-container">
-            <h5>グループIDが入る場所</h5>
+                <h5>{{ group['group_id'] }}が入る場所</h5>
+                <!-- 他のフィールドがあればここに追加 -->
+            {% endfor %}
         </form>
+    {% else %}
+        <p>データがありません。</p>
+    {% endif %}
 
         <form class="login-container">
             <h3>参加人数 ?/10 が入る</h3>
