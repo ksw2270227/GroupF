@@ -44,9 +44,9 @@ CREATE TABLE companies_employee (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
--- groups テーブルの作成
 CREATE TABLE groups (
     group_id INTEGER PRIMARY KEY,
+    group_name TEXT NOT NULL,  -- 新たに追加されたカラム
     password TEXT NOT NULL,
     user_id INTEGER NOT NULL,
     creation_date TEXT NOT NULL,
@@ -55,6 +55,7 @@ CREATE TABLE groups (
     event_id INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+
 
 -- events テーブルの作成
 CREATE TABLE events (
@@ -131,12 +132,13 @@ INSERT INTO companies_employee (company_id, user_id, user_name, full_name, passw
 (4, 4, 'employee4', '田中 健一', 'emp4pass', 'kenichi@tanaka-trading.co.jp'),
 (5, 5, 'employee5', '秋田 明', 'emp5pass', 'akira@akita-systems.co.jp');
 
-INSERT INTO groups (group_id, password, user_id, creation_date, max_members, current_members, event_id) VALUES
-(1, 'grouppass1', 1, '2023-11-17 10:00:00', 10, 5, 1),
-(2, 'grouppass2', 2, '2023-11-1811:00:00', 15, 8, 2),
-(3, 'grouppass3', 3, '2023-11-19 12:00:00', 20, 10, 3),
-(4, 'grouppass4', 4, '2023-11-20 13:00:00', 12, 6, 4),
-(5, 'grouppass5', 5, '2023-11-21 14:00:00', 8, 4, 5); 
+INSERT INTO groups (group_id, group_name, password, user_id, creation_date, max_members, current_members, event_id) VALUES
+(1, 'Group Alpha', 'grouppass1', 1, '2023-11-17 10:00:00', 10, 5, 1),
+(2, 'Group Beta', 'grouppass2', 2, '2023-11-18 11:00:00', 15, 8, 2),
+(3, 'Group Gamma', 'grouppass3', 3, '2023-11-19 12:00:00', 20, 10, 3),
+(4, 'Group Delta', 'grouppass4', 4, '2023-11-20 13:00:00', 12, 6, 4),
+(5, 'Group Epsilon', 'grouppass5', 5, '2023-11-21 14:00:00', 8, 4, 5);
+
 
 INSERT INTO events (company_id, event_name, event_id, password, start_time, end_time, location, event_content) VALUES
 (1, '新製品発表会', 1, 'eventpass1', '2023-12-01 09:00:00', '2023-12-01 18:00:00', '東京国際フォーラム', '最新技術の展示とデモンストレーション'),
