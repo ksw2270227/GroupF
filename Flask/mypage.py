@@ -34,4 +34,4 @@ def mypage():
         # ユーザー情報が見つからない場合はエラーを表示
         return render_template('error.html', message='ユーザー情報が見つかりません。')
 
-# mmmmmmmmmmmmmmmmm
+# mmmmmmmmmmmmmmmmmｍｍｍｍｍｍｍｍｍ
