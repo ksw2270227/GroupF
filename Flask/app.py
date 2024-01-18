@@ -34,4 +34,4 @@ def show_urls():
     return render_template('list_urls.html', urls=urls)
 
 if __name__ == "__main__":
-    app.run()  # あるいは任意のポート
+    app.run()  # あるいは任意のポート.

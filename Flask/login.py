@@ -33,6 +33,6 @@ def login_user():
             # ログイン失敗時のエラーメッセージ
             error = '無効なメールアドレスまたはパスワードです。'
 
-    # GETリクエストの場合、またはエラーがある場合にログインページを表示
+    # GETリクエストの場合、またはエラーがある場合にログインページを表示.
     return render_template('login.html', error=error)
 
