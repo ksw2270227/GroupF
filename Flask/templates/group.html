@@ -90,7 +90,7 @@
                     .then((data) => {
                         document.querySelector("#header").innerHTML = data;
 
-                        // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
+                        // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する/
                         document.querySelector('.hamburger-menu').addEventListener('click', function () {
                             document.querySelector('.menu').classList.toggle('active');
                         });
