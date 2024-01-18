@@ -12,31 +12,41 @@ def get_db_connection():
         password='pass'
     )
 
-@group_bp.route('/add_user', methods=['POST'])
-def add_user():
+# @group_bp.route('/create_group', methods=['GET', 'POST'])
+# def create_group():
+@group_bp.route('/group/create_group', methods=['GET', 'POST'])
+def create_group():
     if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
+        # フォームから送信されたデータを取得
+        group_name = request.form['group_name']
+        group_id = request.form['group_id']
+        # 他のフォームフィールドも同様に取得する
 
-        # データベースへの接続とユーザーの追加
+        # データベースに接続
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        # 以下は適切なテーブルとカラム名に変更する必要があります
-        cursor.execute('INSERT INTO users (username, email) VALUES (%s, %s)', (username, email))
+        try:
+            # データベースにデータを挿入
+            cursor.execute('INSERT INTO users (group_name, group_id) VALUES (%s, %s)', (group_name, group_id))
+            # 他のフォームフィールドも適切に挿入する
 
-        conn.commit()
-        cursor.close()
-        conn.close()
+            # データベースへの変更を確定
+            conn.commit()
 
-        return redirect(url_for('group.show_users'))  # 成功時に表示するページにリダイレクト
+            # 成功した場合、リダイレクトなどの適切な処理を行う
+            return redirect(url_for('group.create_group'))
+        except Exception as e:
+            # エラーが発生した場合、ロールバック
+            conn.rollback()
+            print(f"Error: {e}")
 
-@group_bp.route('/group')
-def show_users():
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM users')
-    users = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return render_template('group.html', users=users)
+        finally:
+            # 接続をクローズ
+            cursor.close()
+            conn.close()
+
+    # GETメソッドの場合は単にテンプレートを表示
+    return render_template('group.html')
+
+# 他の関連するルートや処理を追加することも可能
