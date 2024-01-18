@@ -96,7 +96,7 @@
         <main id="chat">
             <!-- チャットメッセージが表示されるエリア -->
             {% for chat in chat_history %}
-            {% if chat[1] == session.get('user_id') %}
+            {% if chat[1] == 1 %}
                 <div class="user1-message">{{ chat[3] }}</div>
             {% elif chat[2] == 2 %}
                 <div class="user2-message">{{ chat[2] }}: <br>{{ chat[3] }}</div>
