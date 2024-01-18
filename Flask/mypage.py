@@ -1,57 +1,36 @@
-from flask import Flask, render_template, request, redirect, url_for
-import mysql.connector
-from flask import Blueprint
+from flask import Blueprint, render_template, session, redirect, url_for
+import sqlite3
 
 mypage_bp = Blueprint('mypage', __name__)
 
 def get_db_connection():
-    return mysql.connector.connect(
-        host='localhost',
-        database='your_database_name',
-        user='your_database_user',
-        password='your_database_password'
-    )
+    # SQLiteデータベースに接続するための関数
+    conn = sqlite3.connect('testDB.db')
+    return conn
 
-@mypage_bp.route('/mypage', methods=['GET', 'POST'])
+@mypage_bp.route('/mypage')
 def mypage():
-    if request.method == 'POST':
-        # フォームから送信されたデータを取得
-        user_name = request.form['user_name']
-        full_name = request.form['full_name']
-        phone_number = request.form['phone_number']
-        email_address = request.form['email_address']
-        password = request.form['password']  # 通常、パスワードはハッシュ化して保存するべき
+    # セッションからユーザーIDを取得
+    user_id = session.get('user_id')
 
-        try:
-            # データベースに接続
-            conn = get_db_connection()
-            cursor = conn.cursor()
+    if not user_id:
+        # ユーザーがログインしていない場合はログインページにリダイレクト
+        return redirect(url_for('login.login_user'))
 
-            # データベースに新しいユーザーを挿入
-            cursor.execute('''
-                INSERT INTO users (user_name, full_name, phone_number, email_address, password)
-                VALUES (%s, %s, %s, %s, %s)
-            ''', (user_name, full_name, phone_number, email_address, password))
+    conn = get_db_connection()
+    cursor = conn.cursor()
 
-            # 変更をコミット
-            conn.commit()
+    # ユーザーIDを使用してユーザーの情報を取得
+    cursor.execute('SELECT * FROM users WHERE user_id = ?', (user_id,))
+    user_info = cursor.fetchone()
 
-            # 接続を閉じる
-            cursor.close()
-            conn.close()
+    cursor.close()
+    conn.close()
 
-            # マイページにリダイレクト
-            return redirect(url_for('mypage.mypage'))
+    if user_info:
+        # マイページにユーザー情報を渡して表示
+        return render_template('mypage.html', user_info=user_info)
+    else:
+        # ユーザー情報が見つからない場合はエラーを表示
+        return render_template('error.html', message='ユーザー情報が見つかりません。')
 
-        except mysql.connector.Error as err:
-            print(f"Error: {err}")
-            # エラーが発生した場合はロールバック
-            conn.rollback()
-
-        finally:
-            # 接続を確実に閉じる
-            if conn.is_connected():
-                cursor.close()
-                conn.close()
-
-    return render_template('mypage.html')
