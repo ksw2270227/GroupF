@@ -36,7 +36,7 @@
                 margin-bottom: 5px;
                 padding: 10px;
                 border-radius: 10px;
-                white-space: pre-line; /* 改行を有効にする */
+                white-space: pre-line; /*改行を有効にする*/
             }
 
             .user2-message {
@@ -61,6 +61,7 @@
                 /* position: fixed; */
                 bottom: 0;
                 width: 100%;
+                
             }
 
             #messageInput {
@@ -69,6 +70,9 @@
                 margin-right: 10px;
                 overflow: hidden;
                 resize: none; /* ユーザーが手動でリサイズできないようにする */
+                max-height: 100px;
+                overflow-y: auto; 
+                
             }
 
             #sendMessageBtn {
@@ -105,8 +109,7 @@
             <textarea name="message_content" id="messageInput" placeholder="メッセージを入力" rows="1"></textarea>
             <button name="sendButton" id="sendMessageBtn" onclick="sendMessage()">送信</button>
         </form>
-
-        <div id="footer" class="footer"></div>
+        
         <script>
             fetch("../static/header.html")
             .then((response) => response.text())
@@ -160,23 +163,24 @@
         }
 
         function sendMessage() {
-        var messageInput = document.getElementById('messageInput');
-        var message = messageInput.value.trim();
+            var messageInput = document.getElementById('messageInput');
+            var message = messageInput.value.trim();
 
-        // 送ったチャット
-        // if (message !== '') {
-        //     var chatDiv = document.getElementById('chat');
-        //     var chatMessage = document.createElement('div');
+            // 送ったチャット
+            if (message !== '') {
+                var chatDiv = document.getElementById('chat');
+                var chatMessage = document.createElement('div');
 
-        //     chatMessage.textContent = message;
-        //     chatMessage.className = 'user1-message'; // ユーザーごとにクラスを設定
+                chatMessage.textContent = message;
+                chatMessage.className = 'user1-message'; // ユーザーごとにクラスを設定
 
-        //     chatDiv.appendChild(chatMessage);
-        //     messageInput.value = '';
+                chatDiv.appendChild(chatMessage);
+                messageInput.value = '';
 
-            // 送信後、入力欄をクリアし、一番下にスクロール
-            chatDiv.scrollTop = chatDiv.scrollHeight;
+                // 送信後、入力欄をクリアし、一番下にスクロール
+                chatDiv.scrollTop = chatDiv.scrollHeight;
             }
+        }
         
 
             document.addEventListener('DOMContentLoaded', function () {
@@ -187,6 +191,8 @@
             document.getElementById('messageInput').addEventListener('input', function () {
                 this.style.height = 'auto';
                 this.style.height = (this.scrollHeight) + 'px';
+
+                this.scrollTop = this.scrollHeight;
                 });
 
             document.getElementById('messageInput').addEventListener('keyup', function (e) {
@@ -196,5 +202,7 @@
                 }
             });
         </script>
+
+<div id="footer" class="footer"></div>
     </body>
 </html>
