@@ -165,7 +165,9 @@
     <tr>
         <th>message_id</th>
         <th>sender_user_id</th>
+        <th>sender_role</th>
         <th>receiver_user_id</th>
+        <th>receiver_role</th>
         <th>message_content</th>
         <th>sent_time</th>
     </tr>
@@ -176,6 +178,8 @@
         <td>{{ message[2] }}</td>
         <td>{{ message[3] }}</td>
         <td>{{ message[4] }}</td>
+        <td>{{ message[5] }}</td>
+        <td>{{ message[6] }}</td>
     </tr>
     {% endfor %}
     </table>

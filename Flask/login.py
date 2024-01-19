@@ -29,6 +29,7 @@ def login_user():
             # ユーザーIDをセッションに格納
             session['user_id'] = user[0]
             session['user_name'] = user[1]
+            session['role']='User'
             # ログイン成功時のリダイレクト先（例：indexページ）
             return redirect(url_for('index.index'))
         else:

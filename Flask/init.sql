@@ -74,7 +74,9 @@ CREATE TABLE events (
 CREATE TABLE messages (
     message_id INTEGER PRIMARY KEY,
     sender_user_id INTEGER NOT NULL,
+    sender_role TEXT NOT NULL,
     receiver_user_id INTEGER NOT NULL,
+    receiver_role TEXT NOT NULL,
     message_content TEXT NOT NULL,
     sent_time TEXT NOT NULL,
     FOREIGN KEY (sender_user_id) REFERENCES users(user_id),
@@ -147,12 +149,14 @@ INSERT INTO events (company_id, event_name, event_id, password, start_time, end_
 (4, 'エンジニアリングフェア', 4, 'eventpass4', '2023-12-15 09:00:00', '2023-12-15 20:00:00', '福岡サンパレス', 'エンジニアリングの最新トレンドと展望'),
 (5, 'ITセキュリティカンファレンス', 5, 'eventpass5', '2023-12-20 10:00:00', '2023-12-20 18:00:00', '札幌コンベンションセンター', 'サイバーセキュリティの最新動向と対策');
 
-INSERT INTO messages (message_id, sender_user_id, receiver_user_id, message_content, sent_time) VALUES
-(1, 1, 2, 'こんにちは、今日のミーティングについてですが...', '2023-11-17 09:00:00'),
-(2, 3, 1, 'プロジェクトの進行状況を共有したいと思います。', '2023-11-17 09:15:00'),
-(3, 2, 3, '明日のプレゼンテーションの準備はどうですか？', '2023-11-17 09:30:00'),
-(4, 4, 2, '最新のレポートを送りました。ご確認ください。', '2023-11-17 09:45:00'),
-(5, 5, 4, '次のミーティングの日程調整をお願いします。', '2023-11-17 10:00:00');
+INSERT INTO messages (message_id, sender_user_id, sender_role, receiver_user_id, receiver_role, message_content, sent_time) 
+VALUES
+(1, 1, 'User', 2, 'Admin', 'こんにちは、問題が発生しています。', '2024-01-19 10:00:00'),
+(2, 2, 'Admin', 1, 'User', 'こんにちは、どのような問題でしょうか？', '2024-01-19 10:02:00'),
+(3, 1, 'User', 2, 'Admin', 'アカウントにログインできません。', '2024-01-19 10:05:00'),
+(4, 2, 'Admin', 1, 'User', 'ユーザー名とパスワードを再確認してください。', '2024-01-19 10:07:00'),
+(5, 1, 'User', 2, 'Admin', 'ありがとうございます、解決しました！', '2024-01-19 10:10:00');
+
 
 INSERT INTO location_data (user_id, user_status, current_latitude, current_longitude, current_altitude, acquisition_time) VALUES
 (1, '通常', 35.6895, 139.6917, 40.0, '2023-11-17 09:00:00'),  -- 東京
