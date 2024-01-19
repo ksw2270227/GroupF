@@ -3,21 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>URLリスト</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h1>URLリスト</h1>
+    <button id="auto-login-btn">クリックで自動にログイン</button>
 
     <!-- ログイン情報の表示 -->
-    {% if user_name and user_id %}
-        <p>ログイン中: {{ user_name }} - user_id = {{ user_id }}</p>
-    {% else %}
-        <p>ログインしていません</p>
-    {% endif %}
+    <p id="login-info">
+        {% if user_name and user_id %}
+            ログイン中: {{ user_name }} - user_id = {{ user_id }}
+        {% else %}
+            ログインしていません
+        {% endif %}
+    </p>
 
     <ul>
         {% for url in urls %}
             <li><a href="{{ url.rule }}">{{ url.rule }}</a> ({{ url.endpoint }})</li>
         {% endfor %}
     </ul>
+
+    <script>
+        $(document).ready(function() {
+            $("#auto-login-btn").click(function() {
+                $.post("/auto-login", function(data) {
+                    $("#login-info").text("ログイン中: " + data.user_name + " - user_id = " + data.user_id);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
