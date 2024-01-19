@@ -1,4 +1,4 @@
-from flask import Flask,render_template
+from flask import Flask,render_template,session
 from index import index_bp
 from register import register_bp
 from signup import signup_bp
@@ -37,7 +37,10 @@ except Exception as e:
 @app.route("/")
 def show_urls():
     urls = [{"rule": rule.rule, "endpoint": rule.endpoint} for rule in app.url_map.iter_rules()]
-    return render_template('list_urls.html', urls=urls)
+    user_name = session.get('user_name')
+    user_id = session.get('user_id')
+    return render_template('list_urls.html', urls=urls, user_name=user_name, user_id=user_id)
+
 
 if __name__ == "__main__":
     app.run()  # あるいは任意のポート.

@@ -17,6 +17,11 @@ def show_map():
         location = cursor.fetchone()
         cursor.close()
         conn.close()
+
         if location:
+            # ユーザーの位置情報が存在する場合
             return render_template('map.html', latitude=location[0], longitude=location[1])
-    return render_template('map.html', latitude=-34.397, longitude=150.644)  # デフォルトの位置
+    
+    # ユーザーの位置情報が存在しない場合、デフォルトの位置を使用
+    return render_template('map.html', latitude=-34.397, longitude=150.644)
+

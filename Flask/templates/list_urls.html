@@ -6,6 +6,14 @@
 </head>
 <body>
     <h1>URLリスト</h1>
+
+    <!-- ログイン情報の表示 -->
+    {% if user_name and user_id %}
+        <p>ログイン中: {{ user_name }} - user_id = {{ user_id }}</p>
+    {% else %}
+        <p>ログインしていません</p>
+    {% endif %}
+
     <ul>
         {% for url in urls %}
             <li><a href="{{ url.rule }}">{{ url.rule }}</a> ({{ url.endpoint }})</li>

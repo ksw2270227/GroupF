@@ -21,12 +21,14 @@ def login_user():
             'SELECT * FROM users WHERE email_address = ? AND password = ?',(email_address, password)
         )
         user = cursor.fetchone()
+        print(user)
         cursor.close()
         conn.close()
 
         if user:
             # ユーザーIDをセッションに格納
             session['user_id'] = user[0]
+            session['user_name'] = user[1]
             # ログイン成功時のリダイレクト先（例：indexページ）
             return redirect(url_for('index.index'))
         else:
