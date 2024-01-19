@@ -11,6 +11,7 @@ from login import login_bp
 from mypage import mypage_bp
 from map import map_bp
 from joingroup import joingroup_bp
+from logout import logout_bp
 
 app = Flask(__name__)
 app.register_blueprint(index_bp)
@@ -25,6 +26,7 @@ app.register_blueprint(login_bp)
 app.register_blueprint(mypage_bp)
 app.register_blueprint(map_bp)
 app.register_blueprint(joingroup_bp)
+app.register_blueprint(logout_bp)
 
 try:
     with open('Flask/secret_key.txt', 'r') as file:
