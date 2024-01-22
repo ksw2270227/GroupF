@@ -1,6 +1,6 @@
 # group.py
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import mysql.connector
 from flask import Blueprint
 
@@ -33,6 +33,7 @@ def create_group():
             user_email = session.get('user_email')  # セッションからユーザーのメールアドレスを取得（例）
 
         # ユーザーIDを使って関連するグループ情報を取得
+        # ユーザーIDを使って関連するグループ情報を取得
         if user_email:
             conn = get_db_connection()
             cursor = conn.cursor(dictionary=True)
@@ -42,30 +43,20 @@ def create_group():
             user_id = cursor.fetchone()['id']
 
             # ユーザーIDを使って関連するグループ情報を取得
-            cursor.execute('SELECT group_name, group_id, max_participants FROM groups WHERE user_id = %s', (user_id,))
-            groups = cursor.fetchall()
-
-
-        # GETメソッドの場合はデータベースから情報を取得してテンプレートに渡す
-            conn = get_db_connection()
-            cursor = conn.cursor(dictionary=True)
-
-            # グループ情報を取得
-            cursor.execute('SELECT group_name, group_id FROM groups')
+            cursor.execute('SELECT group_name, group_id, max_members FROM groups WHERE user_id = %s', (user_id,))
             groups = cursor.fetchall()
 
             # 参加者情報を取得
-            cursor.execute('SELECT participant_name FROM participants')
+            cursor.execute('SELECT participant_name FROM participants WHERE group_id IN (SELECT group_id FROM groups WHERE user_id = %s)', (user_id,))
             participants = cursor.fetchall()
 
             # グループの人数を取得
-            cursor.execute('SELECT COUNT(*) as group_count FROM groups')
+            cursor.execute('SELECT COUNT(*) as group_count FROM groups WHERE user_id = %s', (user_id,))
             group_count = cursor.fetchone()['group_count']
 
             # 最大参加者数を取得
-            cursor.execute('SELECT MAX(max_participants) as max_participants FROM groups')
+            cursor.execute('SELECT MAX(max_members) as max_participants FROM groups WHERE user_id = %s', (user_id,))
             max_participants = cursor.fetchone()['max_participants']
-
 
     except Exception as e:
         print(f"エラー: {e}")
