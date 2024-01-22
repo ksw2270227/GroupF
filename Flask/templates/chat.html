@@ -13,93 +13,103 @@
                 margin: 0;
                 padding: 0;
                 font-family: Arial, sans-serif;
-                overflow-x: hidden; /* 横スクロールを無効に */
-
-                word-wrap: break-word; /* 半角・全角の区別なく、単語の途中で改行する */
-                overflow-wrap: break-word; /* word-wrapの標準互換プロパティ */
+                overflow-x: hidden;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
             }
-
 
             main {
                 padding: 10px;
-                height: calc(100vh - 229px);
+                height: calc(100vh - 268px);
                 overflow-y: auto;
                 display: flex;
-                flex-direction: column; /* チャット履歴を下から上に表示 */
+                flex-direction: column;
             }
 
             .user1-message {
                 max-width: 50%;
-                text-align: right;
-                align-self: flex-end; /* 右寄りに表示 */
+                align-self: flex-end;
                 background-color: #e0f7ff;
                 margin-bottom: 5px;
-                padding: 10px;
+                padding: 12px;
                 border-radius: 10px;
-                white-space: pre-line; /*改行を有効にする*/
+                white-space: pre-line;
             }
 
             .user2-message {
                 max-width: 50%;
                 text-align: left;
-                align-self: flex-start; /* 左寄りに表示 */
-                background-color: #efffe0; /* 背景色を設定 */
+                align-self: flex-start;
+                background-color: #efffe0;
                 margin-bottom: 5px;
-                padding: 10px;
+                padding: 12px;
                 border-radius: 10px;
-                white-space: pre-line; /* 改行を有効にする */
+                white-space: pre-line;
             }
-
 
 
             #messageInputContainer {
                 display: flex;
                 justify-content: space-between;
-                align-items: center;
+                align-items: flex-start; /* align-itemsを変更 */
                 padding: 10px;
                 background-color: #ffffff;
-                /* position: fixed; */
                 bottom: 0;
                 width: 100%;
-                
+                /* flex-direction: column; */
+                position: relative;
+                /* align-items: center; */
+
+                height: 105px;
             }
 
             #messageInput {
-                width: 90%;
+                max-width: calc(100% - 100px);
+                width: 100%;
                 padding: 8px;
                 margin-right: 10px;
+                margin-bottom: 100px;
                 overflow: hidden;
-                resize: none; /* ユーザーが手動でリサイズできないようにする */
-                max-height: 40px;
-                overflow-y: auto; 
+                resize: none;
+                min-height: 85px;
+                max-height: 85px;
                 
+                overflow-y: auto;
+                /*position: absolute; これで上に広がるようになってる 
+                bottom: 15px;
+                align-self: flex-start;/* align-selfを追加 */
             }
 
             #sendMessageBtn {
                 min-width: 80px;
-                padding: 8px;
                 cursor: pointer;
-
                 padding: 10px 20px;
                 background-color: #3498db;
                 color: #fff;
                 border: none;
                 border-radius: 5px;
-                cursor: pointer;
+                align-self: flex-end;
             }
+
+            #sendMessageBtn:hover {
+            background-color: #2980b9;
+        }
+
         </style>
     </head>
     <body>
         <div id="header"></div>
-        <a href="/index" class="backButton">戻る</a>
+        <a href="index.html" class="backButton">戻る</a>
 
         <main id="chat">
-            <!-- チャットメッセージが表示されるエリア -->
+            <!-- チャット履歴のforループ内 -->
             {% for chat in chat_history %}
-            {% if chat[1] == 1 %}
-                <div class="user1-message">{{ chat[3] }}</div>
-            {% elif chat[2] == 2 %}
-                <div class="user2-message">{{ chat[2] }}: <br>{{ chat[3] }}</div>
+            {% if chat[1] == 1 and chat[2] == session.get('role') %}
+                <!-- ユーザーのメッセージを表示 -->
+                <div class="user1-message">{{ chat[5] }}</div>
+            {% elif chat[1] == 2 and chat[2] == 'Admin' %}
+                <!-- 管理者のメッセージを表示 -->
+                <div class="user2-message">{{ chat[2] }}: <br>{{ chat[5] }}</div>
             {% endif %}
             {% endfor %}
         </main>
@@ -109,6 +119,8 @@
             <textarea name="message_content" id="messageInput" placeholder="メッセージを入力" rows="1"></textarea>
             <button name="sendButton" id="sendMessageBtn">送信</button>
         </form>
+
+        <div id="footer" class="footer" ></div>
         
         <script>
             fetch("../static/header.html")
@@ -126,6 +138,7 @@
             .then((response) => response.text())
             .then((data) => document.querySelector("#footer").innerHTML = data);
             
+
             
             // 高さの調整
             document.getElementById('messageInput').addEventListener('input', function () {
@@ -139,12 +152,10 @@
             // チャット履歴が表示された後にスクロールを一番下に移動
             var mainElement = document.getElementById('chat');
             mainElement.scrollTop = mainElement.scrollHeight;
-            
 
             
         </script>
-
-<div id="footer" class="footer"></div>
 <script src="./static/headerScript.js"></script>
+
     </body>
 </html>
