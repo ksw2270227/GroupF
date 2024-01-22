@@ -45,7 +45,7 @@ def get_chat_history():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # ユーザーまたは管理者としての履歴を取得
+    # ユーザーまたは管理者としての履歴を取得  2, 'Admin'が当てはまればOKになってるから要改善
     cursor.execute('SELECT * FROM messages WHERE (sender_user_id = ? AND sender_role = ?) OR (sender_user_id = ? AND sender_role = ?)',
                    (1, session.get('role'), 2, 'Admin'))
 
