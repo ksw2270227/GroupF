@@ -75,6 +75,9 @@
     <!-- 地図を表示するためのコンテナ -->
     <div id="map"></div>
     <!-- ここにコンテンツ -->
+    <!-- 位置情報を格納する隠し要素 -->
+    <input id="latitude" value="{{ latitude }}">
+    <input id="longitude" value="{{ longitude }}">
   </div>
 
   <div class="back">
@@ -125,11 +128,14 @@
           .then((data) => document.querySelector("#footer").innerHTML = data);
   
       // Google Maps JavaScript API の初期化
-    var map;
+      var map;
 
     function initMap() {
-      // Flaskから渡された緯度経度を使用
-      var userLocation = {lat: {{ latitude|tojson }}, lng: {{ longitude|tojson }}};
+      // JavaScriptで位置情報を取得
+      var latitude = parseFloat(document.getElementById('latitude').value);
+      var longitude = parseFloat(document.getElementById('longitude').value);
+
+      var userLocation = {lat: latitude, lng: longitude};
 
       map = new google.maps.Map(document.getElementById('map'), {
         center: userLocation,
@@ -140,7 +146,12 @@
         position: userLocation,
         map: map
       });
+
+      
     }
   </script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQNqTzEy70KGNqJm_DIy77FkmPSQwwXYk&callback=initMap">
+</script>
 </body>
 </html>
