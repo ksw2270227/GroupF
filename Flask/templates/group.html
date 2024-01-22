@@ -108,6 +108,7 @@
         </form>
         <form class="login-container">
                 <h5>{{ group['group_id'] }}が入る場所</h5>
+                <h5>最大人数: {{ group['max_participants'] }}</h5>
                 <!-- 他のフィールドがあればここに追加 -->
             {% endfor %}
         </form>
@@ -116,22 +117,16 @@
     {% endif %}
 
         <form class="login-container">
-            <h3>参加人数 ?/10 が入る</h3>
-            <div style="border: 1px solid black;">
-                参加者氏名:○○○○
-            </div>
-            <div style="border: 1px solid black;">
-                参加者氏名:○○○○
-            </div>
-            <div style="border: 1px solid black;">
-                参加者氏名:○○○○
-            </div>
-            <div style="border: 1px solid black;">
-                参加者氏名:○○○○
-            </div>
-            <div style="border: 1px solid black;">
-                参加者氏名:○○○○
-            </div>
+            <h3>参加人数 {{ group_count }}/{{ max_participants }} が入る</h3>
+            {% if participants %}
+            {% for participant in participants %}
+                <div style="border: 1px solid black;">
+                    参加者氏名: {{ participant['participant_name'] }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>参加者がいません。</p>
+        {% endif %}
         </form>
         <div class="login-container2">
             <a href="index.html" class="backButton1">グループ退会</a>
