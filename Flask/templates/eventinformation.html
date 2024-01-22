@@ -60,18 +60,18 @@
 <body>
   <div id="header"></div>
 
-  <a href="index.html" class="backButton">戻る</a>
+  <a href="/index" class="backButton">戻る</a>
 
   <!-- <button onclick="goBack()" class="cta-button">戻る</button> -->
 
   <div class="event-container">
     <div class="buttons">
-      <a href="userlist.html">
+      <a href="/userlist">
         <button class="userButton">
           ユーザー
         </button>
       </a>
-      <a href="eventchange.html">
+      <a href="/eventchange">
         <button class="changeButton">
           変更
         </button>
@@ -173,6 +173,8 @@
       .then((response) => response.text())
       .then((data) => document.querySelector("#footer").innerHTML = data);
   </script>
+
+<script src="./static/headerScript.js"></script>
 
 </body>
 </html>
