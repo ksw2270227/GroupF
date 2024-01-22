@@ -117,21 +117,15 @@
 
         <form class="login-container">
             <h3>参加人数 ?/10 が入る</h3>
-            <div style="border: 1px solid black;">
-                参加者氏名:○○○○
-            </div>
-            <div style="border: 1px solid black;">
-                参加者氏名:○○○○
-            </div>
-            <div style="border: 1px solid black;">
-                参加者氏名:○○○○
-            </div>
-            <div style="border: 1px solid black;">
-                参加者氏名:○○○○
-            </div>
-            <div style="border: 1px solid black;">
-                参加者氏名:○○○○
-            </div>
+            {% if participants %}
+            {% for participant in participants %}
+                <div style="border: 1px solid black;">
+                    参加者氏名: {{ participant['participant_name'] }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>参加者がいません。</p>
+        {% endif %}
         </form>
         <div class="login-container2">
             <a href="index.html" class="backButton1">グループ退会</a>

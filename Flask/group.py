@@ -25,9 +25,16 @@ def create_group():
 
         # GETメソッドの場合はデータベースから情報を取得してテンプレートに渡す
             conn = get_db_connection()
-        cursor = conn.cursor(dictionary=True)
+            cursor = conn.cursor(dictionary=True)
 
-        # 以下略...
+            # グループ情報を取得
+            cursor.execute('SELECT group_name, group_id FROM groups')
+            groups = cursor.fetchall()
+
+            # 参加者情報を取得
+            cursor.execute('SELECT participant_name FROM participants')
+            participants = cursor.fetchall()
+
     except Exception as e:
         print(f"エラー: {e}")
     finally:
@@ -36,4 +43,4 @@ def create_group():
         if conn:
             conn.close()
 
-    return render_template('group.html')
+    return render_template('group.html', groups=groups, participants=participants)
