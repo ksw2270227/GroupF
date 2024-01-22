@@ -8,4 +8,4 @@ def logout():
         # ログアウト時にセッションからユーザー情報を削除
         session.pop('user_id', None)
         return jsonify({"success": True})
-    return render_template('logout.html')
+    return render_template('index.html')

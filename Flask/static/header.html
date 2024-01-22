@@ -1,40 +1,71 @@
 <!-- ヘッダー -->
 <!DOCTYPE html>
 <html lang="ja">
-  
+
 <head>
-  <meta charset="UTF-8">
-  <title>サイトのタイトル</title>
-  <meta name="description" content="サイトの説明文">
-  <link rel="stylesheet" href="./static/style.css">
+    <meta charset="UTF-8">
+    <title>サイトのタイトル</title>
+    <meta name="description" content="サイトの説明文">
+    <link rel="stylesheet" href="./static/style.css">
 </head>
-  
+
 <body>
-  <header>
-    <div class="logo">
-      <a href="/index">
-      <img src="./static/1logo.png" alt="ロストトラッカー">
-      </a>
-    </div>
-    <div class="hamburger-menu">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
-    <nav class="menu">
-      <ul>
-        <li><a href="/signup">新規登録</a></li>
-        <li><a href="/login">ログイン</a></li>
-        <li><a href="/chat">チャット</a></li>
-      </ul>
-    </nav>
-  </header>
-  
-  <script>
-    document.querySelector('.hamburger-menu').addEventListener('click', function() {
-      document.querySelector('.menu').classList.toggle('active');
-    });
-  </script>
-  
+    <header>
+        <div class="logo">
+            <a href="/index">
+                <img src="./static/1logo.png" alt="ロストトラッカー">
+            </a>
+        </div>
+        <div class="hamburger-menu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="/signup">新規登録</a></li>
+                <li><a href="/login">ログイン</a></li>
+                <!-- ここで showConfirmation 関数を呼ぶように修正 -->
+                <li><a href="#" onclick="showConfirmation()">ログアウト</a></li>
+                <li><a href="/chat">チャット</a></li>
+            </ul>
+        </nav>
+    
+
+    <!-- ここでスクリプトが実行されるように修正 -->
+    <script>
+        function showConfirmation() {
+            var isLogout = window.confirm("ログアウトしますか？");
+            confirmLogout(isLogout);
+        }
+
+        function cancelLogout() {
+            alert("ログアウトしませんでした。");
+            window.location.href = "/index";
+        }
+
+        function confirmLogout(isLogout) {
+            if (isLogout) {
+                fetch("/logout", { method: "POST" })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert("ログアウトしました。");
+                            window.location.href = "/index";
+                        } else {
+                            alert("ログアウトに失敗しました。");
+                        }
+                    });
+            } else {
+                // キャンセルされた場合、何もしない
+            }
+        }
+
+        document.querySelector('.hamburger-menu').addEventListener('click', function () {
+            document.querySelector('.menu').classList.toggle('active');
+        });
+    </script>
+    </header>
 </body>
+
 </html>

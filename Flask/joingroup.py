@@ -16,7 +16,7 @@ def join_group():
 
         # ここでグループIDとパスワードのチェックを行う
         # (仮)IDが"exampleID" パスワードが"examplePass"
-        if group_id != "exampleID" or password != "examplePass":
+        if group_id != "group_id" or password != "password":
             error_message = 'グループIDまたはパスワードが間違っています'
             return render_template('joingroup.html', error_message=error_message)
 
