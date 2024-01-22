@@ -88,13 +88,13 @@
 
     <a href="index.html" class="backButton">戻る</a>
 
-    <form id="passchange" action="#" method="post">
+    <form id="passchange" action="/joingroup" method="post">
 
         <label for="groupidInput">グループID</label>
-        <input type="text" id="groupidInput" name="groupidInput" required>
+        <input type="text" id="group_id" name="group_id" required>
 
         <label for="passwordInput">パスワード</label>
-        <input type="password" id="passwordInput" name="passwordInput" required>
+        <input type="password" id="password" name="password" required>
 
         <input type="submit" value="参加" class="sendButton">
         <p id="error-message"></p>
@@ -113,26 +113,26 @@
                 });
             });
 
-        document.getElementById('passchange').addEventListener('submit', function(event) {
-            event.preventDefault(); // フォームのデフォルトの送信を防止
+        // document.getElementById('passchange').addEventListener('submit', function(event) {
+        //     event.preventDefault(); // フォームのデフォルトの送信を防止
 
-            var groupID = document.getElementById('groupidInput').value;
-            var password = document.getElementById('passwordInput').value;
+        //     var groupID = document.getElementById('groupidInput').value;
+        //     var password = document.getElementById('passwordInput').value;
 
-            // ここでグループIDとパスワードのチェックを行う
-            // (仮)IDが"exampleID" パスワードが"examplePass"
+        //     // ここでグループIDとパスワードのチェックを行う
+        //     // (仮)IDが"exampleID" パスワードが"examplePass"
 
-            if (groupID !== "group_id" || password !== "password") {
-                var errorElement = document.getElementById('error-message');
-                errorElement.innerText = 'グループIDまたはパスワードが間違っています';
-                errorElement.style.color = 'red';
-                return false; // フォーム送信をキャンセル
-            }
+        //     // if (groupID !== "group_id" || password !== "password") {
+        //     //     var errorElement = document.getElementById('error-message');
+        //     //     errorElement.innerText = 'グループIDまたはパスワードが間違っています';
+        //     //     errorElement.style.color = 'red';
+        //     //     return false; // フォーム送信をキャンセル
+        //     // }
 
-            // ここで何かしらの処理を行うか、遷移先にデータを送信する処理を記述
+        //     // ここで何かしらの処理を行うか、遷移先にデータを送信する処理を記述
 
-            window.location.href = 'group.html'; // ここに遷移先のURLを指定
-        });
+        //     window.location.href = 'group.html'; // ここに遷移先のURLを指定
+        // });
 
         fetch("./static/footer.html")
             .then((response) => response.text())

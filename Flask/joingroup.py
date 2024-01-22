@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, Blueprint
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 import sqlite3
 
 joingroup_bp = Blueprint('joingroup', __name__)
@@ -7,21 +7,53 @@ def get_db_connection():
     conn = sqlite3.connect('testDB.db')
     return conn
 
+def update_current_group_id(user_id, new_group_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # ユーザーのcurrent_group_idを更新するSQL文
+    update_sql = 'UPDATE users SET current_group_id = ? WHERE user_id = ?'
+    cursor.execute(update_sql, (new_group_id, user_id))
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
 @joingroup_bp.route('/joingroup', methods=['GET', 'POST'])
 def join_group():
+    if 'user_id' not in session:
+        # ユーザーがログインしていない場合、index.indexにリダイレクト
+        return redirect(url_for('index.index'))
+
+    error = None
     if request.method == 'POST':
-        # フォームからグループ参加情報を取得
         group_id = request.form['group_id']
         password = request.form['password']
+        conn = get_db_connection()
+        cursor = conn.cursor()
 
-        # ここでグループIDとパスワードのチェックを行う
-        # (仮)IDが"exampleID" パスワードが"examplePass"
-        if group_id != "group_id" or password != "password":
-            error_message = 'グループIDまたはパスワードが間違っています'
-            return render_template('joingroup.html', error_message=error_message)
+        # グループを検索
+        cursor.execute(
+            'SELECT * FROM groups WHERE group_id = ? AND password = ?', (group_id, password)
+        )
+        group = cursor.fetchone()
+        cursor.close()
 
-        # ここで何かしらの処理を行うか、遷移先にデータを送信する処理を記述
+        if group:
+            # グループIDをセッションに格納
+            session['group_id'] = group[0]
+            session['group_name'] = group[1]
 
-        return redirect(url_for('index.index'))
-    
-    return render_template('joingroup.html')
+            # グループに参加したユーザーのcurrent_group_idを更新
+            user_id = session['user_id']
+            update_current_group_id(user_id, group[0])
+
+            # 参加成功時のリダイレクト先（例：groupページ）
+            return redirect(url_for('group.create_group'))
+        else:
+            # 参加失敗時のエラーメッセージ
+            error = '無効なグループIDまたはパスワードです.'
+
+    # GETリクエストの場合、またはエラーがある場合に参加ページを表示.
+    return render_template('joingroup.html', error=error)
