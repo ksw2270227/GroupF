@@ -56,7 +56,7 @@
 
 <body>
     <div id="header"></div>
-    <a href="abnormalityconfirmation.html" class="backButton">戻る</a>
+    <a href="/abnormalityconfirmation" class="backButton">戻る</a>
 
     <main>
     <!-- 最新チャットの履歴は20文字以上になったら....で表示される -->
@@ -72,27 +72,27 @@
             <tbody>
                 <tr>
                     <!-- 履歴を取得し、遷移先の内容はユーザーごとに違うものになる -->
-                    <td><a href="chat.html">ユーザー1</a></td>
+                    <td><a href="/chat">ユーザー1</a></td>
                     <td>OO/OO --:--</td>
                     <td class="ellipsis">123456789012345678901</td>
                 </tr>
                 <tr>
-                    <td><a href="chat.html">ユーザー2</a></td>
+                    <td><a href="/chat">ユーザー2</a></td>
                     <td>OO/OO --:--</td>
                     <td class="ellipsis">~~~~~~~~~~~~~</td>
                 </tr>
                 <tr>
-                    <td><a href="chat.html">ユーザー3</a></td>
+                    <td><a href="/chat">ユーザー3</a></td>
                     <td>OO/OO --:--</td>
                     <td class="ellipsis">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</td>
                 </tr>
                 <tr>
-                    <td><a href="chat.html">ユーザー4</a></td>
+                    <td><a href="/chat">ユーザー4</a></td>
                     <td>OO/OO --:--</td>
                     <td class="ellipsis">~~~~~~~~~~~~~~~~~~~......</td>
                 </tr>
                 <tr>
-                    <td><a href="chat.html">ユーザー5</a></td>
+                    <td><a href="/chat">ユーザー5</a></td>
                     <td>OO/OO --:--</td>
                     <td class="ellipsis">最新チャット5</td>
                 </tr>
@@ -133,6 +133,8 @@
             .then((response) => response.text())
             .then((data) => document.querySelector("#footer").innerHTML = data);
     </script>
+
+<script src="./static/headerScript.js"></script>
 </body>
 
 </html>
