@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 import sqlite3
+from flask import jsonify
+
 
 login_bp = Blueprint('login', __name__)
 
@@ -36,6 +38,20 @@ def login_user():
             # ログイン失敗時のエラーメッセージ
             error = '無効なメールアドレスまたはパスワードです。'
 
-    # GETリクエストの場合、またはエラーがある場合にログインページを表示.
-    return render_template('login.html', error=error)
+# 既存のlogin_user関数はそのままに、以下にログアウト処理を追加
+@login_bp.route('/logout', methods=['POST'])
+def logout_user():
+    # ログインしているかどうかの判定
+    if 'user_id' not in session:
+        # ログインしていない場合、ログアウトエラーのレスポンスを返す
+        return jsonify({'success': False, 'error': 'ログアウトしていません'})
+
+    # セッションからユーザー情報を削除
+    session.pop('user_id', None)
+    session.pop('user_name', None)
+    session.pop('role', None)
+
+    # ログアウト成功時のレスポンスを返す
+    return jsonify({'success': True})
+
 

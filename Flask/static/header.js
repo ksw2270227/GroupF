@@ -1,5 +1,12 @@
 function showConfirmation() {
     var isLogout = window.confirm("ログアウトしますか？");
+        
+    // ログインしていない場合の処理
+    if (!isLogout) {
+        alert("ログアウトしていません。");
+        return;
+    }
+
     confirmLogout(isLogout);
 }
 
@@ -23,6 +30,19 @@ function confirmLogout(isLogout) {
     } else {
         // キャンセルされた場合、何もしない
     }
+}
+
+function logoutUser() {
+    fetch("/logout", { method: "POST" })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("ログアウトしました。");
+                window.location.href = "/index";
+            } else {
+                alert("ログアウトしていません。");
+            }
+        });
 }
 
 document.querySelector('.hamburger-menu').addEventListener('click', function () {
