@@ -37,21 +37,23 @@ def login_user():
         else:
             # ログイン失敗時のエラーメッセージ
             error = '無効なメールアドレスまたはパスワードです。'
+    else :
+        return render_template("login.html")     
 
 # 既存のlogin_user関数はそのままに、以下にログアウト処理を追加
-@login_bp.route('/logout', methods=['POST'])
-def logout_user():
-    # ログインしているかどうかの判定
-    if 'user_id' not in session:
-        # ログインしていない場合、ログアウトエラーのレスポンスを返す
-        return jsonify({'success': False, 'error': 'ログアウトしていません'})
+# @login_bp.route('/logout', methods=['POST'])
+# def logout_user():
+#     # ログインしているかどうかの判定
+#     if 'user_id' not in session:
+#         # ログインしていない場合、ログアウトエラーのレスポンスを返す
+#         return jsonify({'success': False, 'error': 'ログアウトしていません'})
 
-    # セッションからユーザー情報を削除
-    session.pop('user_id', None)
-    session.pop('user_name', None)
-    session.pop('role', None)
+#     # セッションからユーザー情報を削除
+#     session.pop('user_id', None)
+#     session.pop('user_name', None)
+#     session.pop('role', None)
 
-    # ログアウト成功時のレスポンスを返す
-    return jsonify({'success': True})
+#     # ログアウト成功時のレスポンスを返す
+#     return jsonify({'success': True})
 
 
