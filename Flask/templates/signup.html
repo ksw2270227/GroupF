@@ -131,22 +131,22 @@
     <h2>新規登録</h2>
 
     <label for="userNameInput">ユーザー名</label>
-    <input type="text" id="userNameInput" name="user_name" required>
+    <input type="text" id="userNameInput" name="user_name" required maxlength="10">
 
     <label for="fullNameInput">フルネーム</label>
-    <input type="text" id="fullNameInput" name="full_name" required>
+    <input type="text" id="fullNameInput" name="full_name" required maxlength="20">
 
     <label for="phoneInput">電話番号</label>
-    <input type="tel" id="phoneInput" name="phone_number" required>
+    <input type="tel" id="phoneInput" name="phone_number" required maxlength="15" placeholder="ハイフンも含む">
 
     <label for="emailInput">メールアドレス</label>
-    <input type="email" id="emailInput" name="email_address" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
+    <input type="email" id="emailInput" name="email_address" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" maxlength="254">
 
     <label for="passwordInput">パスワード</label>
-    <input type="password" id="passwordInput" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
+    <input type="password" id="passwordInput" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" maxlength="40"  placeholder="大文字小文字一文字以上・数字">
   
     <label for="ageInput">年齢</label>
-    <input type="number" id="ageInput" name="age" pattern="[0-9]*">
+    <input type="number" id="ageInput" name="age" pattern="[0-9]*" maxlength="3">
 
     <label>性別</label>
     <input type="radio" id="maleRadio" name="gender" value="男性"checked>
