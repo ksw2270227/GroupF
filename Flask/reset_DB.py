@@ -1,10 +1,10 @@
 import os
 print("Current Directory:", os.getcwd())
 
-from flask import Flask, render_template, Blueprint
+from flask import Flask, render_template, Blueprint,jsonify
 import sqlite3
 
-create_SQLite_DB_bp = Blueprint('create_SQLite_DB', __name__)
+reset_DB_bp = Blueprint('reset_DB', __name__)
 
 def reset_db():
     db_path = 'testDB.db'
@@ -31,9 +31,9 @@ def create_db_from_sql(sql_file_path):
     cur.close()
     conn.close()
 
-@create_SQLite_DB_bp.route('/create_SQLite_DB')
+@reset_DB_bp.route('/reset_DB', methods=["POST"])
 def show_tables():
-    create_db_from_sql('Flask/init.sql')  # 最初にデータベースをリセットして初期化
+    create_db_from_sql('Flask/sql/init.sql')  # 最初にデータベースをリセットして初期化
 
     conn = get_db_connection()  # リセット後のデータベースに接続
     cur = conn.cursor()
@@ -77,6 +77,8 @@ def show_tables():
     cur.close()
     conn.close()
 
-    return render_template('create_SQLite_DB.html', users=users,admins=admins ,companies=companies,companies_employee=companies_employee,groups=groups,events=events,messages=messages,location_data=location_data,location_history=location_history)
+    # ポップアップメッセージを設定
+    popup_message = "データベースがリセットされました。"
 
+    return jsonify({'message': popup_message})
 
