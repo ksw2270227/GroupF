@@ -14,18 +14,18 @@ def get_db_connection():
 def register_user():
     if request.method == 'POST':
         # 以下のフォームデータ取得部分は変更不要
-        user_name = request.form['user_name']
-        full_name = request.form['full_name']
-        phone_number = request.form['phone_number']
-        email_address = request.form['email_address']
-        password = request.form['password']
-        age = request.form['age']
+        user_name = request.form['user_name'][:10]
+        full_name = request.form['full_name'][:20]
+        phone_number = request.form['phone_number'][:15]
+        email_address = request.form['email_address'][:254]
+        password = request.form['password'][:40]
+        age = request.form['age'][:3]
         gender = request.form['gender']
 
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        # ユーザーをINSERT（プレースホルダを?に変更）.
+
         cursor.execute(
             'INSERT INTO users (user_name, full_name, phone_number, email_address, password, age, gender) VALUES (?, ?, ?, ?, ?, ?, ?)',
             (user_name, full_name, phone_number, email_address, password, age, gender)
