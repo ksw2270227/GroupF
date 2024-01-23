@@ -108,8 +108,8 @@
                 document.querySelector("#header").innerHTML = data;
 
                 // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
-                document.querySelector('.hamburger-menu').addEventListener('click', function() {
-                    document.querySelector('.menu').classList.toggle('active');
+                document.querySelector('.hamburger-menu').addEventListener('click', function () {
+                document.querySelector('.menu').classList.toggle('active');
                 });
             });
 
@@ -139,7 +139,7 @@
             .then((data) => document.querySelector("#footer").innerHTML = data);
     </script>
 
-<script src="./static/headerScript.js"></script>
+<script src="./static/header.js"></script>
 </body>
 
 </html>

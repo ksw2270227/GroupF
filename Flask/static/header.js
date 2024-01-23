@@ -28,7 +28,7 @@ function confirmLogout(isLogout) {
                 }
             });
     } else {
-        // キャンセルされた場合、何もしない
+        cancelLogout();
     }
 }
 
