@@ -104,7 +104,7 @@
         <main id="chat">
             <!-- チャット履歴のforループ内 -->
             {% for chat in chat_history %}
-            {% if chat[1] == 1 and chat[2] == session.get('role') %}
+            {% if chat[1] == session.get('user_id') and chat[2] == session.get('role') %}
                 <!-- ユーザーのメッセージを表示 -->
                 <div class="user1-message">{{ chat[5] }}</div>
             {% elif chat[1] == 2 and chat[2] == 'Admin' %}
@@ -120,7 +120,7 @@
             <button name="sendButton" id="sendMessageBtn">送信</button>
         </form>
 
-        <div id="footer" class="footer" ></div>
+        <div id="footer"></div>
         
         <script>
             fetch("../static/header.html")

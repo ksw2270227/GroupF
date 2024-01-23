@@ -16,7 +16,7 @@ def chat():
         message_content = request.form['message_content']
 
         if message_content.strip() != '':
-            sender_user_id = 1  # ログインユーザーのIDを固定
+            sender_user_id = session.get('user_id')  # ログインユーザーのIDを固定
             receiver_user_id = 2  # 受信者のユーザーIDを管理者に固定
             sender_role = session.get('role')  # 役割を'User'と仮定
             
@@ -42,16 +42,20 @@ def save_message_to_database(sender_user_id, sender_role, receiver_user_id, rece
     conn.close()
 
 def get_chat_history():
-    conn = get_db_connection()
-    cursor = conn.cursor()
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
 
-    # ユーザーまたは管理者としての履歴を取得  2, 'Admin'が当てはまればOKになってるから要改善
-    cursor.execute('SELECT * FROM messages WHERE (sender_user_id = ? AND sender_role = ?) OR (sender_user_id = ? AND sender_role = ?)',
-                   (1, session.get('role'), 2, 'Admin'))
+        # ユーザーまたは管理者としての履歴を取得
+        cursor.execute('SELECT * FROM messages WHERE (sender_user_id = ? AND sender_role = ? AND receiver_user_id = ? AND receiver_role = ?) OR (sender_user_id = ? AND sender_role = ? AND receiver_user_id = ? AND receiver_role = ?)',
+               (session.get('user_id'), session.get('role'), 2, 'Admin', 2, 'Admin', session.get('user_id'), session.get('role')))
 
-    chat_history = cursor.fetchall()
+        chat_history = cursor.fetchall()
 
-    cursor.close()
-    conn.close()
+        cursor.close()
+        conn.close()
 
-    return chat_history
+        return chat_history
+    except Exception as e:
+            print(f"Error fetching chat history: {e}")
+            return None
