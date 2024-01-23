@@ -111,7 +111,8 @@ INSERT INTO users (user_id, user_name, full_name, phone_number, email_address, p
 (2, 'taro2023', '太郎 佐藤', '080-9876-5432', 'taro@example.com', 'pass2023', 32, '男性', 1, 1, '待機'),
 (3, 'sakura_flower', 'さくら 鈴木', '070-1111-2222', 'sakura@example.com', 'sakura123', 25, '女性', 2, 3, '迷子'),
 (4, 'yamamoto_k', '健一 山本', '075-3333-4444', 'yamamoto@example.com', 'yama2024', 45, '男性', 4, 4, '緊急'),
-(5, 'akira_tech', '明 秋田', '092-5555-6666', 'akira@example.com', 'akira5678', 30, '男性', 5, 5, '通常');
+(5, 'akira_tech', '明 秋田', '092-5555-6666', 'akira@example.com', 'akira5678', 30, '男性', 5, 5, '通常'),
+(6, 'some123', '染 谷', '030-1334-3378', 'someya@example.com', 'pass12345', 111, '男性', 3, 2, '通常');
 
 INSERT INTO admins (user_id, user_name, password, full_name, email_address) VALUES
 (1, 'admin_tanaka', 'admtanaka1', '田中 一郎', 'tanaka_admin@example.com'),
