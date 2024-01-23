@@ -101,27 +101,50 @@
         <div id="header"></div>
         <a href="index.html" class="backButton">戻る</a>
 
+        
         <main id="chat">
-            <!-- チャット履歴のforループ内 -->
-            {% for chat in chat_history %}
-            {% if chat[1] == session.get('user_id') and chat[2] == session.get('role') %}
-                <!-- ユーザーのメッセージを表示 -->
-                <div class="user1-message">{{ chat[5] }}</div>
-            {% elif chat[1] == 2 and chat[2] == 'Admin' %}
-                <!-- 管理者のメッセージを表示 -->
-                <div class="user2-message">{{ chat[2] }}: <br>{{ chat[5] }}</div>
+            {% if session.get('user_id') is none or session.get('role') is none %}
+            <!-- ログインしていない場合 -->
+            <div style="color: red; text-align: center; padding: 20px;">
+                エラー: ユーザーIDまたはロールがセッションに存在しません。</br>ログインをしてください。
+            </div>
+            {% else %}
+                <!-- チャット履歴のforループ内 不具合があるかもしれない-->
+                {% for chat in chat_history %}
+                {% if chat[1] == session.get('user_id') and chat[2] == session.get('role') %}
+                    <!-- ログインユーザーの送信メッセージを表示 -->
+                    <div class="user1-message">{{ chat[5] }}</div>
+                {% elif chat[3] == session.get('user_id') and chat[4] == session.get('role') %}
+                    <!-- ユーザーによる受信メッセージを表示 -->
+                    <div class="user2-message">{{ chat[2] }}: <br>{{ chat[5] }}</div>
+                {% elif chat[1] == 2 and chat[2] == 'Admin' %}
+                    <!-- 管理者の送信メッセージを表示 -->
+                    <div class="user1-message">{{ chat[5] }}</div>
+                {% elif chat[3] == 2 and chat[4] == 'Admin' %}
+                    <!-- 管理者による受信メッセージを表示 -->
+                    <div class="user2-message">{{ chat[4] }}: <br>{{ chat[5] }}</div>
+                {% endif %}
+                {% endfor %}
             {% endif %}
-            {% endfor %}
         </main>
+        
 
-
+        {% if session.get('user_id') is none or session.get('role') is none %}
+        <!-- ログインしていない場合　見た目だけで送信はできない -->
+        <div id="messageInputContainer">
+            <textarea name="message_content" id="messageInput" placeholder="メッセージを入力" rows="1"></textarea>
+            <button name="sendButton" id="sendMessageBtn">送信</button>
+        </div>
+        <div id="footer"></div>
+        {% else %}
+        <!-- ログインしている場合 -->
         <form method="post" action="/chat" id="messageInputContainer">
             <textarea name="message_content" id="messageInput" placeholder="メッセージを入力" rows="1"></textarea>
             <button name="sendButton" id="sendMessageBtn">送信</button>
         </form>
-
         <div id="footer"></div>
-        
+        {% endif %}
+
         <script>
             fetch("./static/header.html")
             .then((response) => response.text())
@@ -141,12 +164,12 @@
 
             
             // 高さの調整
-            document.getElementById('messageInput').addEventListener('input', function () {
-                this.style.height = 'auto';
-                this.style.height = (this.scrollHeight) + 'px';
+            // document.getElementById('messageInput').addEventListener('input', function () {
+            //     this.style.height = 'auto';
+            //     this.style.height = (this.scrollHeight) + 'px';
 
-                this.scrollTop = this.scrollHeight;
-                });
+            //     this.scrollTop = this.scrollHeight;
+            //     });
 
             
             // チャット履歴が表示された後にスクロールを一番下に移動

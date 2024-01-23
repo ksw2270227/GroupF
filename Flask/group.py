@@ -7,25 +7,34 @@ def get_db_connection():
     conn = sqlite3.connect('testDB.db')
     return conn
 
-@group_bp.route('/group/<int:group_id>')
+@group_bp.route('/group', defaults={'group_id': None})
 def view_group(group_id):
-    conn = get_db_connection()
-    cursor = conn.cursor()
+    if group_id is not None:
+        try:
+            group_id = int(group_id)
+        except ValueError:
+            return render_template('group.html', error_message='グループIDは整数である必要があります')
 
-    # グループ情報の取得
-    cursor.execute('SELECT * FROM groups WHERE group_id = ?', (group_id,))
-    group = cursor.fetchone()
+        conn = get_db_connection()
+        cursor = conn.cursor()
 
-    if group:
-        # グループの参加者情報の取得
-        cursor.execute('SELECT full_name FROM users WHERE current_group_id = ?', (group_id,))
-        participants = cursor.fetchall()
+        # グループ情報の取得
+        cursor.execute('SELECT * FROM groups WHERE group_id = ?', (group_id,))
+        group = cursor.fetchone()
 
-        cursor.close()
-        conn.close()
+        if group:
+            # グループの参加者情報の取得
+            cursor.execute('SELECT full_name FROM users WHERE current_group_id = ?', (group_id,))
+            participants = cursor.fetchall()
 
-        return render_template('group.html', group=group, participants=participants)
+            cursor.close()
+            conn.close()
+
+            return render_template('group.html', group=group, participants=participants)
+        else:
+            cursor.close()
+            conn.close()
+            return render_template('group.html', error_message='指定されたグループは存在しません')
     else:
-        cursor.close()
-        conn.close()
-        return render_template('error.html', error_message='指定されたグループは存在しません')
+        # 全グループ情報の取得（いったん省略）
+        return render_template('group.html')
