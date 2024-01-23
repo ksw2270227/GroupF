@@ -81,6 +81,9 @@ CREATE TABLE messages (
     sent_time TEXT NOT NULL,
     FOREIGN KEY (sender_user_id) REFERENCES users(user_id),
     FOREIGN KEY (receiver_user_id) REFERENCES users(user_id)
+
+    FOREIGN KEY (sender_user_id) REFERENCES admins(admin_id),
+    FOREIGN KEY (sender_user_id) REFERENCES admins(admin_id)
 );
 
 -- location_data テーブルの作成

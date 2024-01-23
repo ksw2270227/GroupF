@@ -15,10 +15,30 @@ def selectchatpartner():
 
 def get_users_with_latest_chat():
     try:
+        session['user_id'] = 2
+        session['role'] ='Admin'
+        session['user_name'] = 'Admin2'
+
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        cursor.execute('SELECT users.user_id, users.user_name, MAX(messages.sent_time) as latest_chat_time, messages.message_content as latest_chat_content FROM users LEFT JOIN messages ON (users.user_id = messages.sender_user_id AND users.user_id = messages.receiver_user_id) GROUP BY users.user_id')
+        # 各ユーザーとAdminとの最新のチャット情報を取得
+        cursor.execute('''
+            SELECT 
+                users.user_id, 
+                users.user_name, 
+                MAX(messages.sent_time) as latest_chat_time, 
+                messages.message_content as latest_chat_content
+            FROM 
+                users 
+            LEFT JOIN 
+                messages ON (
+                    (users.user_id = messages.sender_user_id AND messages.receiver_user_id = 2) OR
+                    (users.user_id = messages.receiver_user_id AND messages.sender_user_id = 2)
+                )
+            GROUP BY 
+                users.user_id
+        ''')
 
         users = []
         for row in cursor.fetchall():
@@ -26,7 +46,7 @@ def get_users_with_latest_chat():
                 'user_id': row[0],
                 'user_name': row[1],
                 'latest_chat_time': row[2] if row[2] is not None else 'N/A',
-                'latest_chat_content': row[3] if row[3] is not None else 'No chat history'
+                'latest_chat_content': row[3] if row[3] is not None else 'チャット履歴なし'
             }
             users.append(user)
 
@@ -35,7 +55,5 @@ def get_users_with_latest_chat():
 
         return users
     except Exception as e:
-        print(f"Error fetching users with latest chat: {e}")
+        print(f"ユーザーと最新のチャットを取得する際にエラーが発生しました: {e}")
         return None
-
-# ... (existing functions from chat.py)
