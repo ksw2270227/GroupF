@@ -46,9 +46,10 @@ CREATE TABLE companies_employee (
 
 CREATE TABLE groups (
     group_id INTEGER PRIMARY KEY,
-    group_name TEXT NOT NULL,  -- 新たに追加されたカラム
+    -- group_name TEXT NOT NULL,  -- 新たに追加されたカラム
+    group_name TEXT NOT NULL,
     password TEXT NOT NULL,
-    user_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL UNIQUE,
     creation_date TEXT NOT NULL,
     max_members INTEGER NOT NULL,
     current_members INTEGER NOT NULL,
@@ -106,6 +107,8 @@ CREATE TABLE location_history (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
+
+
 INSERT INTO users (user_id, user_name, full_name, phone_number, email_address, password, age, gender, current_event_id, current_group_id, user_status) VALUES
 (1, 'hanako123', '花子 山田', '090-1234-5678', 'hanako@example.com', 'pass1234', 28, '女性', 3, 2, '通常'),
 (2, 'taro2023', '太郎 佐藤', '080-9876-5432', 'taro@example.com', 'pass2023', 32, '男性', 1, 1, '待機'),
@@ -135,7 +138,7 @@ INSERT INTO companies_employee (company_id, user_id, user_name, full_name, passw
 (5, 5, 'employee5', '秋田 明', 'emp5pass', 'akira@akita-systems.co.jp');
 
 INSERT INTO groups (group_id, group_name, password, user_id, creation_date, max_members, current_members, event_id) VALUES
-(1, 'Group Alpha', 'grouppass1', 1, '2023-11-17 10:00:00', 10, 5, 1),
+-- (1, 'Group Alpha', 'grouppass1', 1, '2023-11-17 10:00:00', 10, 5, 1),
 (2, 'Group Beta', 'grouppass2', 2, '2023-11-18 11:00:00', 15, 8, 2),
 (3, 'Group Gamma', 'grouppass3', 3, '2023-11-19 12:00:00', 20, 10, 3),
 (4, 'Group Delta', 'grouppass4', 4, '2023-11-20 13:00:00', 12, 6, 4),
@@ -171,3 +174,4 @@ INSERT INTO location_history (user_id, latitude, longitude, altitude, acquisitio
 (3, 35.6895, 139.6917, 45.0, '2023-11-17 08:30:00', '迷子'),  -- 東京の位置情報
 (4, 43.0618, 141.3545, 20.0, '2023-11-17 08:45:00', '緊急'),  -- 札幌の位置情報
 (5, 26.2124, 127.6809, 15.0, '2023-11-17 09:00:00', '通常');  -- 沖縄の位置情報
+
