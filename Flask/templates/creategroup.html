@@ -112,7 +112,7 @@
         document.querySelector("#header").innerHTML = data;
 
         // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
-        document.querySelector('.hamburger-menu').addEventListener('click', function() {
+        document.querySelector('.hamburger-menu').addEventListener('click', function () {
           document.querySelector('.menu').classList.toggle('active');
         });
       });
@@ -136,12 +136,12 @@
 
     <div class="passwordText">
       <label for="password">パスワード:</label>
-      <input type="text" id="password" name="password">
+      <input type="text" id="password" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
     </div>
 
     <div class="participantNumberText">
       <label for="man">参加人数　:</label>
-      <input type="number" id="man" name="man">
+      <input type="number" id="man" name="man" min="0">
     </div>
     
     <input type="submit" value="作成" class="createButton" onclick="submitForm()">
