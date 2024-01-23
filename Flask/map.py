@@ -26,10 +26,34 @@ def show_map():
     # ユーザーの位置情報が存在しない場合、デフォルトの位置を使用
     return render_template('map.html', latitude=-34.397, longitude=150.644)
 
-# 既存の関数とコード...
+@map_bp.route('/api/update-user-status', methods=['POST'])
+def update_user_status():
+    user_id = session.get('user_id')
+    if not user_id:
+        return jsonify({'error': 'User not logged in'}), 401
+
+    data = request.json
+    status = data.get('status')
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute('UPDATE users SET user_status = ? WHERE user_id = ?', (status, user_id))
+        conn.commit()
+    except sqlite3.Error as e:
+        conn.rollback()
+        cursor.close()
+        conn.close()
+        return jsonify({'error': str(e)}), 500
+
+    cursor.close()
+    conn.close()
+    return jsonify({'message': 'User status updated successfully'})
 
 @map_bp.route('/api/update-location', methods=['POST'])
 def update_location():
+
     user_id = session.get('user_id')
     if not user_id:
         return jsonify({'error': 'User not logged in'}), 401
@@ -78,3 +102,26 @@ def update_location():
     cursor.close()
     conn.close()
     return jsonify({'message': 'Location updated successfully'})
+
+@map_bp.route('/api/get-user-status')
+def get_user_status():
+    user_id = session.get('user_id')
+    if not user_id:
+        return jsonify({'error': 'User not logged in'}), 401
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute('SELECT user_status FROM users WHERE user_id = ?', (user_id,))
+        user_status = cursor.fetchone()
+        if user_status:
+            return jsonify({'user_status': user_status[0]})
+        else:
+            return jsonify({'error': 'User not found'}), 404
+    except sqlite3.Error as e:
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
