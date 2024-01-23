@@ -13,11 +13,13 @@ from map import map_bp
 from joingroup import joingroup_bp
 from logout import logout_bp
 from autologin import auto_login_bp
+from selectchatpartner import selectchatpartner_bp
 
 app = Flask(__name__)
 app.register_blueprint(index_bp)
 app.register_blueprint(register_bp)
 app.register_blueprint(signup_bp)
+app.register_blueprint(selectchatpartner_bp)
 app.register_blueprint(chat_bp)
 app.register_blueprint(creategroup_bp)
 app.register_blueprint(check_data_bp)

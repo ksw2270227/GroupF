@@ -16,19 +16,27 @@ def chat():
         message_content = request.form['message_content']
 
         if message_content.strip() != '':
-            sender_user_id = session.get('user_id')  # ログインユーザーのIDを固定
-            receiver_user_id = 2  # 受信者のユーザーIDを管理者に固定
-            sender_role = session.get('role')  # 役割を'User'と仮定
+            sender_user_id = session.get('user_id')
+            sender_role = session.get('role')
             
+            # 管理者へのメッセージ送信
+            if sender_role == 'User':
+                receiver_user_id = 2
+                receiver_role = 'Admin'
+            elif sender_role == 'Admin':
+                # 管理者がメッセージを送信する場合の処理
+                receiver_user_id = 1  # 仮定: 送信先はユーザーとする
+                receiver_role = 'User'
 
             sent_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-            save_message_to_database(sender_user_id, sender_role, receiver_user_id, 'Admin', message_content, sent_time)
+            save_message_to_database(sender_user_id, sender_role, receiver_user_id, receiver_role, message_content, sent_time)
 
             return redirect(url_for('chat.chat'))
 
     chat_history = get_chat_history()
     return render_template('chat.html', chat_history=chat_history)
+
 
 def save_message_to_database(sender_user_id, sender_role, receiver_user_id, receiver_role, message_content, sent_time):
     conn = get_db_connection()

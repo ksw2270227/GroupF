@@ -70,32 +70,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <!-- 履歴を取得し、遷移先の内容はユーザーごとに違うものになる -->
-                    <td><a href="/chat">ユーザー1</a></td>
-                    <td>OO/OO --:--</td>
-                    <td class="ellipsis">123456789012345678901</td>
-                </tr>
-                <tr>
-                    <td><a href="/chat">ユーザー2</a></td>
-                    <td>OO/OO --:--</td>
-                    <td class="ellipsis">~~~~~~~~~~~~~</td>
-                </tr>
-                <tr>
-                    <td><a href="/chat">ユーザー3</a></td>
-                    <td>OO/OO --:--</td>
-                    <td class="ellipsis">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</td>
-                </tr>
-                <tr>
-                    <td><a href="/chat">ユーザー4</a></td>
-                    <td>OO/OO --:--</td>
-                    <td class="ellipsis">~~~~~~~~~~~~~~~~~~~......</td>
-                </tr>
-                <tr>
-                    <td><a href="/chat">ユーザー5</a></td>
-                    <td>OO/OO --:--</td>
-                    <td class="ellipsis">最新チャット5</td>
-                </tr>
+                {% for user in users %}
+                    <tr>
+                        <td><a href="{{ url_for('chat.chat', user_id=user.user_id) }}">{{ user.user_name }}</a></td>
+                        <td>{{ user.latest_chat_time }}</td>
+                        <td class="ellipsis">{{ user.latest_chat_content }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

@@ -1,9 +1,9 @@
 function showConfirmation() {
     var isLogout = window.confirm("ログアウトしますか？");
         
-    // ログインしていない場合の処理
+    // キャンセルした場合の処理
     if (!isLogout) {
-        alert("ログアウトしていません。");
+        alert("キャンセルしました。");
         return;
     }
 
