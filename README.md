@@ -1,3 +1,4 @@
 # GroupF
 卒業研究Fグループ
-#そめが編集した
+
+![Test Image 2](Flask/static/map/another_user.png)
