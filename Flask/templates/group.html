@@ -108,7 +108,7 @@
         </form>
         <form class="login-container">
                 <h5>{{ group['group_id'] }}が入る場所</h5>
-                <h5>最大人数: {{ group['max_participants'] }}</h5>
+                <h5>最大人数: {{ group['max_members'] }}</h5>
                 <!-- 他のフィールドがあればここに追加 -->
             {% endfor %}
         </form>
@@ -117,11 +117,11 @@
     {% endif %}
 
         <form class="login-container">
-            <h3>参加人数 {{ group_count }}/{{ max_participants }} が入る</h3>
+            <h3>参加人数 {{ group_count }}/{{ max_members }} </h3>
             {% if participants %}
             {% for participant in participants %}
                 <div style="border: 1px solid black;">
-                    参加者氏名: {{ participant['participant_name'] }}
+                    参加者氏名: {{ participant['full_name'] }}
                 </div>
             {% endfor %}
         {% else %}
