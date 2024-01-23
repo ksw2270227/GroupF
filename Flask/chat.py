@@ -3,6 +3,7 @@ import sqlite3
 import datetime
 
 chat_bp = Blueprint('chat', __name__)
+app = Flask(__name__)
 
 
 def get_db_connection():
@@ -13,6 +14,10 @@ def get_db_connection():
 @chat_bp.route('/chat', methods=['GET', 'POST'])
 def chat():
     if request.method == 'POST':
+
+        # URLからクエリパラメータとして渡されたuser_idを取得し、int型に変換
+        select_user_id = int(request.args.get('user_id')) if request.args.get('user_id') else None
+
         message_content = request.form['message_content']
 
         if message_content.strip() != '':
@@ -25,7 +30,7 @@ def chat():
                 receiver_role = 'Admin'
             elif sender_role == 'Admin':
                 # 管理者がメッセージを送信する場合の処理
-                receiver_user_id = 1  # 仮定: 送信先はユーザーとする
+                receiver_user_id = int(select_user_id)
                 receiver_role = 'User'
 
             sent_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -36,7 +41,6 @@ def chat():
 
     chat_history = get_chat_history()
     return render_template('chat.html', chat_history=chat_history)
-
 
 def save_message_to_database(sender_user_id, sender_role, receiver_user_id, receiver_role, message_content, sent_time):
     conn = get_db_connection()
@@ -54,9 +58,19 @@ def get_chat_history():
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        # ユーザーまたは管理者としての履歴を取得
-        cursor.execute('SELECT * FROM messages WHERE (sender_user_id = ? AND sender_role = ? AND receiver_user_id = ? AND receiver_role = ?) OR (sender_user_id = ? AND sender_role = ? AND receiver_user_id = ? AND receiver_role = ?)',
-               (session.get('user_id'), session.get('role'), 2, 'Admin', 2, 'Admin', session.get('user_id'), session.get('role')))
+        # URLからクエリパラメータとして渡されたuser_idを取得
+        select_user_id = request.args.get('user_id')
+
+        sender_user_id = session.get('user_id')
+        sender_role = session.get('role')
+
+        if sender_role == 'User':
+            # ユーザーまたは管理者としての履歴を取得
+            cursor.execute('SELECT * FROM messages WHERE (sender_user_id = ? AND sender_role = ? AND receiver_user_id = ? AND receiver_role = ?) OR (sender_user_id = ? AND sender_role = ? AND receiver_user_id = ? AND receiver_role = ?)',
+                (session.get('user_id'), session.get('role'), 2, 'Admin', 2, 'Admin', session.get('user_id'), session.get('role')))
+        elif sender_role == 'Admin':
+            cursor.execute('SELECT * FROM messages WHERE (sender_user_id = ? AND sender_role = ? AND receiver_user_id = ? AND receiver_role = ?) OR (sender_user_id = ? AND sender_role = ? AND receiver_user_id = ? AND receiver_role = ?)',
+                (session.get('user_id'), session.get('role'), select_user_id, 'User', select_user_id, 'User', session.get('user_id'), session.get('role')))
 
         chat_history = cursor.fetchall()
 
@@ -65,5 +79,8 @@ def get_chat_history():
 
         return chat_history
     except Exception as e:
-            print(f"Error fetching chat history: {e}")
-            return None
+        print(f"Error fetching chat history: {e}")
+        return None
+    
+if __name__ == '__main__':
+    app.run(debug=True)

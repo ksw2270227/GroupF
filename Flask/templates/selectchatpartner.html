@@ -10,6 +10,7 @@
     <style>
         .table {
             margin-top: 20px;
+            margin-bottom: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -71,11 +72,11 @@
             </thead>
             <tbody>
                 {% for user in users %}
-                    <tr>
-                        <td><a href="{{ url_for('chat.chat', user_id=user.user_id) }}">{{ user.user_name }}</a></td>
-                        <td>{{ user.latest_chat_time }}</td>
-                        <td class="ellipsis">{{ user.latest_chat_content }}</td>
-                    </tr>
+                <tr>
+                    <td><a href="{{ url_for('chat.chat', user_id=user.user_id) }}">{{ user.user_name }}</a></td>
+                    <td>{{ user.latest_chat_time }}</td>
+                    <td class="ellipsis">{{ user.latest_chat_content }}</td>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>
@@ -110,7 +111,7 @@
                 });
             });
 
-        fetch("footer.html")
+        fetch("./static/footer.html")
             .then((response) => response.text())
             .then((data) => document.querySelector("#footer").innerHTML = data);
     </script>
