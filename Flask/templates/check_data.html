@@ -3,17 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>SQLite Database Tables</title>
-    <script>
-        function toggleTable(tableName) {
-            var table = document.getElementById(tableName);
-            table.style.display = table.style.display === 'none' ? '' : 'none';
+
+    <style>
+        /* ボタンとテーブルの共通スタイル */
+        button, table {
+            background-color: #f8f8f8; /* 薄い灰色の背景 */
+            margin-bottom: 10px;
+            border-radius: 5px;
+            padding: 10px;
         }
-    </script>
+
+        /* 個別のテーブルスタイル */
+        #usersTable { background-color: #fff0f0; } /* 非常に薄い赤 */
+        #adminsTable { background-color: #f0fff0; } /* 非常に薄い緑 */
+        #companiesTable { background-color: #f0f0ff; } /* 非常に薄い青 */
+        #companyEmployeesTable { background-color: #fff5e6; } /* 非常に薄いオレンジ */
+        #groupsTable { background-color: #e6f7ff; } /* 非常に薄い水色 */
+        #eventsTable { background-color: #f6e6ff; } /* 非常に薄い紫 */
+        #messagesTable { background-color: #fffff0; } /* 非常に薄い黄色 */
+        #locationDataTable { background-color: #fff0f0; } /* 非常に薄いピンク */
+        #locationHistoryTable { background-color: #f0fff0; } /* 非常に薄いミント */
+
+        /* 個別のテーブルスタイル */
+        .btn-usersTable  { background-color: #fff0f0; } /* 非常に薄い赤 */
+        .btn-adminsTable  { background-color: #f0fff0; } /* 非常に薄い緑 */
+        .btn-companiesTable  { background-color: #f0f0ff; } /* 非常に薄い青 */
+        .btn-companyEmployeesTable  { background-color: #fff5e6; } /* 非常に薄いオレンジ */
+        .btn-groupsTable  { background-color: #e6f7ff; } /* 非常に薄い水色 */
+        .btn-eventsTable  { background-color: #f6e6ff; } /* 非常に薄い紫 */
+        .btn-messagesTable  { background-color: #fffff0; } /* 非常に薄い黄色 */
+        .btn-locationDataTable  { background-color: #fff0f0; } /* 非常に薄いピンク */
+        .btn-locationHistoryTable  { background-color: #f0fff0; } /* 非常に薄いミント */
+
+    
+    </style>
 </head>
 <body>
-    <h2>SQLite Database Tables</h2>
-
-    <button onclick="toggleTable('usersTable')">Toggle Users Table</button>
+    <button onclick="toggleTable('usersTable', this)"> Users  </button>
     <table id="usersTable" border="1" style="display:none;"> 
         <tr>
             <th>user_id</th>
@@ -45,7 +71,7 @@
         {% endfor %}
     </table>
 
-    <button onclick="toggleTable('adminsTable')">Toggle Admins Table</button>
+    <button onclick="toggleTable('adminsTable', this)"> Admins  </button>
     <table id="adminsTable" border="1" style="display:none;">
     <tr>
         <th>user_id</th>
@@ -65,7 +91,7 @@
     {% endfor %}
     </table>
 
-    <button onclick="toggleTable('companiesTable')">Toggle Companies Table</button>
+    <button onclick="toggleTable('companiesTable', this)"> Companies  </button>
     <table id="companiesTable" border="1" style="display:none;">
     <tr>
         <th>company_id</th>
@@ -87,7 +113,7 @@
     {% endfor %}
     </table>
 
-    <button onclick="toggleTable('companyEmployeesTable')">Toggle Company Employees Table</button>
+    <button onclick="toggleTable('companyEmployeesTable', this)"> Company Employees  </button>
     <table id="companyEmployeesTable" border="1" style="display:none;">
     <tr>
         <th>company_id</th>
@@ -109,7 +135,7 @@
     {% endfor %}
     </table>
 
-    <button onclick="toggleTable('groupsTable')">Toggle Groups Table</button>
+    <button onclick="toggleTable('groupsTable', this)"> Groups  </button>
     <table id="groupsTable" border="1" style="display:none;">
     <tr>
         <th>group_id</th>
@@ -130,11 +156,12 @@
         <td>{{ group[4] }}</td>
         <td>{{ group[5] }}</td>
         <td>{{ group[6] }}</td>
+        <td>{{ group[7] }}</td>
     </tr>
     {% endfor %}
     </table>
 
-    <button onclick="toggleTable('eventsTable')">Toggle Events Table</button>
+    <button onclick="toggleTable('eventsTable', this)"> Events  </button>
     <table id="eventsTable" border="1" style="display:none;">
     <tr>
         <th>company_id</th>
@@ -160,7 +187,7 @@
     {% endfor %}
     </table>
 
-    <button onclick="toggleTable('messagesTable')">Toggle Messages Table</button>
+    <button onclick="toggleTable('messagesTable', this)"> Messages  </button>
     <table id="messagesTable" border="1" style="display:none;">
     <tr>
         <th>message_id</th>
@@ -184,7 +211,7 @@
     {% endfor %}
     </table>
 
-    <button onclick="toggleTable('locationDataTable')">Toggle Location Data Table</button>
+    <button onclick="toggleTable('locationDataTable', this)"> Location Data  </button>
     <table id="locationDataTable" border="1" style="display:none;">
     <tr>
         <th>user_id</th>
@@ -206,7 +233,7 @@
     {% endfor %}
     </table>
     
-    <button onclick="toggleTable('locationHistoryTable')">Toggle Location History Table</button>
+    <button onclick="toggleTable('locationHistoryTable', this)"> Location History  </button>
     <table id="locationHistoryTable" border="1" style="display:none;">
     <tr>
         <th>user_id</th>
@@ -228,6 +255,29 @@
     {% endfor %}
     </table>
 
+    
+    <script>
+        function toggleTable(tableName, button) {
+            var table = document.getElementById(tableName);
+            var display = table.style.display;
+    
+            // テーブルの表示状態を切り替える
+            table.style.display = display === 'none' ? '' : 'none';
+    
+            // ボタンのクラス名を生成
+            var buttonClass = 'btn-' + tableName;
+            
+            // ボタンのクラスを切り替える
+            if (display === 'none') {
+                button.classList.add(buttonClass);
+                button.classList.remove("active-button");
+            } else {
+                button.classList.remove(buttonClass);
+                button.classList.add("active-button");
+            }
+        }
+    </script>
+    
 
 </body>
 </html>

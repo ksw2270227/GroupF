@@ -111,14 +111,18 @@ CREATE TABLE location_history (
 );
 
 
-
+-- `users` テーブルの初期値を設定
 INSERT INTO users (user_id, user_name, full_name, phone_number, email_address, password, age, gender, current_event_id, current_group_id, user_status) VALUES
-(1, 'hanako123', '花子 山田', '090-1234-5678', 'hanako@example.com', 'pass1234', 28, '女性', 3, 2, '通常'),
-(2, 'taro2023', '太郎 佐藤', '080-9876-5432', 'taro@example.com', 'pass2023', 32, '男性', 1, 1, '待機'),
+(1, 'hanako123', '花子 山田', '090-1234-5678', 'hanako@example.com', 'pass1234', 28, '女性', 3, 1, '通常'),
+(2, 'taro2023', '太郎 佐藤', '080-9876-5432', 'taro@example.com', 'pass2023', 32, '男性', 1, 2, '待機'),
 (3, 'sakura_flower', 'さくら 鈴木', '070-1111-2222', 'sakura@example.com', 'sakura123', 25, '女性', 2, 3, '迷子'),
 (4, 'yamamoto_k', '健一 山本', '075-3333-4444', 'yamamoto@example.com', 'yama2024', 45, '男性', 4, 4, '緊急'),
 (5, 'akira_tech', '明 秋田', '092-5555-6666', 'akira@example.com', 'akira5678', 30, '男性', 5, 5, '通常'),
-(6, 'some123', '染 谷', '030-1334-3378', 'someya@example.com', 'pass12345', 111, '男性', 3, 2, '通常');
+(6, 'some123', '染 谷', '030-1334-3378', 'someya@example.com', 'pass12345', 111, '男性', 3, 1, '通常'),
+(7, 'miyuki_star', '美幸 伊藤', '091-2345-6789', 'miyuki@example.com', 'miyu1234', 27, '女性', 2, 2, '待機'),
+(8, 'hiroki_pro', '博樹 中村', '081-9876-5433', 'hiroki@example.com', 'hiro2023', 33, '男性', 1, 2, '迷子'),
+(9, 'ayumi_sky', 'あゆみ 小林', '071-1111-2233', 'ayumi@example.com', 'ayu12345', 26, '女性', 3, 2, '通常');
+
 
 INSERT INTO admins (user_id, user_name, password, full_name, email_address) VALUES
 (1, 'admin_tanaka', 'admtanaka1', '田中 一郎', 'tanaka_admin@example.com'),
@@ -141,13 +145,13 @@ INSERT INTO companies_employee (company_id, user_id, user_name, full_name, passw
 (4, 4, 'employee4', '田中 健一', 'emp4pass', 'kenichi@tanaka-trading.co.jp'),
 (5, 5, 'employee5', '秋田 明', 'emp5pass', 'akira@akita-systems.co.jp');
 
+-- `groups` テーブルの初期値を設定
 INSERT INTO groups (group_id, group_name, password, user_id, creation_date, max_members, current_members, event_id) VALUES
--- (1, 'Group Alpha', 'grouppass1', 1, '2023-11-17 10:00:00', 10, 5, 1),
+(1, 'Group Alpha', 'grouppass1', 1, '2023-11-17 10:00:00', 10, 5, 1),
 (2, 'Group Beta', 'grouppass2', 2, '2023-11-18 11:00:00', 15, 8, 2),
 (3, 'Group Gamma', 'grouppass3', 3, '2023-11-19 12:00:00', 20, 10, 3),
 (4, 'Group Delta', 'grouppass4', 4, '2023-11-20 13:00:00', 12, 6, 4),
 (5, 'Group Epsilon', 'grouppass5', 5, '2023-11-21 14:00:00', 8, 4, 5);
-
 
 INSERT INTO events (company_id, event_name, event_id, password, start_time, end_time, location, event_content) VALUES
 (1, '新製品発表会', 1, 'eventpass1', '2023-12-01 09:00:00', '2023-12-01 18:00:00', '東京国際フォーラム', '最新技術の展示とデモンストレーション'),
@@ -170,7 +174,11 @@ INSERT INTO location_data (user_id, user_status, current_latitude, current_longi
 (2, '待機', 34.6937, 135.5022, 30.0, '2023-11-17 09:15:00'),  -- 大阪
 (3, '迷子', 35.6895, 139.6917, 45.0, '2023-11-17 09:30:00'),  -- 東京
 (4, '緊急', 43.0618, 141.3545, 20.0, '2023-11-17 09:45:00'),  -- 札幌
-(5, '通常', 26.2124, 127.6809, 15.0, '2023-11-17 10:00:00');  -- 沖
+(5, '通常', 26.2124, 127.6809, 15.0, '2023-11-17 10:00:00'),  -- 沖
+(6, '通常', 35.6897, 139.6921, 50.0, '2023-11-17 09:05:00'),  -- 東京
+(7, '待機', 35.4148, 139.4501, 25.0, '2023-11-17 09:20:00'),  -- 神奈川県
+(8, '迷子', 35.6896, 139.7004, 35.0, '2023-11-17 09:35:00'),  -- 東京
+(9, '緊急', 35.8579, 139.6489, 45.0, '2023-11-17 09:50:00');  -- 埼玉県
 
 INSERT INTO location_history (user_id, latitude, longitude, altitude, acquisition_time, user_status) VALUES
 (1, 35.6895, 139.6917, 40.0, '2023-11-17 08:00:00', '通常'),  -- 東京の位置情報
