@@ -8,7 +8,7 @@ def get_db_connection():
     conn = sqlite3.connect('testDB.db')
     return conn
 
-@selectchatpartner_bp.route('/selectchatpartner', methods=['GET', 'POST'])
+@selectchatpartner_bp.route('/selectchatpartner', methods=['GET'])
 def selectchatpartner():
     users = get_users_with_latest_chat()
     return render_template('selectchatpartner.html', users=users)
