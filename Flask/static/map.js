@@ -16,6 +16,8 @@ function initMap() {
 
   // サーバーからユーザーステータスを取得してマーカーを設定
   fetchUserStatusAndSetMarker(userLocation);
+
+  fetchGroupUsersAndSetMarkers();
 }
 
 function fetchUserStatusAndSetMarker(userLocation) {
@@ -62,11 +64,10 @@ function getIconUrl(userId, userStatus) {
   var iconType = (userId == currentUserId) ? 'user' : 'member';
   // console.log("userId + ",userId," == ",currentUserId,"currentUserId")
   var iconFileName = iconType + '_' + userStatus + '.png';
-  // console.log("iconFileName = ",iconFileName)
-  // console.log("file pass = ",iconBasePath + iconFileName)
-  return iconBasePath + iconFileName;
+  var fullPath = iconBasePath + iconFileName;
+  console.log("Icon URL:", fullPath); // デバッグ情報
+  return fullPath;
 }
-
 
 function updateMarkerPosition(latitude, longitude) {
   var newLatLng = new google.maps.LatLng(latitude, longitude);
@@ -86,7 +87,6 @@ function updateMarkerIcon(userId, userStatus) {
     marker.setIcon(icon);
   }
 }
-
 
 function getLocationAndUpdate() {
   if (navigator.geolocation) {
@@ -183,6 +183,36 @@ function fetchUserStatus() {
       console.error('Error fetching user status:', error);
     });
 }
+
+//新しく追加した機能
+function fetchGroupUsersAndSetMarkers() {
+  fetch('/api/get-group-users')
+      .then(response => response.json())
+      .then(data => {
+          console.log("API response:", data); // APIからの応答をログに出力
+          data.group_users.forEach(user => {
+              var userLocation = {
+                  lat: user[2], // 緯度
+                  lng: user[3]  // 経度
+              };
+              var iconUrl = getIcon(user[0], user[4]); // ユーザーIDとステータス
+
+              var marker = new google.maps.Marker({
+                  position: userLocation,
+                  map: map,
+                  icon: iconUrl,
+                  title: user[1] // ユーザーの名前
+              });
+              console.log("Marker for user:", user[1], userLocation); // マーカー設定のログ
+          });
+      })
+      .catch(error => {
+          console.error('Error fetching group users:', error);
+      });
+}
+
+
+
 
 // 位置情報を更新するためのインターバル設定
 setInterval(getLocationAndUpdate, 10000); // 10秒ごとに更新
