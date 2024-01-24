@@ -125,3 +125,37 @@ def get_user_status():
         cursor.close()
         conn.close()
 
+#新しく追加した機能
+@map_bp.route('/api/get-group-users')
+def get_group_users():
+    user_id = session.get('user_id')
+    if not user_id:
+        print("User not logged in")
+        return jsonify({'error': 'User not logged in'}), 401
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    try:
+        # 現在のユーザーのグループIDを取得
+        cursor.execute('SELECT current_group_id FROM users WHERE user_id = ?', (user_id,))
+        group_id = cursor.fetchone()[0]
+        print("Group ID:", group_id)
+
+        # 同じグループの全ユーザー情報を取得
+        cursor.execute('''
+            SELECT u.user_id, u.full_name, l.current_latitude, l.current_longitude, l.user_status
+            FROM users u
+            JOIN location_data l ON u.user_id = l.user_id
+            WHERE u.current_group_id = ?
+        ''', (group_id,))
+        users = cursor.fetchall()
+        print("Group users:", users)
+        return jsonify({'group_users': users})
+    except sqlite3.Error as e:
+        print("Database error:", str(e))
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()
+

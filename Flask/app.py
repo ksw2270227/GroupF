@@ -4,7 +4,6 @@ import sqlite3
 
 #impot from files
 from index import index_bp
-from register import register_bp
 from signup import signup_bp
 from chat import chat_bp
 from creategroup import creategroup_bp
@@ -22,7 +21,6 @@ from autologout import autologout_bp
 
 app = Flask(__name__)
 app.register_blueprint(index_bp)
-app.register_blueprint(register_bp)
 app.register_blueprint(signup_bp)
 app.register_blueprint(selectchatpartner_bp)
 app.register_blueprint(chat_bp)
