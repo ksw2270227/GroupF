@@ -13,11 +13,19 @@ def get_db_connection():
 
 @chat_bp.route('/chat', methods=['GET', 'POST'])
 def chat():
+
+    # URLからクエリパラメータとして渡されたuser_idを取得し、int型に変換
+    # select_user_id = int(request.args.get('user_url_id')) if request.args.get('user_url_id') else None
+    
+
     if request.method == 'POST':
+        select_user_id = request.form.get('user_url_id')
+    else:
+        select_user_id = request.args.get('user_url_id')
+    
+    receiver_user_id = select_user_id
 
-        # URLからクエリパラメータとして渡されたuser_idを取得し、int型に変換
-        select_user_id = int(request.args.get('user_id')) if request.args.get('user_id') else None
-
+    if request.method == 'GET':
         message_content = request.form['message_content']
 
         if message_content.strip() != '':
@@ -28,9 +36,9 @@ def chat():
             if sender_role == 'User':
                 receiver_user_id = 2
                 receiver_role = 'Admin'
+            # 管理者がメッセージを送信する場合の処理
             elif sender_role == 'Admin':
-                # 管理者がメッセージを送信する場合の処理
-                receiver_user_id = int(select_user_id)
+                
                 receiver_role = 'User'
 
             sent_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -59,9 +67,9 @@ def get_chat_history():
         cursor = conn.cursor()
 
         # URLからクエリパラメータとして渡されたuser_idを取得
-        select_user_id = request.args.get('user_id')
+        print(request.args)
+        select_user_id = int(request.args.get('user_url_id'))
 
-        sender_user_id = session.get('user_id')
         sender_role = session.get('role')
 
         if sender_role == 'User':
