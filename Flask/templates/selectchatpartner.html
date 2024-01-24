@@ -73,7 +73,11 @@
             <tbody>
                 {% for user in users %}
                 <tr>
-                    <td><a href="{{ url_for('chat.chat', user_id=user.user_id) }}">{{ user.user_name }}</a></td>
+                    <td>
+                        <form method="POST" action="{{ url_for('chat.chat', user_url_id=user.user_id) }}">
+                            <button type="submit">Submit</button>
+                        </form>
+                    </td>
                     <td>{{ user.latest_chat_time }}</td>
                     <td class="ellipsis">{{ user.latest_chat_content }}</td>
                 </tr>
