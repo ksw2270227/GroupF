@@ -6,6 +6,10 @@
   <link rel="stylesheet" type="text/css" href="static/map.css">
 </head>
 <body>
+  <script type="text/javascript">
+    var currentUserId = "{{ session['user_id'] }}";
+    console.log(currentUserId)
+  </script>
   <div id="header"></div>
   <div id="content">
     <a href="/index" class="backButton">戻る</a>
