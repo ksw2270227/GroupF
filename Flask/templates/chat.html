@@ -129,21 +129,21 @@
         </main>
         
 
-        {% if session.get('user_id') is none or session.get('role') is none %}
-        <!-- ログインしていない場合　見た目だけで送信はできない -->
+        <!-- {% if session.get('user_id') is none or session.get('role') is none %}
+        <!-- ログインしていない場合　見た目だけで送信はできない 
         <div id="messageInputContainer">
             <textarea name="message_content" id="messageInput" placeholder="メッセージを入力" rows="1"></textarea>
             <button name="sendButton" id="sendMessageBtn">送信</button>
         </div>
         <div id="footer"></div>
-        {% else %}
+        {% else %} -->
         <!-- ログインしている場合 -->
         <form method="post" action="/chat" id="messageInputContainer">
             <textarea name="message_content" id="messageInput" placeholder="メッセージを入力" rows="1"></textarea>
             <button name="sendButton" id="sendMessageBtn">送信</button>
         </form>
         <div id="footer"></div>
-        {% endif %}
+        <!-- {% endif %} -->
 
         <script>
             fetch("./static/header.html")

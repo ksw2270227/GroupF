@@ -8,7 +8,7 @@ def get_db_connection():
     conn = sqlite3.connect('testDB.db')
     return conn
 
-@selectchatpartner_bp.route('/selectchatpartner', methods=['GET'])
+@selectchatpartner_bp.route('/selectchatpartner', methods=['GET', 'POST'])
 def selectchatpartner():
     users = get_users_with_latest_chat()
     return render_template('selectchatpartner.html', users=users)
@@ -39,6 +39,8 @@ def get_users_with_latest_chat():
             GROUP BY 
                 users.user_id
         ''')
+        # ユーザーID = 送信者ID     受信者ID = 2 (User -> Admin)
+        # ユーザーID = 受信者ID     送信者ID = 2 (Admin -> User)
 
         users = []
         for row in cursor.fetchall():
