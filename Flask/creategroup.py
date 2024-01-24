@@ -44,6 +44,6 @@ def create_group():
             cursor.close()
             conn.close()
 
-        return redirect(url_for('index.index'))  # 仮に/indexにリダイレクト
+        return redirect(url_for('group.group_page'))  # 仮に/indexにリダイレクト
     
     return render_template('creategroup.html')  # グループ作成フォームを表示
