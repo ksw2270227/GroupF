@@ -131,7 +131,11 @@
 
 <body>
   <div id="header"></div>
-
+  {% if test==1 %}
+            <div style="color: red; text-align: center; padding: 20px;">
+              無効なメールアドレスまたはパスワードです。
+            </div>
+  {% endif %}
   <a href="/index" class="backButton">戻る</a>
   <div class="login-container">
     <h2>ログイン</h2>

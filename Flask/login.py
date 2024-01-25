@@ -37,6 +37,8 @@ def login_user():
         else:
             # ログイン失敗時のエラーメッセージ
             error = '無効なメールアドレスまたはパスワードです。'
+            test =1
+            return render_template("login.html",error=error,test=test)
     else :
         return render_template("login.html")     
 
