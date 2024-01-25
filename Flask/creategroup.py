@@ -10,8 +10,8 @@ def get_db_connection():
 
 @creategroup_bp.route('/creategroup', methods=['GET', 'POST'])
 def create_group():
-
     if 'user_id' not in session:
+        # ユーザーがログインしていない場合、login.login_userにリダイレクト
         return redirect(url_for('login.login_user'))
 
     if request.method == 'POST':
