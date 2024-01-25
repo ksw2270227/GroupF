@@ -13,38 +13,59 @@ def get_db_connection():
 
 @chat_bp.route('/chat', methods=['GET', 'POST'])
 def chat():
-    select_user_id_ = int(request.args.get('user_url_id')) if request.args.get('user_url_id') else None
-    session['user_url_id'] = select_user_id_
+    sender_role = session.get('role')
+    if sender_role == 'Admin':
+        # URLからクエリパラメータとして渡されたuser_idを取得し、int型に変換
+        if request.method == 'POST':
+            select_user_id = int(request.form.get('user_url_id'))
+            session['user_url_id'] = select_user_id
+        elif request.method == 'GET':
+            select_user_id = int(request.args.get('user_url_id'))
+            session['user_url_id'] = select_user_id
+        else:
+            select_user_id = 11
+            session['user_url_id'] = select_user_id
 
-    receiver_user_id = session.get('user_url_id')
+    # if request.method == 'POST':
+    #     select_user_id = int(request.form['user_url_id'])
+    # elif request.method == 'GET':
+    #     select_user_id = int(request.args['user_url_id'])
+    # else:
+    #      select_user_id = 11
+
+    
 
     if request.method == 'POST':
-
         message_content = request.form['message_content']
-
+        receiver_user_id = session.get('user_url_id')
+ 
         if message_content.strip() != '':
             sender_user_id = session.get('user_id')
-            sender_role = session.get('role')
-
+            # sender_role = session.get('role')
             
-            
-            # 管理者へのメッセージ送信
+            # 管理者へのメッセージ送信 送信先をAdminの2に固定
             if sender_role == 'User':
                 receiver_user_id = 2
                 receiver_role = 'Admin'
             elif sender_role == 'Admin':
-                # 管理者がメッセージを送信する場合の処理
-                receiver_user_id = select_user_id_
+            # 管理者がメッセージを送信する場合の処理
+                receiver_user_id = session.get('user_url_id')#
                 receiver_role = 'User'
 
             sent_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
             save_message_to_database(sender_user_id, sender_role, receiver_user_id, receiver_role, message_content, sent_time)
 
-            return redirect(url_for('chat.chat'))
+            if sender_role == 'Admin':
+                return redirect(url_for('chat.chat', user_url_id=receiver_user_id))
+            else:
+                return redirect(url_for('chat.chat'))
 
     chat_history = get_chat_history()
-    return render_template('chat.html', chat_history=chat_history)
+    if sender_role == 'Admin':
+        return render_template('chat.html', chat_history=chat_history,user_url_id=select_user_id)
+    else:
+        return render_template('chat.html', chat_history=chat_history)
 
 def save_message_to_database(sender_user_id, sender_role, receiver_user_id, receiver_role, message_content, sent_time):
     conn = get_db_connection()
@@ -63,19 +84,22 @@ def get_chat_history():
         cursor = conn.cursor()
 
         receiver_user_id = session.get('user_url_id')
+        sender_user_id = session.get('user_id')
+        sender_role = session.get('role')
 
         # URLからクエリパラメータとして渡されたuser_idを取得
         # select_user_id = int(request.args.get('user_url_id')) if request.args.get('user_url_id') else None
 
-        sender_role = session.get('role')
+        
 
         if sender_role == 'User':
-            # ユーザーまたは管理者としての履歴を取得
+            # ユーザーとしての履歴を取得 sender_user_id/roleを2/Adminに
             cursor.execute('SELECT * FROM messages WHERE (sender_user_id = ? AND sender_role = ? AND receiver_user_id = ? AND receiver_role = ?) OR (sender_user_id = ? AND sender_role = ? AND receiver_user_id = ? AND receiver_role = ?)',
-                (session.get('user_id'), session.get('role'), 2, 'Admin', 2, 'Admin', session.get('user_id'), session.get('role')))
+                (sender_user_id, sender_role, 2, 'Admin', 2, 'Admin', sender_user_id, sender_role))
         elif sender_role == 'Admin':
+            # 管理者としての履歴を取得　receiver_roleをUserに
             cursor.execute('SELECT * FROM messages WHERE (sender_user_id = ? AND sender_role = ? AND receiver_user_id = ? AND receiver_role = ?) OR (sender_user_id = ? AND sender_role = ? AND receiver_user_id = ? AND receiver_role = ?)',
-                (session.get('user_id'), session.get('role'), receiver_user_id, 'User', receiver_user_id, 'User', session.get('user_id'), session.get('role')))
+                (sender_user_id, sender_role, receiver_user_id, 'User', receiver_user_id, 'User', sender_user_id, sender_role))
 
         chat_history = cursor.fetchall()
 
