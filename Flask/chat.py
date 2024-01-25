@@ -13,6 +13,10 @@ def get_db_connection():
 
 @chat_bp.route('/chat', methods=['GET', 'POST'])
 def chat():
+    # ユーザーIDがセッションに存在しない場合、ログインページにリダイレクト
+    if session.get('user_id') is None:
+        return redirect(url_for('login.login_user'))
+    
     sender_role = session.get('role')
     if sender_role == 'Admin':
         # URLからクエリパラメータとして渡されたuser_idを取得し、int型に変換
@@ -38,7 +42,7 @@ def chat():
     if request.method == 'POST':
         message_content = request.form['message_content']
         receiver_user_id = session.get('user_url_id')
- 
+
         if message_content.strip() != '':
             sender_user_id = session.get('user_id')
             # sender_role = session.get('role')
@@ -72,7 +76,7 @@ def save_message_to_database(sender_user_id, sender_role, receiver_user_id, rece
     cursor = conn.cursor()
 
     cursor.execute('INSERT INTO messages (sender_user_id, sender_role, receiver_user_id, receiver_role, message_content, sent_time) VALUES (?, ?, ?, ?, ?, ?)',
-                   (sender_user_id, sender_role, receiver_user_id, receiver_role, message_content.strip(), sent_time))
+                    (sender_user_id, sender_role, receiver_user_id, receiver_role, message_content.strip(), sent_time))
 
     conn.commit()
     cursor.close()
