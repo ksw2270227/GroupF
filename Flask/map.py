@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, request, jsonify
+from flask import Blueprint, render_template, session, request, jsonify, redirect, url_for
 import sqlite3
 import datetime
 
@@ -131,7 +131,8 @@ def get_group_users():
     user_id = session.get('user_id')
     if not user_id:
         print("User not logged in")
-        return jsonify({'error': 'User not logged in'}), 401
+        # return jsonify({'error': 'User not logged in'}), 401
+        return redirect(url_for('login.login_user'))
 
     conn = get_db_connection()
     cursor = conn.cursor()

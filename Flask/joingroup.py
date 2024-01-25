@@ -23,8 +23,8 @@ def update_current_group_id(user_id, new_group_id):
 @joingroup_bp.route('/joingroup', methods=['GET', 'POST'])
 def join_group():
     if 'user_id' not in session:
-        # ユーザーがログインしていない場合、index.indexにリダイレクト
-        return redirect(url_for('index.index'))
+        # ユーザーがログインしていない場合、login.login_userにリダイレクト
+        return redirect(url_for('login.login_user'))
 
     error = None
     if request.method == 'POST':
@@ -53,7 +53,9 @@ def join_group():
             return redirect(url_for('group.group_page'))
         else:
             # 参加失敗時のエラーメッセージ
-            error = '無効なグループIDまたはパスワードです.'
+            error = '無効なグループIDまたはパスワードです。'
+            test =1
+            return render_template("joingroup.html",error=error,test=test)
 
     # GETリクエストの場合、またはエラーがある場合に参加ページを表示.
     return render_template('joingroup.html', error=error)

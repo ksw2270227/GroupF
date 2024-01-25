@@ -34,8 +34,8 @@ def register_user():
             return render_template('signup.html', form_data=request.form)
 
         cursor.execute(
-            'INSERT INTO users (user_name, full_name, phone_number, email_address, password, age, gender) VALUES (?, ?, ?, ?, ?, ?, ?)',
-            (user_name, full_name, phone_number, email_address, password, age, gender)
+            'INSERT INTO users (user_name, full_name, phone_number, email_address, password, age, gender,current_event_id,current_group_id,user_status) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?)',
+            (user_name, full_name, phone_number, email_address, password, age, gender,0,0,'通常')
         )
 
         conn.commit()

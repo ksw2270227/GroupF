@@ -1,6 +1,6 @@
 # group.py
 
-from flask import Blueprint, render_template, session, jsonify, current_app
+from flask import Blueprint, render_template, session, jsonify, current_app, redirect, url_for
 import sqlite3
 
 group_bp = Blueprint('group', __name__)
@@ -25,6 +25,10 @@ def group_page():
 
             if current_group_id:
                 current_group_id = current_group_id[0]
+
+                if current_group_id == 0 or current_group_id is None:
+                    # current_group_idが0もしくはNoneの場合、/joingroupにリダイレクト
+                    return redirect(url_for('joingroup.join_group'))
 
                 cursor.execute('SELECT * FROM groups WHERE group_id = ?', (current_group_id,))
                 group = cursor.fetchone()
@@ -58,4 +62,4 @@ def group_page():
             cursor.close()
             conn.close()
     else:
-        return jsonify({'success': False, 'error': 'ユーザーがログインしていません'})
+        return redirect(url_for('login.login_user'))

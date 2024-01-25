@@ -16,7 +16,7 @@ def mypage():
     if not user_id:
         # ユーザーがログインしていない場合はログインページにリダイレクトkkk
         print("ログインしてない")
-        return redirect(url_for('index.index'))
+        return redirect(url_for('login.login_user'))
 
     conn = get_db_connection()
     cursor = conn.cursor()

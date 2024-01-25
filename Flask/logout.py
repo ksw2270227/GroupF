@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, jsonify, request
+from flask import Blueprint, render_template, session, jsonify, request, redirect, url_for
 
 logout_bp = Blueprint('logout', __name__)
 
@@ -16,4 +16,5 @@ def logout():
         
         return jsonify({"success": True, "message": "Logout successful"})
     
-    return render_template('index.html')
+# ログインしていない場合、login.login_userにリダイレクト
+    return redirect(url_for('login.login_user'))
