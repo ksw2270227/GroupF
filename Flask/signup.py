@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash,jsonify
 import sqlite3
 from flask import Blueprint
 
@@ -34,8 +34,8 @@ def register_user():
             return render_template('signup.html', form_data=request.form)
 
         cursor.execute(
-            'INSERT INTO users (user_name, full_name, phone_number, email_address, password, age, gender) VALUES (?, ?, ?, ?, ?, ?, ?)',
-            (user_name, full_name, phone_number, email_address, password, age, gender)
+            'INSERT INTO users (user_name, full_name, phone_number, email_address, password, age, gender,current_event_id,current_group_id,user_status) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?)',
+            (user_name, full_name, phone_number, email_address, password, age, gender,0,0,'通常')
         )
 
         conn.commit()
@@ -46,3 +46,21 @@ def register_user():
         return redirect(url_for('index.index'))
     
     return render_template('signup.html')
+
+@signup_bp.route('/check_user', methods=['POST'])
+def check_user():
+    data = request.json
+    phone_number = data.get('phone_number')
+    email_address = data.get('email_address')
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        'SELECT * FROM users WHERE phone_number = ? OR email_address = ?',
+        (phone_number, email_address)
+    )
+    existing_user = cursor.fetchone()
+    cursor.close()
+    conn.close()
+
+    return jsonify({'user_exists': bool(existing_user)})

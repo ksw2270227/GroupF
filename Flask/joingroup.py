@@ -50,7 +50,7 @@ def join_group():
             update_current_group_id(user_id, group[0])
 
             # 参加成功時のリダイレクト先（例：groupページ）
-            return redirect(url_for('group.create_group'))
+            return redirect(url_for('group.group_page'))
         else:
             # 参加失敗時のエラーメッセージ
             error = '無効なグループIDまたはパスワードです.'
