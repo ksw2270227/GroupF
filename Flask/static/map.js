@@ -3,6 +3,8 @@ var map;
 var marker; // マーカーをグローバルに定義
 var userLocation; // グローバル変数として定義
 var selectedMemberLocation; // 選択されたメンバーの位置情報
+var directionsRenderer; // ルート表示のための DirectionsRenderer のインスタンスを保持
+var markers = []; // 作成したマーカーの配列
 
 function initMap() {
   // 緯度と経度の取得
@@ -18,6 +20,21 @@ function initMap() {
 
   fetchUserStatusAndSetMarker(userLocation);
   fetchGroupUsersAndSetMarkers();
+  directionsRenderer = new google.maps.DirectionsRenderer();
+  directionsRenderer.setMap(map);
+}
+
+function clearPreviousRouteAndMarkers() {
+  // 既存のルートをクリア
+  if (directionsRenderer) {
+    directionsRenderer.setMap(null);
+  }
+
+  // 既存のマーカーをクリア
+  markers.forEach(function(marker) {
+    marker.setMap(null);
+  });
+  markers = []; // マーカー配列をリセット
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -256,6 +273,10 @@ function onMemberPinClick(memberLocation) {
 }
 
 function calculateRoute(from, to) {
+
+  // 以前のルートとマーカーをクリア
+  clearPreviousRouteAndMarkers();
+
   var directionsService = new google.maps.DirectionsService();
   var directionsRenderer = new google.maps.DirectionsRenderer();
   directionsRenderer.setMap(map);
@@ -273,6 +294,16 @@ function calculateRoute(from, to) {
       console.error('Directions request failed due to ' + status);
     }
   });
+}
+
+// マーカーの作成と保持
+function addMarker(location) {
+  var marker = new google.maps.Marker({
+    position: location,
+    map: map,
+    // その他のオプション...
+  });
+  markers.push(marker); // マーカーを配列に追加
 }
 
 // イベントリスナー内
