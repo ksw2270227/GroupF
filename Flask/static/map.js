@@ -1,12 +1,14 @@
 // Google Maps JavaScript API の初期化とマップ設定
 var map;
 var marker; // マーカーをグローバルに定義
+var userLocation; // グローバル変数として定義
+var selectedMemberLocation; // 選択されたメンバーの位置情報
 
 function initMap() {
   // 緯度と経度の取得
   var latitude = parseFloat(document.getElementById('latitude').value);
   var longitude = parseFloat(document.getElementById('longitude').value);
-  var userLocation = { lat: latitude, lng: longitude };
+  userLocation = new google.maps.LatLng(latitude, longitude);
 
   // Google Mapsの初期化
   map = new google.maps.Map(document.getElementById('map'), {
@@ -14,10 +16,53 @@ function initMap() {
     zoom: 16
   });
 
-  // サーバーからユーザーステータスを取得してマーカーを設定
   fetchUserStatusAndSetMarker(userLocation);
-
   fetchGroupUsersAndSetMarkers();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var createButton = document.querySelector('.create-button');
+  if (createButton) {
+    createButton.addEventListener('click', function() {
+      if (selectedMemberLocation) {
+        calculateRoute(userLocation, selectedMemberLocation);
+      } else {
+        alert('メンバーが選択されていません！');
+      }
+    });
+  }
+});
+
+function fetchGroupUsersAndSetMarkers() {
+  fetch('/api/get-group-users')
+    .then(response => response.json())
+    .then(data => {
+        data.group_users.forEach(user => {
+            var userLocation = new google.maps.LatLng(user[2], user[3]);
+            var iconUrl = getIcon(user[0], user[4]);
+
+            var memberMarker = new google.maps.Marker({
+                position: userLocation,
+                map: map,
+                icon: iconUrl
+            });
+
+            memberMarker.addListener('click', function() {
+              selectedMemberLocation = userLocation;
+            });
+
+            var infowindow = new google.maps.InfoWindow({
+              content: user[1]
+            });
+
+            memberMarker.addListener('click', function() {
+              infowindow.open(map, memberMarker);
+            });
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching group users:', error);
+    });
 }
 
 function fetchUserStatusAndSetMarker(userLocation) {
@@ -73,7 +118,7 @@ function updateMarkerPosition(latitude, longitude) {
   var newLatLng = new google.maps.LatLng(latitude, longitude);
   if (marker) {
     marker.setPosition(newLatLng);
-    map.setCenter(newLatLng);
+    // map.setCenter(newLatLng);
   }
 }
 
@@ -131,18 +176,6 @@ function getUserStatus() {
     });
 }
 
-// ページ読み込み時にユーザー状況を取得
-document.addEventListener('DOMContentLoaded', function() {
-  getUserStatus();
-  fetchUserStatus();
-  var statusSelect = document.querySelector('.sub1');
-
-  statusSelect.addEventListener('change', function() {
-    var selectedStatus = this.value;
-    updateUserStatus(currentUserId,selectedStatus);
-  });
-
-});
 
 function updateUserStatus(user_id,status) {
   fetch('/api/update-user-status', {
@@ -184,35 +217,76 @@ function fetchUserStatus() {
     });
 }
 
-//新しく追加した機能
 function fetchGroupUsersAndSetMarkers() {
   fetch('/api/get-group-users')
-      .then(response => response.json())
-      .then(data => {
-          console.log("API response:", data); // APIからの応答をログに出力
-          data.group_users.forEach(user => {
-              var userLocation = {
-                  lat: user[2], // 緯度
-                  lng: user[3]  // 経度
-              };
-              var iconUrl = getIcon(user[0], user[4]); // ユーザーIDとステータス
+    .then(response => response.json())
+    .then(data => {
+        data.group_users.forEach(user => {
+            var userLocation = { lat: user[2], lng: user[3] };
+            var iconUrl = getIcon(user[0], user[4]);
 
-              var marker = new google.maps.Marker({
-                  position: userLocation,
-                  map: map,
-                  icon: iconUrl,
-                  title: user[1] // ユーザーの名前
-              });
-              console.log("Marker for user:", user[1], userLocation); // マーカー設定のログ
-          });
-      })
-      .catch(error => {
-          console.error('Error fetching group users:', error);
-      });
+            var memberMarker = new google.maps.Marker({
+                position: userLocation,
+                map: map,
+                icon: iconUrl
+            });
+
+            memberMarker.addListener('click', function() {
+              selectedMemberLocation = userLocation;
+              // 必要なUIの更新
+            });
+
+            var infowindow = new google.maps.InfoWindow({
+              content: user[1]
+            });
+
+            memberMarker.addListener('click', function() {
+              infowindow.open(map, memberMarker);
+            });
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching group users:', error);
+    });
 }
+
+function onMemberPinClick(memberLocation) {
+  selectedMemberLocation = memberLocation;
+  // 必要に応じてUIの更新など
+}
+
+function calculateRoute(from, to) {
+  var directionsService = new google.maps.DirectionsService();
+  var directionsRenderer = new google.maps.DirectionsRenderer();
+  directionsRenderer.setMap(map);
+
+  var request = {
+    origin: from,
+    destination: to,
+    travelMode: 'DRIVING'
+  };
+
+  directionsService.route(request, function(result, status) {
+    if (status == 'OK') {
+      directionsRenderer.setDirections(result);
+    } else {
+      console.error('Directions request failed due to ' + status);
+    }
+  });
+}
+
+// イベントリスナー内
+createButton.addEventListener('click', function() {
+  if (selectedMemberLocation && userLocation) {
+    calculateRoute(userLocation, selectedMemberLocation);
+  } else {
+    console.error('Location not defined');
+  }
+});
 
 
 
 
 // 位置情報を更新するためのインターバル設定
 setInterval(getLocationAndUpdate, 10000); // 10秒ごとに更新
+

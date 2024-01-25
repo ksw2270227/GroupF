@@ -34,30 +34,32 @@
 
   <div id="footer"></div>
 
-  <!-- map.js ファイルの読み込み -->
-  <script src="./static/map.js"></script>
-
   <!-- Google Maps APIの読み込み -->
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQNqTzEy70KGNqJm_DIy77FkmPSQwwXYk&callback=initMap">
-  </script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQNqTzEy70KGNqJm_DIy77FkmPSQwwXYk&callback=initMap"></script>
+
+<!-- map.js ファイルの読み込み -->
+<script src="./static/map.js"></script>
+
 
   <script>
-          // ヘッダーとフッターを動的に読み込む
-          fetch("./static/header.html")
-            .then((response) => response.text())
-            .then((data) => {
-              document.querySelector("#header").innerHTML = data;
+      // ヘッダーとフッターを動的に読み込む
+fetch("./static/header.html")
+  .then((response) => response.text())
+  .then((data) => {
+    document.querySelector("#header").innerHTML = data;
 
-              // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
-              document.querySelector('.hamburger-menu').addEventListener('click', function () {
-                document.querySelector('.menu').classList.toggle('active');
-              });
-            });
+    // ヘッダーを読み込んだ後にハンバーガーボタンにイベントを設定する
+    document.querySelector('.hamburger-menu').addEventListener('click', function () {
+      document.querySelector('.menu').classList.toggle('active');
+    });
+  });
+
   
       fetch("./static/footer.html")
           .then((response) => response.text())
           .then((data) => document.querySelector("#footer").innerHTML = data);
   </script>
+  <!-- map.js ファイルの読み込み -->
+  
 </body>
 </html>

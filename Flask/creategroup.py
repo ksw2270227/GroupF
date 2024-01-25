@@ -32,6 +32,13 @@ def create_group():
                 'INSERT INTO groups (group_name, password, user_id, creation_date, max_members, current_members, event_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
                 (group_name, password, user_id, '2023-01-17 12:00:00', max_members, 0, 0)
             )
+
+            # 追加: 作成したグループの group_id を取得
+            cursor.execute('SELECT group_id FROM groups WHERE user_id = ?', (user_id,))
+            group_id = cursor.fetchone()[0]
+
+            # 追加: users テーブルの current_group_id を更新
+            cursor.execute('UPDATE users SET current_group_id = ? WHERE user_id = ?', (group_id, user_id))
         except sqlite3.IntegrityError as e:
             # 重複がある場合の処理
             print("追加: 重複があります。")
