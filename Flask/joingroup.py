@@ -53,7 +53,9 @@ def join_group():
             return redirect(url_for('group.group_page'))
         else:
             # 参加失敗時のエラーメッセージ
-            error = '無効なグループIDまたはパスワードです.'
+            error = '無効なグループIDまたはパスワードです。'
+            test =1
+            return render_template("joingroup.html",error=error,test=test)
 
     # GETリクエストの場合、またはエラーがある場合に参加ページを表示.
     return render_template('joingroup.html', error=error)
