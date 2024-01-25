@@ -62,4 +62,4 @@ def group_page():
             cursor.close()
             conn.close()
     else:
-        return jsonify({'success': False, 'error': 'ユーザーがログインしていません'})
+        return redirect(url_for('login.login_user'))
