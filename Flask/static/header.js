@@ -1,4 +1,4 @@
-function showConfirmation() {
+ function showConfirmation() {
     var isLogout = window.confirm("ログアウトしますか？");
         
     // キャンセルした場合の処理
