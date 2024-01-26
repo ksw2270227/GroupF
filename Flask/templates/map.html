@@ -14,6 +14,7 @@
   <div id="content">
     <a href="/index" class="backButton">戻る</a>
     <div id="map"></div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQNqTzEy70KGNqJm_DIy77FkmPSQwwXYk&callback=initMap"></script>
     <input type="hidden" id="latitude" value="{{ latitude }}">
     <input type="hidden" id="longitude" value="{{ longitude }}">
   </div>
@@ -36,7 +37,7 @@
   <div id="footer"></div>
 
   <!-- Google Maps APIの読み込み -->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQNqTzEy70KGNqJm_DIy77FkmPSQwwXYk&callback=initMap"></script>
+
 
 <!-- map.js ファイルの読み込み -->
 <script src="./static/map.js"></script>

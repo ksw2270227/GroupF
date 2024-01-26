@@ -5,6 +5,8 @@ var userLocation; // グローバル変数として定義
 var selectedMemberLocation; // 選択されたメンバーの位置情報
 var directionsRenderer; // ルート表示のための DirectionsRenderer のインスタンスを保持
 var markers = []; // 作成したマーカーの配列
+var directionsService;
+var directionsDisplayed = false;
 
 // Google Maps JavaScript API の初期化とマップ設定
 function initMap() {
@@ -22,9 +24,10 @@ function initMap() {
 
   fetchUserStatusAndSetMarker(userLocation);
   fetchGroupUsersAndSetMarkers();
+  
+  directionsService = new google.maps.DirectionsService();
   directionsRenderer = new google.maps.DirectionsRenderer();
-  directionsRenderer.setMap(map);
-
+  directionsRenderer.setMap(map); // DirectionsRenderer をマップに設定
 }
 
 // 現在のユーザーの状態を取得し、その位置にマーカーを設定
@@ -124,14 +127,21 @@ function clearPreviousRouteAndMarkers() {
   markers = []; // マーカー配列をリセット
 }
 
-// 指定された2点間のルートを計算し、マップに表示
-function calculateRoute(from, to) {
-  // 以前のルートとマーカーをクリア
-  clearPreviousRouteAndMarkers();
+// すでに表示されているルートを削除する関数
+function clearDirections() {
+  directionsRenderer.setDirections(null);
+}
 
-  var directionsService = new google.maps.DirectionsService();
-  var directionsRenderer = new google.maps.DirectionsRenderer();
-  directionsRenderer.setMap(map);
+function clearDirections() {
+  if (directionsDisplayed) {
+    directionsRenderer.setDirections({ routes: [] }); // 現在のルートをクリア
+    directionsDisplayed = false; // フラグをリセット
+  }
+}
+
+
+// 指定された2点間のルートを計算し、マップに表示
+function calculateRoute(from, to) {  
 
   var request = {
     origin: from,
@@ -141,11 +151,15 @@ function calculateRoute(from, to) {
 
   directionsService.route(request, function(result, status) {
     if (status == 'OK') {
+      clearDirections(); // 既存のルートを削除
+
       directionsRenderer.setDirections(result);
+      directionsDisplayed = true; // ルートが表示されていることを示すフラグを設定
     } else {
       console.error('Directions request failed due to ' + status);
     }
   });
+
 }
 
 // ユーザーのマーカー位置を更新
