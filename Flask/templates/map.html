@@ -9,7 +9,7 @@
   <script type="text/javascript">
     var currentUserId = "{{ session['user_id'] }}";
   </script>
-  <div id="header"></div>
+  {% include 'header.html' %}
   <div id="content">
     <a href="/index" class="backButton">戻る</a>
     <div id="map"></div>
