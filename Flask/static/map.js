@@ -7,6 +7,7 @@ var directionsRenderer; // ルート表示のための DirectionsRenderer のイ
 var markers = []; // 作成したマーカーの配列
 var directionsService;
 var directionsDisplayed = false;
+var currentUserId
 
 // Google Maps JavaScript API の初期化とマップ設定
 function initMap() {
@@ -127,10 +128,7 @@ function clearPreviousRouteAndMarkers() {
   markers = []; // マーカー配列をリセット
 }
 
-// すでに表示されているルートを削除する関数
-function clearDirections() {
-  directionsRenderer.setDirections(null);
-}
+
 
 function clearDirections() {
   if (directionsDisplayed) {
@@ -146,7 +144,7 @@ function calculateRoute(from, to) {
   var request = {
     origin: from,
     destination: to,
-    travelMode: 'DRIVING'
+    travelMode: 'WALKING'
   };
 
   directionsService.route(request, function(result, status) {
@@ -287,13 +285,26 @@ function addMarker(location) {
 
 // ドキュメントが読み込まれた際に実行される関数
 document.addEventListener('DOMContentLoaded', function() {
+  // 'sub1' クラスを持つ select 要素を取得
+  var statusSelect = document.querySelector('.sub1');
+
+  // select 要素にイベントリスナーを追加
+  statusSelect.addEventListener('change', function() {
+    var selectedStatus = this.value; // 選択されたステータスを取得
+    var userId = 'currentUserId'; // 適切なユーザーIDに置き換える
+
+    // updateUserStatus 関数を呼び出してステータスを更新
+    updateUserStatus(userId, selectedStatus);
+  });
+
+
   // 'create-button'というクラスを持つ要素を取得
   var createButton = document.querySelector('.create-button');
-  
   // 'createButton'が存在する場合
   if (createButton) {
     // 'createButton'がクリックされたときに実行される関数
     createButton.addEventListener('click', function() {
+
       if (selectedMemberLocation) {
         // ルートを計算する関数を呼び出す
         calculateRoute(userLocation, selectedMemberLocation);
