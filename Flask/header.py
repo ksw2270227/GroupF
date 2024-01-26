@@ -1,42 +1,51 @@
 from flask import Blueprint, render_template, session
 
-header_bp = Blueprint('header', __name__)
+index_bp = Blueprint('index', __name__)
 
-# @header_bp.route('/header')
-# def render_header():
-#     # セッションからユーザーIDを取得
-#     user_id = session.get('user_id')
+signup_bp = Blueprint('signup', __name__)
+login_bp = Blueprint('login', __name__)
 
-#     # ログイン状態によって表示するメニューを変更
-#     if user_id:
-#         menu_items = [
-#             {'url': 'mypage.html', 'label': 'マイページ'},
-#             {'url': 'chat.html', 'label': 'チャット'},
-#             {'url': 'map.html', 'label': 'マップ'},
-#             {'url': 'group.html', 'label': 'グループ'},
-#             {'url': 'logout', 'label': 'ログアウト'}
-#         ]
-#     else:
-#         menu_items = [
-#             {'url': 'signup.html', 'label': '新規登録'},
-#             {'url': 'login.html', 'label': 'ログイン'}
-#         ]
-
-#     return render_template('header.html', menu_items=menu_items)
+mypage_bp = Blueprint('mypage', __name__)
+chat_bp = Blueprint('chat', __name__)
+group_bp = Blueprint('group', __name__)
+map_bp = Blueprint('map', __name__)
+logout_bp = Blueprint('logout', __name__)
 
 # ルート設定
-@header_bp.route('/index')
+@index_bp.route('/index')
 def index():
-    return render_template('index.html')
+    user_id = session.get('user_id')
+    return render_template('header.html', user_id=user_id)
 
-@header_bp.route('/signup')
+# 未ログイン
+@signup_bp.route('/signup')
 def signup():
-    return render_template('signup.html')
+    user_id = session.get('user_id')
+    return render_template('header.html', user_id=user_id)
 
-@header_bp.route('/login')
+@login_bp.route('/login')
 def login():
-    return render_template('login.html')
+    user_id = session.get('user_id')
+    return render_template('header.html', user_id=user_id)
 
-@header_bp.route('/chat')
+
+# ログイン済み
+@mypage_bp.route('/mypage')
 def chat():
-    return render_template('chat.html')
+    user_id = session.get('user_id')
+    return render_template('header.html', user_id=user_id)
+
+@chat_bp.route('/chat')
+def chat():
+    user_id = session.get('user_id')
+    return render_template('header.html', user_id=user_id)
+
+@map_bp.route('/map')
+def map():
+    user_id = session.get('user_id')
+    return render_template('header.html', user_id=user_id)
+
+@logout_bp.route('/logout')
+def logout():
+    user_id = session.get('user_id')
+    return render_template('header.html', user_id=user_id)

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash,jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash,jsonify, session 
 import sqlite3
 from flask import Blueprint
 
@@ -10,6 +10,11 @@ def get_db_connection():
 
 @signup_bp.route('/signup', methods=['GET', 'POST'])
 def register_user():
+
+    # ログインしている場合は直ちに index.index にリダイレクト
+    if 'user_id' in session:
+        return redirect(url_for('index.index'))
+
     if request.method == 'POST':
         user_name = request.form['user_name'][:10]
         full_name = request.form['full_name'][:20]
