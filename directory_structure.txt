@@ -1,49 +1,46 @@
-/
-    .gitignore
-    directory_structure.txt
-    README.md
-    testDB.db
 .vscode/
     launch.json
 Flask/
     app.py
     autologin.py
+    autologout.py
     chat.py
     check_data.py
     check_directory_structure.py
     creategroup.py
-    create_SQLite_DB.py
-    docker_mysql.py
     eventlist.py
     group.py
     header.py
     index.py
-    init.sql
     joingroup.py
     login.py
     loginpasforget.py
     logout.py
     map.py
     mypage.py
-    mypage2.py
     mypagechangescreen.py
-    register.py
+    reset_DB.py
     secret_key.txt
     selectchatpartner.py
     signup.py
     testIndex.py
     userlist.py
+    sql/
+        init.sql
     static/
+        favicon.ico
+        favicon_dog.ico
         footer.html
-        header.html
         header.js
         logo.png
         map.css
         map.js
+        signup.js
         style copy.css
         style.css
         testIndex.css
         map/
+            another_user.png
             member_待機.png
             member_緊急.png
             member_迷子.png
@@ -56,8 +53,6 @@ Flask/
         chat.html
         check_data.html
         creategroup.html
-        create_SQLite_DB.html
-        docker_mysql.html
         event.html
         eventchange.html
         eventinformation.html
@@ -65,6 +60,7 @@ Flask/
         eventregistration.html
         googleMapTestPin.png
         group.html
+        header.html
         index.html
         joingroup.html
         list_urls.html
@@ -75,28 +71,9 @@ Flask/
         map.html
         mypage.html
         mypagechangescreen.html
-        register.html
         selectchatpartner.html
         signup.html
-        testIndex.html
         userlist.html
-    __pycache__/
-        app.cpython-38.pyc
-        autologin.cpython-38.pyc
-        chat.cpython-38.pyc
-        check_data.cpython-38.pyc
-        creategroup.cpython-38.pyc
-        create_SQLite_DB.cpython-38.pyc
-        group.cpython-38.pyc
-        index.cpython-38.pyc
-        joingroup.cpython-38.pyc
-        login.cpython-38.pyc
-        logout.cpython-38.pyc
-        map.cpython-38.pyc
-        mypage.cpython-38.pyc
-        register.cpython-38.pyc
-        selectchatpartner.cpython-38.pyc
-        signup.cpython-38.pyc
 html/
     1logo.png
     abnormalityconfirmation.html
@@ -147,128 +124,3 @@ html/
     userdetails.html
     userlist.html
     usually.png
-out/
-    client_sequence/
-        イベント作成.png
-        イベント削除.png
-        イベント変更.png
-        チャット.png
-        パスワード変更.png
-        ログアウト.png
-        ログイン.png
-        参加ユーザー確認.png
-        新規登録.png
-        異常確認.png
-    F_class/
-        F_class.png
-    F_class_Japanese/
-        F_class_Japanese.png
-    F_dmainModel/
-        ドメインモデル.png
-        ドメインモデル2.png
-        ドメインモデル4.png
-        ドメインモデル３.png
-    F_sequence_something/
-        F_sequence_something.png
-    F_usecase_admin/
-        システムシステム管理者.png
-        システム管理者.png
-        システム管理者_usecase.png
-        管理者.png
-    F_usecase_client/
-        F_usecase_client.png
-        パートナー企業.png
-        パートナー企業_usecase(1).png
-        パートナー企業_usecase(2).png
-        パートナー企業_usecase.png
-        パートナー企業_usecase11 30.png
-        提案先.png
-    F_usecase_user/
-        user_usecase.png
-        ユースケース.png
-    F_usecase_user1/
-        user_usecase(1).png
-        user_usecase11 30.png
-    F_usecase_user2/
-        user_usecase(2).png
-    user1_sequence/
-        イベント参加.png
-        イベント退出.png
-        システム管理者チャット.png
-        システム退会.png
-        パスワード変更.png
-        ユーザー異常確認.png
-        ログアウト.png
-        ログイン.png
-        新規登録.png
-        登録情報変更.png
-    ロバストネス図/
-        システム管理者-ロバストネス図-チャット.png
-        システム管理者-ロバストネス図-パス忘れ.png
-        システム管理者-ロバストネス図-ユーザーの異常確認.png
-        システム管理者-ロバストネス図-ユーザー登録情報削除.png
-        システム管理者-ロバストネス図-ユーザー登録情報確認.png
-        システム管理者-ロバストネス図-ログアウト.png
-        システム管理者-ロバストネス図-ログイン.png
-        システム管理者-ロバストネス図.drawio
-        パートナー企業-ロバストネス図-イベント作成.png
-        パートナー企業-ロバストネス図-イベント変更.png
-        パートナー企業-ロバストネス図-チャット.png
-        パートナー企業-ロバストネス図-パスワード変更.png
-        パートナー企業-ロバストネス図-ユーザー異常確認.png
-        パートナー企業-ロバストネス図-ログアウト.png
-        パートナー企業-ロバストネス図-ログイン.png
-        パートナー企業-ロバストネス図-参加ユーザー確認.png
-        パートナー企業-ロバストネス図-新規登録.png
-        パートナー企業-ロバストネス図.drawio
-        ユーザー-ロバストネス図.drawio
-        ユーザー２-ロバストネス図.drawio
-    画面設計図/
-        A-ユーザー情報確認.png
-        A-ユーザー情報確認詳細.png
-        A・C-チャット-企業・シス管.png
-        A・C-チャット相手指定-企業・シス管.png
-        C-イベント一覧.png
-        C-イベント変更.png
-        C-イベント情報.png
-        C-イベント情報登録.png
-        C-ホームページ-企業.png
-        C-新規登録-企業.png
-        C・A-ホームページ-シス管異常確認.png
-        C・A-ホームページ-異常ユーザー詳細.png
-        U-イベント参加.png
-        U-イベント画面.png
-        U-グループ-参加・作成.png
-        U-グループ作成.png
-        U-グループ参加.png
-        U-グループ画面.png
-        U-チャット.png
-        U-マイページ-変更.png
-        U-マイページ-退会.png
-        U-マイページ.png
-        U-マップ-ルート.png
-        U-マップ.png
-        U-新規登録.png
-        U-状況変更付メニュー.png
-        パートナー企業-ロバストネス図-イベント削除.png
-        ヘッダーフッター.png
-        ホームページ.png
-        ログアウト.png
-        ログイン-パス忘れ.png
-        ログイン-パス忘れ変更.png
-        ログイン.png
-        卒研図２.drawio.png
-        状況変更付メニュー.png
-plantuml/
-    client_sequence.plantuml
-    F_class.plantuml
-    F_class_Japanese.plantuml
-    F_dmainModel.plantuml
-    F_sequence_something.plantuml
-    F_usecase_admin.plantuml
-    F_usecase_client.plantuml
-    F_usecase_user1.plantuml
-    System.plantuml
-    user1_sequence.plantuml
-    user2_sequence.plantuml
-
