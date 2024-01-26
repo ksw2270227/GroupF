@@ -10,7 +10,7 @@ def auto_login():
         return jsonify({'user_name': session.get('user_name'), 'user_id': session.get('user_id'), 'message': 'すでにログインしています。'})
     else:
         # 通常はここでユーザー認証を行いますが、デモのために固定値を使用
-        session['user_id'] = 1
-        session['user_name'] = 'hanako@example.com'
+        session['user_id'] = 2
+        session['user_name'] = 'taro@example.com'
         session['role'] = 'User'
         return jsonify({'user_name': session.get('user_name'), 'user_id': session.get('user_id'), 'message': 'ログイン成功！'})
