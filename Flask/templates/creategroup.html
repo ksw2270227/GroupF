@@ -113,8 +113,7 @@
   {% include 'header.html' %}
 
   <script>
-     
-
+    
     fetch("./static/footer.html")
       .then((response) => response.text())
       .then((data) => document.querySelector("#footer").innerHTML = data);
@@ -129,7 +128,7 @@
 
     <div class="groupNameText">
       <label for="group_name">グループ名:</label>
-      <input type="text" id="group_name" name="group_name">
+      <input type="text" id="group_name" name="group_name" required>
     </div>
 
     <div class="passwordText">
@@ -140,7 +139,7 @@
 
     <div class="participantNumberText">
       <label for="man">参加人数　:</label>
-      <input type="number" id="man" name="man" min="1">
+      <input type="number" id="man" name="man" min="1" required>
     </div>
     
     <input type="submit" value="作成" class="createButton" onclick="submitForm()">
