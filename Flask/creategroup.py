@@ -22,7 +22,7 @@ def create_group():
         max_members = request.form['man']  # フォームの input 要素の名前が 'man' なのでこちらを指定
 
         # マイナスでないことを確認
-        if max_members < 0:
+        if len(max_members) < 0:
             return render_template('creategroup.html', error="参加人数は0以上の整数で入力してください")
 
         # データベースに挿入する処理
