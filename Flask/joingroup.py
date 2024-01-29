@@ -19,7 +19,6 @@ def update_current_group_id(user_id, new_group_id):
     cursor.close()
     conn.close()
 
-
 @joingroup_bp.route('/joingroup', methods=['GET', 'POST'])
 def join_group():
     if 'user_id' not in session:
