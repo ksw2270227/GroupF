@@ -176,9 +176,12 @@
         <a href="/mypagechangescreen">
             <button class="changeButton">変更</button>
         </a>
-        <a href="/mypagewithdrawal">
-            <button class="withdrawalButton">退会</button>
-        </a>
+    </div>
+
+    <div class="buttons">
+        <form action="/withdrawal" method="post" onsubmit="return confirm('本当に退会しますか？');">
+            <button type="submit" class="withdrawalButton">退会</button>
+        </form>
     </div>
 
     <div id="footer"></div>
