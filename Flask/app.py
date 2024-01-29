@@ -18,6 +18,8 @@ from logout import logout_bp
 from autologin import auto_login_bp
 from selectchatpartner import selectchatpartner_bp
 from autologout import autologout_bp
+from eventparticpation import eventparticpation_bp
+from event import event_bp
 
 app = Flask(__name__)
 app.register_blueprint(index_bp)
@@ -35,6 +37,8 @@ app.register_blueprint(joingroup_bp)
 app.register_blueprint(logout_bp)
 app.register_blueprint(auto_login_bp)
 app.register_blueprint(autologout_bp)
+app.register_blueprint(eventparticpation_bp)
+app.register_blueprint(event_bp)
 
 try:
     with open('Flask/secret_key.txt', 'r') as file:
