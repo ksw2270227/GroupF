@@ -21,10 +21,10 @@ def show_map():
 
         if location:
             # ユーザーの位置情報が存在する場合
-            return render_template('map.html', latitude=location[0], longitude=location[1])
+            return render_template('map.html', latitude=location[0], longitude=location[1],login_user_id=user_id)
     
     # ユーザーの位置情報が存在しない場合、デフォルトの位置を使用
-    return render_template('map.html', latitude=-34.397, longitude=150.644)
+    return render_template('index.html')
 
 @map_bp.route('/api/update-user-status', methods=['POST'])
 def update_user_status():
@@ -39,7 +39,12 @@ def update_user_status():
     cursor = conn.cursor()
 
     try:
+        # usersテーブルのuser_statusを更新
         cursor.execute('UPDATE users SET user_status = ? WHERE user_id = ?', (status, user_id))
+
+        # location_dataテーブルのuser_statusを更新
+        cursor.execute('UPDATE location_data SET user_status = ? WHERE user_id = ?', (status, user_id))
+
         conn.commit()
     except sqlite3.Error as e:
         conn.rollback()
@@ -50,6 +55,7 @@ def update_user_status():
     cursor.close()
     conn.close()
     return jsonify({'message': 'User status updated successfully'})
+
 
 @map_bp.route('/api/update-location', methods=['POST'])
 def update_location():

@@ -15,6 +15,8 @@ function initMap() {
   getLocationAndUpdate()
   var latitude = parseFloat(document.getElementById('latitude').value);
   var longitude = parseFloat(document.getElementById('longitude').value);
+  var login_user_id = parseFloat(document.getElementById('login_user_id').value);
+  // console.log("latitude:",latitude, "longitude:",longitude, "login_user_id:",login_user_id)
   userLocation = new google.maps.LatLng(latitude, longitude);
 
   // Google Mapsの初期化
@@ -32,12 +34,21 @@ function initMap() {
 }
 
 // 現在のユーザーの状態を取得し、その位置にマーカーを設定
+// 現在のユーザーの状態を取得し、その位置にマーカーを設定
 function fetchUserStatusAndSetMarker(userLocation) {
+  // console.log("fetchUserStatusAndSetMarker function called"); // 関数が呼ばれたことをログに出力
+
   fetch('/api/get-user-status')
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
     .then(data => {
+      // console.log("Response from get-user-status API:", data); // APIレスポンスをログに出力
+
       if (data.user_status) {
-        // 仮に現在のユーザーIDを 'currentUserId' と仮定
         var iconUrl = getIcon(currentUserId, data.user_status);
 
         // マーカーの設定
@@ -46,18 +57,17 @@ function fetchUserStatusAndSetMarker(userLocation) {
           map: map,
           icon: iconUrl
         });
+
+        // console.log("Marker set with user status:", data.user_status); // マーカー設定のログ出力
+      } else {
+        console.error("No user status in response");
       }
     })
     .catch(error => {
       console.error('Error fetching user status:', error);
-      var iconUrl = getIcon('通常');
-      marker = new google.maps.Marker({
-        position: userLocation,
-        map: map,
-        icon: iconUrl
-      });
     });
 }
+
 
 // グループ内のユーザーの位置情報を取得し、それぞれの位置にマーカーを設定
 function fetchGroupUsersAndSetMarkers() {
@@ -73,10 +83,10 @@ function fetchGroupUsersAndSetMarkers() {
                 map: map,
                 icon: iconUrl
             });
-
+            // console.log("marker:",marker)
             memberMarker.addListener('click', function() {
               selectedMemberLocation = userLocation;
-              console.log("userLocation:",userLocation)
+              // console.log("userLocation:",userLocation)
             });
 
             var infowindow = new google.maps.InfoWindow({
@@ -99,7 +109,7 @@ function getIconUrl(userId, userStatus) {
   var iconType = (userId == currentUserId) ? 'user' : 'member';
   var iconFileName = iconType + '_' + userStatus + '.png';
   var fullPath = iconBasePath + iconFileName;
-  console.log("Icon URL:", fullPath); // デバッグ情報
+  // console.log("Icon URL:", fullPath); // デバッグ情報
   return fullPath;
 }
 
@@ -114,20 +124,6 @@ function getIcon(userId, userStatus) {
     scaledSize: iconSize // アイコンの表示サイズを設定
   };
 }
-
-
-// 既存のルートとマーカーをクリアする
-function clearPreviousRouteAndMarkers() {
-  // 既存のルートをクリア
-  if (directionsRenderer) {
-    directionsRenderer.setMap(null);
-  }
-  markers.forEach(function(marker) {
-    marker.setMap(null);
-  });
-  markers = []; // マーカー配列をリセット
-}
-
 
 
 function clearDirections() {
@@ -163,6 +159,7 @@ function calculateRoute(from, to) {
 // ユーザーのマーカー位置を更新
 function updateMarkerPosition(latitude, longitude) {
   var newLatLng = new google.maps.LatLng(latitude, longitude);
+  // console.log("marker:",marker)
   if (marker) {
     marker.setPosition(newLatLng);
     // map.setCenter(newLatLng);
@@ -170,16 +167,35 @@ function updateMarkerPosition(latitude, longitude) {
 }
 
 // マーカーのアイコンを更新
+// マーカーのアイコンを更新
 function updateMarkerIcon(userId, userStatus) {
+  // console.log("updateMarkerIcon called: marker:", marker);
+
   if (marker) {
+    // console.log("Updating marker with new icon");
+
+    // マーカーを一旦マップから削除
+    marker.setMap(null);
+
+    // 新しいアイコンのURLを取得
     var iconUrl = getIconUrl(userId, userStatus);
+    // console.log("New icon URL:", iconUrl);
+
     var icon = {
       url: iconUrl,
-      scaledSize: new google.maps.Size(50, 50) // ここでアイコンのサイズを指定
+      scaledSize: new google.maps.Size(50, 50) // アイコンのサイズを指定
     };
+
+    // マーカーのアイコンを更新
     marker.setIcon(icon);
+
+    // マーカーをマップに再追加
+    marker.setMap(map);
+  } else {
+    console.log("No marker to update");
   }
 }
+
 
 // ユーザーの位置情報を取得し、更新する
 function getLocationAndUpdate() {
@@ -236,8 +252,9 @@ function updateUserStatus(user_id, status) {
   })
   .then(response => response.json())
   .then(data => {
-    console.log('Status update successful:', data);
+    // console.log('Status update successful:', data);
     // アイコンを更新
+    // console.log("user_id:",user_id,"status:",status)
     updateMarkerIcon(user_id, status);
   })
   .catch(error => {
@@ -269,7 +286,7 @@ function fetchUserStatus() {
 // 特定のメンバーのピンがクリックされたときに実行
 function onMemberPinClick(memberLocation) {
   selectedMemberLocation = memberLocation;
-  console.log("onMemberPinClick")
+  // console.log("onMemberPinClick")
   // 必要に応じてUIの更新など
 }
 
@@ -281,6 +298,7 @@ function addMarker(location) {
     // その他のオプション...
   });
   markers.push(marker); // マーカーを配列に追加
+  // console.log("marker:",marker)
 }
 
 // ドキュメントが読み込まれた際に実行される関数
@@ -291,7 +309,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // select 要素にイベントリスナーを追加
   statusSelect.addEventListener('change', function() {
     var selectedStatus = this.value; // 選択されたステータスを取得
-    var userId = 'currentUserId'; // 適切なユーザーIDに置き換える
+    var userId = parseFloat(document.getElementById('login_user_id').value); // 適切なユーザーIDに置き換える
+    // console.log("userID",userId)
 
     // updateUserStatus 関数を呼び出してステータスを更新
     updateUserStatus(userId, selectedStatus);
@@ -310,7 +329,7 @@ document.addEventListener('DOMContentLoaded', function() {
         calculateRoute(userLocation, selectedMemberLocation);
       } else {
         // メンバーが選択されていない場合のアラート
-        console.log("not member selected")
+        // console.log("not member selected")
         alert('メンバーが選択されていません！');
       }
     });
@@ -319,3 +338,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 位置情報を更新するためのインターバル設定
 setInterval(getLocationAndUpdate, 10000); // 10秒ごとに更新
+setInterval(fetchGroupUsersAndSetMarkers, 10000); // 10秒ごとに更新
