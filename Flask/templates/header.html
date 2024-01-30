@@ -21,11 +21,11 @@
         </div>
         <nav class="menu">
             <ul>
-            {% if user_id is none %}
+            {% if session.get('user_id') is none %}
                 <!-- 未ログイン時 -->
                 <li><a href="/signup">新規登録</a></li>
                 <li><a href="/login">ログイン</a></li>
-            {% else %}
+            {% elif session.get('user_id') %}
                 <!-- ログイン済み時 -->
                 <li><a href="/mypage">マイページ</a></li>
                 <li><a href="chat">チャット</a></li>
@@ -33,7 +33,8 @@
                 <li><a href="/group">グループ</a></li>
                 <li><a href="/show_event">イベント</a></li>
                 <li><a href="" onclick="showConfirmation()">ログアウト</a></li>
-            
+            {% else %}
+                <li><a href="#">user_idなし</a></li>
             {% endif %}
             </ul>
         </nav>
