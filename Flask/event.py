@@ -26,7 +26,7 @@ def event_show(event):
         return redirect(url_for('index.index'))  # indexへリダイレクト
 
 # メニューからイベントへ
-@event_bp.route('/event_show', methods=['GET', 'POST'])
+@event_bp.route('/show_event', methods=['GET', 'POST'])
 def show_event():
     # ログインしていなければログイン画面へリダイレクト
     if session.get('user_id') is None:
