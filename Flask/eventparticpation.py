@@ -10,27 +10,11 @@ def get_db_connection():
     return conn
 
 @eventparticpation_bp.route('/eventparticpation', methods=['GET', 'POST'])
-def login_user():
-
-    if request.method == 'POST':
-        event_id = request.form['eventidinput']
-        password = request.form['passwordinput']
-        conn = get_db_connection()
-        cursor = conn.cursor()
-
-        # ユーザーを検索
-        cursor.execute(
-            'SELECT * FROM users WHERE event_id = ? AND password = ?',(event_id, password)
-        )
-        event = cursor.fetchone()
-        print(event)
-
-        session['event_id'] = event[0]
-
-        cursor.close()
-        conn.close()
-
-        
-        return render_template("event.html")
-    else :
-        return render_template("eventparticpation.html")     
+def eventparticpation():
+    # ログインしていればeventparticpationを表示
+    if session.get('user_id') is None:
+        return redirect(url_for('login.login_user'))
+    # elif session.get('user_id'):
+    #     return redirect(url_for('event_show.event_show'))
+    else:
+        return render_template("eventparticpation.html")
