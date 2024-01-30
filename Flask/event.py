@@ -23,7 +23,7 @@ def event_show(event):
                                end_time=end_time, location=location, event_content=event_content)
     else:
         flash('イベントが見つかりませんでした。')  # エラーメッセージをフラッシュ
-        return redirect(url_for('index.index'))  # indexへリダイレクト
+        return render_template("eventparticpation.html")  # eventparticpationへリダイレクト
 
 # メニューからイベントへ
 @event_bp.route('/show_event', methods=['GET', 'POST'])
