@@ -34,7 +34,7 @@ def show_event():
     
     event_id = session.get('event_id')
     # イベントに参加していなければイベント参加画面へ
-    if event_id is 0:
+    if event_id is None:
         return render_template("eventparticpation.html")
     
     conn = get_db_connection()
