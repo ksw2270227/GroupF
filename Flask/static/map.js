@@ -83,10 +83,10 @@ function fetchGroupUsersAndSetMarkers() {
                 map: map,
                 icon: iconUrl
             });
-            // console.log("marker:",marker)
             memberMarker.addListener('click', function() {
               selectedMemberLocation = userLocation;
-              // console.log("userLocation:",userLocation)
+              infowindow.open(map, memberMarker);
+              // console.log("Selected Member Location:", selectedMemberLocation);
             });
 
             var infowindow = new google.maps.InfoWindow({
@@ -286,7 +286,8 @@ function fetchUserStatus() {
 // 特定のメンバーのピンがクリックされたときに実行
 function onMemberPinClick(memberLocation) {
   selectedMemberLocation = memberLocation;
-  // console.log("onMemberPinClick")
+  console.log("onMemberPinClick")
+  console.log(selectedMemberLocation)
   // 必要に応じてUIの更新など
 }
 
@@ -303,8 +304,9 @@ function addMarker(location) {
 
 // ドキュメントが読み込まれた際に実行される関数
 document.addEventListener('DOMContentLoaded', function() {
+  console.log("DOMContentLoaded")
   // 'sub1' クラスを持つ select 要素を取得
-  initMap();
+  
   var statusSelect = document.querySelector('.sub1');
 
   // select 要素にイベントリスナーを追加
@@ -317,24 +319,21 @@ document.addEventListener('DOMContentLoaded', function() {
     updateUserStatus(userId, selectedStatus);
   });
 
-
+  console.log("ok")
   // 'create-button'というクラスを持つ要素を取得
   var createButton = document.querySelector('.create-button');
-  // 'createButton'が存在する場合
-  if (createButton) {
-    // 'createButton'がクリックされたときに実行される関数
-    createButton.addEventListener('click', function() {
-
-      if (selectedMemberLocation) {
-        // ルートを計算する関数を呼び出す
-        calculateRoute(userLocation, selectedMemberLocation);
-      } else {
-        // メンバーが選択されていない場合のアラート
-        // console.log("not member selected")
-        alert('メンバーが選択されていません！');
-      }
-    });
-  }
+  console.log("createButton :",createButton)
+  console.log(createButton)
+  createButton.addEventListener('click', function() {
+    console.log("Current selectedMemberLocation:", selectedMemberLocation);
+    if (selectedMemberLocation) {
+      // ルートを計算する関数を呼び出す
+      calculateRoute(userLocation, selectedMemberLocation);
+    } else {
+      alert('メンバーが選択されていません！');
+    }
+  });
+  initMap();
 });
 
 // 位置情報を更新するためのインターバル設定
