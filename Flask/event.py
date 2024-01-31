@@ -25,51 +25,56 @@ def event_show(event):
         flash('イベントが見つかりませんでした。')  # エラーメッセージをフラッシュ
         return render_template("eventparticpation.html")  # eventparticpationへリダイレクト
 
-# メニューからイベントへ
-@event_bp.route('/show_event', methods=['GET', 'POST'])
-def show_event():
-    # ログインしていなければログイン画面へリダイレクト
-    if session.get('user_id') is None:
-        return redirect(url_for('login.login_user'))
-    
-    event_id = session.get('event_id')
-    # イベントに参加していなければイベント参加画面へ
-    if event_id is None:
-        return render_template("eventparticpation.html")
-    
-    conn = get_db_connection()
-    cursor = conn.cursor()
+@event_bp.route('/event', methods=['GET', 'POST'])
+def event():
+    if request.method == 'POST':
+        if session.get('user_id') is None:
+            return redirect(url_for('login.login_user'))
+        
+        # イベント参加画面のformから取得
+        event_id = request.form['eventidinput']
+        password = request.form['passwordinput']
 
-    # 入力イベントIDと一致するイベントを検索
-    cursor.execute('SELECT * FROM events WHERE event_id = ?', (event_id,))
-    event = cursor.fetchone()
+        conn = get_db_connection()
+        cursor = conn.cursor()
 
-    cursor.close()
-    conn.close()
+        # 入力イベントIDと一致するイベントを検索
+        cursor.execute('SELECT * FROM events WHERE event_id = ? AND password = ?', (event_id, password))
+        event = cursor.fetchone()
 
-    # イベント内容を表示
-    return event_show(event)
+        if event:
+            # イベントに参加できた場合、ユーザーのcurrent_event_idを更新
+            user_id = session.get('user_id')
+            cursor.execute("UPDATE users SET current_event_id = ? WHERE user_id = ?", (event_id, user_id))
+            conn.commit()
 
-# イベント参加処理
-@event_bp.route('/event', methods=['POST'])
-def join_event():
-    if session.get('user_id') is None:
-        return redirect(url_for('login.login_user'))
+        cursor.close()
+        conn.close()
 
-    event_id = request.form['eventidinput']
-    password = request.form['passwordinput']
+        return event_show(event)
+    else:  # GET request # メニューからイベントへ
+        # ログインしていなければログイン画面へリダイレクト
+        if session.get('user_id') is None:
+            return redirect(url_for('login.login_user'))
+        
+        # イベントに参加していなければイベント参加画面へ
+        if session.get('event_id') is None:
+            return render_template("eventparticpation.html")
+        
+        event_id = session.get('event_id')
+        
+        conn = get_db_connection()
+        cursor = conn.cursor()
 
-    conn = get_db_connection()
-    cursor = conn.cursor()
+        # 入力イベントIDと一致するイベントを検索
+        cursor.execute('SELECT * FROM events WHERE event_id = ?', (event_id,))
+        event = cursor.fetchone()
 
-    # イベントを検索
-    cursor.execute('SELECT * FROM events WHERE event_id = ? AND password = ?', (event_id, password))
-    event = cursor.fetchone()
+        cursor.close()
+        conn.close()
 
-    cursor.close()
-    conn.close()
+        return event_show(event)
 
-    return event_show(event)
 
 # イベント退出処理
 @event_bp.route('/exit_event', methods=['POST'])

@@ -15,6 +15,6 @@ def eventparticpation():
     if session.get('user_id') is None:
         return redirect(url_for('login.login_user'))
     elif session.get('user_id'):
-        return redirect(url_for('event.show_event'))
+        return redirect(url_for('event.event'))
     else:
         return render_template("eventparticpation.html")
