@@ -304,7 +304,7 @@ function addMarker(location) {
 
 // ドキュメントが読み込まれた際に実行される関数
 document.addEventListener('DOMContentLoaded', function() {
-  console.log("DOMContentLoaded")
+  // console.log("DOMContentLoaded")
   // 'sub1' クラスを持つ select 要素を取得
   
   var statusSelect = document.querySelector('.sub1');
@@ -319,13 +319,13 @@ document.addEventListener('DOMContentLoaded', function() {
     updateUserStatus(userId, selectedStatus);
   });
 
-  console.log("ok")
+  // console.log("ok")
   // 'create-button'というクラスを持つ要素を取得
   var createButton = document.querySelector('.create-button');
-  console.log("createButton :",createButton)
-  console.log(createButton)
+  // console.log("createButton :",createButton)
+  // console.log(createButton)
   createButton.addEventListener('click', function() {
-    console.log("Current selectedMemberLocation:", selectedMemberLocation);
+    // console.log("Current selectedMemberLocation:", selectedMemberLocation);
     if (selectedMemberLocation) {
       // ルートを計算する関数を呼び出す
       calculateRoute(userLocation, selectedMemberLocation);
