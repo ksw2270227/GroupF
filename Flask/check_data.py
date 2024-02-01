@@ -1,5 +1,4 @@
-from flask import Flask, render_template, jsonify, Blueprint
-import mysql.connector
+from flask import Flask, render_template, jsonify, Blueprint,request
 import sqlite3
 check_data_bp = Blueprint('check_data', __name__)
 
@@ -56,3 +55,27 @@ def show_tables():
 @check_data_bp.route('/check_data')
 def check_data():
     return show_tables()
+
+@check_data_bp.route('/edit_row', methods=['POST'])
+def edit_row():
+    data = request.json
+    table = data['table']
+    row_id = data['id']
+    row_data = data['data']
+
+    # データベース接続と行の更新
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        # 更新クエリの構築（注意: SQLインジェクションを避けるために、パラメータ化されたクエリを使用）
+        # 例: UPDATE users SET user_name = ?, email = ? WHERE user_id = ?
+        query = f'UPDATE {table} SET ' + ', '.join([f"{key} = ?" for key in row_data.keys()]) + f' WHERE user_id = ?'
+        cur.execute(query, list(row_data.values()) + [row_id])
+        conn.commit()
+
+        cur.close()
+        conn.close()
+        return jsonify({'message': 'データが正常に更新されました。'})
+    except Exception as e:
+        return jsonify({'message': f'更新中にエラーが発生しました: {e}'})

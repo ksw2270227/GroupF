@@ -22,9 +22,10 @@ def show_map():
         if location:
             # ユーザーの位置情報が存在する場合
             return render_template('map.html', latitude=location[0], longitude=location[1],login_user_id=user_id)
-    
-    # ユーザーの位置情報が存在しない場合、デフォルトの位置を使用
-    return render_template('index.html')
+        else:
+            return render_template('map.html',login_user_id=user_id)
+    else:
+        return redirect(url_for('login.login_user'))
 
 @map_bp.route('/api/update-user-status', methods=['POST'])
 def update_user_status():
