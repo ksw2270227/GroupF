@@ -49,7 +49,7 @@ CREATE TABLE groups (
     -- group_name TEXT NOT NULL,  -- 新たに追加されたカラム
     group_name TEXT NOT NULL,
     password TEXT NOT NULL,
-    user_id INTEGER NOT NULL UNIQUE,
+    user_id INTEGER NOT NULL,
     creation_date TEXT NOT NULL,
     max_members INTEGER NOT NULL,
     current_members INTEGER NOT NULL,
