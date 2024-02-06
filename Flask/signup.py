@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash,jsonify, session 
 import sqlite3
 from flask import Blueprint
+from datetime import datetime
 
 signup_bp = Blueprint('signup', __name__)
 
@@ -41,6 +42,17 @@ def register_user():
         cursor.execute(
             'INSERT INTO users (user_name, full_name, phone_number, email_address, password, age, gender,current_event_id,current_group_id,user_status) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?)',
             (user_name, full_name, phone_number, email_address, password, age, gender,0,0,'通常')
+        )
+        
+                # 新規登録者のuser_idを取得
+        cursor.execute('SELECT last_insert_rowid()')
+        user_id = cursor.fetchone()[0]
+
+        # location_dataテーブルにINSERT
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        cursor.execute(
+            'INSERT INTO location_data (user_id, user_status, current_latitude, current_longitude, current_altitude, acquisition_time) VALUES (?, ?, ?, ?, ?, ?)',
+            (user_id, '通常', 35.864120, 139.972069, 0, current_time)
         )
 
         conn.commit()
