@@ -23,7 +23,12 @@ def register_user():
         email_address = request.form['email_address'][:254]
         password = request.form['password'][:40]
         age = request.form['age'][:3]
+        # year = request.form['year']
+        # month = request.form['month']
+        # day = request.form['day']
         gender = request.form['gender']
+
+        # birth_date = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
 
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -43,7 +48,7 @@ def register_user():
             'INSERT INTO users (user_name, full_name, phone_number, email_address, password, age, gender,current_event_id,current_group_id,user_status) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?)',
             (user_name, full_name, phone_number, email_address, password, age, gender,0,0,'通常')
         )
-        
+
                 # 新規登録者のuser_idを取得
         cursor.execute('SELECT last_insert_rowid()')
         user_id = cursor.fetchone()[0]
