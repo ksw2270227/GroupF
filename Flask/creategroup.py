@@ -21,12 +21,8 @@ def create_group():
         password = request.form['password']
         max_members = request.form['man']  # フォームの input 要素の名前が 'man' なのでこちらを指定
 
-        # 参加人数が0以上の整数であることを確認
-        try:
-            max_members = int(max_members)
-            if max_members < 0:
-                raise ValueError("参加人数は0以上の整数で入力してください")
-        except ValueError:
+        # マイナスでないことを確認
+        if len(max_members) < 0:
             return render_template('creategroup.html', error="参加人数は0以上の整数で入力してください")
 
         # データベースに挿入する処理
@@ -47,19 +43,19 @@ def create_group():
 
             # 追加: users テーブルの current_group_id を更新
             cursor.execute('UPDATE users SET current_group_id = ? WHERE user_id = ?', (group_id, user_id))
-            conn.commit()  # コミットはここで行う
-            print("追加: 成功")
         except sqlite3.IntegrityError as e:
             # 重複がある場合の処理
-            error_message = str(e)
-            if "UNIQUE constraint failed: users.user_id" in error_message:
-                return render_template('creategroup.html', error="ユーザーIDが既に存在します。別のユーザーIDを選択してください。")
-            else:
-                print(f"追加: 重複があります。エラーメッセージ: {error_message}")
-                conn.rollback()
+            print("追加: 重複があります。")
+            conn.rollback()
+        else:
+            # 重複がない場合の処理
+            print("追加: 成功")
+            conn.commit()
         finally:
             cursor.close()
             conn.close()
+
+        
 
         return redirect(url_for('group.group_page'))  # 仮に/indexにリダイレクト
     
