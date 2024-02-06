@@ -48,7 +48,7 @@ def register_user():
         conn.close()
 
         flash('ユーザーが正常に登録されました。', 'success')
-        return redirect(url_for('index.index'))
+        return redirect(url_for('login.login_user'))
     
     return render_template('signup.html')
 
