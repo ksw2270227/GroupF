@@ -22,13 +22,20 @@ def register_user():
         phone_number = request.form['phone_number'][:15]
         email_address = request.form['email_address'][:254]
         password = request.form['password'][:40]
-        age = request.form['age'][:3]
-        # year = request.form['year']
-        # month = request.form['month']
-        # day = request.form['day']
+        # age = request.form['age'][:3]
+        year = int(request.form['year'])
+        month = int(request.form['month'])
+        day = int(request.form['day'])
         gender = request.form['gender']
 
-        # birth_date = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+                # 生年月日を合成してbirth_dateを作成します。
+        birth_date = datetime(year, month, day)
+
+        # 現在の日付を取得します。
+        current_date = datetime.now()
+
+        # 年齢を計算します。
+        age = current_date.year - birth_date.year - ((current_date.month, current_date.day) < (birth_date.month, birth_date.day))
 
         conn = get_db_connection()
         cursor = conn.cursor()

@@ -122,7 +122,7 @@
 
   /* 年と月のlabel要素のスタイル */
 label[for="yearInput"],
-label[for="monthInput"] 
+label[for="monthInput"],
 label[for="dayInput"]{
   display: inline-block;
   width: auto; /* ラベルの幅を自動に設定 */
@@ -165,15 +165,13 @@ label[for="dayInput"]{
     <label for="passwordInput">パスワード</label>
     <input type="password" id="passwordInput" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" maxlength="40"  placeholder="大小英数字8字以上">
   
-    <label for="ageInput">年齢</label>
-    <input type="number" id="ageInput" name="age" required pattern="[0-9]*" maxlength="3">
-    <!-- <label for="yearInput">年</label> -->
-    <!-- <label for="birthDate">生年月日</label>
+    <!-- <label for="ageInput">年齢</label>
+    <input type="number" id="ageInput" name="age" required pattern="[0-9]*" maxlength="3"> -->
+    <label for="birthDate">生年月日</label>
     <select id="yearInput" name="year" onchange="updateDays()" required></select>
-    <label for="yearInput">年</label> -->
+    <label for="yearInput">年</label>
     
-    <!-- <label for="monthInput">月</label> -->
-    <!-- <select id="monthInput" name="month" onchange="updateDays()" required>
+    <select id="monthInput" name="month" onchange="updateDays()" required>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -185,13 +183,11 @@ label[for="dayInput"]{
       <option value="9">9</option>
       <option value="10">10</option>
       <option value="11">11</option>
-      <option value="12">12</option>
-    </select>
+      <option value="12">12</option></select>
     <label for="monthInput">月</label>
     
-    <label for="dayInput">日</label>
     <select id="dayInput" name="day" required></select>
-    <label for="dayInput">日</label> -->
+    <label for="dayInput">日</label>
 
     <label>性別</label>
     <input type="radio" id="maleRadio" name="gender" value="男性"checked>
@@ -209,7 +205,7 @@ label[for="dayInput"]{
   <div id="footer"></div>
   <!-- JavaScriptを追加 -->
   <script>
-     
+
 
     fetch("./static/footer.html")
       .then((response) => response.text())
@@ -233,7 +229,7 @@ document.getElementById('phoneInput').addEventListener('input', function (e) {
     e.target.value = inputValue;
 });
 
- const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
   const yearInput = document.getElementById('yearInput');
 
   for (let year = currentYear; year >= currentYear - 100; year--) {
