@@ -11,6 +11,10 @@ def get_db_connection():
 
 @login_bp.route('/login', methods=['GET', 'POST'])
 def login_user():
+
+    if 'user_id' in session:
+        return redirect(url_for('index.index'))
+
     error = None
     if request.method == 'POST':
         email_address = request.form['email_address']
