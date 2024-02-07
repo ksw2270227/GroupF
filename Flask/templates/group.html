@@ -144,23 +144,24 @@
                 'Content-Type': 'application/json',
                 // 必要に応じてCSRFトークンを追加
             },
-            // body: JSON.stringify({}) // 必要に応じてデータを送信
+            // body: JSON.stringify({}) // リクエストボディが必要な場合はここに追加
         })
         .then(response => {
             if (response.ok) {
-                return response.json();
+                return response.json(); // レスポンスが成功した場合、JSONを返す
             }
-            throw new Error('Something went wrong');
+            throw new Error('Something went wrong'); // レスポンスが失敗した場合、エラーを投げる
         })
         .then(data => {
-            console.log(data);
-            // 成功した場合の処理（ページ遷移やメッセージ表示など）
+            console.log(data); // レスポンスデータをコンソールに出力（デバッグ用）
+            window.location.href = '/index'; // 成功した場合、/indexに遷移
+            // もしindex.htmlに遷移したい場合は、window.location.href = 'index.html'; を使用
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('Error:', error); // エラーハンドリング
         });
     });
-</script>
+    </script>
 
 </body>
 </html>  
