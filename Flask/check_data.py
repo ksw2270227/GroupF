@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, Blueprint,request
+from flask import Flask, render_template, jsonify, Blueprint,request,session,redirect,url_for
 import sqlite3
 check_data_bp = Blueprint('check_data', __name__)
 
@@ -54,6 +54,11 @@ def show_tables():
 
 @check_data_bp.route('/check_data')
 def check_data():
+    if(session.get('role')=='Admin' and app.debug==False):
+        print('ok')  
+    else:
+        return redirect(url_for('index.index'))
+    
     return show_tables()
 
 @check_data_bp.route('/edit_row', methods=['POST'])

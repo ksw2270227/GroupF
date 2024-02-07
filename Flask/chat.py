@@ -17,6 +17,9 @@ def chat():
     if session.get('user_id') is None:
         return redirect(url_for('login.login_user'))
     
+    if(session.get('role')=='Admin'):
+        return redirect(url_for('selectchatpartner.selectchatpartner'))
+    
     sender_role = session.get('role')
     if sender_role == 'Admin':
         # URLからクエリパラメータとして渡されたuser_idを取得し、int型に変換

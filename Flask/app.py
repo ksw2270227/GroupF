@@ -1,4 +1,4 @@
-from flask import Flask,render_template,session
+from flask import Flask,render_template,session,redirect,url_for
 import os
 import sqlite3
 
@@ -40,6 +40,8 @@ app.register_blueprint(autologout_bp)
 app.register_blueprint(eventparticpation_bp)
 app.register_blueprint(event_bp)
 
+
+
 try:
     with open('Flask/secret_key.txt', 'r') as file:
         app.secret_key = file.read().strip()
@@ -68,6 +70,11 @@ if not os.path.exists(db_path):
 
 @app.route("/")
 def show_urls():
+    print(f"session.get('role'):{session.get('role')}  app:{app.debug}")
+    if(session.get('role')=='Admin' and app.debug==False):
+        print('ok')  
+    else:
+        return redirect(url_for('index.index'))  
     urls = [{"rule": rule.rule, "endpoint": rule.endpoint} for rule in app.url_map.iter_rules()]
     user_name = session.get('user_name')
     user_id = session.get('user_id')
@@ -76,3 +83,4 @@ def show_urls():
 
 if __name__ == "__main__":
     app.run()  # あるいは任意のポート.
+    app.debug = True

@@ -10,15 +10,18 @@ def get_db_connection():
 
 @selectchatpartner_bp.route('/selectchatpartner', methods=['GET'])
 def selectchatpartner():
+    if(session.get('role')!='Admin'):
+        return redirect(url_for('index.index'))
     users = get_users_with_latest_chat()
     return render_template('selectchatpartner.html', users=users)
 
 def get_users_with_latest_chat():
     try:
-        session['user_id'] = 2
-        session['role'] ='Admin'
-        session['user_name'] = 'Admin2'
-
+        # session['user_id'] = 2
+        # session['role'] ='Admin'
+        # session['user_name'] = 'Admin2'
+       
+        
         conn = get_db_connection()
         cursor = conn.cursor()
 
