@@ -46,20 +46,33 @@ def login_user():
     else :
         return render_template("login.html")     
 
-# 既存のlogin_user関数はそのままに、以下にログアウト処理を追加
-# @login_bp.route('/logout', methods=['POST'])
-# def logout_user():
-#     # ログインしているかどうかの判定
-#     if 'user_id' not in session:
-#         # ログインしていない場合、ログアウトエラーのレスポンスを返す
-#         return jsonify({'success': False, 'error': 'ログアウトしていません'})
+@login_bp.route('/login_admin', methods=['GET', 'POST'])
+def login_admin():
+    error = None
+    if request.method == 'POST':
+        email_address = request.form['email_address']
+        password = request.form['password']
+        conn = get_db_connection()
+        cursor = conn.cursor()
 
-#     # セッションからユーザー情報を削除
-#     session.pop('user_id', None)
-#     session.pop('user_name', None)
-#     session.pop('role', None)
+        # 管理者を検索
+        cursor.execute(
+            'SELECT * FROM admins WHERE email_address = ? AND password = ?', (email_address, password)
+        )
+        admin = cursor.fetchone()
+        cursor.close()
+        conn.close()
 
-#     # ログアウト成功時のレスポンスを返す
-#     return jsonify({'success': True})
-
-
+        if admin:
+            # 管理者IDをセッションに格納
+            session['user_id'] = admin[0]
+            session['user_name'] = admin[1]
+            session['role'] = 'Admin'  # ロールをAdminに設定
+            # ログイン成功時のリダイレクト先（例：indexページ）
+            return redirect(url_for('index.index'))
+        else:
+            # ログイン失敗時のエラーメッセージ
+            error = '無効なメールアドレスまたはパスワードです。'
+            return render_template("login_admin.html", error=error)
+    else:
+        return render_template("login_admin.html")
