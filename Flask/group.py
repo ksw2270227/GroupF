@@ -63,3 +63,48 @@ def group_page():
             conn.close()
     else:
         return redirect(url_for('login.login_user'))
+    
+@group_bp.route('/leavegroup', methods=['POST'])
+def leave_group():
+    user_id = session.get('user_id')
+    if user_id is None:
+        return jsonify({'success': False, 'error': 'ユーザーがログインしていません'}), 401
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    try:
+        # ユーザーの現在のグループIDを取得
+        cursor.execute('SELECT current_group_id FROM users WHERE user_id = ?', (user_id,))
+        current_group_id = cursor.fetchone()
+        if current_group_id is None or current_group_id[0] == 0:
+            return jsonify({'success': False, 'error': 'ユーザーはグループに所属していません'}), 404
+
+        current_group_id = current_group_id[0]
+
+        # ユーザーのcurrent_group_idを0に設定して退会処理
+        cursor.execute('UPDATE users SET current_group_id = 0 WHERE user_id = ?', (user_id,))
+        conn.commit()
+
+        # groupsテーブルから現在のメンバー数を取得して更新
+        cursor.execute('SELECT current_members FROM groups WHERE group_id = ?', (current_group_id,))
+        current_members = cursor.fetchone()
+        if current_members is None:
+            return jsonify({'success': False, 'error': 'グループが存在しません'}), 404
+
+        current_members = current_members[0] - 1
+        if current_members > 0:
+            # メンバー数を更新
+            cursor.execute('UPDATE groups SET current_members = ? WHERE group_id = ?', (current_members, current_group_id))
+        else:
+            # メンバーがいなくなったらグループを削除
+            cursor.execute('DELETE FROM groups WHERE group_id = ?', (current_group_id,))
+
+        conn.commit()
+        return jsonify({'success': True, 'message': 'グループから正常に退会しました'})
+    except Exception as e:
+        conn.rollback()
+        return jsonify({'success': False, 'error': str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()

@@ -119,7 +119,7 @@
 <!-- ... (後略) ... -->
 
         <div class="login-container2">
-            <a href="/index" class="backButton1">グループ退会</a>
+            <a href="#" class="backButton1" id="leaveGroup">グループ退会</a>
         </div>
     </form>
 
@@ -133,5 +133,34 @@
             .then((data) => document.querySelector("#footer").innerHTML = data);
     </script>
 <script src="./static/header.js"></script>
+
+<script>
+    document.getElementById('leaveGroup').addEventListener('click', function(e) {
+        e.preventDefault(); // デフォルトのリンク動作を防止
+    
+        fetch('/leavegroup', {
+            method: 'POST', // POSTメソッドを指定
+            headers: {
+                'Content-Type': 'application/json',
+                // 必要に応じてCSRFトークンを追加
+            },
+            // body: JSON.stringify({}) // 必要に応じてデータを送信
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Something went wrong');
+        })
+        .then(data => {
+            console.log(data);
+            // 成功した場合の処理（ページ遷移やメッセージ表示など）
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+
 </body>
 </html>  
