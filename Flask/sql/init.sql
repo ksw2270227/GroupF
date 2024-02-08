@@ -159,6 +159,7 @@ INSERT INTO events (company_id, event_name, event_id, password, start_time, end_
 (3, 'エコロジーイノベーションサミット', 3, 'eventpass3', '2023-12-10 08:30:00', '2023-12-10 19:00:00', '名古屋国際会議場', '持続可能な技術の開発と応用'),
 (4, 'エンジニアリングフェア', 4, 'eventpass4', '2023-12-15 09:00:00', '2023-12-15 20:00:00', '福岡サンパレス', 'エンジニアリングの最新トレンドと展望'),
 (5, 'ITセキュリティカンファレンス', 5, 'eventpass5', '2023-12-20 10:00:00', '2023-12-20 18:00:00', '札幌コンベンションセンター', 'サイバーセキュリティの最新動向と対策');
+(6,'国際スイカ大食い大会',6,'SUIKA2024','2023-12-05 10:00:00','2023-12-05 10:00:00','熊本県熊本市中央区本丸１−１','世界が熱狂したこの大会が３年ぶりに復活')
 
 INSERT INTO messages (message_id, sender_user_id, sender_role, receiver_user_id, receiver_role, message_content, sent_time) 
 VALUES
