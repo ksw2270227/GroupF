@@ -107,8 +107,8 @@
     <h3>参加人数 {{ group_count }}/{{ group['max_members'] }} </h3>
     {% if participants %}
         {% for participant in participants %}
-            <div style="border: 1px solid black;">
-                参加者氏名: {{ participant['full_name'] }}
+            <div style="text-align: center;">
+                {{ participant['full_name'] }}
             </div>
         {% endfor %}
     {% else %}
@@ -162,6 +162,39 @@
         });
     });
     </script>
+
+<script>
+    document.getElementById('leaveGroup').addEventListener('click', function(e) {
+        e.preventDefault(); // デフォルトのリンク動作を防止
+    
+        // 確認ダイアログを表示
+        if (confirm("グループから本当に退会しますか？")) {
+            fetch('/leavegroup', {
+                method: 'POST', // POSTメソッドを指定
+                headers: {
+                    'Content-Type': 'application/json',
+                    // 必要に応じてCSRFトークンを追加
+                },
+                // body: JSON.stringify({}) // リクエストボディが必要な場合はここに追加
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json(); // レスポンスが成功した場合、JSONを返す
+                }
+                throw new Error('Something went wrong'); // レスポンスが失敗した場合、エラーを投げる
+            })
+            .then(data => {
+                console.log(data); // レスポンスデータをコンソールに出力（デバッグ用）
+                window.location.href = '/index'; // 成功した場合、/indexに遷移
+                // もしindex.htmlに遷移したい場合は、window.location.href = 'index.html'; を使用
+            })
+            .catch(error => {
+                console.error('Error:', error); // エラーハンドリング
+            });
+        }
+    });
+</script>
+
 
 </body>
 </html>  
