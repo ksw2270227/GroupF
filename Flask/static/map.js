@@ -24,7 +24,7 @@ function initMap() {
     center: userLocation,
     zoom: 16
   });
-
+  fetchUserStatus();
   fetchUserStatusAndSetMarker(userLocation);
   fetchGroupUsersAndSetMarkers();
   
@@ -288,6 +288,8 @@ function fetchUserStatus() {
         if (defaultOption) {
           defaultOption.disabled = true;
         }
+      }else{
+        console.log("user_statuの取得に失敗")
       }
     })
     .catch(error => {
