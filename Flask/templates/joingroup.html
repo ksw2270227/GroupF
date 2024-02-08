@@ -87,12 +87,14 @@
 <body>
     {% include 'header.html' %}
 
+
+    <a href="/index" class="backButton">戻る</a>
     {% if test==1 %}
             <div style="color: red; text-align: center; padding: 20px;">
-                無効なグループIDまたはパスワードです。
+                {{ error }}
             </div>
     {% endif %}
-    <a href="/index" class="backButton">戻る</a>
+    
 
     <form id="passchange" action="/joingroup" method="post">
 
