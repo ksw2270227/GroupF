@@ -71,10 +71,10 @@ if not os.path.exists(db_path):
 @app.route("/")
 def show_urls():
     print(f"session.get('role'):{session.get('role')}  app:{app.debug}")
-    if(session.get('role')=='Admin' and app.debug==False):
-        print('ok')  
-    else:
-        return redirect(url_for('index.index'))  
+    # if(session.get('role')=='Admin' and app.debug==False):
+    #     print('ok')  
+    # else:
+    #     return redirect(url_for('index.index'))  
     urls = [{"rule": rule.rule, "endpoint": rule.endpoint} for rule in app.url_map.iter_rules()]
     user_name = session.get('user_name')
     user_id = session.get('user_id')

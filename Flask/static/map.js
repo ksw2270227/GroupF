@@ -280,6 +280,7 @@ function fetchUserStatus() {
     .then(response => response.json())
     .then(data => {
       if (data.user_status) {
+        console.log("user_statuの取得に失敗")
         const statusSelect = document.querySelector('.sub1');
         statusSelect.value = data.user_status;
 
