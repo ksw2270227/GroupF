@@ -158,7 +158,20 @@ def get_group_users():
         ''', (group_id,))
         users = cursor.fetchall()
         # print("Group users:", users)
-        return jsonify({'group_users': users})
+
+        # 各ユーザーに対して位置情報を取得
+        user_locations = []
+        for user in users:
+            cursor.execute('SELECT current_latitude, current_longitude, user_status FROM location_data WHERE user_id = ?', (user[0],))
+            location_data = cursor.fetchone()
+            if location_data:
+                user_locations.append((user[0], user[1], *location_data))
+
+        # 出力
+        # for location in user_locations:
+        #     print(f"({location[0]}, '{location[1]}', {location[2]}, {location[3]}, '{location[4]}')")
+
+        return jsonify({'group_users': user_locations})
     except sqlite3.Error as e:
         # print("Database error:", str(e))
         return jsonify({'error': str(e)}), 500

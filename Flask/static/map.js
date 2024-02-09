@@ -226,7 +226,7 @@ function getLocationAndUpdate() {
       .then(data => {
         console.log(data);
         // 位置情報の更新が成功したらfetchGroupUsersAndSetMarkersを実行
-        fetchGroupUsersAndSetMarkers();
+        // fetchGroupUsersAndSetMarkers();
       })
       .catch(error => console.error('Error updating location:', error));
 
@@ -380,5 +380,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // 位置情報を更新するためのインターバル設定
-setInterval(getLocationAndUpdate, 10000); // 10秒ごとに更新
-setInterval(fetchGroupUsersAndSetMarkers, 10000); // 10秒ごとに更新
+setInterval(getLocationAndUpdate, 5000); // 10秒ごとに更新
+setInterval(fetchGroupUsersAndSetMarkers, 5000); // 10秒ごとに更新
