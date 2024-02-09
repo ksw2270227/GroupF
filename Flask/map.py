@@ -105,7 +105,6 @@ def update_location():
         cursor.close()
         conn.close()
         return jsonify({'error': str(e)}), 500
-
     cursor.close()
     conn.close()
     return jsonify({'message': 'Location updated successfully'})

@@ -196,11 +196,39 @@ function updateMarkerIcon(userId, userStatus) {
   }
 }
 
-// ユーザーの位置情報を取得し、更新する
 function getLocationAndUpdate() {
+  console.log('start getLocationAndUpdate');
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-      // 現在の位置情報をサーバーに送信するコード（既存の処理）
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      const altitude = position.coords.altitude || 0; // altitudeがnullの場合は0を使用
+
+      // ここにサーバーへのPOSTリクエストを追加
+      fetch('/api/update-location', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          latitude: latitude,
+          longitude: longitude,
+          altitude: altitude,
+        }),
+        credentials: 'include' // セッションクッキーを使用するため
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        // 位置情報の更新が成功したらfetchGroupUsersAndSetMarkersを実行
+        fetchGroupUsersAndSetMarkers();
+      })
+      .catch(error => console.error('Error updating location:', error));
 
     }, function(error) {
       // 位置情報の取得に失敗した場合の処理
@@ -212,6 +240,7 @@ function getLocationAndUpdate() {
     console.error("Geolocation is not supported by this browser.");
   }
 }
+
 
 // 位置情報取得エラーのポップアップを表示する関数
 function showLocationErrorPopup() {
