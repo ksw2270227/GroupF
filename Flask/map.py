@@ -136,7 +136,7 @@ def get_user_status():
 def get_group_users():
     user_id = session.get('user_id')
     if not user_id:
-        print("User not logged in")
+        # print("User not logged in")
         # return jsonify({'error': 'User not logged in'}), 401
         return redirect(url_for('login.login_user'))
 
@@ -147,7 +147,7 @@ def get_group_users():
         # 現在のユーザーのグループIDを取得
         cursor.execute('SELECT current_group_id FROM users WHERE user_id = ?', (user_id,))
         group_id = cursor.fetchone()[0]
-        print("Group ID:", group_id)
+        # print("Group ID:", group_id)
 
         # 同じグループの全ユーザー情報を取得
         cursor.execute('''
@@ -157,10 +157,10 @@ def get_group_users():
             WHERE u.current_group_id = ?
         ''', (group_id,))
         users = cursor.fetchall()
-        print("Group users:", users)
+        # print("Group users:", users)
         return jsonify({'group_users': users})
     except sqlite3.Error as e:
-        print("Database error:", str(e))
+        # print("Database error:", str(e))
         return jsonify({'error': str(e)}), 500
     finally:
         cursor.close()
