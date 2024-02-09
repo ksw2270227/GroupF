@@ -365,6 +365,7 @@ function addMarker(location) {
 
 // ドキュメントが読み込まれた際に実行される関数
 document.addEventListener('DOMContentLoaded', function() {
+  
   // console.log("DOMContentLoaded")
   // 'sub1' クラスを持つ select 要素を取得
   
