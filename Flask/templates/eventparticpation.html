@@ -124,9 +124,8 @@
       min-height: calc(100vh - 257px);
     }
   </style>
-        <!-- イベントがない場合 -->
         <div style="color: red; text-align: center; padding: 20px;">
-            そのイベントIDまたはパスワードは存在しません。</br>再度入力してください。
+            {{ error }}
         </div>
   {% endif %}
 
