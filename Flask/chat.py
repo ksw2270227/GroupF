@@ -13,6 +13,8 @@ def get_db_connection():
 
 @chat_bp.route('/chat', methods=['GET', 'POST'])
 def chat():
+    if(session.get('role')!='Admin'):
+        return redirect(url_for('index.index'))
     # ユーザーIDがセッションに存在しない場合、ログインページにリダイレクト
     if session.get('user_id') is None:
         return redirect(url_for('login.login_user'))
