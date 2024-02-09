@@ -59,13 +59,13 @@
         }
 
         /* footerを下に配置 */
-        main {
+        /* main {
             text-align: left;
             display: flex;
             flex-direction: column;
             min-height: calc(100vh - 165px);
             margin: 0;
-        }
+        } */
 
         .backButton {
           display: inline-block;
@@ -98,7 +98,6 @@
 
   <button onclick="goBack()" class="backButton">戻る</button>
 
-  <main>
     <div class="event-container">
       <div class="event-title">
           <p name="eventText">{{ event_name }}</p>
@@ -115,7 +114,6 @@
         イベント退出
       </button>
     </div>
-  </main>
     
 
   <div id="footer" class="footer"></div>
@@ -153,7 +151,7 @@
     }
   </script>
   <script>
-    fetch("./static/footer.html")
+    fetch("./static/footer1.html")
       .then((response) => response.text())
       .then((data) => document.querySelector("#footer").innerHTML = data);
   </script>
