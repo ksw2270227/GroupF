@@ -81,6 +81,18 @@ def show_urls():
     user_id = session.get('user_id')
     return render_template('list_urls.html', urls=urls, user_name=user_name, user_id=user_id)
 
+# 405 Method Not Allowed エラーハンドラ
+@app.errorhandler(405)
+def method_not_allowed(e):
+    # カスタムエラーメッセージを含む error.html をレンダリング
+    return render_template('error.html', error_message='許可されていないメソッドです。'), 405
+
+# 404 Not Found エラーハンドラ
+@app.errorhandler(404)
+def page_not_found(e):
+    # カスタムエラーメッセージを含む error.html をレンダリング
+    return render_template('error.html', error_message='ページが見つかりません。'), 404
+
 
 if __name__ == "__main__":
     app.run()  # あるいは任意のポート.
