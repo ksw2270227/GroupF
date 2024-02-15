@@ -8,24 +8,25 @@ def get_db_connection():
     conn = sqlite3.connect('testDB.db')
     return conn
 
-@company_bp.route('/save_company_info', methods=['POST'])
+@company_bp.route('/company', methods=['GET', 'POST'])
 def save_company_info():
     if request.method == 'POST':
-        company_id = request.form['company_id']
-        company_name = request.form['company_name']
-        company_password = request.form['company_password']
-        address = request.form['address']
-        phone_number = request.form['phone_number']
-        email_address = request.form['email_address']
-
-        # データベースに接続
         conn = get_db_connection()
         cursor = conn.cursor()
 
+        group_id = request.form['group_id']
+        group_name = request.form['group_name']
+        password = request.form['password']
+        user_id = request.form['user_id']
+        creation_date = request.form['creation_date']
+        max_members = request.form['max_members']
+        current_members = request.form['current_members']
+        event_id = request.form['event_id']
+
         try:
             # ユーザー情報をusersテーブルに挿入
-            cursor.execute('INSERT INTO users (company_id, company_name, company_password, address, phone_number, email_address) VALUES (?, ?, ?, ?, ?, ?)',
-                            (company_id, company_name, company_password, address, phone_number, email_address))
+            cursor.execute('INSERT INTO users (group_id, group_name, password, user_id, creation_date, max_members, current_members, event_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                            (group_id, group_name, password, user_id, creation_date, max_members, current_members, event_id))
             conn.commit()
             message = "企業情報が正常に保存されました。"
         except Exception as e:
@@ -35,10 +36,7 @@ def save_company_info():
             cursor.close()
             conn.close()
 
-        return render_template('company_response.html', message=message)
-
-# エラーページのハンドラ
-@company_bp.route('/error')
-def error():
-    return render_template('error.html', error_message='リクエストを処理できませんでした。')
-
+        return render_template('company_saved.html', message=message)
+    elif request.method == 'GET':
+        # GETリクエストの場合、単にフォームページを表示するだけ
+        return render_template('company.html')

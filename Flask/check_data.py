@@ -54,8 +54,8 @@ def show_tables():
 
 @check_data_bp.route('/check_data')
 def check_data():
-    if(session.get('role')!='Admin'):
-        return redirect(url_for('index.index'))
+    # if(session.get('role')!='Admin'):
+    #     return redirect(url_for('index.index'))
     
     return show_tables()
 

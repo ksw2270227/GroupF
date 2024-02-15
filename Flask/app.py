@@ -73,8 +73,8 @@ if not os.path.exists(db_path):
 
 @app.route("/")
 def show_urls():
-    if(session.get('role')!='Admin'):
-        return redirect(url_for('index.index'))
+    # if(session.get('role')!='Admin'):
+    #     return redirect(url_for('index.index'))
     # if(session.get('role')=='Admin' and app.debug==False):
     #     print('ok')  
     # else:
