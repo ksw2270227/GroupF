@@ -57,7 +57,6 @@ def update_user_status():
     conn.close()
     return jsonify({'message': 'User status updated successfully'})
 
-
 @map_bp.route('/api/update-location', methods=['POST'])
 def update_location():
 
@@ -131,13 +130,10 @@ def get_user_status():
         cursor.close()
         conn.close()
 
-#新しく追加した機能
 @map_bp.route('/api/get-group-users')
 def get_group_users():
     user_id = session.get('user_id')
     if not user_id:
-        # print("User not logged in")
-        # return jsonify({'error': 'User not logged in'}), 401
         return redirect(url_for('login.login_user'))
 
     conn = get_db_connection()
@@ -147,33 +143,37 @@ def get_group_users():
         # 現在のユーザーのグループIDを取得
         cursor.execute('SELECT current_group_id FROM users WHERE user_id = ?', (user_id,))
         group_id = cursor.fetchone()[0]
-        # print("Group ID:", group_id)
 
-        # 同じグループの全ユーザー情報を取得
-        cursor.execute('''
-            SELECT u.user_id, u.full_name, l.current_latitude, l.current_longitude, l.user_status
-            FROM users u
-            JOIN location_data l ON u.user_id = l.user_id
-            WHERE u.current_group_id = ?
-        ''', (group_id,))
-        users = cursor.fetchall()
-        # print("Group users:", users)
+        if group_id == 0:
+            # グループに属していない場合、自分自身の位置情報を取得
+            cursor.execute('''
+                SELECT u.user_id, u.full_name, l.current_latitude, l.current_longitude, l.user_status
+                FROM users u
+                JOIN location_data l ON u.user_id = l.user_id
+                WHERE u.user_id = ?
+            ''', (user_id,))
+            user_location = cursor.fetchone()
+            if user_location:
+                user_locations = [user_location]
+            else:
+                user_locations = []
+        else:
+            # 同じグループの全ユーザー情報を取得
+            cursor.execute('''
+                SELECT u.user_id, u.full_name, l.current_latitude, l.current_longitude, l.user_status
+                FROM users u
+                JOIN location_data l ON u.user_id = l.user_id
+                WHERE u.current_group_id = ?
+            ''', (group_id,))
+            users = cursor.fetchall()
 
-        # 各ユーザーに対して位置情報を取得
-        user_locations = []
-        for user in users:
-            cursor.execute('SELECT current_latitude, current_longitude, user_status FROM location_data WHERE user_id = ?', (user[0],))
-            location_data = cursor.fetchone()
-            if location_data:
-                user_locations.append((user[0], user[1], *location_data))
-
-        # 出力
-        # for location in user_locations:
-        #     print(f"({location[0]}, '{location[1]}', {location[2]}, {location[3]}, '{location[4]}')")
+            # 各ユーザーに対して位置情報を取得
+            user_locations = []
+            for user in users:
+                user_locations.append(user)
 
         return jsonify({'group_users': user_locations})
     except sqlite3.Error as e:
-        # print("Database error:", str(e))
         return jsonify({'error': str(e)}), 500
     finally:
         cursor.close()
