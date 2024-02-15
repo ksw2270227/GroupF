@@ -2,6 +2,7 @@
 <html>
 <head>
   <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
 
     .login-container {
@@ -113,7 +114,6 @@
   {% include 'header.html' %}
 
   <script>
-    
     fetch("./static/footer1.html")
       .then((response) => response.text())
       .then((data) => document.querySelector("#footer").innerHTML = data);
@@ -133,7 +133,8 @@
 
     <div class="passwordText">
       <label for="password">パスワード:</label>
-      <input type="password" id="password" name="password" required pattern="^(?=.*[a-z])(?=.*\d)[a-z\d]{4,}$">
+      <input type="password" id="password" name="password" required pattern="^(?=.*[a-z])(?=.*\d)[a-z\d]{4,}$" placeholder="小文字のアルファベットと数字を含む、4文字以上">
+
       
     </div>
 
