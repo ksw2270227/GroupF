@@ -20,6 +20,8 @@ from selectchatpartner import selectchatpartner_bp
 from autologout import autologout_bp
 from eventparticpation import eventparticpation_bp
 from event import event_bp
+from company import company_bp
+
 
 app = Flask(__name__)
 app.register_blueprint(index_bp)
@@ -39,6 +41,7 @@ app.register_blueprint(auto_login_bp)
 app.register_blueprint(autologout_bp)
 app.register_blueprint(eventparticpation_bp)
 app.register_blueprint(event_bp)
+app.register_blueprint(company_bp)
 
 
 
@@ -70,8 +73,8 @@ if not os.path.exists(db_path):
 
 @app.route("/")
 def show_urls():
-    if(session.get('role')!='Admin'):
-        return redirect(url_for('index.index'))
+    # if(session.get('role')!='Admin'):
+    #     return redirect(url_for('index.index'))
     # if(session.get('role')=='Admin' and app.debug==False):
     #    #print('ok')  
     # else:

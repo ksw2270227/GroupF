@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企業情報入力フォーム</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #5bc0de; /* 水色の太い線 */
+}
+
+h2 {
+    text-align: center;
+    background-color: #5bc0de; /* 水色の背景 */
+    color: white;
+    padding: 10px;
+    margin-top: 0; /* マージンを追加 */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.input-field {
+    margin-bottom: 20px;
+    display: flex; /* ラベルと入力フィールドを横並びにする */
+    align-items: center; /* 縦方向に中央揃え */
+}
+
+.input-field label {
+    font-weight: bold;
+    width: 120px; /* ラベルの幅を指定 */
+}
+
+.input-field input,
+.input-field textarea {
+    flex: 1; /* 入力フィールドが残りのスペースを占有する */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.input-field input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.input-field input[type="submit"]:hover {
+    background-color: #45a049;
+}
+</style>
+</head>
+<body>
+<h2>新しい企業情報を入力</h2>
+<form action="{{ url_for('company.save_company_info') }}" method="post">
+    <div class="input-field">
+        <label for="group_id">グループID:</label>
+        <input type="number" id="group_id" name="group_id" required>
+    </div>
+    
+    <div class="input-field">
+        <label for="group_name">グループ名:</label>
+        <input type="text" id="group_name" name="group_name" required>
+    </div>
+    
+    <div class="input-field">
+        <label for="password">パスワード:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    
+    <div class="input-field">
+        <label for="user_id">ユーザーID:</label>
+        <input type="text" id="user_id" name="user_id" required>
+    </div>
+    
+    <div class="input-field">
+        <label for="creation_date">作成日:</label>
+        <input type="datetime-local" id="creation_date" name="creation_date" required>
+    </div>
+    
+    <div class="input-field">
+        <label for="max_members">最大メンバー数:</label>
+        <input type="number" id="max_members" name="max_members" required>
+    </div>
+    
+    <div class="input-field">
+        <label for="current_members">現在のメンバー数:</label>
+        <input type="number" id="current_members" name="current_members" required>
+    </div>
+    
+    <div class="input-field">
+        <label for="event_id">イベントID:</label>
+        <input type="number" id="event_id" name="event_id" required>
+    </div>
+    
+    <div class="input-field">
+        <input type="submit" value="送信">
+    </div>
+</form>
+</body>
+</html>
